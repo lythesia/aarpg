@@ -18,10 +18,10 @@ func exit():
     pass
 
 func handle_input(_event: InputEvent) -> PlayerState:
-    return next_state
+    return STAY
 
 func process(_delta: float) -> PlayerState:
-    return next_state
+    return STAY
 
 func physics_process(_delta: float) -> PlayerState:
-    return next_state
+    return STAY

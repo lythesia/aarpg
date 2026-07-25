@@ -2,6 +2,7 @@ class_name PlayerStateMachine extends Node
 
 @onready var idle: PlayerStateIdle = %PlayerStateIdle
 @onready var walk: PlayerStateWalk = %PlayerStateWalk
+@onready var attack: PlayerStateAttack = %PlayerStateAttack
 
 const MAX_STATES: int = 3
 

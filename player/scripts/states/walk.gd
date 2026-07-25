@@ -16,8 +16,10 @@ func enter():
 func exit():
     pass
 
-func handle_input(_event: InputEvent) -> PlayerState:
-    return next_state
+func handle_input(event: InputEvent) -> PlayerState:
+    if event.is_action_pressed("Attack"):
+        return player.fsm.attack
+    return STAY
 
 func process(_delta: float) -> PlayerState:
     if player.dir.is_zero_approx():
@@ -26,8 +28,8 @@ func process(_delta: float) -> PlayerState:
     if player.update_sprite_direction():
         player.update_animation("walk")
 
-    return next_state
+    return STAY
 
 func physics_process(_delta: float) -> PlayerState:
     player.velocity = player.dir * speed
-    return next_state
+    return STAY

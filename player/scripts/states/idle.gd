@@ -14,14 +14,16 @@ func enter():
 func exit():
     pass
 
-func handle_input(_event: InputEvent) -> PlayerState:
-    return next_state
+func handle_input(event: InputEvent) -> PlayerState:
+    if event.is_action_pressed("Attack"):
+        return player.fsm.attack
+    return STAY
 
 func process(_delta: float) -> PlayerState:
     if !player.dir.is_zero_approx():
         return player.fsm.walk
-    return next_state
+    return STAY
 
 func physics_process(_delta: float) -> PlayerState:
     player.velocity = Vector2.ZERO
-    return next_state
+    return STAY

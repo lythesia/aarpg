@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://uvn5g18u6222"]
+
+[ext_resource type="Texture2D" uid="uid://dbf44skfkosh5" path="res://levels/props/plant/Plant.png" id="1_duck8"]
+[ext_resource type="Script" uid="uid://c88aauadyjol6" path="res://levels/props/plant/plant.gd" id="1_yky7o"]
+[ext_resource type="Script" uid="uid://b60no6xp6h8jr" path="res://general/hitbox/damage_area.gd" id="2_li86d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
+size = Vector2(22, 15)
+
+[node name="Plant" type="Node2D" unique_id=639601265]
+script = ExtResource("1_yky7o")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=132885724]
+position = Vector2(0, -7)
+texture = ExtResource("1_duck8")
+hframes = 16
+vframes = 3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1084432974]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=497774699]
+shape = SubResource("RectangleShape2D_aabtn")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=737100573]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("2_li86d")
+metadata/_custom_type_script = "uid://b60no6xp6h8jr"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=832694698]
+shape = SubResource("RectangleShape2D_aabtn")

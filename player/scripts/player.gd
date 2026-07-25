@@ -37,12 +37,11 @@ func update_sprite_direction() -> bool:
     if dir == Vector2.ZERO:
         return false
 
-    var new_cardinal: Vector2 = cardinal_dir
-    # y-axis strength is greater than x-axis strength
-    if abs(dir.y) > abs(dir.x):
-        new_cardinal = Vector2.UP if dir.y < 0 else Vector2.DOWN
-    else:
-        new_cardinal = Vector2.LEFT if dir.x < 0 else Vector2.RIGHT
+    # cleaver! and give honor to original cardinal direction
+    const CLOCKWISE: Array[Vector2] = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
+    var idx = round(((dir + 0.2 * cardinal_dir).angle() / TAU) * 4)
+    var new_cardinal: Vector2 = CLOCKWISE[idx]
+
     if new_cardinal == cardinal_dir:
         return false
     cardinal_dir = new_cardinal
