@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://duj6e51c3674j" path="res://player/scripts/states/stun.gd" id="11_d4apd"]
 [ext_resource type="Script" uid="uid://c7tcshhj8j0ts" path="res://general/hitbox/attack_area.gd" id="11_mgvvd"]
 [ext_resource type="AudioStream" uid="uid://blejhwxuc6ser" path="res://public/audio/hit_player.wav" id="13_l7x70"]
+[ext_resource type="Script" uid="uid://cg5catbhgwqsf" path="res://player/scripts/player_interaction.gd" id="14_l7x70"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqg7"]
 radius = 27.018513
@@ -691,6 +692,9 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6mua"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
+size = Vector2(26, 24)
+
 [node name="Player" type="CharacterBody2D" unique_id=1761720507]
 collision_layer = 16
 motion_mode = 1
@@ -782,6 +786,7 @@ horizontal_alignment = 1
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=830260256]
 unique_name_in_owner = true
+visible = false
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("10_6g3n5")
@@ -790,3 +795,15 @@ metadata/_custom_type_script = "uid://b60no6xp6h8jr"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1553084426]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_d6mua")
+
+[node name="Interaction" type="Area2D" parent="." unique_id=1781928421]
+visible = false
+position = Vector2(0, -9)
+monitoring = false
+monitorable = false
+script = ExtResource("14_l7x70")
+metadata/_custom_type_script = "uid://cg5catbhgwqsf"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction" unique_id=1931404224]
+position = Vector2(0, 21)
+shape = SubResource("RectangleShape2D_aabtn")

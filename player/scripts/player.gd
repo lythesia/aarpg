@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+signal DirectionChanged(dir: Vector2)
+
 @onready var sprite: Sprite2D = %Sprite
 @onready var sprite_material: ShaderMaterial = sprite.material as ShaderMaterial
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -55,6 +57,8 @@ func update_direction() -> bool:
         sprite.scale.x = -1.0
     else:
         sprite.scale.x = 1.0
+
+    DirectionChanged.emit(cardinal_dir)
 
     return true
 
