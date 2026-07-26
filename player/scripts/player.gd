@@ -1,8 +1,11 @@
 class_name Player extends CharacterBody2D
 
 @onready var sprite: Sprite2D = %Sprite
+@onready var sprite_material: ShaderMaterial = sprite.material as ShaderMaterial
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var effect_anim_player: AnimationPlayer = $EffectAnimationPlayer
 @onready var fsm: PlayerStateMachine = %PlayerStateMachine
+@onready var damage_area: DamageArea = %DamageArea
 
 @onready var label: Label = $Label
 
@@ -33,7 +36,7 @@ func _update_direction():
     # moving direction
     dir = Vector2(x_axis, y_axis).normalized()
 
-func update_sprite_direction() -> bool:
+func update_direction() -> bool:
     if dir == Vector2.ZERO:
         return false
 

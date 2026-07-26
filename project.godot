@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://bu4e70aw0jtc8"
 
 Audio="*uid://c2m16mm4678j"
 PhantomCameraManager="*uid://duq6jhf6unyis"
+Messages="*uid://b7lb6ddds8trm"
 
 [display]
 
@@ -39,12 +40,17 @@ enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://enemies/": "red",
 "res://general/": "blue",
-"res://globals/": "red",
+"res://globals/": "pink",
 "res://levels/": "orange",
 "res://player/": "teal",
-"res://script_templates/": "gray"
+"res://public/": "gray"
 }
+
+[global_group]
+
+WanderPaths=""
 
 [gui]
 
@@ -99,3 +105,4 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true

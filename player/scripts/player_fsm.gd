@@ -3,6 +3,7 @@ class_name PlayerStateMachine extends Node
 @onready var idle: PlayerStateIdle = %PlayerStateIdle
 @onready var walk: PlayerStateWalk = %PlayerStateWalk
 @onready var attack: PlayerStateAttack = %PlayerStateAttack
+@onready var stun: PlayerStateStun = %PlayerStateStun
 
 const MAX_STATES: int = 3
 
@@ -36,13 +37,15 @@ func init(player: Player) -> void:
     for c in get_children():
         if c is PlayerState:
             states.append(c)
+            # init() may require player, so setup here
+            if !c.player:
+                c.player = player
 
     for c in states:
         c.init()
 
     if states.size() > 0:
         # first state is always activated!
-        current_state.player = player
         current_state.enter()
         # ready to process
         process_mode = Node.PROCESS_MODE_INHERIT

@@ -25,7 +25,7 @@ func process(_delta: float) -> PlayerState:
     if player.dir.is_zero_approx():
         return player.fsm.idle
 
-    if player.update_sprite_direction():
+    if player.update_direction():
         player.update_animation("walk")
 
     return STAY
