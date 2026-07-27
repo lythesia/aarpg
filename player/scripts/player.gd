@@ -22,6 +22,7 @@ var max_hp: int = 6
 
 func _ready() -> void:
     fsm.init(self)
+    reparent.call_deferred(get_tree().root) # reparent self to `root`
     PlayerHud.update_hp(hp, max_hp)
 
 func _process(delta: float) -> void:

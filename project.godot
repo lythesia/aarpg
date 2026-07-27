@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AARPG"
-run/main_scene="uid://wgf5stsrwi40"
+run/main_scene="uid://cce13rldqs5om"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,7 @@ Audio="*uid://c2m16mm4678j"
 Messages="*uid://b7lb6ddds8trm"
 PlayerHud="*uid://jbd4p43as3i1"
 PlayerManager="*uid://cqnwbal30g0vf"
+SceneManager="*uid://j20v4cg7v8m1"
 
 [display]
 
@@ -37,7 +38,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
 
 [file_customization]
 

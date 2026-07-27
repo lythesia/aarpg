@@ -23,7 +23,7 @@ func _ready() -> void:
     _create_player_camera(player, base_tilemap_layer)
 
     # emit
-    # Messages.LoadSceneFinished.emit()
+    Messages.LoadSceneFinished.emit()
 
 func _get_configuration_warnings() -> PackedStringArray:
     if !_get_base_tilemap_layer():
