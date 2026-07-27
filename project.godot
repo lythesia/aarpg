@@ -21,9 +21,10 @@ buses/default_bus_layout="uid://bu4e70aw0jtc8"
 
 [autoload]
 
-Audio="*uid://c2m16mm4678j"
 PhantomCameraManager="*uid://duq6jhf6unyis"
+Audio="*uid://c2m16mm4678j"
 Messages="*uid://b7lb6ddds8trm"
+PlayerHud="*uid://jbd4p43as3i1"
 
 [display]
 

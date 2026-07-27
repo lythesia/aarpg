@@ -17,8 +17,12 @@ var cardinal_dir: Vector2 = Vector2.DOWN
 # actual moving direction
 var dir: Vector2 = Vector2.ZERO
 
+var hp: int = 5
+var max_hp: int = 6
+
 func _ready() -> void:
     fsm.init(self)
+    PlayerHud.update_hp(hp, max_hp)
 
 func _process(delta: float) -> void:
     _update_direction()
