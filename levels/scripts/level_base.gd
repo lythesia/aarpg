@@ -20,8 +20,10 @@ func _ready() -> void:
     base_tilemap_layer.get_path()
 
     # create player camera
-    var player_camera: Node = _create_player_camera(player, base_tilemap_layer)
-    add_child(player_camera)
+    _create_player_camera(player, base_tilemap_layer)
+
+    # emit
+    # Messages.LoadSceneFinished.emit()
 
 func _get_configuration_warnings() -> PackedStringArray:
     if !_get_base_tilemap_layer():
@@ -38,7 +40,7 @@ func _get_base_tilemap_layer() -> TileMapLayer:
 #  +-- Camera2D
 #  |   +-- PhantomCameraHost
 #  +-- PhantomCamera2D
-func _create_player_camera(player: Player, base_tilemap_layer: TileMapLayer) -> Node:
+func _create_player_camera(player: Player, base_tilemap_layer: TileMapLayer):
     var container: Node = Node.new()
     container.name = "Cam"
 
@@ -52,9 +54,16 @@ func _create_player_camera(player: Player, base_tilemap_layer: TileMapLayer) -> 
     var cam: PhantomCamera2D = PhantomCamera2D.new()
     cam.name = "PhantomCamera2D"
     cam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
-    cam.set_follow_target(player)
-    cam.set_limit_target(base_tilemap_layer.get_path())
-    cam.teleport_position.call_deferred()
+    cam.tween_on_load = false
     container.add_child(cam)
 
-    return container
+    add_child(container)
+
+    _setup_camera.call_deferred(cam, player, base_tilemap_layer)
+
+
+func _setup_camera(cam: PhantomCamera2D, player: Player, base_tilemap_layer: TileMapLayer):
+    cam.set_limit_target(base_tilemap_layer.get_path())
+    cam.set_follow_target(player)
+    cam.teleport_position()
+    await get_tree().process_frame
