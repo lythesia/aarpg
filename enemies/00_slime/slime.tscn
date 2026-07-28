@@ -738,6 +738,7 @@ visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("5_uwv4y")
+damage_amount = 1
 metadata/_custom_type_script = "uid://6l6bkw5ewj28"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea" unique_id=13475166]

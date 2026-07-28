@@ -49,6 +49,7 @@ func _on_damage_taken(attack_area: AttackArea) -> void:
     dir = attack_area.global_position.direction_to(player.global_position).normalized()
     init_velocity = dir * knockback_speed
     player.update_direction()
+    player.hp -= attack_area.damage_amount
     player.fsm.change_state(self)
 
 func _on_animation_finished(_anim: String) -> void:

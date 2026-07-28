@@ -3,7 +3,7 @@ class_name AttackArea extends Area2D
 
 signal DamageDealt
 
-@export var damage_amount: float = 0.0
+@export var damage_amount: int = 0
 
 func _ready() -> void:
     self.visible = false

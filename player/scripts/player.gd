@@ -17,7 +17,10 @@ var cardinal_dir: Vector2 = Vector2.DOWN
 # actual moving direction
 var dir: Vector2 = Vector2.ZERO
 
-var hp: int = 5
+var hp: int = 5:
+    set(value):
+        hp = clampi(value, 0, max_hp)
+        PlayerHud.update_hp(hp, max_hp)
 var max_hp: int = 6
 
 func _ready() -> void:
