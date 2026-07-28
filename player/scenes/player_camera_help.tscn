@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cexvbsm0fvhd0"]
+
+[ext_resource type="Script" uid="uid://dr14pxau1clcm" path="res://globals/helper/camera_helper.gd" id="1_1055e"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_xqd2n"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_r0s5o"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_2unwd"]
+
+[sub_resource type="Resource" id="Resource_pcl0k"]
+script = ExtResource("4_2unwd")
+
+[node name="Cam" type="Node" unique_id=1012394959]
+script = ExtResource("1_1055e")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1004138993]
+top_level = true
+limit_left = -64
+limit_top = -64
+limit_right = 544
+limit_bottom = 320
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=1704936172]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_xqd2n")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1761802931]
+unique_name_in_owner = true
+top_level = true
+script = ExtResource("3_r0s5o")
+follow_mode = 2
+tween_resource = SubResource("Resource_pcl0k")
+tween_on_load = false
+draw_limits = true
+limit_target = NodePath("../../BaseGrass")
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"

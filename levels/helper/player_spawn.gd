@@ -9,11 +9,11 @@ func _ready() -> void:
 
     # check if already exists a player
     if get_tree().get_first_node_in_group("Player"):
-        print("Player already exists, skipping spawn")
+        # print("Player already exists, skipping spawn")
         return
 
     # instantiate player
-    print("Spawning player")
+    # print("Spawning player")
     var player: Player = PLAYER_SCENE.instantiate()
     get_tree().current_scene.add_child(player) # player will reparent self in its `_ready()`
 

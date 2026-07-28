@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://v65ndi5v5x6i"]
+
+[ext_resource type="Script" uid="uid://ch0qpb7sg3hnu" path="res://globals/helper/scene_helper.gd" id="1_y20a3"]
+
+[node name="SceneHelper" type="Node" unique_id=502568303]
+process_mode = 3
+script = ExtResource("1_y20a3")

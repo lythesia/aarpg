@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d2ctvjte8oikf" path="res://levels/scripts/level_base.gd" id="1_eoad6"]
 [ext_resource type="TileSet" uid="uid://c8bsm6ap21gvv" path="res://levels/tiles/grass.tres" id="1_gld8x"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_5wo24"]
+[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="4_ynnnl"]
 
 [node name="S02" type="Node2D" unique_id=1622965855]
 y_sort_enabled = true
@@ -17,9 +18,9 @@ tile_set = ExtResource("1_gld8x")
 
 [node name="s02_to_s01" parent="LT" unique_id=327073310 instance=ExtResource("2_5wo24")]
 position = Vector2(304, -64)
-size = 3
-location = 2
 target_level = "uid://cce13rldqs5om"
 target_name = "s01_to_s02"
-player_width = 36
-player_height = 48
+size = 3
+location = 2
+
+[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("4_ynnnl")]

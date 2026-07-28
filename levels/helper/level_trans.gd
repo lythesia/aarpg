@@ -36,7 +36,7 @@ const CELL_UNIT: int = 32
         size = val
         apply_area_settings()
 
-## which side portal is placed
+## which side transition is placed
 @export() var location: SIDE = SIDE.LEFT:
     set(val):
         location = val
@@ -51,17 +51,25 @@ func _ready() -> void:
     if Engine.is_editor_hint():
         return
 
-    Messages.NewSceneReady.connect(_on_new_scene_ready)
-    Messages.LoadSceneFinished.connect(_on_load_scene_finished)
+    Messages.NewSceneLoaded.connect(_on_new_scene_ready)
+    Messages.ChangeSceneFinished.connect(_on_load_scene_finished)
 
-func _on_player_entered(player: Node2D) -> void:
-    SceneManager.change_scene(target_level, {
-        # when new scene is ready (`_ready` called)
-        "on_ready": func(_new_scene: Node): _on_ready(_new_scene, player),
-    })
+func _on_player_entered(player: Player) -> void:
+    # prepare args
+    const v: float = 100.0
+    const time_to_pass: float = CELL_UNIT / v
+    var velocity: Vector2 = Vector2.ZERO
+    match location:
+        LevelTrans.SIDE.LEFT:
+            velocity = Vector2(-v, 0)
+        LevelTrans.SIDE.RIGHT:
+            velocity = Vector2(0, v)
+        LevelTrans.SIDE.TOP:
+            velocity = Vector2(0, -v)
+        LevelTrans.SIDE.BOTTOM:
+            velocity = Vector2(0, v)
 
-func _on_ready(_new_scene: Node, player: Player):
-    Messages.NewSceneReady.emit(target_name, get_offset(player))
+    SceneHelper.change_scene(target_level, target_name, player as Player, velocity, time_to_pass, get_offset(player))
 
 func _on_new_scene_ready(target: String, offset: Vector2) -> void:
     # target_name behaves like LT's id, to make sure `_on_new_scene_ready`
@@ -120,5 +128,5 @@ func _get_configuration_warnings() -> PackedStringArray:
     if target_level == "":
         warnings.append("Target level is not set")
     if target_name == "":
-        warnings.append("Target level transition name is not set")
+        warnings.append("Target level transition is not set")
     return warnings
