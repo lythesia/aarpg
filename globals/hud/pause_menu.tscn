@@ -71,7 +71,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_lsqg7")
 
-[node name="InventoryUI" type="GridContainer" parent="Control/InventoryScreen/PanelContainer" unique_id=103548859]
+[node name="InventoryUI" type="GridContainer" parent="Control/InventoryScreen/PanelContainer" unique_id=103548859 groups=["saveable"]]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 6

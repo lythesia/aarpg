@@ -1,8 +1,9 @@
 class_name InventoryData extends SaveKitResource
 
+## inventory size
 @export var capacity: int = 18
 
-## element of `slots` should be non-null semantics
+## slots in inventory
 @export var slots: Array[SlotData] = []
 
 func _init() -> void:

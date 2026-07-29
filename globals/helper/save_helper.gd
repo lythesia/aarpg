@@ -13,7 +13,7 @@ func _ready() -> void:
     SaveManager.after_load.connect(_on_after_load)
 
 func save():
-    SaveManager.save_game([SAVE_SLOTS[current_slot]])
+    SaveManager.save_game([SAVE_SLOTS[current_slot]], true)
 
 func load():
     SaveManager.load_game([SAVE_SLOTS[current_slot]])

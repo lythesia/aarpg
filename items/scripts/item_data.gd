@@ -22,8 +22,3 @@ func use() -> bool:
             effect.use()
 
     return true
-
-func save_to_dict(s: Serializer) -> Dictionary:
-    var dict: Dictionary = super(s)
-    dict.erase("texture")
-    return dict

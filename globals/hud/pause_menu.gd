@@ -31,8 +31,8 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("ui_cancel"):
         Audio.ui_cancel()
         if !is_paused:
-            show_pause_menu()
             is_system_screen = false
+            show_pause_menu()
         elif is_system_screen:
             hide_system_screen()
         else:
@@ -71,6 +71,7 @@ func _on_save_pressed() -> void:
     print("Saved to slot %0d" % [SaveHelper.current_slot + 1])
 
 func _on_load_pressed() -> void:
+    hide_system_screen()
     hide_pause_menu()
     SaveHelper.load()
     print("Loaded from slot %0d" % [SaveHelper.current_slot + 1])
