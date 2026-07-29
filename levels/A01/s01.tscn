@@ -56,3 +56,5 @@ location = 1
 position = Vector2(477, 155)
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("6_1stbg")]
+
+[node name="Cam2" parent="." unique_id=1099334505 instance=ExtResource("6_1stbg")]

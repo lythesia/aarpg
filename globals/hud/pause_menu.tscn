@@ -1,14 +1,61 @@
 [gd_scene format=3 uid="uid://dsrgw2p8wkxn2"]
 
 [ext_resource type="Script" uid="uid://oey6lc6n64qy" path="res://globals/hud/pause_menu.gd" id="1_7ft3m"]
+[ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="2_kq3wa"]
+[ext_resource type="PackedScene" uid="uid://d28ga647y5dsu" path="res://globals/hud/inventory/inventory_slot.tscn" id="3_565bv"]
+[ext_resource type="Script" uid="uid://iek7etu2ykf3" path="res://globals/hud/inventory/scripts/inventory_ui.gd" id="3_yoby7"]
+[ext_resource type="Script" uid="uid://dbigaoxhl2dl4" path="res://globals/hud/inventory/scripts/inventory_data.gd" id="4_1f4io"]
+[ext_resource type="Script" uid="uid://bvapyssn4fmm6" path="res://globals/hud/inventory/scripts/slot_data.gd" id="5_r7bmi"]
+[ext_resource type="Resource" uid="uid://8qgcg0rmriho" path="res://items/gem.tres" id="6_cu325"]
+[ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/portion.tres" id="7_r7bmi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cxjf"]
+atlas = ExtResource("2_kq3wa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lsqg7"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("AtlasTexture_3cxjf")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[sub_resource type="Resource" id="Resource_kgaf0"]
+script = ExtResource("5_r7bmi")
+item_data = ExtResource("6_cu325")
+quantity = 4
+metadata/_custom_type_script = "uid://bvapyssn4fmm6"
+
+[sub_resource type="Resource" id="Resource_1f4io"]
+script = ExtResource("5_r7bmi")
+item_data = ExtResource("7_r7bmi")
+quantity = 3
+metadata/_custom_type_script = "uid://bvapyssn4fmm6"
+
+[sub_resource type="Resource" id="Resource_yoby7"]
+script = ExtResource("4_1f4io")
+slots = Array[ExtResource("5_r7bmi")]([SubResource("Resource_kgaf0"), SubResource("Resource_1f4io")])
+metadata/_custom_type_script = "uid://dbigaoxhl2dl4"
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=276449163]
 process_mode = 3
 layer = 2
-visible = false
 script = ExtResource("1_7ft3m")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1791673599]
+[node name="Control" type="Control" parent="." unique_id=898038151]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1791673599]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,31 +63,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.20784314, 0.20784314, 0.20784314, 0.7411765)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=74415645]
-custom_minimum_size = Vector2(80, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -25.0
-offset_right = 21.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SaveBtn" type="Button" parent="VBoxContainer" unique_id=961698651]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Save"
-
-[node name="LoadBtn" type="Button" parent="VBoxContainer" unique_id=1866500561]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Load"
-
-[node name="Label" type="Label" parent="." unique_id=1253915774]
+[node name="Label" type="Label" parent="Control" unique_id=1253915774]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -51,3 +75,129 @@ offset_bottom = 63.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
 text = "[ Paused ]"
+
+[node name="InventoryScreen" type="Control" parent="Control" unique_id=1512121720]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_left = 41.0
+offset_top = 77.0
+offset_right = 41.0
+offset_bottom = 77.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/InventoryScreen" unique_id=1159050716]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_lsqg7")
+
+[node name="InventoryUI" type="GridContainer" parent="Control/InventoryScreen/PanelContainer" unique_id=103548859]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 6
+script = ExtResource("3_yoby7")
+data = SubResource("Resource_yoby7")
+
+[node name="InventorySlot" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=1489574721 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=221942274 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=1551821392 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=67532128 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=672783201 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=2110532922 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=152974043 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=1991737420 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=711471224 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=673652329 instance=ExtResource("3_565bv")]
+layout_mode = 2
+
+[node name="SystemBtn" type="Button" parent="Control/InventoryScreen" unique_id=384070020]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 364.0
+offset_top = 154.0
+offset_right = 423.0
+offset_bottom = 177.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "System"
+
+[node name="ItemDesc" type="Label" parent="Control/InventoryScreen" unique_id=1617707275]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 248.0
+offset_top = 3.0
+offset_right = 408.0
+offset_bottom = 36.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "A brown fox jumps over the lazy dog!"
+autowrap_mode = 2
+
+[node name="SystemScreen" type="Control" parent="Control" unique_id=1358239727]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/SystemScreen" unique_id=74415645]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -38.5
+offset_right = 40.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveBtn" type="Button" parent="Control/SystemScreen/VBoxContainer" unique_id=961698651]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[node name="LoadBtn" type="Button" parent="Control/SystemScreen/VBoxContainer" unique_id=1866500561]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+
+[node name="BackBtn" type="Button" parent="Control/SystemScreen/VBoxContainer" unique_id=1703957576]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"

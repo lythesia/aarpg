@@ -50,6 +50,7 @@ folder_colors={
 "res://enemies/": "red",
 "res://general/": "blue",
 "res://globals/": "pink",
+"res://items/": "teal",
 "res://levels/": "orange",
 "res://player/": "teal",
 "res://public/": "gray"
