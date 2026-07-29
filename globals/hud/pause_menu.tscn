@@ -4,6 +4,7 @@
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=276449163]
 process_mode = 3
+layer = 2
 visible = false
 script = ExtResource("1_7ft3m")
 
