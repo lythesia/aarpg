@@ -11,14 +11,16 @@ func _ready() -> void:
     label.text = ""
     focus_entered.connect(_on_focus_entered)
     focus_exited.connect(_on_focus_exited)
+    pressed.connect(_on_pressed)
 
 func set_slot_data(value: SlotData):
-    if !value:
-        return
-
     slot_data = value
-    texture.texture = slot_data.item_data.texture
-    label.text = str(slot_data.quantity)
+    if !value:
+        texture.texture = null
+        label.text = ""
+    else:
+        texture.texture = slot_data.item_data.texture
+        label.text = str(slot_data.quantity)
 
 func _on_focus_entered() -> void:
     if slot_data:
@@ -26,3 +28,8 @@ func _on_focus_entered() -> void:
 
 func _on_focus_exited() -> void:
     inventory_ui.update_item_desc()
+
+func _on_pressed() -> void:
+    if slot_data and slot_data.item_data:
+        if slot_data.item_data.use():
+            slot_data.quantity -= 1

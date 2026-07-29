@@ -4,10 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="2_kq3wa"]
 [ext_resource type="PackedScene" uid="uid://d28ga647y5dsu" path="res://globals/hud/inventory/inventory_slot.tscn" id="3_565bv"]
 [ext_resource type="Script" uid="uid://iek7etu2ykf3" path="res://globals/hud/inventory/scripts/inventory_ui.gd" id="3_yoby7"]
-[ext_resource type="Script" uid="uid://dbigaoxhl2dl4" path="res://globals/hud/inventory/scripts/inventory_data.gd" id="4_1f4io"]
-[ext_resource type="Script" uid="uid://bvapyssn4fmm6" path="res://globals/hud/inventory/scripts/slot_data.gd" id="5_r7bmi"]
-[ext_resource type="Resource" uid="uid://8qgcg0rmriho" path="res://items/gem.tres" id="6_cu325"]
-[ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/portion.tres" id="7_r7bmi"]
+[ext_resource type="Resource" uid="uid://ccgovctbimxdn" path="res://globals/hud/inventory/inventory_data.tres" id="4_kgaf0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3cxjf"]
 atlas = ExtResource("2_kq3wa")
@@ -23,23 +20,6 @@ texture_margin_left = 14.0
 texture_margin_top = 14.0
 texture_margin_right = 14.0
 texture_margin_bottom = 14.0
-
-[sub_resource type="Resource" id="Resource_kgaf0"]
-script = ExtResource("5_r7bmi")
-item_data = ExtResource("6_cu325")
-quantity = 4
-metadata/_custom_type_script = "uid://bvapyssn4fmm6"
-
-[sub_resource type="Resource" id="Resource_1f4io"]
-script = ExtResource("5_r7bmi")
-item_data = ExtResource("7_r7bmi")
-quantity = 3
-metadata/_custom_type_script = "uid://bvapyssn4fmm6"
-
-[sub_resource type="Resource" id="Resource_yoby7"]
-script = ExtResource("4_1f4io")
-slots = Array[ExtResource("5_r7bmi")]([SubResource("Resource_kgaf0"), SubResource("Resource_1f4io")])
-metadata/_custom_type_script = "uid://dbigaoxhl2dl4"
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=276449163]
 process_mode = 3
@@ -96,7 +76,7 @@ unique_name_in_owner = true
 layout_mode = 2
 columns = 6
 script = ExtResource("3_yoby7")
-data = SubResource("Resource_yoby7")
+inventory_data = ExtResource("4_kgaf0")
 
 [node name="InventorySlot" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=1489574721 instance=ExtResource("3_565bv")]
 layout_mode = 2

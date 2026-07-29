@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemEffectHeal" format=3 uid="uid://dwth303jqk8re"]
+
+[ext_resource type="Script" uid="uid://tjt2reva101w" path="res://items/effects/item_effect_heal.gd" id="1_3g5i3"]
+[ext_resource type="AudioStream" uid="uid://csll5ykc3yhcb" path="res://public/audio/hp-up.wav" id="2_xvdgi"]
+
+[resource]
+script = ExtResource("1_3g5i3")
+use_audio = ExtResource("2_xvdgi")
+metadata/_custom_type_script = "uid://tjt2reva101w"

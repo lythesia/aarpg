@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cvwa4cmuf8lqi"]
+
+[ext_resource type="Script" uid="uid://dn4w8ptdgiq8j" path="res://items/pickup/item_pickup.gd" id="1_5evqp"]
+[ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="2_lx5c1"]
+[ext_resource type="Script" uid="uid://b3gxxo3lbv5us" path="res://general/effects/animated_sprites/floating_sprite.gd" id="3_apwkj"]
+[ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="4_tcqwi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aabtn"]
+
+[node name="ItemPickup" type="Node2D" unique_id=1729738544]
+script = ExtResource("1_5evqp")
+pickup_audio = ExtResource("2_lx5c1")
+
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=209384752]
+modulate = Color(0.16078432, 0.16078432, 0.16078432, 0.78431374)
+show_behind_parent = true
+position = Vector2(0, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_tcqwi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=571239074]
+z_index = 1
+position = Vector2(0, -8)
+script = ExtResource("3_apwkj")
+float_speed = 5.0
+float_range = 2.5
+
+[node name="Area2D" type="Area2D" parent="." unique_id=752820882]
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1520240682]
+shape = SubResource("CircleShape2D_aabtn")

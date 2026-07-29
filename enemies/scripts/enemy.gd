@@ -129,8 +129,8 @@ func _get_configuration_warnings() -> PackedStringArray:
         warnings.append("Requires a Sprite2D!")
     if !find_children("*", "AnimationPlayer", false):
         warnings.append("Requires an AnimationPlayer")
-    # if !find_children("*", "HazardArea", false):
-    #     warnings.append("Requires a HazardArea")
+    if !find_children("*", "HazardArea", false):
+        warnings.append("Requires a HazardArea")
     if !find_children("*", "DamageArea", false):
         warnings.append("Requires a DamageArea")
     if !find_children("*", "EnemyStateMachine", false):

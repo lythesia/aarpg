@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InventoryData" format=3 uid="uid://ccgovctbimxdn"]
+
+[ext_resource type="Script" uid="uid://dbigaoxhl2dl4" path="res://globals/hud/inventory/scripts/inventory_data.gd" id="1_bnecu"]
+[ext_resource type="Script" uid="uid://bvapyssn4fmm6" path="res://globals/hud/inventory/scripts/slot_data.gd" id="2_ver7s"]
+
+[resource]
+script = ExtResource("1_bnecu")
+metadata/_custom_type_script = "uid://dbigaoxhl2dl4"

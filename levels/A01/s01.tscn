@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="3_d5g0j"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="4_uv6ks"]
 [ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="6_1stbg"]
+[ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="7_bs86r"]
+[ext_resource type="Resource" uid="uid://8qgcg0rmriho" path="res://items/item_tres/gem.tres" id="8_e8gkl"]
+[ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="9_e8gkl"]
 
 [node name="S01" type="Node2D" unique_id=901446768]
 y_sort_enabled = true
@@ -53,8 +56,16 @@ target_name = "s03_to_s01"
 location = 1
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("3_d5g0j")]
-position = Vector2(477, 155)
+position = Vector2(254, 121)
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("6_1stbg")]
 
-[node name="Cam2" parent="." unique_id=1099334505 instance=ExtResource("6_1stbg")]
+[node name="Gem" parent="." unique_id=1729738544 instance=ExtResource("7_bs86r")]
+y_sort_enabled = true
+position = Vector2(203, 105)
+item_data = ExtResource("8_e8gkl")
+
+[node name="Portion" parent="." unique_id=600042248 instance=ExtResource("7_bs86r")]
+y_sort_enabled = true
+position = Vector2(220, 78)
+item_data = ExtResource("9_e8gkl")
