@@ -1,5 +1,10 @@
 extends Node
 
+const DEFAULT_SCENE: String = "uid://cce13rldqs5om"
+var scene_to_load: String
+var current_scene: String = DEFAULT_SCENE
+var is_reload: bool = false
+
 var _target_level_trans: String
 var _offset: Vector2
 
@@ -21,10 +26,35 @@ func _resume():
 
 func _on_scene_loaded():
     print("on_scene_loaded: %s" % SceneManager._current_scene.name)
-    if !_target_level_trans:
-        return
 
-    Messages.NewSceneLoaded.emit(_target_level_trans, _offset)
+    # on load
+    if is_reload:
+        setup_player()
+        # clear flags
+        is_reload = false
+    # on level transition
+    elif _target_level_trans:
+        Messages.NewSceneLoaded.emit(_target_level_trans, _offset)
+
+func load_scene_and_setup_player(target_scene):
+    var player: Player = PlayerManager.get_player()
+    if target_scene != current_scene:
+        await SceneManager.change_scene(target_scene, {
+            "on_ready": func(_scene): player.global_position = player.load_pos
+        })
+        current_scene = ResourceUID.path_to_uid(target_scene)
+    else:
+        # "on_ready" hook not work in `reload_scene`, use `scene_loaded` signal to setup player
+        is_reload = true
+        await SceneManager.reload_scene()
+
+    # always need to emit signal to activate level transition area in target scene
+    Messages.ChangeSceneFinished.emit()
+
+func setup_player():
+    var player: Player = PlayerManager.get_player()
+    if player:
+        player.global_position = player.load_pos
 
 # 1. pause
 # 2. await fade out
@@ -54,6 +84,7 @@ func change_scene(
     get_tree().create_timer(time_to_pass).timeout.connect(_pause)
 
     await SceneManager.change_scene(target_scene)
+    current_scene = ResourceUID.path_to_uid(target_scene)
     Messages.ChangeSceneFinished.emit()
 
     player.damage_area.set_deferred("monitorable", true)

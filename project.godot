@@ -22,12 +22,15 @@ buses/default_bus_layout="uid://bu4e70aw0jtc8"
 [autoload]
 
 PhantomCameraManager="*uid://duq6jhf6unyis"
+SceneManager="*uid://j20v4cg7v8m1"
+SaveManager="*uid://ck4ih2layufdo"
 Audio="*uid://c2m16mm4678j"
 Messages="*uid://b7lb6ddds8trm"
 PlayerHud="*uid://jbd4p43as3i1"
 PlayerManager="*uid://cqnwbal30g0vf"
 SceneHelper="*uid://v65ndi5v5x6i"
-SceneManager="*uid://j20v4cg7v8m1"
+PauseMenu="*uid://dsrgw2p8wkxn2"
+SaveHelper="*uid://cx3gabbm3exgy"
 
 [display]
 
@@ -39,7 +42,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg", "res://addons/savekit/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
 
 [file_customization]
 
@@ -55,6 +58,7 @@ folder_colors={
 [global_group]
 
 Player=""
+saveable=""
 
 [gui]
 

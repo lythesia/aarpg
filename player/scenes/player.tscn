@@ -695,7 +695,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
 size = Vector2(26, 24)
 
-[node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player", "saveable"]]
 z_index = 1
 collision_layer = 16
 motion_mode = 1

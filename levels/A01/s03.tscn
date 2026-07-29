@@ -30,5 +30,6 @@ position = Vector2(302, 186)
 position = Vector2(0, 128)
 target_level = "uid://cce13rldqs5om"
 target_name = "s01_to_s03"
+size = 6
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("5_3h20w")]

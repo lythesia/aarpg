@@ -17,7 +17,10 @@ var cardinal_dir: Vector2 = Vector2.DOWN
 # actual moving direction
 var dir: Vector2 = Vector2.ZERO
 
-var hp: int = 5:
+var load_pos: Vector2
+
+const DEFAULT_HP: int = 6
+var hp: int = 6:
     set(value):
         hp = clampi(value, 0, max_hp)
         PlayerHud.update_hp(hp, max_hp)
@@ -86,6 +89,26 @@ func update_animation(anim_state: String) -> String:
     return anim_player.current_animation
 
 func _debug_label(_delta: float):
-    var args = [dir, cardinal_dir]
-    label.text = "D: %v\nC: %v" % args
+    var args = [global_position]
+    label.text = "%v" % args
     pass
+
+#region save/load
+func save_to_dict(s: SaveKitSerializer) -> Dictionary:
+    return {
+        "scene": ResourceUID.uid_to_path(SceneHelper.current_scene),
+        "pos": s.encode_var(global_position),
+        "hp": hp,
+        "max_hp": max_hp,
+    }
+
+func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
+    var scene: String = data.get("scene", SceneHelper.DEFAULT_SCENE)
+    SceneHelper.scene_to_load = ResourceUID.path_to_uid(scene) # used to change scene later
+
+    var decoded = d.decode_var(data["pos"], TYPE_VECTOR2)
+    load_pos = decoded if decoded is Vector2 else Vector2.ZERO # re-place later during change scene
+
+    hp = data.get("hp", DEFAULT_HP)
+    max_hp = data.get("max_hp", DEFAULT_HP)
+#endregion
