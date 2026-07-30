@@ -3,13 +3,22 @@ class_name ItemPickup extends Node2D
 
 @export var item_data: ItemData: set = _set_item_data
 @export var pickup_audio: AudioStream
+@export var has_shadow: bool = true: set = _set_has_shadow
+@export var has_animation: bool = false: set = _set_has_animation
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var area: Area2D = $Area2D
+@onready var shadow_sprite: Sprite2D = $ShadowSprite
 
 func _ready() -> void:
     y_sort_enabled = true
+
+    if !has_shadow:
+        shadow_sprite.visible = false
+
     _update_texture()
+    _update_shadow()
+
     if Engine.is_editor_hint():
         return
 
@@ -22,15 +31,35 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _set_item_data(value: ItemData) -> void:
     item_data = value
-    _update_texture()
-    update_configuration_warnings()
+
+    if Engine.is_editor_hint() and is_node_ready():
+        _update_texture()
+        update_configuration_warnings()
 
 func _update_texture() -> void:
-    if item_data and sprite:
-        sprite.texture = item_data.texture
-    elif sprite:
-        sprite.texture = null
+    if !has_animation:
+        if item_data and sprite:
+            sprite.texture = item_data.icon
+        elif sprite:
+            sprite.texture = null
+    # we have default animation for the sprite
+    # set it manually
+    else:
+        pass
 
+func _set_has_shadow(value: bool) -> void:
+    has_shadow = value
+    if Engine.is_editor_hint() and is_node_ready():
+        _update_shadow()
+
+func _update_shadow() -> void:
+    if shadow_sprite:
+        shadow_sprite.visible = has_shadow
+
+func _set_has_animation(value: bool) -> void:
+    has_animation = value
+    if Engine.is_editor_hint() and is_node_ready():
+        _update_texture()
 
 func item_picked_up(player: Player) -> void:
     area.body_entered.disconnect(_on_body_entered)
@@ -56,6 +85,26 @@ func play_pickup_animation(player: Node2D) -> void:
 
     var start_pos = global_position
 
+    _tween_trajectory(tween, duration, peak_height, start_pos, player)
+
+    var spin_tween: Tween = _tween_spin(flip_count, duration)
+
+    var fade_delay: float = duration * 0.7 # Starts fading at 70% of the flight
+    _tween_fade(tween, duration, fade_delay)
+
+    # 8. Clean up nodes when the animation finishes
+    tween.chain().tween_callback(func():
+        spin_tween.kill() # Ensure the looping sub-tween is freed
+        queue_free()
+    )
+
+func _tween_trajectory(
+    tween: Tween,
+    duration: float,
+    peak_height: float,
+    start_pos: Vector2,
+    player: Player,
+) -> void:
     # 4. Parabolic motion: X-axis tracking the player smoothly
     tween.tween_method(
         func(t: float):
@@ -63,15 +112,31 @@ func play_pickup_animation(player: Node2D) -> void:
         0.0, 1.0, duration
     ).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
-    # 5. Parabolic motion: Y-axis arc calculation
+    # 5. Parabolic motion: Y-axis arc calculation & Shadow scaling
     tween.tween_method(
         func(t: float):
             var linear_y = lerp(start_pos.y, player.global_position.y, t)
+            # arc represents the height above the ground (0.0 at start/end, max at peak)
             var arc = 4.0 * t * (1.0 - t) * peak_height
-            global_position.y = linear_y - arc,
-        0.0, 1.0, duration
+            global_position.y = linear_y - arc
+
+            # Shadow effect: scale down and fade out as the item flies higher
+            if has_shadow:
+                var height_ratio = arc / peak_height # 0.0 on ground, 1.0 at peak
+                # Shadow shrinks to 40% and fades to 30% opacity at the highest point
+                shadow_sprite.scale = Vector2.ONE * (1.0 - height_ratio * 0.6)
+                shadow_sprite.modulate.a = 1.0 - height_ratio * 0.7
+                # Keep has_shadow at the base height (offset the item's jump up)
+                shadow_sprite.position.y = arc,
+        0.0,
+        1.0,
+        duration
     ).set_trans(Tween.TRANS_LINEAR)
 
+func _tween_spin(
+    flip_count: int,
+    duration: float,
+) -> Tween:
     # 6. 3D Coin Spin Effect via horizontal scale flipping
     var spin_tween = create_tween()
     spin_tween.set_loops(flip_count)
@@ -82,20 +147,17 @@ func play_pickup_animation(player: Node2D) -> void:
     # Flip from back to front (scale.x from -1 to 1)
     spin_tween.tween_property(sprite, "scale:x", 1.0, single_flip_time).set_trans(Tween.TRANS_SINE)
 
-    # 7. Fade out and shrink vertically only at the very end of the animation
-    var fade_delay: float = duration * 0.7 # Starts fading at 70% of the flight
-    var fade_duration: float = duration - fade_delay
+    return spin_tween
 
+func _tween_fade(
+    tween: Tween,
+    duration: float,
+    fade_delay: float,
+) -> void:
+    # 7. Fade out and shrink vertically only at the very end of the animation
+    var fade_duration: float = duration - fade_delay
     tween.tween_property(sprite, "scale:y", 0.0, fade_duration).set_delay(fade_delay).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
     tween.tween_property(sprite, "modulate:a", 0.0, fade_duration).set_delay(fade_delay)
-
-
-    # 8. Clean up nodes when the animation finishes
-    tween.chain().tween_callback(func():
-        spin_tween.kill() # Ensure the looping sub-tween is freed
-        queue_free()
-    )
-
 
 func _get_configuration_warnings() -> PackedStringArray:
     if Utils.is_editing_own_scene(self):

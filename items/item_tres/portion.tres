@@ -12,7 +12,7 @@ heal_amount = 2
 use_audio = ExtResource("3_cqbli")
 metadata/_custom_type_script = "uid://tjt2reva101w"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vu6uo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fqaq"]
 atlas = ExtResource("4_cqbli")
 region = Rect2(32, 0, 32, 32)
 
@@ -20,6 +20,6 @@ region = Rect2(32, 0, 32, 32)
 script = ExtResource("3_hqump")
 name = "Portion"
 description = "Heals you"
-texture = SubResource("AtlasTexture_vu6uo")
+icon = SubResource("AtlasTexture_3fqaq")
 effects = Array[ExtResource("1_at4kb")]([SubResource("Resource_0v6hv")])
 metadata/_custom_type_script = "uid://cpirecojyj4v2"

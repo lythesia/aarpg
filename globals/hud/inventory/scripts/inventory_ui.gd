@@ -40,10 +40,15 @@ func calibrate_inventory_data() -> void:
 func update_item_desc(item_data: ItemData = null) -> void:
     item_desc_label.text = item_data.description if item_data else ""
 
+func update_coin_label() -> void:
+    var n: int = inventory_data.currencies.get("Coin", 0)
+    PauseMenu.coin_label.text = str(n)
+
 func _on_paused() -> void:
     update_inventory()
     await get_tree().process_frame
     update_slot_focus()
+    update_coin_label()
 
 func _on_unpaused() -> void:
     clear_inventory()

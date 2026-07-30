@@ -19,7 +19,7 @@ func set_slot_data(value: SlotData):
         texture.texture = null
         label.text = ""
     else:
-        texture.texture = slot_data.item_data.texture
+        texture.texture = slot_data.item_data.icon
         label.text = str(slot_data.quantity)
 
 func _on_focus_entered() -> void:

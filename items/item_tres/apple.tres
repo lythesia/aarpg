@@ -11,7 +11,7 @@ script = ExtResource("2_c5ygi")
 use_audio = ExtResource("3_hfi0f")
 metadata/_custom_type_script = "uid://tjt2reva101w"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j4puw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_br1h1"]
 atlas = ExtResource("4_c5ygi")
 region = Rect2(192, 0, 32, 32)
 
@@ -19,6 +19,6 @@ region = Rect2(192, 0, 32, 32)
 script = ExtResource("2_el646")
 name = "Apple"
 description = "Juicy!"
-texture = SubResource("AtlasTexture_j4puw")
+icon = SubResource("AtlasTexture_br1h1")
 effects = Array[ExtResource("1_5sg4j")]([SubResource("Resource_6vr6c")])
 metadata/_custom_type_script = "uid://cpirecojyj4v2"

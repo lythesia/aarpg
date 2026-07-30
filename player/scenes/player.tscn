@@ -19,6 +19,7 @@
 radius = 27.018513
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aabtn"]
+radius = 13.0
 
 [sub_resource type="Animation" id="Animation_apn28"]
 length = 0.001
@@ -733,6 +734,7 @@ show_behind_parent = true
 texture = ExtResource("4_kaefl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890230004]
+position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_aabtn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=98925703]

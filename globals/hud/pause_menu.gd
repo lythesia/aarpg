@@ -11,6 +11,7 @@ signal PauseMenuHidden
 @onready var system_screen: Control = %SystemScreen
 @onready var inventory_ui: InventoryUI = %InventoryUI
 @onready var item_desc_label: Label = %ItemDesc
+@onready var coin_label: Label = %CoinLabel
 
 var is_paused: bool = false
 var is_system_screen: bool = false

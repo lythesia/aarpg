@@ -5,6 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://d28ga647y5dsu" path="res://globals/hud/inventory/inventory_slot.tscn" id="3_565bv"]
 [ext_resource type="Script" uid="uid://iek7etu2ykf3" path="res://globals/hud/inventory/scripts/inventory_ui.gd" id="3_yoby7"]
 [ext_resource type="Resource" uid="uid://ccgovctbimxdn" path="res://globals/hud/inventory/inventory_data.tres" id="4_kgaf0"]
+[ext_resource type="Texture2D" uid="uid://d0cqku6rkw3e3" path="res://public/sprites/coin_split/coin1.png" id="6_kqlu6"]
+[ext_resource type="Texture2D" uid="uid://brs8q05k5c4yo" path="res://public/sprites/coin_split/coin2.png" id="7_ea3dv"]
+[ext_resource type="Texture2D" uid="uid://b24m2te4070sp" path="res://public/sprites/coin_split/coin3.png" id="8_7eg80"]
+[ext_resource type="Texture2D" uid="uid://v8s7embhub22" path="res://public/sprites/coin_split/coin4.png" id="9_t4dq7"]
+[ext_resource type="Texture2D" uid="uid://blcfpcxqiutmk" path="res://public/sprites/coin_split/coin5.png" id="10_7ex7g"]
+[ext_resource type="Texture2D" uid="uid://cgth8i76tu4li" path="res://public/sprites/coin_split/coin6.png" id="11_1kdy4"]
+[ext_resource type="Texture2D" uid="uid://b4f3a5xedjx3f" path="res://public/sprites/coin_split/coin7.png" id="12_ahq01"]
+[ext_resource type="Texture2D" uid="uid://8rd1f4x0eyqf" path="res://public/sprites/coin_split/coin8.png" id="13_s0uh3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3cxjf"]
 atlas = ExtResource("2_kq3wa")
@@ -20,6 +28,25 @@ texture_margin_left = 14.0
 texture_margin_top = 14.0
 texture_margin_right = 14.0
 texture_margin_bottom = 14.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_aabtn"]
+frames = 8
+frame_0/texture = ExtResource("6_kqlu6")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("7_ea3dv")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("8_7eg80")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("9_t4dq7")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("10_7ex7g")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("11_1kdy4")
+frame_5/duration = 0.1
+frame_6/texture = ExtResource("12_ahq01")
+frame_6/duration = 0.1
+frame_7/texture = ExtResource("13_s0uh3")
+frame_7/duration = 0.1
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=276449163]
 process_mode = 3
@@ -141,6 +168,51 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "A brown fox jumps over the lazy dog!"
 autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/InventoryScreen" unique_id=1654721918]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 134.0
+offset_right = 128.0
+offset_bottom = 174.0
+
+[node name="Control" type="Control" parent="Control/InventoryScreen/HBoxContainer" unique_id=1103758204]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryScreen/HBoxContainer/Control" unique_id=1194538708]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_aabtn")
+
+[node name="Control2" type="Control" parent="Control/InventoryScreen/HBoxContainer" unique_id=1318669551]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CoinLabel" type="Label" parent="Control/InventoryScreen/HBoxContainer/Control2" unique_id=923425556]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 8.0
+offset_bottom = 7.5
+grow_vertical = 2
+text = "0"
 
 [node name="SystemScreen" type="Control" parent="Control" unique_id=1358239727]
 unique_name_in_owner = true

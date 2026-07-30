@@ -12,6 +12,8 @@ signal WasKilled
 
 @export var hp: float = 3.0
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
 var sprite: Sprite2D
 var animation_player: AnimationPlayer
 var hazard_area: HazardArea
@@ -116,6 +118,7 @@ func _on_damage_taken(attack_area: AttackArea) -> void:
     if blackboard.hp <= 0.0:
         hazard_area.queue_free()
         damage_area.queue_free()
+        collision_shape.set_deferred("disabled", true)
         # on killed, both `WasHit` and `WasKilled` are emitted
         # and `WasKilled` is fired before `WasHit`
         WasKilled.emit()

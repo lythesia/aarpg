@@ -6,6 +6,9 @@ class_name InventoryData extends SaveKitResource
 ## slots in inventory
 @export var slots: Array[SlotData] = []
 
+## currency-like, not occupying slot
+@export var currencies: Dictionary = {}
+
 func _init() -> void:
     ensure_capacity()
     _connect_slots()
@@ -14,6 +17,13 @@ func ensure_capacity() -> void:
     slots.resize(capacity)
 
 func add_item(item_data: ItemData, quantity: int = 1) -> bool:
+    match item_data.item_type:
+        ItemData.ItemType.CURRENCY:
+            return _add_currency(item_data, quantity)
+        _:
+            return _add_consumable(item_data, quantity)
+
+func _add_consumable(item_data: ItemData, quantity: int = 1) -> bool:
     # 1. try to stack
     for slot in slots:
         if slot and slot.item_data == item_data:
@@ -34,6 +44,11 @@ func add_item(item_data: ItemData, quantity: int = 1) -> bool:
     # 3. no slots, inventory is full
     print("inventory is full")
     return false
+
+func _add_currency(item_data: ItemData, quantity: int) -> bool:
+    currencies.get_or_add(item_data.name, 0 as int)
+    currencies[item_data.name] += quantity
+    return true
 
 func _connect_slots():
     for slot in slots:

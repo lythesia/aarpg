@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://e4ff1kt8eyx1"]
+
+[ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_nh3og"]
+[ext_resource type="Script" uid="uid://cpirecojyj4v2" path="res://items/scripts/item_data.gd" id="2_ivymc"]
+[ext_resource type="Texture2D" uid="uid://1x4xwbjk4gy6" path="res://public/sprites/coin.png" id="3_ivymc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsqg7"]
+atlas = ExtResource("3_ivymc")
+region = Rect2(0, 0, 6, 6)
+
+[resource]
+script = ExtResource("2_ivymc")
+name = "Coin"
+item_type = 0
+icon = SubResource("AtlasTexture_lsqg7")
+metadata/_custom_type_script = "uid://cpirecojyj4v2"

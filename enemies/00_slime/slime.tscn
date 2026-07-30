@@ -14,6 +14,10 @@
 [ext_resource type="Script" uid="uid://besi5f8uymy2w" path="res://enemies/scripts/base/es_death.gd" id="12_l83x4"]
 [ext_resource type="AudioStream" uid="uid://cl8fdopju6pq4" path="res://public/audio/hit_00.wav" id="13_d6mua"]
 [ext_resource type="PackedScene" uid="uid://blxqf5mi5omx0" path="res://general/effects/animated_sprites/destroy_smoke.tscn" id="14_d6mua"]
+[ext_resource type="Script" uid="uid://btsrtx6c2nriu" path="res://general/loot_drop/loot_drop.gd" id="15_3ig6r"]
+[ext_resource type="Script" uid="uid://jqbhutkxlgs2" path="res://general/loot_drop/lood_data.gd" id="16_gxb4a"]
+[ext_resource type="PackedScene" uid="uid://c51i7rm84mkyu" path="res://general/loot_drop/coin.tscn" id="17_bslat"]
+[ext_resource type="PackedScene" uid="uid://dbtahbkmi83dy" path="res://general/loot_drop/portion.tscn" id="18_gxb4a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aabtn"]
 
@@ -692,6 +696,20 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_uwv4y"]
 radius = 13.0
 
+[sub_resource type="Resource" id="Resource_aabtn"]
+script = ExtResource("16_gxb4a")
+item_scene = ExtResource("17_bslat")
+min_drop = 2
+max_drop = 8
+metadata/_custom_type_script = "uid://jqbhutkxlgs2"
+
+[sub_resource type="Resource" id="Resource_br1h1"]
+script = ExtResource("16_gxb4a")
+item_scene = ExtResource("18_gxb4a")
+min_drop = 1
+drop_rate = 0.5
+metadata/_custom_type_script = "uid://jqbhutkxlgs2"
+
 [node name="Slime" type="CharacterBody2D" unique_id=1748956911]
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
@@ -785,3 +803,8 @@ bus = &"SFX"
 
 [node name="DeathAudio" type="AudioStreamPlayer2D" parent="Audio" unique_id=110397049]
 bus = &"SFX"
+
+[node name="LootDropper" type="Marker2D" parent="." unique_id=1390969385]
+script = ExtResource("15_3ig6r")
+items = Array[ExtResource("16_gxb4a")]([SubResource("Resource_aabtn"), SubResource("Resource_br1h1")])
+metadata/_custom_type_script = "uid://btsrtx6c2nriu"
