@@ -3,7 +3,7 @@ class_name InventoryUI extends Control
 
 const INVENTORY_SLOT = preload("uid://d28ga647y5dsu")
 
-@export var inventory_data: InventoryData = InventoryData.new()
+@export var inventory_data: InventoryData
 
 @onready var item_desc_label: Label = $"../../ItemDesc"
 
@@ -12,7 +12,7 @@ var last_focused_slot: int = 0
 func _ready() -> void:
     PauseMenu.PauseMenuShown.connect(_on_paused)
     PauseMenu.PauseMenuHidden.connect(_on_unpaused)
-    inventory_data.changed.connect(_on_inventory_changed)
+    connect_inventory_changed()
 
 func update_inventory() -> void:
     for slot in inventory_data.slots:
@@ -62,3 +62,9 @@ func _on_slot_focused() -> void:
         if slot_ui.has_focus():
             last_focused_slot = i
             return
+
+## we need to manually reconnect instead of relying `_ready` coz
+## PauseMenu is global autoload, `_ready` won't trigger again on
+## scene (re)load
+func connect_inventory_changed() -> void:
+    inventory_data.changed.connect(_on_inventory_changed)

@@ -17,14 +17,15 @@ var cardinal_dir: Vector2 = Vector2.DOWN
 # actual moving direction
 var dir: Vector2 = Vector2.ZERO
 
-var load_pos: Vector2
-
 const DEFAULT_HP: int = 6
 var hp: int = 6:
     set(value):
         hp = clampi(value, 0, max_hp)
         PlayerHud.update_hp(hp, max_hp)
 var max_hp: int = 6
+
+# used for game load, setup player stats after scene change instead of on load
+var player_to_load: Dictionary = {}
 
 func _ready() -> void:
     fsm.init(self)
@@ -107,8 +108,14 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
     SceneHelper.scene_to_load = ResourceUID.path_to_uid(scene) # used to change scene later
 
     var decoded = d.decode_var(data["pos"], TYPE_VECTOR2)
-    load_pos = decoded if decoded is Vector2 else Vector2.ZERO # re-place later during change scene
-
-    hp = data.get("hp", DEFAULT_HP)
-    max_hp = data.get("max_hp", DEFAULT_HP)
+    player_to_load = {
+        "pos": decoded if decoded is Vector2 else Vector2.ZERO,
+        "hp": data.get("hp", DEFAULT_HP),
+        "max_hp": data.get("max_hp", DEFAULT_HP),
+    }
 #endregion
+
+func setup_player() -> void:
+    global_position = player_to_load["pos"]
+    hp = player_to_load["hp"]
+    max_hp = player_to_load["max_hp"]

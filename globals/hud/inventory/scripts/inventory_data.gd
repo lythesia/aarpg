@@ -50,3 +50,10 @@ func _on_slot_changed() -> void:
             # make that slot empty in ui
             slots[i] = null
             emit_changed()
+
+#region save/load
+func load_from_dict(d: Deserializer, data: Dictionary) -> void:
+    super(d, data)
+    # re-connect slots
+    _connect_slots()
+#endregion

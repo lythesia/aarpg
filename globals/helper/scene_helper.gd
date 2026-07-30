@@ -26,7 +26,7 @@ func _resume():
 
 func _on_scene_loaded():
     # print("on_scene_loaded: %s" % SceneManager._current_scene.name)
-    # on load
+    # on (re)load
     if is_reload:
         setup_player()
         # clear flags
@@ -39,7 +39,7 @@ func load_scene_and_setup_player(target_scene):
     var player: Player = PlayerManager.get_player()
     if target_scene != current_scene:
         await SceneManager.change_scene(target_scene, {
-            "on_ready": func(_scene): player.global_position = player.load_pos
+            "on_ready": func(_scene): player.setup_player()
         })
         current_scene = ResourceUID.path_to_uid(target_scene)
     else:
@@ -53,7 +53,7 @@ func load_scene_and_setup_player(target_scene):
 func setup_player():
     var player: Player = PlayerManager.get_player()
     if player:
-        player.global_position = player.load_pos
+        player.setup_player()
 
 # 1. pause
 # 2. await fade out

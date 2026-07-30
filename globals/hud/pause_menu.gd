@@ -68,13 +68,13 @@ func _on_system_pressed() -> void:
 
 func _on_save_pressed() -> void:
     SaveHelper.save()
-    print("Saved to slot %0d" % [SaveHelper.current_slot + 1])
+    print("Saved to slot_%02d" % [SaveHelper.current_slot + 1])
 
 func _on_load_pressed() -> void:
     hide_system_screen()
     hide_pause_menu()
     SaveHelper.load()
-    print("Loaded from slot %0d" % [SaveHelper.current_slot + 1])
+    print("Loaded from slot_%02d" % [SaveHelper.current_slot + 1])
 
 func _on_back_pressed() -> void:
     hide_system_screen()

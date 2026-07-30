@@ -16,6 +16,8 @@ func save():
     SaveManager.save_game([SAVE_SLOTS[current_slot]], true)
 
 func load():
+    # todo: this load update player's hp too early and we can see
+    # loaded hp before fade out
     SaveManager.load_game([SAVE_SLOTS[current_slot]])
 
 func switch_slot(slot: int):
@@ -23,3 +25,4 @@ func switch_slot(slot: int):
 
 func _on_after_load() -> void:
     SceneHelper.load_scene_and_setup_player(SceneHelper.scene_to_load)
+    PauseMenu.inventory_ui.connect_inventory_changed()
