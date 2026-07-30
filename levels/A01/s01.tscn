@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="7_bs86r"]
 [ext_resource type="Resource" uid="uid://8qgcg0rmriho" path="res://items/item_tres/gem.tres" id="8_e8gkl"]
 [ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="9_e8gkl"]
+[ext_resource type="Resource" uid="uid://dwmbiwabnojq4" path="res://items/item_tres/apple.tres" id="10_r434y"]
 
 [node name="S01" type="Node2D" unique_id=901446768]
 y_sort_enabled = true
@@ -69,3 +70,8 @@ item_data = ExtResource("8_e8gkl")
 y_sort_enabled = true
 position = Vector2(220, 78)
 item_data = ExtResource("9_e8gkl")
+
+[node name="ItemPickup" parent="." unique_id=1890760154 instance=ExtResource("7_bs86r")]
+y_sort_enabled = true
+position = Vector2(184, 78)
+item_data = ExtResource("10_r434y")

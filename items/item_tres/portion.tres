@@ -1,9 +1,16 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dbwm6mt68w6gl"]
 
 [ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_at4kb"]
-[ext_resource type="Resource" uid="uid://dwth303jqk8re" path="res://items/effect_tres/heal_effect.tres" id="2_0v6hv"]
+[ext_resource type="Script" uid="uid://tjt2reva101w" path="res://items/effects/item_effect_heal.gd" id="2_0v6hv"]
+[ext_resource type="AudioStream" uid="uid://csll5ykc3yhcb" path="res://public/audio/hp-up.wav" id="3_cqbli"]
 [ext_resource type="Script" uid="uid://cpirecojyj4v2" path="res://items/scripts/item_data.gd" id="3_hqump"]
 [ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="4_cqbli"]
+
+[sub_resource type="Resource" id="Resource_0v6hv"]
+script = ExtResource("2_0v6hv")
+heal_amount = 2
+use_audio = ExtResource("3_cqbli")
+metadata/_custom_type_script = "uid://tjt2reva101w"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vu6uo"]
 atlas = ExtResource("4_cqbli")
@@ -14,5 +21,5 @@ script = ExtResource("3_hqump")
 name = "Portion"
 description = "Heals you"
 texture = SubResource("AtlasTexture_vu6uo")
-effects = Array[ExtResource("1_at4kb")]([ExtResource("2_0v6hv")])
+effects = Array[ExtResource("1_at4kb")]([SubResource("Resource_0v6hv")])
 metadata/_custom_type_script = "uid://cpirecojyj4v2"

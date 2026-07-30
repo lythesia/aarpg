@@ -23,10 +23,14 @@ func _on_body_entered(body: Node2D) -> void:
 func _set_item_data(value: ItemData) -> void:
     item_data = value
     _update_texture()
+    update_configuration_warnings()
 
 func _update_texture() -> void:
     if item_data and sprite:
         sprite.texture = item_data.texture
+    elif sprite:
+        sprite.texture = null
+
 
 func item_picked_up(player: Player) -> void:
     area.body_entered.disconnect(_on_body_entered)
@@ -98,6 +102,6 @@ func _get_configuration_warnings() -> PackedStringArray:
         return []
 
     var warnings: PackedStringArray = []
-    if !item_data and owner:
+    if !item_data:
         warnings.append("Item data is not set")
     return warnings

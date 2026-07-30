@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("1_3g5i3")
+heal_amount = 2
 use_audio = ExtResource("2_xvdgi")
 metadata/_custom_type_script = "uid://tjt2reva101w"

@@ -10,10 +10,5 @@ static func is_editing_own_scene(node: Node) -> bool:
     if not edited_root:
         return false
 
-    # approach 1: recommended (more reliable)
-    return node.get_tree().get_edited_scene_root() == edited_root or \
-           node.owner == edited_root or \
-           node == edited_root
-
     # approach 2: if you want to be more strict, only check if the node is the root node of the edited scene
-    # return node == edited_root or node.get_parent() == null
+    return node == edited_root or node.get_parent() == null
