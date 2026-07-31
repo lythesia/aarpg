@@ -692,6 +692,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6mua"]
+radius = 13.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
 size = Vector2(26, 24)
@@ -734,6 +735,7 @@ show_behind_parent = true
 texture = ExtResource("4_kaefl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890230004]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_aabtn")
 
@@ -789,6 +791,7 @@ horizontal_alignment = 1
 [node name="DamageArea" type="Area2D" parent="." unique_id=830260256]
 unique_name_in_owner = true
 visible = false
+position = Vector2(0, 4)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("10_6g3n5")
@@ -799,7 +802,6 @@ position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_d6mua")
 
 [node name="Interaction" type="Area2D" parent="." unique_id=1781928421]
-visible = false
 position = Vector2(0, -9)
 monitoring = false
 monitorable = false

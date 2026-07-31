@@ -33,3 +33,6 @@ func _on_pressed() -> void:
     if slot_data and slot_data.item_data:
         if slot_data.item_data.use():
             slot_data.quantity -= 1
+            # update quantity label in-place
+            if slot_data.quantity > 0:
+                label.text = str(slot_data.quantity)
