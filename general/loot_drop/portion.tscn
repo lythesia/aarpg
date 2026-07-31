@@ -5,7 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="3_bvcag"]
 [ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="4_es15t"]
 [ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="5_3vb4k"]
-[ext_resource type="Script" uid="uid://b3gxxo3lbv5us" path="res://general/effects/animated_sprites/floating_sprite.gd" id="6_gn85p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3fqaq"]
 atlas = ExtResource("5_3vb4k")
@@ -13,13 +12,12 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5g2ih"]
 
-[node name="Portion" type="Node2D" unique_id=378991260]
-y_sort_enabled = true
+[node name="Portion" type="CharacterBody2D" unique_id=1295639167]
+z_index = 1
+collision_layer = 0
 script = ExtResource("1_7coib")
-throw_range = 15.0
 item_data = ExtResource("2_7coib")
 pickup_audio = ExtResource("3_bvcag")
-metadata/_custom_type_script = "uid://b7isw7hyfuyr8"
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1195926433]
 modulate = Color(0.16078432, 0.16078432, 0.16078432, 0.78431374)
@@ -29,12 +27,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_es15t")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1191684526]
-z_index = 1
 position = Vector2(0, -8)
 texture = SubResource("AtlasTexture_3fqaq")
-script = ExtResource("6_gn85p")
-float_speed = 5.0
-float_range = 2.5
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1358605353]
 visible = false
@@ -47,3 +41,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_5g2ih")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=658070093]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1847285916]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_5g2ih")

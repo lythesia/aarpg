@@ -23,14 +23,14 @@ enum SIDE {
 
 @export_category("Size & Position")
 ## player collision shape width with some margin
-# i.e. given circle(r = 20), then make it 25, 30 is appropriate
-@export var margin_width: int = 30
-## player collision shape height with some margin
-# i.e. given circle(r = 20), then make it 25, 30 is appropriate
-@export var margin_height: int = 30
+# i.e. given circle(2r = 20), then make it 25, 30 is appropriate
+@export var margin_width: int = 32
+const TOLERANCE: int = 5
+@export var margin_top: int = 13 - 5 + TOLERANCE
+@export var margin_bottom: int = 13 + 5 + TOLERANCE
 const CELL_UNIT: int = 32
 
-## portal box size in mutiples of 32px
+## box size in mutiples of 32px
 @export_range(2, 16, 1, "or_greater") var size: int = 2:
     set(val):
         size = val
@@ -54,29 +54,23 @@ func _ready() -> void:
     Messages.NewSceneLoaded.connect(_on_new_scene_ready)
     Messages.ChangeSceneFinished.connect(_on_load_scene_finished)
 
+var _is_transitioning: bool = false
 func _on_player_entered(player: Player) -> void:
+    if _is_transitioning: return
+
+    _is_transitioning = true
     # prepare args
     const v: float = 100.0
     const time_to_pass: float = CELL_UNIT / v
-    var velocity: Vector2 = Vector2.ZERO
-    match location:
-        LevelTrans.SIDE.LEFT:
-            velocity = Vector2(-v, 0)
-        LevelTrans.SIDE.RIGHT:
-            velocity = Vector2(0, v)
-        LevelTrans.SIDE.TOP:
-            velocity = Vector2(0, -v)
-        LevelTrans.SIDE.BOTTOM:
-            velocity = Vector2(0, v)
 
-    SceneHelper.change_scene(target_level, target_name, player as Player, velocity, time_to_pass, get_offset(player))
+    await SceneHelper.level_transition(target_level, target_name, player, time_to_pass, get_offset(player))
+    _is_transitioning = false
 
 func _on_new_scene_ready(target: String, offset: Vector2) -> void:
     # target_name behaves like LT's id, to make sure `_on_new_scene_ready`
     # is called only by one of them in single scene
     if target == self.name:
-        var player: Node2D = PlayerManager.get_player()
-        player.global_position = self.global_position + offset
+        PlayerManager.set_player_global_position(self.global_position + offset)
 
 func _on_load_scene_finished() -> void:
     area.monitoring = false # disable area collision detect
@@ -107,20 +101,18 @@ func get_offset(player: Node2D) -> Vector2:
     var player_pos = player.global_position
     if location == SIDE.LEFT or location == SIDE.RIGHT:
         offset.y = player_pos.y - self.global_position.y
-        # portal's on left => enter from right
-        # offset player left-wise to (target portal which's on right)
+        # on left => enter from right
         if location == SIDE.LEFT:
             offset.x = - (CELL_UNIT + margin_width) / 2.0
         else:
             offset.x = (CELL_UNIT + margin_width) / 2.0
     else:
         offset.x = player_pos.x - self.global_position.x
-        # portal's on top => enter from bottom
-        # offset player up-wise to (target portal which's on bottom)
+        # on top => enter from bottom
         if location == SIDE.TOP:
-            offset.y = - (CELL_UNIT + margin_height) / 2.0
+            offset.y = - (CELL_UNIT / 2.0 + margin_top)
         else:
-            offset.y = (CELL_UNIT + margin_height) / 2.0
+            offset.y = CELL_UNIT / 2.0 + margin_bottom
     return offset
 
 func _get_configuration_warnings() -> PackedStringArray:

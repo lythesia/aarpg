@@ -707,7 +707,6 @@ metadata/_custom_type_script = "uid://jqbhutkxlgs2"
 script = ExtResource("16_gxb4a")
 item_scene = ExtResource("18_gxb4a")
 min_drop = 1
-drop_rate = 0.5
 metadata/_custom_type_script = "uid://jqbhutkxlgs2"
 
 [node name="Slime" type="CharacterBody2D" unique_id=1748956911]

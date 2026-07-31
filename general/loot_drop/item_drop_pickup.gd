@@ -1,14 +1,10 @@
 @tool
 class_name ItemDropPickup extends ItemPickup
 
-## pickup_size control sprite & collision area
-# @export var pickup_size: float = 10.0
-
-@export_category("Drop throw range")
-## sample one point within range when drop
-@export_range(0.0, 100.0) var throw_range: float = 5.0
-
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+const initial_speed: float = 50.0
+const decelerate: float = 5.0
 
 func _ready() -> void:
     super()
@@ -20,9 +16,17 @@ func _ready() -> void:
         animation_player.play("default")
 
     var direction = Vector2.RIGHT.rotated(randf_range(0.0, 2.0 * PI))
-    var target_offset = direction * throw_range
-    throw_item.call_deferred(target_offset)
+    # var target_offset = direction * throw_range
+    # throw_item.call_deferred(target_offset)
 
+    # initialize velocity
+    velocity = direction * initial_speed
+
+func _physics_process(delta: float) -> void:
+    velocity -= decelerate * delta * velocity
+    move_and_slide()
+
+# todo: throw animation is not ideal ..
 #region throw animation
 
 ## Main function to handle horizontal travel and trigger vertical bounce

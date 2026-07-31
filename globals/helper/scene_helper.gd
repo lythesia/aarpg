@@ -3,8 +3,14 @@ extends Node
 const DEFAULT_SCENE: String = "uid://cce13rldqs5om"
 var scene_to_load: String
 var current_scene: String = DEFAULT_SCENE
-var is_reload: bool = false
 
+enum TransitionType {
+    LEVEL,
+    LOAD,
+    RELOAD,
+    NONE,
+}
+var _transition_type: TransitionType = TransitionType.NONE
 var _target_level_trans: String
 var _offset: Vector2
 
@@ -25,35 +31,41 @@ func _resume():
     get_tree().paused = false
 
 func _on_scene_loaded():
-    # print("on_scene_loaded: %s" % SceneManager._current_scene.name)
-    # on (re)load
-    if is_reload:
-        setup_player()
-        # clear flags
-        is_reload = false
-    # on level transition
-    elif _target_level_trans:
-        Messages.NewSceneLoaded.emit(_target_level_trans, _offset)
+    print("on_scene_loaded: %s" % SceneManager._current_scene.name)
 
-func load_scene_and_setup_player(target_scene):
-    var player: Player = PlayerManager.get_player()
+    match _transition_type:
+        TransitionType.RELOAD:
+            var player: Player = PlayerManager.get_player()
+            player.setup_player_on_load()
+        TransitionType.LOAD:
+            var player: Player = PlayerManager.get_player()
+            var scene: Node = get_tree().current_scene
+            PlayerManager.reparent_player_to_scene(scene)
+            player.setup_player_on_load()
+        # on level transition
+        TransitionType.LEVEL:
+            var scene: Node = get_tree().current_scene
+            PlayerManager.reparent_player_to_scene(scene)
+            Messages.NewSceneLoaded.emit(_target_level_trans, _offset)
+
+func load_scene_and_setup_player(target_scene: String):
+    PlayerManager.reparent_player_to_root()
+
+    # `change_scene` if load to different scene
     if target_scene != current_scene:
-        await SceneManager.change_scene(target_scene, {
-            "on_ready": func(_scene): player.setup_player()
-        })
+        _transition_type = TransitionType.LOAD
+        await SceneManager.change_scene(target_scene)
         current_scene = ResourceUID.path_to_uid(target_scene)
+        _transition_type = TransitionType.NONE
+
+    # `reload_scene` if load same scene
     else:
-        # "on_ready" hook not work in `reload_scene`, use `scene_loaded` signal to setup player
-        is_reload = true
+        _transition_type = TransitionType.RELOAD
         await SceneManager.reload_scene()
+        _transition_type = TransitionType.NONE
 
     # always need to emit signal to activate level transition area in target scene
     Messages.ChangeSceneFinished.emit()
-
-func setup_player():
-    var player: Player = PlayerManager.get_player()
-    if player:
-        player.setup_player()
 
 # 1. pause
 # 2. await fade out
@@ -63,17 +75,19 @@ func setup_player():
 # 6. fade in
 # 7. resume
 # 8. signal: new scene enable area monitoring
-func change_scene(
+func level_transition(
     target_scene: String,
     target_level_trans: String,
     player: Player,
-    _velocity: Vector2,
     time_to_pass: float,
     offset: Vector2
 ):
     # store
+    _transition_type = TransitionType.LEVEL
     _target_level_trans = target_level_trans
     _offset = offset
+
+    PlayerManager.reparent_player_to_root()
 
     # disable player hit boxes
     player.damage_area.set_deferred("monitorable", false)
@@ -90,5 +104,6 @@ func change_scene(
     _resume()
 
     # clear
+    _transition_type = TransitionType.NONE
     _target_level_trans = ""
     _offset = Vector2.ZERO

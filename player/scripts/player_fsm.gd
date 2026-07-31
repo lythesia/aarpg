@@ -38,8 +38,8 @@ func init(player: Player) -> void:
         if c is PlayerState:
             states.append(c)
             # init() may require player, so setup here
-            if !c.player:
-                c.player = player
+            # **ALWAYS** set latest player coz SaveManager is recreating player instance!
+            c.player = player
 
     for c in states:
         c.init()

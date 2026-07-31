@@ -24,6 +24,8 @@ var decision_engine: DecisionEngine
 var blackboard: Blackboard
 
 func _ready() -> void:
+    z_index = 1
+
     if Engine.is_editor_hint():
         set_physics_process(false)
         return

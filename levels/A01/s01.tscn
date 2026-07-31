@@ -6,9 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="3_d5g0j"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="4_uv6ks"]
 [ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="6_1stbg"]
-[ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="7_bs86r"]
-[ext_resource type="Resource" uid="uid://8qgcg0rmriho" path="res://items/item_tres/gem.tres" id="8_e8gkl"]
-[ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="9_e8gkl"]
 
 [node name="S01" type="Node2D" unique_id=901446768]
 y_sort_enabled = true
@@ -20,6 +17,7 @@ tile_map_data = PackedByteArray("AAAQAAkAAQAKAAUAAAAQAAgAAQAKAAUAAAAQAAcAAQAKAAU
 tile_set = ExtResource("1_ijvaa")
 
 [node name="Props" type="Node2D" parent="." unique_id=327479403]
+z_index = 1
 y_sort_enabled = true
 
 [node name="Plant" parent="Props" unique_id=639601265 instance=ExtResource("2_n3r0e")]
@@ -59,13 +57,3 @@ location = 1
 position = Vector2(504, 140)
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("6_1stbg")]
-
-[node name="Gem" parent="." unique_id=1729738544 instance=ExtResource("7_bs86r")]
-y_sort_enabled = true
-position = Vector2(203, 105)
-item_data = ExtResource("8_e8gkl")
-
-[node name="Portion" parent="." unique_id=600042248 instance=ExtResource("7_bs86r")]
-y_sort_enabled = true
-position = Vector2(220, 78)
-item_data = ExtResource("9_e8gkl")

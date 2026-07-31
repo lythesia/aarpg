@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 @export var float_speed: float = 2.0
 @export var float_range: float = 20.0

@@ -16,6 +16,7 @@ func _ready() -> void:
     # print("Spawning player")
     var player: Player = PLAYER_SCENE.instantiate()
     get_tree().current_scene.add_child(player) # player will reparent self in its `_ready()`
+    PlayerManager.set_player(player)
 
     # position player
-    player.position = self.global_position
+    PlayerManager.set_player_global_position(self.global_position)

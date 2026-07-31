@@ -13,7 +13,7 @@ config_version=5
 config/name="AARPG"
 run/main_scene="uid://cce13rldqs5om"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bgnygq2hpysof"
 
 [audio]
 

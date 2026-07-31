@@ -4,14 +4,9 @@ class_name CameraHelper extends Node
 
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
-    # wait player
-    var player: Player = PlayerManager.get_player()
-    while player == null:
-        player = PlayerManager.get_player()
-        await get_tree().process_frame
+    PlayerManager.PlayerRepositioned.connect(_on_player_repositioned)
 
-    if !pcam:
-        pcam = %PhantomCamera2D
+func _on_player_repositioned(player: Player) -> void:
     pcam.set_tween_duration(0.0)
     pcam.set_follow_target(player)
     pcam.teleport_position()

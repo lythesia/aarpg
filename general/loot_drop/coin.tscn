@@ -5,7 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://bit1p18a4y3n8" path="res://public/audio/coin_pickup.wav" id="3_br1h1"]
 [ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="3_u3caa"]
 [ext_resource type="Texture2D" uid="uid://1x4xwbjk4gy6" path="res://public/sprites/coin.png" id="4_c6afv"]
-[ext_resource type="Script" uid="uid://b3gxxo3lbv5us" path="res://general/effects/animated_sprites/floating_sprite.gd" id="5_tnkq5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5g2ih"]
 radius = 4.0
@@ -49,16 +48,15 @@ _data = {
 &"default": SubResource("Animation_br1h1")
 }
 
-[node name="Coin" type="Node2D" unique_id=378991260]
-y_sort_enabled = true
+[node name="Coin" type="CharacterBody2D" unique_id=875227434]
+z_index = 1
 scale = Vector2(2, 2)
+collision_layer = 0
 script = ExtResource("1_ipcse")
-throw_range = 15.0
 item_data = ExtResource("2_br1h1")
 pickup_audio = ExtResource("3_br1h1")
 has_shadow = false
 has_animation = true
-metadata/_custom_type_script = "uid://b7isw7hyfuyr8"
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1195926433]
 visible = false
@@ -69,13 +67,9 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_u3caa")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1191684526]
-z_index = 1
 position = Vector2(0, -2)
 texture = ExtResource("4_c6afv")
 hframes = 8
-script = ExtResource("5_tnkq5")
-float_speed = 5.0
-float_range = 2.5
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1358605353]
 visible = false
@@ -89,3 +83,8 @@ shape = SubResource("CircleShape2D_5g2ih")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=658070093]
 libraries/ = SubResource("AnimationLibrary_u3caa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=584125960]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_5g2ih")

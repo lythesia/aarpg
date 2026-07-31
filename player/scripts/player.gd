@@ -3,11 +3,11 @@ class_name Player extends CharacterBody2D
 signal DirectionChanged(dir: Vector2)
 
 @onready var sprite: Sprite2D = %Sprite
-@onready var sprite_material: ShaderMaterial = sprite.material as ShaderMaterial
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var effect_anim_player: AnimationPlayer = $EffectAnimationPlayer
 @onready var fsm: PlayerStateMachine = %PlayerStateMachine
 @onready var damage_area: DamageArea = %DamageArea
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var label: Label = $Label
 
@@ -28,8 +28,8 @@ var max_hp: int = 6
 var player_to_load: Dictionary = {}
 
 func _ready() -> void:
+    PlayerManager.set_player(self)
     fsm.init(self)
-    reparent.call_deferred(get_tree().root) # reparent self to `root`
     PlayerHud.update_hp(hp, max_hp)
 
 func _process(delta: float) -> void:
@@ -115,7 +115,7 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
     }
 #endregion
 
-func setup_player() -> void:
-    global_position = player_to_load["pos"]
+func setup_player_on_load() -> void:
+    PlayerManager.set_player_global_position(player_to_load["pos"])
     hp = player_to_load["hp"]
     max_hp = player_to_load["max_hp"]

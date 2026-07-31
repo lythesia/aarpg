@@ -1,5 +1,5 @@
 @tool
-class_name ItemPickup extends Node2D
+class_name ItemPickup extends CharacterBody2D
 
 @export var item_data: ItemData: set = _set_item_data
 @export var pickup_audio: AudioStream
@@ -11,8 +11,7 @@ class_name ItemPickup extends Node2D
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
 
 func _ready() -> void:
-    y_sort_enabled = true
-
+    # y_sort_enabled = true
     if !has_shadow:
         shadow_sprite.visible = false
 
