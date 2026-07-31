@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 signal DirectionChanged(dir: Vector2)
 
 @onready var sprite: Sprite2D = %Sprite
+@onready var smear_sprite: Sprite2D = %SmearSprite
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var effect_anim_player: AnimationPlayer = $EffectAnimationPlayer
 @onready var fsm: PlayerStateMachine = %PlayerStateMachine

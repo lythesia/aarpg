@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="3_d5g0j"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="4_uv6ks"]
 [ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="6_1stbg"]
+[ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="7_e8gkl"]
+[ext_resource type="Resource" uid="uid://dwmbiwabnojq4" path="res://items/item_tres/apple.tres" id="8_r434y"]
+[ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="9_pcl0k"]
 
 [node name="S01" type="Node2D" unique_id=901446768]
 y_sort_enabled = true
@@ -57,3 +60,11 @@ location = 1
 position = Vector2(504, 140)
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("6_1stbg")]
+
+[node name="Items" type="Node2D" parent="." unique_id=830853031]
+y_sort_enabled = true
+
+[node name="Apple" parent="Items" unique_id=2085438971 instance=ExtResource("7_e8gkl")]
+position = Vector2(332, 105)
+item_data = ExtResource("8_r434y")
+pickup_audio = ExtResource("9_pcl0k")

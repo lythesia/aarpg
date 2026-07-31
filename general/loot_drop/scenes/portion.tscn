@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ccws6jvb4ajvd"]
+
+[ext_resource type="PackedScene" uid="uid://bjjhsf5oolhc4" path="res://general/loot_drop/base/item_drop_pickup.tscn" id="1_tymyv"]
+[ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="2_510bq"]
+[ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="2_gru6b"]
+[ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="3_7whna"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fqaq"]
+atlas = ExtResource("2_510bq")
+region = Rect2(32, 0, 32, 32)
+
+[node name="Portion" unique_id=2143851475 instance=ExtResource("1_tymyv")]
+item_data = ExtResource("2_gru6b")
+pickup_audio = ExtResource("3_7whna")
+
+[node name="Sprite2D" parent="." index="1" unique_id=804970223]
+texture = SubResource("AtlasTexture_3fqaq")

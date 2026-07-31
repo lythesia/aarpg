@@ -22,6 +22,8 @@ func enter():
 func exit():
     is_attacking = false
     player.anim_player.animation_finished.disconnect(_on_attack_finished)
+    # force hide smear sprite
+    player.smear_sprite.visible = false
 
 func handle_input(_event: InputEvent) -> PlayerState:
     return STAY

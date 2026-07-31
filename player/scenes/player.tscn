@@ -131,10 +131,10 @@ tracks/1/path = NodePath("Sprite/SmearSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 3]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -228,7 +228,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_6g3n5"]
 resource_name = "attack_side"
-length = 0.3
+length = 0.32
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -249,10 +249,10 @@ tracks/1/path = NodePath("Sprite/SmearSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [8, 11]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -346,7 +346,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_kaefl"]
 resource_name = "attack_up"
-length = 0.3
+length = 0.32
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -367,10 +367,10 @@ tracks/1/path = NodePath("Sprite/SmearSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [4, 7]
+"values": [4, 5, 6, 7]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -712,6 +712,7 @@ hframes = 16
 vframes = 3
 
 [node name="SmearSprite" type="Sprite2D" parent="Sprite" unique_id=18231169]
+unique_name_in_owner = true
 visible = false
 show_behind_parent = true
 texture = ExtResource("3_tn8gd")
@@ -802,6 +803,7 @@ position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_d6mua")
 
 [node name="Interaction" type="Area2D" parent="." unique_id=1781928421]
+visible = false
 position = Vector2(0, -9)
 monitoring = false
 monitorable = false

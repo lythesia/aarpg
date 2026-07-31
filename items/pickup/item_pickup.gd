@@ -1,17 +1,23 @@
 @tool
 class_name ItemPickup extends CharacterBody2D
 
+enum TextureType {
+    ## use item data's static atlas texture
+    ITEM_DATA,
+    ## Manually set the texture
+    CUSTOM,
+}
+
 @export var item_data: ItemData: set = _set_item_data
 @export var pickup_audio: AudioStream
 @export var has_shadow: bool = true: set = _set_has_shadow
-@export var has_animation: bool = false: set = _set_has_animation
+@export var texture_type: TextureType: set = _set_texture_type
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var area: Area2D = $Area2D
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
 
 func _ready() -> void:
-    # y_sort_enabled = true
     if !has_shadow:
         shadow_sprite.visible = false
 
@@ -36,15 +42,14 @@ func _set_item_data(value: ItemData) -> void:
         update_configuration_warnings()
 
 func _update_texture() -> void:
-    if !has_animation:
-        if item_data and sprite:
-            sprite.texture = item_data.icon
-        elif sprite:
-            sprite.texture = null
-    # we have default animation for the sprite
-    # set it manually
-    else:
-        pass
+    match texture_type:
+        TextureType.ITEM_DATA:
+            if item_data and sprite:
+                sprite.texture = item_data.icon
+            elif sprite:
+                sprite.texture = null
+        TextureType.CUSTOM:
+            pass
 
 func _set_has_shadow(value: bool) -> void:
     has_shadow = value
@@ -55,8 +60,8 @@ func _update_shadow() -> void:
     if shadow_sprite:
         shadow_sprite.visible = has_shadow
 
-func _set_has_animation(value: bool) -> void:
-    has_animation = value
+func _set_texture_type(value: TextureType) -> void:
+    texture_type = value
     if Engine.is_editor_hint() and is_node_ready():
         _update_texture()
 
