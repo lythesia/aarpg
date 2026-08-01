@@ -1,6 +1,7 @@
 extends Node
 
 signal PlayerRepositioned(player: Player)
+signal PlayerInteracted(player: Player)
 
 const INVENTORY_DATA: InventoryData = preload("uid://ccgovctbimxdn")
 

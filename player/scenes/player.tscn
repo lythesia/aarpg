@@ -804,7 +804,6 @@ _data = {
 radius = 13.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
-size = Vector2(26, 24)
 
 [node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player", "saveable"]]
 z_index = 1
@@ -913,13 +912,13 @@ position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_d6mua")
 
 [node name="Interaction" type="Area2D" parent="." unique_id=1781928421]
-visible = false
 position = Vector2(0, -9)
+collision_layer = 2
+collision_mask = 0
 monitoring = false
-monitorable = false
 script = ExtResource("14_l7x70")
 metadata/_custom_type_script = "uid://cg5catbhgwqsf"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction" unique_id=1931404224]
-position = Vector2(0, 21)
+position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_aabtn")

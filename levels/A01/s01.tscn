@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="7_e8gkl"]
 [ext_resource type="Resource" uid="uid://dwmbiwabnojq4" path="res://items/item_tres/apple.tres" id="8_r434y"]
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="9_pcl0k"]
+[ext_resource type="PackedScene" uid="uid://dhb7dvw2yb6cr" path="res://items/interactable/chest/chest.tscn" id="10_r434y"]
+[ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="11_pcl0k"]
 
 [node name="S01" type="Node2D" unique_id=901446768]
 y_sort_enabled = true
@@ -68,3 +70,8 @@ y_sort_enabled = true
 position = Vector2(332, 105)
 item_data = ExtResource("8_r434y")
 pickup_audio = ExtResource("9_pcl0k")
+
+[node name="Chest" parent="Items" unique_id=1270411528 instance=ExtResource("10_r434y")]
+position = Vector2(472, 73)
+item_data = ExtResource("11_pcl0k")
+quantity = 3
