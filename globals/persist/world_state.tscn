@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cdex48mru2pvm"]
+
+[ext_resource type="Script" uid="uid://cn8qadflwnr1d" path="res://globals/persist/world_state.gd" id="1_30vrj"]
+
+[node name="WorldState" type="Node" unique_id=1339640406 groups=["saveable"]]
+script = ExtResource("1_30vrj")

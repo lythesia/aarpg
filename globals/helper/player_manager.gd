@@ -1,7 +1,9 @@
 extends Node
 
+@warning_ignore_start("unused_signal")
 signal PlayerRepositioned(player: Player)
-signal PlayerInteracted(player: Player)
+signal PlayerInteracted
+@warning_ignore_restore("unused_signal")
 
 const INVENTORY_DATA: InventoryData = preload("uid://ccgovctbimxdn")
 

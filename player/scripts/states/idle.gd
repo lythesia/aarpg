@@ -18,7 +18,7 @@ func handle_input(event: InputEvent) -> PlayerState:
     if event.is_action_pressed("Attack"):
         return player.fsm.attack
     elif event.is_action_pressed("ui_accept"):
-        PlayerManager.PlayerInteracted.emit(player)
+        PlayerManager.PlayerInteracted.emit()
     return STAY
 
 func process(_delta: float) -> PlayerState:

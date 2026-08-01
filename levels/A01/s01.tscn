@@ -75,3 +75,4 @@ pickup_audio = ExtResource("9_pcl0k")
 position = Vector2(472, 73)
 item_data = ExtResource("11_pcl0k")
 quantity = 3
+persistent_key = "s01/chest00"

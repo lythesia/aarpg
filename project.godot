@@ -31,6 +31,7 @@ PlayerManager="*uid://cqnwbal30g0vf"
 SceneHelper="*uid://v65ndi5v5x6i"
 PauseMenu="*uid://dsrgw2p8wkxn2"
 SaveHelper="*uid://cx3gabbm3exgy"
+WorldState="*uid://cdex48mru2pvm"
 
 [display]
 

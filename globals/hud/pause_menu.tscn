@@ -98,41 +98,41 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_lsqg7")
 
-[node name="InventoryUI" type="GridContainer" parent="Control/InventoryScreen/PanelContainer" unique_id=103548859 groups=["saveable"]]
+[node name="Inventory" type="GridContainer" parent="Control/InventoryScreen/PanelContainer" unique_id=103548859 groups=["saveable"]]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 6
 script = ExtResource("3_yoby7")
 inventory_data = ExtResource("4_kgaf0")
 
-[node name="InventorySlot" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=1489574721 instance=ExtResource("3_565bv")]
+[node name="InventorySlot" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=1489574721 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot2" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=221942274 instance=ExtResource("3_565bv")]
+[node name="InventorySlot2" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=221942274 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot3" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=1551821392 instance=ExtResource("3_565bv")]
+[node name="InventorySlot3" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=1551821392 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot4" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=67532128 instance=ExtResource("3_565bv")]
+[node name="InventorySlot4" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=67532128 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot5" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=672783201 instance=ExtResource("3_565bv")]
+[node name="InventorySlot5" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=672783201 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot6" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=2110532922 instance=ExtResource("3_565bv")]
+[node name="InventorySlot6" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=2110532922 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot7" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=152974043 instance=ExtResource("3_565bv")]
+[node name="InventorySlot7" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=152974043 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot8" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=1991737420 instance=ExtResource("3_565bv")]
+[node name="InventorySlot8" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=1991737420 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot9" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=711471224 instance=ExtResource("3_565bv")]
+[node name="InventorySlot9" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=711471224 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
-[node name="InventorySlot10" parent="Control/InventoryScreen/PanelContainer/InventoryUI" unique_id=673652329 instance=ExtResource("3_565bv")]
+[node name="InventorySlot10" parent="Control/InventoryScreen/PanelContainer/Inventory" unique_id=673652329 instance=ExtResource("3_565bv")]
 layout_mode = 2
 
 [node name="SystemBtn" type="Button" parent="Control/InventoryScreen" unique_id=384070020]

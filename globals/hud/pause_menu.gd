@@ -9,7 +9,7 @@ signal PauseMenuHidden
 @onready var back_btn: Button = %BackBtn
 @onready var inventory_screen: Control = %InventoryScreen
 @onready var system_screen: Control = %SystemScreen
-@onready var inventory_ui: InventoryUI = %InventoryUI
+@onready var inventory_ui: InventoryUI = %Inventory
 @onready var item_desc_label: Label = %ItemDesc
 @onready var coin_label: Label = %CoinLabel
 

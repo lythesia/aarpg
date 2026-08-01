@@ -92,8 +92,9 @@ func update_animation(anim_state: String) -> String:
     return anim_player.current_animation
 
 func _debug_label(_delta: float):
-    var args = [global_position]
-    label.text = "%v" % args
+    # var args = [global_position]
+    # label.text = "%v" % args
+    label.text = get_tree().current_scene.name
     pass
 
 #region save/load
