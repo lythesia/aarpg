@@ -3,7 +3,7 @@ extends PlayerState
 
 @export var knockback_speed: float = 80
 @export var knockback_decelerate: float = 10
-@export var invulnerable_dur: float = 0.5
+@export var invulnerable_dur: float = 0.8
 @export var hit_audio: AudioStream
 
 # Included in PlayerState

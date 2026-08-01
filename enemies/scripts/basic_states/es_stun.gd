@@ -35,6 +35,7 @@ func _start():
         enemy.update_animation(anim_name)
     # _tween_flash()
 
+    enemy.damage_area.make_invulnerable(0.3) # matches player one hit
     dur = enemy.animation_player.current_animation_length
     var dir = blackboard.damage_source.global_position.direction_to(enemy.global_position).normalized()
     enemy.velocity = dir * knockback_speed

@@ -711,6 +711,7 @@ metadata/_custom_type_script = "uid://jqbhutkxlgs2"
 
 [node name="Slime" type="CharacterBody2D" unique_id=1748956911]
 z_index = 1
+collision_layer = 0
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
 script = ExtResource("1_rue0g")

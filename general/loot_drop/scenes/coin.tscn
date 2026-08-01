@@ -39,7 +39,7 @@ texture_type = 1
 visible = false
 
 [node name="Sprite2D" parent="." index="1" unique_id=804970223]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_c7ojl")
 hframes = 8
 

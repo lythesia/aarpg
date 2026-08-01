@@ -22,8 +22,7 @@ func enter():
 func exit():
     is_attacking = false
     player.anim_player.animation_finished.disconnect(_on_attack_finished)
-    # force hide smear sprite
-    player.smear_sprite.visible = false
+    _deactivate_attacking()
 
 func handle_input(_event: InputEvent) -> PlayerState:
     return STAY
@@ -42,3 +41,7 @@ func physics_process(_delta: float) -> PlayerState:
 
 func _on_attack_finished(_anim: String):
     is_attacking = false
+
+func _deactivate_attacking():
+    player.attack_area.set_active(false)
+    player.smear_sprite.visible = false
