@@ -13,11 +13,13 @@
 [ext_resource type="AudioStream" uid="uid://cj2f8i6amcvr1" path="res://public/audio/hit_01.wav" id="11_1js83"]
 [ext_resource type="Script" uid="uid://besi5f8uymy2w" path="res://enemies/scripts/base/es_death.gd" id="12_l83x4"]
 [ext_resource type="AudioStream" uid="uid://cl8fdopju6pq4" path="res://public/audio/hit_00.wav" id="13_d6mua"]
+[ext_resource type="Script" uid="uid://byf6iechsrm3p" path="res://enemies/scripts/basic_states/es_chase.gd" id="14_bslat"]
 [ext_resource type="PackedScene" uid="uid://blxqf5mi5omx0" path="res://general/effects/animated_sprites/destroy_smoke.tscn" id="14_d6mua"]
 [ext_resource type="Script" uid="uid://btsrtx6c2nriu" path="res://general/loot_drop/loot_drop.gd" id="15_3ig6r"]
 [ext_resource type="Script" uid="uid://jqbhutkxlgs2" path="res://general/loot_drop/lood_data.gd" id="16_gxb4a"]
 [ext_resource type="PackedScene" uid="uid://j2xay6up0xqq" path="res://general/loot_drop/scenes/coin.tscn" id="17_gxb4a"]
 [ext_resource type="PackedScene" uid="uid://ccws6jvb4ajvd" path="res://general/loot_drop/scenes/portion.tscn" id="18_gxb4a"]
+[ext_resource type="Script" uid="uid://c2fcfy0wheq88" path="res://enemies/scripts/sensors/player_sensor.gd" id="20_scaum"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aabtn"]
 
@@ -793,6 +795,12 @@ script = ExtResource("12_l83x4")
 anim_name = "death"
 metadata/_custom_type_script = "uid://besi5f8uymy2w"
 
+[node name="EsChase" type="Node" parent="EnemyStateMachine" unique_id=889808687]
+unique_name_in_owner = true
+script = ExtResource("14_bslat")
+anim_name = "walk"
+metadata/_custom_type_script = "uid://byf6iechsrm3p"
+
 [node name="DecisionEngineSlime" type="Node" parent="." unique_id=1276378519]
 script = ExtResource("6_81s3k")
 metadata/_custom_type_script = "uid://bj62x7uxsua7t"
@@ -809,3 +817,12 @@ bus = &"SFX"
 script = ExtResource("15_3ig6r")
 items = Array[ExtResource("16_gxb4a")]([SubResource("Resource_aabtn"), SubResource("Resource_br1h1")])
 metadata/_custom_type_script = "uid://btsrtx6c2nriu"
+
+[node name="PlayerSensor" type="Area2D" parent="." unique_id=721396922]
+position = Vector2(0, -9)
+script = ExtResource("20_scaum")
+metadata/_custom_type_script = "uid://c2fcfy0wheq88"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerSensor" unique_id=297124130]
+position = Vector2(0, 9)
+polygon = PackedVector2Array(-5, -7, -42, 49, 42, 49, 5, -7)

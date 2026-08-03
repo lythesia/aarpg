@@ -32,6 +32,9 @@ func exit() -> void:
     pass
 
 func physics_update(delta: float) -> void:
+    if enemy.is_on_wall():
+        dir = dir.bounce(enemy.get_wall_normal())
+
     enemy.blackboard.dir = dir
 
     enemy.velocity = dir * speed

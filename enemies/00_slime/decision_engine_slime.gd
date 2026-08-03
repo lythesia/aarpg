@@ -11,6 +11,7 @@ extends DecisionEngine
 @onready var es_wander: EsWander = %EsWander
 @onready var es_stun: EsStun = %EsStun
 @onready var es_death: EsDeath = %EsDeath
+@onready var es_chase: EsChase = %EsChase
 
 func _ready() -> void:
     await super() # basic setup
@@ -29,15 +30,27 @@ func decide() -> EnemyState:
 
     # no damage source
     # can decide next state
-    if current_state is EsIdle:
-        if current_state.ended:
-            return es_wander
+
+    # has target
+    if blackboard.target:
+        if (current_state is not EsChase) and es_chase.can_chase():
+            return es_chase
         else:
-            return EnemyState.STAY
-    elif current_state is EsWander:
-        if current_state.ended:
-            return es_idle
-        else:
-            return EnemyState.STAY
+            if !es_chase.can_chase():
+                return es_wander
+            else:
+                return EnemyState.STAY
+    # no target
+    else:
+        if current_state is EsIdle:
+            if current_state.ended:
+                return es_wander
+            else:
+                return EnemyState.STAY
+        elif current_state is EsWander:
+            if current_state.ended:
+                return es_idle
+            else:
+                return EnemyState.STAY
 
     return previous_state
