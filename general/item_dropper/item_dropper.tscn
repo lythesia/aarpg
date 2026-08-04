@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bmo7u8vjtsecx"]
+
+[ext_resource type="Script" uid="uid://dh6o4kk2bvgns" path="res://general/item_dropper/item_dropper.gd" id="1_gku8y"]
+[ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="2_m0at1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfi0f"]
+atlas = ExtResource("2_m0at1")
+region = Rect2(224, 0, 32, 32)
+
+[node name="ItemDropper" type="Marker2D" unique_id=640575955]
+script = ExtResource("1_gku8y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2129578051]
+texture = SubResource("AtlasTexture_hfi0f")

@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://di0sc2itjm1ll" path="res://levels/tiles/dungeon.tres" id="1_mt4wn"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_ky516"]
 [ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="3_bo1u1"]
+[ext_resource type="PackedScene" uid="uid://np5fu1lmjh0g" path="res://items/interactable/locked_door/locked_door.tscn" id="4_bdlel"]
 
 [node name="D02" type="Node2D" unique_id=737910707]
 y_sort_enabled = true
@@ -20,4 +21,24 @@ target_name = "d01_to_d02"
 center_offset = true
 location = 3
 
+[node name="d02_to_d03" parent="LT" unique_id=1175152996 instance=ExtResource("2_ky516")]
+position = Vector2(512, 96)
+target_level = "uid://d22r6jrmvxees"
+target_name = "d03_to_d02"
+location = 1
+
+[node name="d02_to_d04" parent="LT" unique_id=1959009138 instance=ExtResource("2_ky516")]
+position = Vector2(256, -32)
+target_level = "uid://b5r3xpg3xccxn"
+target_name = "d04_to_d02"
+center_offset = true
+location = 2
+
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("3_bo1u1")]
+
+[node name="Props" type="Node2D" parent="." unique_id=1452475376]
+
+[node name="LockedDoor" parent="Props" unique_id=249242513 instance=ExtResource("4_bdlel")]
+process_mode = 3
+position = Vector2(224, -11)
+persistent_key = "d02/door"

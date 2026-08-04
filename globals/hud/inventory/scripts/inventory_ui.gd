@@ -10,6 +10,8 @@ const INVENTORY_SLOT = preload("uid://d28ga647y5dsu")
 var last_focused_slot: int = 0
 
 func _ready() -> void:
+    assert(inventory_data, "inventory_data is not set")
+    PlayerManager.set_inventory_data(inventory_data)
     PauseMenu.PauseMenuShown.connect(_on_paused)
     PauseMenu.PauseMenuHidden.connect(_on_unpaused)
     connect_inventory_changed()
@@ -55,8 +57,15 @@ func _on_unpaused() -> void:
     calibrate_inventory_data()
 
 func _on_inventory_changed() -> void:
-    clear_inventory()
-    update_inventory()
+    # if not paused, we don't do any UI updates
+    # either B. will add all `cap` slots UI here
+    # then when truely paused, `_on_paused` will
+    # add slots UI again
+    if !PauseMenu.is_paused:
+        return
+
+    clear_inventory() # A. clear current
+    update_inventory() # B. full update
     # check notion page for why call_deferred doesn't work here
     await get_tree().process_frame
     update_slot_focus()

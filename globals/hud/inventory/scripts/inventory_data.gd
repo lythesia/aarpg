@@ -66,6 +66,13 @@ func _on_slot_changed() -> void:
             slots[i] = null
             emit_changed()
 
+func use_item(item: ItemData, count: int = 1) -> bool:
+    for slot in slots:
+        if slot and slot.item_data == item and slot.quantity >= count:
+            slot.quantity -= count
+            return true
+    return false
+
 #region save/load
 func load_from_dict(d: Deserializer, data: Dictionary) -> void:
     super(d, data)

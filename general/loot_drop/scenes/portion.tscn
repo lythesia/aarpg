@@ -10,6 +10,7 @@ atlas = ExtResource("2_510bq")
 region = Rect2(32, 0, 32, 32)
 
 [node name="Portion" unique_id=2143851475 instance=ExtResource("1_tymyv")]
+z_index = 1
 item_data = ExtResource("2_gru6b")
 pickup_audio = ExtResource("3_7whna")
 

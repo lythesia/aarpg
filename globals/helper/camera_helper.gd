@@ -10,7 +10,7 @@ func _ready() -> void:
     PlayerManager.PlayerRepositioned.connect(_on_player_repositioned)
 
 func _get_base_tilemap_layer() -> TileMapLayer:
-    var scene: Node = get_tree().current_scene
+    var scene: Node = owner
     var c: Node = scene.find_child("Base*")
     if c is TileMapLayer:
         return c

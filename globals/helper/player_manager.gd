@@ -5,7 +5,7 @@ signal PlayerRepositioned(player: Player)
 signal PlayerInteracted
 @warning_ignore_restore("unused_signal")
 
-const INVENTORY_DATA: InventoryData = preload("uid://ccgovctbimxdn")
+var INVENTORY_DATA: InventoryData
 
 var spawned: bool = false
 var player: Player
@@ -16,6 +16,9 @@ func _ready() -> void:
 func set_player(_player: Player) -> void:
     player = _player
     spawned = true
+
+func set_inventory_data(_inventory_data: InventoryData) -> void:
+    INVENTORY_DATA = _inventory_data
 
 func get_player() -> Player:
     return player

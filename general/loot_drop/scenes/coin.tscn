@@ -29,6 +29,7 @@ _data = {
 }
 
 [node name="Coin" unique_id=2143851475 instance=ExtResource("1_fvnoc")]
+z_index = 1
 override_pickup_animation = true
 item_data = ExtResource("2_nh8gv")
 pickup_audio = ExtResource("3_sat0f")

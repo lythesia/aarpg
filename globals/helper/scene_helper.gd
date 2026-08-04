@@ -31,8 +31,7 @@ func _resume():
     get_tree().paused = false
 
 func _on_scene_loaded():
-    print("on_scene_loaded: %s" % SceneManager._current_scene.name)
-
+    # print("on_scene_loaded: %s" % SceneManager._current_scene.name)
     match _transition_type:
         TransitionType.RELOAD:
             var player: Player = PlayerManager.get_player()

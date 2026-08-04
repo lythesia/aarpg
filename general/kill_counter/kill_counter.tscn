@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://mv3qb750nw1o"]
+
+[ext_resource type="Script" uid="uid://b4w1kmbtx1fi0" path="res://general/kill_counter/kill_counter.gd" id="1_ru64i"]
+
+[node name="KillCounter" type="Node2D" unique_id=1245689410]
+script = ExtResource("1_ru64i")

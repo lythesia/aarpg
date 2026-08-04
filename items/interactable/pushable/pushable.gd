@@ -3,6 +3,7 @@ class_name Pushable extends RigidBody2D
 
 @export var texture: Texture2D: set = _set_texture
 @export var push_speed: float = 30.0
+@export var push_audio: AudioStream
 ## save global position
 @export var persistent_key: String
 
