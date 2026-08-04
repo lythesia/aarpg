@@ -30,6 +30,8 @@ const TOLERANCE: int = 5
 @export var margin_bottom: int = 13 + 5 + TOLERANCE
 const CELL_UNIT: int = 32
 
+@export var center_offset: bool = false
+
 ## box size in mutiples of 32px
 @export_range(2, 16, 1, "or_greater") var size: int = 2:
     set(val):
@@ -56,14 +58,11 @@ func _ready() -> void:
 
 var _is_transitioning: bool = false
 func _on_player_entered(player: Player) -> void:
+    # print("%s player_entered: is_transitioning=%s %v" % [name, _is_transitioning, player.global_position])
     if _is_transitioning: return
 
     _is_transitioning = true
-    # prepare args
-    const v: float = 100.0
-    const time_to_pass: float = CELL_UNIT / v
-
-    await SceneHelper.level_transition(target_level, target_name, player, time_to_pass, get_offset(player))
+    await SceneHelper.level_transition(target_level, target_name, player, get_offset(player))
     _is_transitioning = false
 
 func _on_new_scene_ready(target: String, offset: Vector2) -> void:
@@ -74,7 +73,10 @@ func _on_new_scene_ready(target: String, offset: Vector2) -> void:
 
 func _on_load_scene_finished() -> void:
     area.monitoring = false # disable area collision detect
+    # await PlayerManager.PlayerRepositioned
     area.body_entered.connect(_on_player_entered)
+    for _f in range(2): # at least 2 frames, 1 won't work
+        await get_tree().process_frame
     area.monitoring = true # enable
 
 func apply_area_settings() -> void:
@@ -100,14 +102,14 @@ func get_offset(player: Node2D) -> Vector2:
     var offset = Vector2.ZERO
     var player_pos = player.global_position
     if location == SIDE.LEFT or location == SIDE.RIGHT:
-        offset.y = player_pos.y - self.global_position.y
+        offset.y = player_pos.y - self.global_position.y if !center_offset else 0
         # on left => enter from right
         if location == SIDE.LEFT:
             offset.x = - (CELL_UNIT + margin_width) / 2.0
         else:
             offset.x = (CELL_UNIT + margin_width) / 2.0
     else:
-        offset.x = player_pos.x - self.global_position.x
+        offset.x = player_pos.x - self.global_position.x if !center_offset else 0
         # on top => enter from bottom
         if location == SIDE.TOP:
             offset.y = - (CELL_UNIT / 2.0 + margin_top)

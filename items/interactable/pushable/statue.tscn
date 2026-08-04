@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dtapkqbs58fa3"]
+
+[ext_resource type="PackedScene" uid="uid://dqiqw022kf6am" path="res://items/interactable/pushable/pushable.tscn" id="1_nwxea"]
+[ext_resource type="Texture2D" uid="uid://cuyeijex5hjqc" path="res://items/interactable/pushable/statue_texture.tres" id="2_nwxea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
+size = Vector2(30, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwxea"]
+size = Vector2(32, 14)
+
+[node name="Statue" unique_id=982532689 instance=ExtResource("1_nwxea")]
+collision_mask = 17
+sleeping = false
+texture = ExtResource("2_nwxea")
+
+[node name="Sprite2D" parent="." index="0" unique_id=30317395]
+texture = ExtResource("2_nwxea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1" unique_id=995656597]
+visible = false
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_aabtn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea" parent_id_path=PackedInt32Array(947173829) index="0" unique_id=1314800767]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_nwxea")

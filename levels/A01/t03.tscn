@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d2ctvjte8oikf" path="res://levels/scripts/level_base.gd" id="1_8gcws"]
 [ext_resource type="TileSet" uid="uid://c8bsm6ap21gvv" path="res://levels/tiles/grass.tres" id="2_y5ul1"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="3_nsphv"]
+[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="4_y5ul1"]
 
 [node name="T03" type="Node2D" unique_id=280381731]
 y_sort_enabled = true
@@ -22,5 +23,5 @@ text = "Test 03"
 position = Vector2(-16, 96)
 target_level = "uid://d2oh87qkv886p"
 target_name = "t02_to_t03"
-player_width = 36
-player_height = 48
+
+[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("4_y5ul1")]

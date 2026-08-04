@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4bqqs"]
 [ext_resource type="PackedScene" uid="uid://dgj4nm6qm1ggp" path="res://player/scenes/player.tscn" id="1_rupst"]
-[ext_resource type="PackedScene" uid="uid://yff6cqudd6pk" path="res://levels/tiles/grass.tscn" id="1_wt17y"]
+[ext_resource type="PackedScene" uid="uid://yff6cqudd6pk" path="res://levels/tiles/grass_layer.tscn" id="1_wt17y"]
 [ext_resource type="PackedScene" uid="uid://uvn5g18u6222" path="res://levels/props/plant/plant.tscn" id="2_m8u5f"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_ynsuh"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_v7dth"]

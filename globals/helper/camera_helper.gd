@@ -4,7 +4,17 @@ class_name CameraHelper extends Node
 
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
+    var base_tilemap_layer: TileMapLayer = _get_base_tilemap_layer()
+    if base_tilemap_layer:
+        pcam.set_limit_target(base_tilemap_layer.get_path())
     PlayerManager.PlayerRepositioned.connect(_on_player_repositioned)
+
+func _get_base_tilemap_layer() -> TileMapLayer:
+    var scene: Node = get_tree().current_scene
+    var c: Node = scene.find_child("Base*")
+    if c is TileMapLayer:
+        return c
+    return null
 
 func _on_player_repositioned(player: Player) -> void:
     pcam.set_tween_duration(0.0)

@@ -56,10 +56,7 @@ func update_direction() -> bool:
     if dir == Vector2.ZERO:
         return false
 
-    # cleaver! and give honor to original cardinal direction
-    const CLOCKWISE: Array[Vector2] = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
-    var idx = round(((dir + 0.2 * cardinal_dir).angle() / TAU) * 4)
-    var new_cardinal: Vector2 = CLOCKWISE[idx]
+    var new_cardinal: Vector2 = calc_cardinal_dir(dir + 0.2 * cardinal_dir)
 
     if new_cardinal == cardinal_dir:
         return false
@@ -75,6 +72,12 @@ func update_direction() -> bool:
     DirectionChanged.emit(cardinal_dir)
 
     return true
+
+func calc_cardinal_dir(vel_dir: Vector2) -> Vector2:
+    # cleaver! and give honor to original cardinal direction
+    const CLOCKWISE: Array[Vector2] = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
+    var idx = round((vel_dir.angle() / TAU) * 4)
+    return CLOCKWISE[idx]
 
 func _cardinal_dir_to_string(cardinal: Vector2) -> String:
     match cardinal:
@@ -92,9 +95,9 @@ func update_animation(anim_state: String) -> String:
     return anim_player.current_animation
 
 func _debug_label(_delta: float):
-    # var args = [global_position]
-    # label.text = "%v" % args
-    label.text = get_tree().current_scene.name
+    var args = [global_position]
+    label.text = "%v" % args
+    # label.text = get_tree().current_scene.name
     pass
 
 #region save/load

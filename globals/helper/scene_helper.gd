@@ -79,7 +79,6 @@ func level_transition(
     target_scene: String,
     target_level_trans: String,
     player: Player,
-    time_to_pass: float,
     offset: Vector2
 ):
     # store
@@ -87,16 +86,17 @@ func level_transition(
     _target_level_trans = target_level_trans
     _offset = offset
 
+    _pause()
     PlayerManager.reparent_player_to_root()
 
     # disable player hit boxes
     player.damage_area.set_deferred("monitorable", false)
     # todo: need `AutoWalk` state if we want to auto walk player pass through transition
 
-    # expect pause to be called after fade out
-    get_tree().create_timer(time_to_pass).timeout.connect(_pause)
-
-    await SceneManager.change_scene(target_scene)
+    await SceneManager.change_scene(target_scene, {
+        # "on_fade_out": _pause,
+        # "on_fade_in": _resume,
+    })
     current_scene = ResourceUID.path_to_uid(target_scene)
     Messages.ChangeSceneFinished.emit()
 

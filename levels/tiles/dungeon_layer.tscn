@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dr10hme8fmt8b"]
+
+[ext_resource type="TileSet" uid="uid://di0sc2itjm1ll" path="res://levels/tiles/dungeon.tres" id="1_qkrux"]
+
+[node name="Dungeon" type="TileMapLayer" unique_id=1279080324]
+tile_set = ExtResource("1_qkrux")

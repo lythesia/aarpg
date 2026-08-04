@@ -24,7 +24,6 @@ func reparent_player_to_root() -> void:
     player.reparent.call_deferred(get_tree().root)
 
 func reparent_player_to_scene(scene: Node) -> void:
-    # player.reparent.call_deferred(scene)
     player.reparent(scene)
 
 func set_player_global_position(position: Vector2) -> void:

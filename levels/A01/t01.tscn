@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://d2ctvjte8oikf" path="res://levels/scripts/level_base.gd" id="1_okvym"]
 [ext_resource type="TileSet" uid="uid://c8bsm6ap21gvv" path="res://levels/tiles/grass.tres" id="2_518nr"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="3_84ywv"]
+[ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="4_650na"]
+[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="5_mm2qc"]
 
 [node name="T01" type="Node2D" unique_id=280381731]
 y_sort_enabled = true
@@ -18,17 +20,13 @@ offset_right = 40.0
 offset_bottom = 15.0
 text = "Test 01"
 
-[node name="t01_to_s01" parent="." unique_id=327073310 instance=ExtResource("3_84ywv")]
-position = Vector2(-16, 96)
-target_level = "uid://cce13rldqs5om"
-target_name = "s01_to_t01"
-player_width = 36
-player_height = 48
-
 [node name="t01_to_t02" parent="." unique_id=139219880 instance=ExtResource("3_84ywv")]
 position = Vector2(496, 96)
-location = 1
 target_level = "uid://d2oh87qkv886p"
 target_name = "t02_to_t01"
-player_width = 36
-player_height = 48
+location = 1
+
+[node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("4_650na")]
+position = Vector2(279, 114)
+
+[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("5_mm2qc")]

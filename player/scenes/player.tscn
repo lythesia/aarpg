@@ -14,13 +14,13 @@
 [ext_resource type="Script" uid="uid://c7tcshhj8j0ts" path="res://general/hitbox/attack_area.gd" id="11_mgvvd"]
 [ext_resource type="AudioStream" uid="uid://blejhwxuc6ser" path="res://public/audio/hit_player.wav" id="13_l7x70"]
 [ext_resource type="Script" uid="uid://cg5catbhgwqsf" path="res://player/scripts/player_interaction.gd" id="14_l7x70"]
+[ext_resource type="Script" uid="uid://bqtk318beexbu" path="res://player/scenes/push_interaction.gd" id="15_utphg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
 height = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aabtn"]
-radius = 13.0
 
 [sub_resource type="Animation" id="Animation_apn28"]
 length = 0.001
@@ -805,6 +805,9 @@ radius = 13.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7x70"]
+size = Vector2(10, 2)
+
 [node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player", "saveable"]]
 z_index = 1
 collision_layer = 16
@@ -845,7 +848,6 @@ show_behind_parent = true
 texture = ExtResource("4_kaefl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890230004]
-visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_aabtn")
 
@@ -884,6 +886,7 @@ hit_audio = ExtResource("13_l7x70")
 metadata/_custom_type_script = "uid://duj6e51c3674j"
 
 [node name="Label" type="Label" parent="." unique_id=415583138]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -922,3 +925,15 @@ metadata/_custom_type_script = "uid://cg5catbhgwqsf"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction" unique_id=1931404224]
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_aabtn")
+
+[node name="PushInteraction" type="Area2D" parent="." unique_id=1416879563]
+visible = false
+position = Vector2(0, -5)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_utphg")
+metadata/_custom_type_script = "uid://cg5catbhgwqsf"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushInteraction" unique_id=1460382571]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_l7x70")
