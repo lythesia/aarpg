@@ -110,6 +110,7 @@ Skill={
 2d_physics/layer_5="Player"
 2d_physics/layer_6="Enemy"
 2d_physics/layer_7="Breakable"
+2d_physics/layer_8="ItemPickup"
 
 [physics]
 

@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cg5catbhgwqsf" path="res://player/scripts/player_interaction.gd" id="14_l7x70"]
 [ext_resource type="Script" uid="uid://bqtk318beexbu" path="res://player/scenes/push_interaction.gd" id="15_utphg"]
 [ext_resource type="Script" uid="uid://si0oxp2xbrv0" path="res://player/abilities/abilities.gd" id="16_28gy6"]
+[ext_resource type="PackedScene" uid="uid://bnxdrdb3hsbrb" path="res://general/item_magnet/item_magnet.tscn" id="16_d8q1f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
@@ -809,6 +810,9 @@ radius = 13.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7x70"]
 size = Vector2(10, 2)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsqg7"]
+radius = 50.01
+
 [node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player", "saveable"]]
 z_index = 1
 collision_layer = 16
@@ -849,6 +853,7 @@ show_behind_parent = true
 texture = ExtResource("4_kaefl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890230004]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_aabtn")
 
@@ -938,6 +943,13 @@ metadata/_custom_type_script = "uid://cg5catbhgwqsf"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushInteraction" unique_id=1460382571]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_l7x70")
+
+[node name="ItemMagnet" parent="." unique_id=1694817827 instance=ExtResource("16_d8q1f")]
+magnet_strength = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemMagnet" unique_id=214836098]
+position = Vector2(0, -20)
+shape = SubResource("CircleShape2D_lsqg7")
 
 [node name="Abilities" type="Node" parent="." unique_id=73244148]
 script = ExtResource("16_28gy6")

@@ -65,11 +65,14 @@ func _set_texture_type(value: TextureType) -> void:
     if Engine.is_editor_hint() and is_node_ready():
         _update_texture()
 
-func item_picked_up(player: Player) -> void:
+func item_picked_up(_player: Player) -> void:
     area.body_entered.disconnect(_on_body_entered)
     if pickup_audio:
         Audio.play_spatial_sound(pickup_audio, global_position)
-    play_pickup_animation(player)
+
+    # disable pickup animation
+    # play_pickup_animation(player)
+    queue_free()
 
 func play_pickup_animation(player: Node2D) -> void:
     # 1. Disable collisions to prevent multiple pickup triggers

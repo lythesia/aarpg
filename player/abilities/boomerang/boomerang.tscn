@@ -64,6 +64,7 @@ texture = ExtResource("2_5bkys")
 hframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1685291454]
+visible = false
 position = Vector2(0, -17)
 shape = SubResource("CircleShape2D_aabtn")
 
@@ -72,6 +73,7 @@ libraries/ = SubResource("AnimationLibrary_lh0vo")
 autoplay = &"fly"
 
 [node name="HazardArea" type="Area2D" parent="." unique_id=1420366863]
+visible = false
 position = Vector2(0, -17)
 collision_layer = 0
 collision_mask = 96
