@@ -58,7 +58,7 @@ func update_direction() -> bool:
     if dir == Vector2.ZERO:
         return false
 
-    var new_cardinal: Vector2 = calc_cardinal_dir(dir + 0.2 * cardinal_dir)
+    var new_cardinal: Vector2 = Utils.calc_cardinal_dir(dir + 0.2 * cardinal_dir)
 
     if new_cardinal == cardinal_dir:
         return false
@@ -75,13 +75,7 @@ func update_direction() -> bool:
 
     return true
 
-func calc_cardinal_dir(vel_dir: Vector2) -> Vector2:
-    # cleaver! and give honor to original cardinal direction
-    const CLOCKWISE: Array[Vector2] = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
-    var idx = round((vel_dir.angle() / TAU) * 4)
-    return CLOCKWISE[idx]
-
-func _cardinal_dir_to_string(cardinal: Vector2) -> String:
+func _dir_str(cardinal: Vector2) -> String:
     match cardinal:
         Vector2.UP:
             return "up"
@@ -92,7 +86,7 @@ func _cardinal_dir_to_string(cardinal: Vector2) -> String:
 
 ## player animation naming rule: [anim_state]_[up/down/side]
 func update_animation(anim_state: String) -> String:
-    var anim: String = "%s_%s" % [anim_state, _cardinal_dir_to_string(cardinal_dir)]
+    var anim: String = "%s_%s" % [anim_state, _dir_str(cardinal_dir)]
     anim_player.play(anim)
     return anim_player.current_animation
 

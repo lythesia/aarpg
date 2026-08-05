@@ -67,7 +67,7 @@ center_offset = true
 location = 2
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("3_d5g0j")]
-position = Vector2(504, 140)
+position = Vector2(261, 289)
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("6_1stbg")]
 

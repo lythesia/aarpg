@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://3lbx7hbyn7kp"]
+
+[ext_resource type="Script" uid="uid://dkssird3ac4tm" path="res://npc/base/npc_behavior_wander.gd" id="1_3b62v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aabtn"]
+
+[node name="NpcBehaviorWander" type="Node2D" unique_id=2005449273]
+script = ExtResource("1_3b62v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1503747194]
+shape = SubResource("CircleShape2D_aabtn")

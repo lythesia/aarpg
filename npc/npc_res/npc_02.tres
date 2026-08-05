@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="NPCResource" format=3 uid="uid://dqgisarh6t5yh"]
+
+[ext_resource type="Texture2D" uid="uid://dbd6r6xis1i4u" path="res://npc/assets/sprites/portraits/npc_portrait_02.png" id="1_kkh4v"]
+[ext_resource type="Script" uid="uid://i71j60pth3y8" path="res://npc/base/npc_res.gd" id="2_naw1u"]
+[ext_resource type="Texture2D" uid="uid://dveuxjss1r73o" path="res://npc/assets/sprites/npc_sprite_02.png" id="3_naw1u"]
+
+[resource]
+script = ExtResource("2_naw1u")
+npc_name = "Red"
+sprite = ExtResource("3_naw1u")
+portrait = ExtResource("1_kkh4v")
+metadata/_custom_type_script = "uid://i71j60pth3y8"

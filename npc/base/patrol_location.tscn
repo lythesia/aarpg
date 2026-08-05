@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://wkf8xv4y4ito"]
+
+[ext_resource type="Script" uid="uid://c6qxholguamtu" path="res://npc/base/patrol_location.gd" id="1_52s8e"]
+
+[sub_resource type="Gradient" id="Gradient_rbetx"]
+offsets = PackedFloat32Array(0.3466981, 0.8584906, 0.9858491)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.47058824, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aabtn"]
+gradient = SubResource("Gradient_rbetx")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="PatrolLocation" type="Node2D" unique_id=918239185]
+show_behind_parent = true
+script = ExtResource("1_52s8e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=889808292]
+texture = SubResource("GradientTexture2D_aabtn")
+
+[node name="Line2D" type="Line2D" parent="Sprite2D" unique_id=405527757]
+points = PackedVector2Array(0, 0, 12, 0)
+width = 1.0
+default_color = Color(1, 1, 1, 0.65882355)
+
+[node name="SeqLabel" type="Label" parent="Sprite2D" unique_id=773846388]
+offset_left = -3.0
+offset_top = -5.0
+offset_right = 37.0
+offset_bottom = 10.0
+theme_override_colors/font_shadow_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="WaitTimeLabel" type="Label" parent="Sprite2D" unique_id=105883041]
+offset_left = -27.0
+offset_top = 11.0
+offset_right = 25.0
+offset_bottom = 26.0
+theme_override_colors/font_shadow_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+theme_override_font_sizes/font_size = 12
+text = "Wait: 1.0s"
+vertical_alignment = 1

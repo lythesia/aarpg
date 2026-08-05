@@ -53,6 +53,7 @@ folder_colors={
 "res://globals/": "pink",
 "res://items/": "teal",
 "res://levels/": "orange",
+"res://npc/": "purple",
 "res://player/": "teal",
 "res://public/": "gray"
 }

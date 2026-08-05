@@ -12,3 +12,9 @@ static func is_editing_own_scene(node: Node) -> bool:
 
     # approach 2: if you want to be more strict, only check if the node is the root node of the edited scene
     return node == edited_root or node.get_parent() == null
+
+static func calc_cardinal_dir(vel_dir: Vector2) -> Vector2:
+    # cleaver! and give honor to original cardinal direction
+    const CLOCKWISE: Array[Vector2] = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
+    var idx = round((vel_dir.angle() / TAU) * 4)
+    return CLOCKWISE[idx]
