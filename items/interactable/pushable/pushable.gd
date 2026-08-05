@@ -8,8 +8,10 @@ class_name Pushable extends RigidBody2D
 @export var persistent_key: String
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var push_dir: Vector2 = Vector2.ZERO
+var pushing: bool = false
 
 func _ready() -> void:
     _update_texture()
@@ -27,6 +29,20 @@ func _physics_process(_delta: float) -> void:
         return
 
     linear_velocity = push_dir * push_speed
+    if push_dir != Vector2.ZERO and !pushing:
+        pushing = true
+        _play_push_audio()
+    elif push_dir == Vector2.ZERO and pushing:
+        pushing = false
+        _stop_push_audio()
+
+func _play_push_audio() -> void:
+    if push_audio:
+        audio_player.stream = push_audio
+        audio_player.play()
+func _stop_push_audio() -> void:
+    if audio_player.playing:
+        audio_player.stop()
 
 func _set_texture(value: Texture2D) -> void:
     texture = value

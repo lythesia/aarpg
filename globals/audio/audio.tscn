@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c2m16mm4678j"]
 
 [ext_resource type="Script" uid="uid://dp1w623ndwkwk" path="res://globals/audio/scripts/audio.gd" id="1_ly4qd"]
-[ext_resource type="AudioStream" uid="uid://c42y3lof0j6h5" path="res://public/audio/ui/ui_bloop_audio.wav" id="2_0a1cj"]
-[ext_resource type="AudioStream" uid="uid://cqyjymwntf5p0" path="res://public/audio/ui/ui_select_audio.wav" id="3_ruij1"]
+[ext_resource type="AudioStream" uid="uid://c2q5tq45vput4" path="res://public/audio/ui/menu_focus.wav" id="2_0a1cj"]
+[ext_resource type="AudioStream" uid="uid://8mwjbdrsv8h5" path="res://public/audio/ui/menu_select.wav" id="3_ruij1"]
 [ext_resource type="AudioStream" uid="uid://yj40o5fcsihy" path="res://public/audio/ui/ui_woosh.wav" id="4_eka5t"]
 [ext_resource type="AudioStream" uid="uid://b4iwvj8kqa88q" path="res://public/audio/ui/ui_success_audio.wav" id="5_4qm16"]
 [ext_resource type="AudioStream" uid="uid://nxtvdxbcr3s0" path="res://public/audio/ui/ui_error_audio.wav" id="6_0f3xi"]
