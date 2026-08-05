@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://blejhwxuc6ser" path="res://public/audio/hit_player.wav" id="13_l7x70"]
 [ext_resource type="Script" uid="uid://cg5catbhgwqsf" path="res://player/scripts/player_interaction.gd" id="14_l7x70"]
 [ext_resource type="Script" uid="uid://bqtk318beexbu" path="res://player/scenes/push_interaction.gd" id="15_utphg"]
+[ext_resource type="Script" uid="uid://si0oxp2xbrv0" path="res://player/abilities/abilities.gd" id="16_28gy6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
@@ -937,3 +938,6 @@ metadata/_custom_type_script = "uid://cg5catbhgwqsf"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushInteraction" unique_id=1460382571]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_l7x70")
+
+[node name="Abilities" type="Node" parent="." unique_id=73244148]
+script = ExtResource("16_28gy6")

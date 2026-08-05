@@ -29,8 +29,10 @@ var max_hp: int = 6
 # used for game load, setup player stats after scene change instead of on load
 var player_to_load: Dictionary = {}
 
-func _ready() -> void:
+func _init() -> void:
     PlayerManager.set_player(self)
+
+func _ready() -> void:
     fsm.init(self)
     PlayerHud.update_hp(hp, max_hp)
 
