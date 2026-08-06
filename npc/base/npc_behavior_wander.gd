@@ -27,11 +27,12 @@ func _process(_delta: float) -> void:
     if Engine.is_editor_hint():
         return
 
-    if abs(global_position.distance_to(orig_pos)) > wander_range * GRID_SIZE:
-        npc.velocity *= -1
-        npc.dir *= -1
-        npc.update_direction(global_position + npc.dir)
-        npc.update_animation()
+    # jittering at edge
+    # if abs(global_position.distance_to(orig_pos)) > wander_range * GRID_SIZE:
+    #     npc.velocity *= -1
+    #     npc.dir *= -1
+    #     npc.update_direction(global_position + npc.dir)
+    #     npc.update_animation()
 
 func start() -> void:
     if !npc.can_behave:
@@ -44,8 +45,17 @@ func start() -> void:
     await get_tree().create_timer(randf() * idle_dur + idle_dur).timeout
 
     # walk phase
+    if !npc.can_behave:
+        return
     npc.state = "walk"
     var _dir: Vector2 = DIRECTIONS[randi_range(0, 3)]
+    if abs(global_position.distance_to(orig_pos)) > wander_range * GRID_SIZE:
+        var dir_to_area: Vector2 = global_position.direction_to(orig_pos)
+        var bests: Array[float] = []
+        for d in DIRECTIONS:
+            bests.append(d.dot(dir_to_area))
+        _dir = DIRECTIONS[bests.find(bests.max())]
+
     npc.velocity = _dir * wander_speed
     npc.update_direction(global_position + _dir)
     npc.update_animation()
@@ -58,4 +68,5 @@ func start() -> void:
 
 func _set_wander_range(value: int) -> void:
     wander_range = value
-    collision_shape.shape.radius = value * GRID_SIZE
+    if Engine.is_editor_hint():
+        collision_shape.shape.radius = value * GRID_SIZE

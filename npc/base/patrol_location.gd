@@ -23,7 +23,7 @@ func _ready() -> void:
     if Engine.is_editor_hint():
         return
 
-    print("%s: %v" % [name, target_pos])
+    # print("%s: %v" % [name, target_pos])
     $Sprite2D.queue_free()
 
 func _update_seq_label(seq: int) -> void:

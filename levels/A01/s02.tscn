@@ -10,8 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://d37qt1qv4fkcm" path="res://npc/base/npc.tscn" id="8_tmjfs"]
 [ext_resource type="Resource" uid="uid://fkksn7r82804" path="res://npc/npc_res/npc_01.tres" id="9_6b7mu"]
 [ext_resource type="PackedScene" uid="uid://3lbx7hbyn7kp" path="res://npc/base/npc_behavior_wander.tscn" id="9_k6tnk"]
+[ext_resource type="Resource" uid="uid://cjsa8oajhtduf" path="res://dialogue/npc1.dialogue" id="10_xqo8v"]
 [ext_resource type="Resource" uid="uid://dqgisarh6t5yh" path="res://npc/npc_res/npc_02.tres" id="11_58rao"]
 [ext_resource type="PackedScene" uid="uid://xk7lyoj3u2mm" path="res://npc/base/npc_behavior_patrol.tscn" id="12_rc8lg"]
+[ext_resource type="Resource" uid="uid://c56pkj0tlomb7" path="res://dialogue/npc2.dialogue" id="13_om7qf"]
 [ext_resource type="PackedScene" uid="uid://wkf8xv4y4ito" path="res://npc/base/patrol_location.tscn" id="13_rc8lg"]
 
 [node name="S02" type="Node2D" unique_id=1622965855]
@@ -56,19 +58,22 @@ position = Vector2(151, 206)
 item_data = ExtResource("6_tmjfs")
 pickup_audio = ExtResource("7_k6tnk")
 
-[node name="Npc" parent="." unique_id=2065591414 instance=ExtResource("8_tmjfs")]
-position = Vector2(129, 77)
+[node name="Npc1" parent="." unique_id=2065591414 instance=ExtResource("8_tmjfs")]
+position = Vector2(129, 85)
 npc_res = ExtResource("9_6b7mu")
+npc_dialog = ExtResource("10_xqo8v")
 
-[node name="NpcBehaviorWander" parent="Npc" unique_id=2005449273 instance=ExtResource("9_k6tnk")]
+[node name="NpcBehaviorWander" parent="Npc1" unique_id=2005449273 instance=ExtResource("9_k6tnk")]
+wander_range = 1
 
 [node name="Npc2" parent="." unique_id=116734983 instance=ExtResource("8_tmjfs")]
 position = Vector2(302, 97)
 npc_res = ExtResource("11_58rao")
+npc_dialog = ExtResource("13_om7qf")
 
 [node name="NpcBehaviorPatrol" parent="Npc2" unique_id=1597043053 instance=ExtResource("12_rc8lg")]
 
-[node name="PatrolLocation" parent="Npc2/NpcBehaviorPatrol" unique_id=918239185 instance=ExtResource("13_rc8lg")]
+[node name="PatrolLocation1" parent="Npc2/NpcBehaviorPatrol" unique_id=918239185 instance=ExtResource("13_rc8lg")]
 modulate = Color(1, 0, 0, 1)
 
 [node name="PatrolLocation2" parent="Npc2/NpcBehaviorPatrol" unique_id=1059561567 instance=ExtResource("13_rc8lg")]

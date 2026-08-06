@@ -1,0 +1,6 @@
+~ start
+Npc1: Hi Hero, is that you?
+Hero: Heck yeah, it's me for sure!
+Npc1: It's nice to have a [b]Hero[/b] here.
+Hero: You get it!
+=> END

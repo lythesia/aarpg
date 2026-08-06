@@ -5,9 +5,11 @@ class_name NPC extends CharacterBody2D
 signal DoBehave
 
 @export var npc_res: NPCResource: set = _set_npc_res
+@export var npc_dialog: DialogueResource
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var interact_area: Area2D = $InteractArea
 
 var state: String = "idle"
 var dir: Vector2 = Vector2.ZERO
@@ -18,6 +20,9 @@ func _ready() -> void:
     setup_npc()
     if Engine.is_editor_hint():
         return
+
+    interact_area.area_entered.connect(_on_area_entered)
+    interact_area.area_exited.connect(_on_area_exited)
 
     DoBehave.emit()
 
@@ -56,3 +61,25 @@ func setup_npc() -> void:
 func _set_npc_res(value: NPCResource) -> void:
     npc_res = value
     setup_npc()
+
+func _on_area_entered(_area: Area2D) -> void:
+    PlayerManager.PlayerInteracted.connect(_on_player_interacted)
+
+func _on_area_exited(_area: Area2D) -> void:
+    PlayerManager.PlayerInteracted.disconnect(_on_player_interacted)
+
+func _on_player_interacted() -> void:
+    update_direction(PlayerManager.get_player().global_position)
+    state = "idle"
+    velocity = Vector2.ZERO
+    update_animation()
+    can_behave = false
+    DialogueManager.dialogue_ended.connect(_on_dialogue_finished)
+    DialogueManager.show_dialogue_balloon(npc_dialog, "start")
+
+func _on_dialogue_finished(_res) -> void:
+    DialogueManager.dialogue_ended.disconnect(_on_dialogue_finished)
+    state = "idle"
+    update_animation()
+    can_behave = true
+    DoBehave.emit()

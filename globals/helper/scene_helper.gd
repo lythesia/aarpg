@@ -19,6 +19,10 @@ func _ready() -> void:
 
     SceneManager.scene_loaded.connect(_on_scene_loaded)
 
+    # don't know where to put this
+    # DialogueManager.dialogue_started.connect(_pause.unbind(1))
+    # DialogueManager.dialogue_ended.connect(_resume.unbind(1))
+
     # SceneHelper is autoload, so await for scene to be ready
     # todo: may not need it if we have main scene?
     await get_tree().process_frame

@@ -12,7 +12,7 @@ var target: PatrolLocation
 func _ready() -> void:
     _gather_patrol_locations()
     if Engine.is_editor_hint():
-        child_entered_tree.connect(func(_node): _gather_patrol_locations())
+        child_entered_tree.connect(_gather_patrol_locations.unbind(1))
         child_order_changed.connect(_gather_patrol_locations)
         return
 
