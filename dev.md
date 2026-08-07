@@ -14,5 +14,7 @@ Attack --> Walk: done & inst.dir ≠ 0
 ## Z-index
 
 ground(tile): -1
-props: 0 + y-sort
-player: 0
+props: 1
+player: 1
+enemy: 1
+npc: 1

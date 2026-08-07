@@ -67,4 +67,4 @@ android/build/*
 *.dSYM
 
 # addons
-addons/*
+# addons/*
