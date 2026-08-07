@@ -19,6 +19,8 @@ var cardinal_dir: Vector2 = Vector2.DOWN
 # actual moving direction
 var dir: Vector2 = Vector2.ZERO
 
+# var input_vector: Vector2 = Vector2.ZERO
+
 const DEFAULT_HP: int = 6
 var hp: int = 6:
     set(value):
@@ -35,6 +37,17 @@ func _init() -> void:
 func _ready() -> void:
     fsm.init(self)
     PlayerHud.update_hp(hp, max_hp)
+
+# func _unhandled_input(_event: InputEvent) -> void:
+#     var x_axis = Input.get_axis("Left", "Right")
+#     var y_axis = Input.get_axis("Up", "Down")
+#     if x_axis != 0 or y_axis != 0:
+#         input_vector = Vector2(x_axis, y_axis).normalized()
+#     else:
+#         input_vector = Vector2.ZERO
+
+# func clear_input_vector() -> void:
+#     input_vector = Vector2.ZERO
 
 func _process(delta: float) -> void:
     _update_direction()

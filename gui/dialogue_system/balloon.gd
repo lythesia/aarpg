@@ -155,6 +155,7 @@ func apply_dialogue_line() -> void:
         await dialogue_label.finished_typing
 
     # Wait for next line
+    # if this line has full CV voice, play it until finished
     if dialogue_line.has_tag("voice"):
         audio_stream_player.stream = load(dialogue_line.get_tag_value("voice"))
         audio_stream_player.play()
@@ -221,7 +222,7 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 
 func _on_dialogue_label_spoke(letter: String, _letter_idx: int, _speed: float) -> void:
     if not letter in [".", " "]:
-        audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
+        audio_stream_player.pitch_scale = randf_range(0.96, 1.04)
         audio_stream_player.play()
 
 #endregion

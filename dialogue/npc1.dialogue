@@ -3,4 +3,11 @@ Npc1: Hi Hero, is that you?
 Hero: Heck yeah, it's me for sure!
 Npc1: It's nice to have a [b]Hero[/b] here.
 Hero: You get it!
+$> locals.player_apple_slot = inventory.get_slot_by_name("Apple")
+$> locals.player_apple_count = 0
+if locals.player_apple_slot:
+	$> locals.player_apple_count = locals.player_apple_slot.quantity
+Npc1: Wow, you have [wait=0.5][b]{{player.max_hp}}[/b] hearts.
+if locals.player_apple_count > 0:
+	Npc1: And [wait=0.5][b]{{locals.player_apple_count}}[/b] [if locals.player_apple_count == 1]apple[else]apples[/if], nice!
 => END

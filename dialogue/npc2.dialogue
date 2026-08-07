@@ -1,4 +1,7 @@
 ~ start
-Npc2: A brown fox jumps over the lazy dog!
-	A brown fox [wave]jumps[/wave] over the lazy dog!
+Npc2: Hey Hero, could you help eliminates the slimes nearby?
+- Ok
+	Npc2: This realy kind of you!
+- Not now, sorry
+	Npc2: Ok, I'll try my luck other ways.
 => END

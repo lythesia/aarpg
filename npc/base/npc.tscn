@@ -166,6 +166,7 @@ shape = SubResource("CapsuleShape2D_ts7x6")
 libraries/ = SubResource("AnimationLibrary_jk3bh")
 
 [node name="Label" type="Label" parent="." unique_id=644413336]
+visible = false
 offset_left = -31.0
 offset_right = 33.0
 offset_bottom = 15.0

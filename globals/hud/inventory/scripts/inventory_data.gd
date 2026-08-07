@@ -13,6 +13,12 @@ func _init() -> void:
     ensure_capacity()
     _connect_slots()
 
+func get_slot_by_name(name: String) -> SlotData:
+    for slot in slots:
+        if slot and slot.item_data.name == name:
+            return slot
+    return null
+
 func ensure_capacity() -> void:
     slots.resize(capacity)
 
