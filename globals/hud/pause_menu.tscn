@@ -253,3 +253,8 @@ text = "Load"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Back"
+
+[node name="TitleBtn" type="Button" parent="Control/SystemScreen/VBoxContainer" unique_id=1267021978]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ttile"

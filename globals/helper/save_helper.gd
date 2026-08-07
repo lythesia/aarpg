@@ -15,6 +15,9 @@ func _ready() -> void:
 func save():
     SaveManager.save_game([SAVE_SLOTS[current_slot]], true)
 
+func save_exists() -> bool:
+    return !SaveManager.list_save_files().is_empty()
+
 func load():
     # todo: this load update player's hp too early and we can see
     # loaded hp before fade out

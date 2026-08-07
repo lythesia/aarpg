@@ -7,6 +7,7 @@ signal PauseMenuHidden
 @onready var save_btn: Button = %SaveBtn
 @onready var load_btn: Button = %LoadBtn
 @onready var back_btn: Button = %BackBtn
+@onready var title_btn: Button = %TitleBtn
 @onready var inventory_screen: Control = %InventoryScreen
 @onready var system_screen: Control = %SystemScreen
 @onready var inventory_ui: InventoryUI = %Inventory
@@ -25,6 +26,7 @@ func _ready() -> void:
     save_btn.pressed.connect(_on_save_pressed)
     load_btn.pressed.connect(_on_load_pressed)
     back_btn.pressed.connect(_on_back_pressed)
+    title_btn.pressed.connect(_on_title_pressed)
 
     Audio.setup_button_audio(self)
 
@@ -44,6 +46,9 @@ func show_pause_menu() -> void:
     get_tree().paused = true
     visible = true
     is_paused = true
+    # always show inventory first instead of system screen
+    inventory_screen.visible = true
+    system_screen.visible = false
     PauseMenuShown.emit()
 
 func hide_pause_menu() -> void:
@@ -72,10 +77,16 @@ func _on_save_pressed() -> void:
     print("Saved to slot_%02d" % [SaveHelper.current_slot + 1])
 
 func _on_load_pressed() -> void:
-    hide_system_screen()
     hide_pause_menu()
     SaveHelper.load()
     print("Loaded from slot_%02d" % [SaveHelper.current_slot + 1])
 
 func _on_back_pressed() -> void:
     hide_system_screen()
+
+func _on_title_pressed() -> void:
+    const TITLE_SCENE: String = "uid://d1w4g1fy3v3oa"
+    hide_pause_menu()
+    PlayerManager.get_player().queue_free()
+    ProjectSettings.get_setting("application/run/main_scene", TITLE_SCENE)
+    SceneManager.change_scene(TITLE_SCENE)

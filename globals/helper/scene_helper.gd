@@ -25,8 +25,8 @@ func _ready() -> void:
 
     # SceneHelper is autoload, so await for scene to be ready
     # todo: may not need it if we have main scene?
-    await get_tree().process_frame
-    Messages.ChangeSceneFinished.emit()
+    # await get_tree().process_frame
+    # Messages.ChangeSceneFinished.emit()
 
 func _pause():
     get_tree().paused = true
@@ -50,6 +50,13 @@ func _on_scene_loaded():
             var scene: Node = get_tree().current_scene
             PlayerManager.reparent_player_to_scene(scene)
             Messages.NewSceneLoaded.emit(_target_level_trans, _offset)
+
+func new_game_scene(scene: String = DEFAULT_SCENE):
+    await SceneManager.change_scene(scene, {
+        "on_fade_out": PlayerHud.show
+    })
+    Messages.ChangeSceneFinished.emit()
+
 
 func load_scene_and_setup_player(target_scene: String):
     PlayerManager.reparent_player_to_root()

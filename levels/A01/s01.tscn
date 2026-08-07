@@ -67,7 +67,7 @@ center_offset = true
 location = 2
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("3_d5g0j")]
-position = Vector2(261, 289)
+position = Vector2(251, 194)
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("6_1stbg")]
 
@@ -75,7 +75,7 @@ position = Vector2(261, 289)
 y_sort_enabled = true
 
 [node name="Apple" parent="Items" unique_id=2085438971 instance=ExtResource("7_e8gkl")]
-position = Vector2(332, 105)
+position = Vector2(-11, 53)
 item_data = ExtResource("8_r434y")
 pickup_audio = ExtResource("9_pcl0k")
 
@@ -89,4 +89,4 @@ persistent_key = "s01/chest00"
 y_sort_enabled = true
 
 [node name="Slime" parent="Mobs" unique_id=1748956911 instance=ExtResource("12_c22wq")]
-position = Vector2(194, 144)
+position = Vector2(56, 136)
