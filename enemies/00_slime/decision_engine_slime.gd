@@ -53,4 +53,7 @@ func decide() -> EnemyState:
             else:
                 return EnemyState.STAY
 
-    return previous_state
+    # bug here, cannot simply return previous_state, it maybe inconsistent with current blackboard
+    # e.g. prev is es_stun, but es_stun is only valid when `damage_source` is not null
+    # return previous_state
+    return es_idle

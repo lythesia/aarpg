@@ -6,7 +6,7 @@ signal DamageDealt
 @export var damage_amount: int = 0
 
 func _ready() -> void:
-    self.visible = false
+    # self.visible = false
     self.monitoring = false # we can initially set it false until `set_active`
     self.monitorable = false
 
@@ -21,5 +21,5 @@ func _on_body_entered(body: Node2D) -> void:
         body.take_damage(self)
 
 func set_active(active: bool = true) -> void:
-    self.visible = active
+    # self.visible = active
     self.monitoring = active

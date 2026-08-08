@@ -37,7 +37,8 @@ func _start():
 
     enemy.damage_area.make_invulnerable(0.3) # matches player one hit
     dur = enemy.animation_player.current_animation_length
-    var dir = blackboard.damage_source.global_position.direction_to(enemy.global_position).normalized()
+    var dmg_src = blackboard.damage_source.global_position
+    var dir = dmg_src.direction_to(enemy.global_position).normalized()
     enemy.velocity = dir * knockback_speed
     blackboard.damage_source = null # clear damage source
     blackboard.can_decide = false # disable decision engine

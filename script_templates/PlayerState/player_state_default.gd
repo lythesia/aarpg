@@ -6,7 +6,6 @@ extends PlayerState
 
 # Included in PlayerState
 # static var player: Player
-# var next_state: PlayerState
 
 func init():
     pass

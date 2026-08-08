@@ -8,7 +8,6 @@ extends PlayerState
 
 # Included in PlayerState
 # static var player: Player
-# var next_state: PlayerState
 
 var dir: Vector2 = Vector2.ZERO
 var init_velocity: Vector2 = Vector2.ZERO

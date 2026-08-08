@@ -45,6 +45,9 @@ func ui_error() -> void:
 
 
 func play_spatial_sound(audio: AudioStream, pos: Vector2, pitch_scale: float = 1.0) -> void:
+    if !audio:
+        return
+
     var player: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
     add_child(player)
     player.bus = "SFX"

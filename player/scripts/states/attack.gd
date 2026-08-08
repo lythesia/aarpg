@@ -3,7 +3,6 @@ extends PlayerState
 
 # Included in PlayerState
 # static var player: Player
-# var next_state: PlayerState
 
 @export var attack_audio: AudioStream
 
@@ -31,6 +30,8 @@ func process(_delta: float) -> PlayerState:
     player.velocity = Vector2.ZERO
     if is_attacking:
         return STAY
+    elif Input.is_action_pressed("Attack"):
+        return player.fsm.charge
     elif player.dir.is_zero_approx():
         return player.fsm.idle
     else:

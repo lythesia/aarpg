@@ -30,6 +30,7 @@ func change_state(new_state: EnemyState) -> void:
     if !new_state:
         return
 
+    # print("fsm [target: %s] %s -> %s" % [blackboard.target, current_state.name, new_state.name])
     if new_state == current_state:
         current_state.re_enter()
         return

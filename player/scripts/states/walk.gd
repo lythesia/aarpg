@@ -3,7 +3,6 @@ extends PlayerState
 
 # Included in PlayerState
 # static var player: Player
-# var next_state: PlayerState
 
 @export var speed: float = 100.0
 

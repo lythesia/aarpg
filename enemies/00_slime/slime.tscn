@@ -820,7 +820,9 @@ metadata/_custom_type_script = "uid://btsrtx6c2nriu"
 
 [node name="PlayerSensor" type="Area2D" parent="." unique_id=721396922]
 position = Vector2(0, -9)
+monitorable = false
 script = ExtResource("20_scaum")
+search_dur = 0.8
 metadata/_custom_type_script = "uid://c2fcfy0wheq88"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerSensor" unique_id=297124130]

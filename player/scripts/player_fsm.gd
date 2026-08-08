@@ -4,6 +4,8 @@ class_name PlayerStateMachine extends Node
 @onready var walk: PlayerStateWalk = %PlayerStateWalk
 @onready var attack: PlayerStateAttack = %PlayerStateAttack
 @onready var stun: PlayerStateStun = %PlayerStateStun
+@onready var charge: PlayerStateCharge = %PlayerStateCharge
+@onready var spin_attack: PlayerStateSpinAttack = %PlayerStateSpinAttack
 
 const MAX_STATES: int = 3
 

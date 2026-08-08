@@ -13,3 +13,6 @@ func update_distance_to_target(self_pos: Vector2) -> void:
         distance_to_target = self_pos.distance_to(target.global_position)
     else:
         distance_to_target = -1
+
+func _report() -> void:
+    print("blackboard: damage_source = %s, can_decide = %s" % [damage_source, can_decide])
