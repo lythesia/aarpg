@@ -1,14 +1,13 @@
 extends Node
 
-@warning_ignore_start("unused_signal")
 signal PlayerRepositioned(player: Player)
 signal PlayerInteracted
-@warning_ignore_restore("unused_signal")
 
 var INVENTORY_DATA: InventoryData
 
 var spawned: bool = false
 var player: Player
+var interact_handled: bool = false
 
 func _ready() -> void:
     pass
@@ -32,3 +31,8 @@ func reparent_player_to_scene(scene: Node) -> void:
 func set_player_global_position(position: Vector2) -> void:
     player.global_position = position
     PlayerRepositioned.emit(player)
+
+func player_interact() -> void:
+    # only one interactable can accquire this flag on `PlayerInteracted` shot
+    interact_handled = false
+    PlayerInteracted.emit()

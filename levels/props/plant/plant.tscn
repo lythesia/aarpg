@@ -1,22 +1,64 @@
 [gd_scene format=3 uid="uid://uvn5g18u6222"]
 
-[ext_resource type="Texture2D" uid="uid://dbf44skfkosh5" path="res://levels/props/plant/Plant.png" id="1_duck8"]
 [ext_resource type="Script" uid="uid://c88aauadyjol6" path="res://levels/props/plant/plant.gd" id="1_yky7o"]
 [ext_resource type="Script" uid="uid://b60no6xp6h8jr" path="res://general/hitbox/damage_area.gd" id="2_li86d"]
+[ext_resource type="Texture2D" uid="uid://dedvuta282swb" path="res://public/sprites/Props.png" id="2_yky7o"]
+
+[sub_resource type="Animation" id="Animation_yky7o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gnka3"]
+resource_name = "destroy"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xabjj"]
+_data = {
+&"RESET": SubResource("Animation_yky7o"),
+&"destroy": SubResource("Animation_gnka3")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
-size = Vector2(22, 15)
+size = Vector2(28, 21)
 
 [node name="Plant" type="Node2D" unique_id=639601265]
 script = ExtResource("1_yky7o")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=132885724]
 position = Vector2(0, -7)
-texture = ExtResource("1_duck8")
+texture = ExtResource("2_yky7o")
 hframes = 16
 vframes = 3
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1335800496]
+libraries/ = SubResource("AnimationLibrary_xabjj")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1084432974]
+visible = false
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=497774699]
@@ -29,4 +71,5 @@ script = ExtResource("2_li86d")
 metadata/_custom_type_script = "uid://b60no6xp6h8jr"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=832694698]
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_aabtn")

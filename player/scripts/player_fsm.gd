@@ -6,6 +6,8 @@ class_name PlayerStateMachine extends Node
 @onready var stun: PlayerStateStun = %PlayerStateStun
 @onready var charge: PlayerStateCharge = %PlayerStateCharge
 @onready var spin_attack: PlayerStateSpinAttack = %PlayerStateSpinAttack
+@onready var lift: PlayerStateLift = %PlayerStateLift
+@onready var carry: PlayerStateCarry = %PlayerStateCarry
 
 const MAX_STATES: int = 3
 
@@ -18,6 +20,8 @@ var current_state: PlayerState:
 var previous_state: PlayerState:
     get():
         return states.get(1)
+
+var next_state: PlayerState
 
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_DISABLED
@@ -60,6 +64,8 @@ func change_state(new_state: PlayerState) -> void:
     if new_state == current_state:
         # no change
         return
+
+    next_state = new_state
 
     if current_state:
         current_state.exit()

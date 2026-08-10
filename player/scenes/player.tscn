@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bdnhw6f0c23ot" path="res://player/scripts/states/walk.gd" id="4_87uja"]
 [ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="4_kaefl"]
 [ext_resource type="Texture2D" uid="uid://cnwdt88rdlsuw" path="res://player/sprites/spin_effect.png" id="5_3orul"]
+[ext_resource type="Texture2D" uid="uid://dedvuta282swb" path="res://public/sprites/Props.png" id="6_g2abb"]
 [ext_resource type="Script" uid="uid://dpw6ru76f572l" path="res://player/scripts/states/attack.gd" id="7_okfwm"]
 [ext_resource type="AudioStream" uid="uid://ch08vlqyq446d" path="res://player/audio/SwordSwoosh.wav" id="8_4qt65"]
 [ext_resource type="Script" uid="uid://b60no6xp6h8jr" path="res://general/hitbox/damage_area.gd" id="10_6g3n5"]
@@ -22,6 +23,10 @@
 [ext_resource type="Script" uid="uid://si0oxp2xbrv0" path="res://player/abilities/abilities.gd" id="16_28gy6"]
 [ext_resource type="PackedScene" uid="uid://bnxdrdb3hsbrb" path="res://general/item_magnet/item_magnet.tscn" id="16_d8q1f"]
 [ext_resource type="AudioStream" uid="uid://bnlaf8n8nblyo" path="res://player/audio/spin-attack.wav" id="17_g2abb"]
+[ext_resource type="Script" uid="uid://c8yr3tlwn2hjx" path="res://player/scripts/states/lift.gd" id="19_usugv"]
+[ext_resource type="Script" uid="uid://bers7o0pgndbp" path="res://player/scripts/states/carry.gd" id="20_h3aqd"]
+[ext_resource type="AudioStream" uid="uid://g542467wkgke" path="res://player/audio/huwh.wav" id="20_uvxdc"]
+[ext_resource type="AudioStream" uid="uid://tfign5084bd4" path="res://player/audio/throw.wav" id="22_3l1gv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
@@ -351,6 +356,30 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sprite/HeldItem:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 20)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_4qt65"]
@@ -779,6 +808,255 @@ tracks/10/keys = {
 "values": [0.0, -0.7853982, 1.5707964]
 }
 
+[sub_resource type="Animation" id="Animation_1qqmx"]
+resource_name = "carry_down"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [35]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_vjan4"]
+resource_name = "carry_side"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [41]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -17)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_smv5u"]
+resource_name = "carry_up"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [38]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -18)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_d7607"]
+resource_name = "carry_walk_down"
+length = 0.3
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [42, 43, 44, 45]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -15), Vector2(0, -16), Vector2(0, -16), Vector2(0, -15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ivons"]
+resource_name = "carry_walk_side"
+length = 0.3
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 53]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -16), Vector2(0, -17), Vector2(0, -17), Vector2(0, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7vjvr"]
+resource_name = "carry_walk_up"
+length = 0.3
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [46, 47, 48, 49]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -17), Vector2(0, -18), Vector2(0, -18), Vector2(0, -17)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_d8q1f"]
 resource_name = "charge_down"
 length = 0.2
@@ -1082,6 +1360,129 @@ tracks/0/keys = {
 "values": [3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_uvxdc"]
+resource_name = "lift_down"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [33, 34, 35]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 20), Vector2(0, 10), Vector2(0, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tlx6e"]
+resource_name = "lift_side"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [39, 40, 41]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(16, 20), Vector2(16, 10), Vector2(0, -17)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_3l1gv"]
+resource_name = "lift_up"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [36, 37, 38]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HeldItem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 14), Vector2(0, 0), Vector2(0, -18)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/HeldItem:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_g2abb"]
 resource_name = "spin_attack"
 length = 0.35
@@ -1235,6 +1636,12 @@ _data = {
 &"attack_down": SubResource("Animation_4qt65"),
 &"attack_side": SubResource("Animation_6g3n5"),
 &"attack_up": SubResource("Animation_kaefl"),
+&"carry_down": SubResource("Animation_1qqmx"),
+&"carry_side": SubResource("Animation_vjan4"),
+&"carry_up": SubResource("Animation_smv5u"),
+&"carry_walk_down": SubResource("Animation_d7607"),
+&"carry_walk_side": SubResource("Animation_ivons"),
+&"carry_walk_up": SubResource("Animation_7vjvr"),
 &"charge_down": SubResource("Animation_d8q1f"),
 &"charge_side": SubResource("Animation_htc74"),
 &"charge_up": SubResource("Animation_7e6y1"),
@@ -1244,6 +1651,9 @@ _data = {
 &"idle_down": SubResource("Animation_t0cpu"),
 &"idle_side": SubResource("Animation_8h4do"),
 &"idle_up": SubResource("Animation_rclgo"),
+&"lift_down": SubResource("Animation_uvxdc"),
+&"lift_side": SubResource("Animation_tlx6e"),
+&"lift_up": SubResource("Animation_3l1gv"),
 &"spin_attack": SubResource("Animation_g2abb"),
 &"stun_down": SubResource("Animation_mgvvd"),
 &"stun_side": SubResource("Animation_mfato"),
@@ -1343,6 +1753,7 @@ unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 96
 script = ExtResource("11_mgvvd")
+damage_amount = 1
 metadata/_custom_type_script = "uid://c7tcshhj8j0ts"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/SmearSprite/AttackArea" unique_id=1248352084]
@@ -1390,8 +1801,20 @@ shape = SubResource("CapsuleShape2D_aabtn")
 [node name="ChargeParticles" type="GPUParticles2D" parent="Sprite/SpinAttackArea" unique_id=2108570694]
 unique_name_in_owner = true
 position = Vector2(-7, 17)
+emitting = false
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_aabtn")
+
+[node name="HeldItem" type="Node2D" parent="Sprite" unique_id=501615061]
+position = Vector2(0, 20)
+
+[node name="Preview" type="Sprite2D" parent="Sprite/HeldItem" unique_id=1284764930]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("6_g2abb")
+hframes = 16
+vframes = 3
+frame = 4
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=895004758]
 modulate = Color(0.16078432, 0.16078432, 0.16078432, 0.78431374)
@@ -1449,6 +1872,18 @@ script = ExtResource("14_htc74")
 spin_audio = ExtResource("17_g2abb")
 metadata/_custom_type_script = "uid://dqvvulh7orc6j"
 
+[node name="PlayerStateLift" type="Node" parent="PlayerStateMachine" unique_id=1714015275]
+unique_name_in_owner = true
+script = ExtResource("19_usugv")
+lift_audio = ExtResource("20_uvxdc")
+metadata/_custom_type_script = "uid://c8yr3tlwn2hjx"
+
+[node name="PlayerStateCarry" type="Node" parent="PlayerStateMachine" unique_id=2051867365]
+unique_name_in_owner = true
+script = ExtResource("20_h3aqd")
+throw_audio = ExtResource("22_3l1gv")
+metadata/_custom_type_script = "uid://bers7o0pgndbp"
+
 [node name="Label" type="Label" parent="." unique_id=415583138]
 visible = false
 anchors_preset = 15
@@ -1478,7 +1913,6 @@ position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_d6mua")
 
 [node name="Interaction" type="Area2D" parent="." unique_id=1781928421]
-visible = false
 position = Vector2(0, -9)
 collision_layer = 2
 collision_mask = 0

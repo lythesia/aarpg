@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://4ixixo0qprp8"]
+
+[ext_resource type="Script" uid="uid://bf2wob57nwdbc" path="res://items/interactable/throwable/throwable.gd" id="1_j7aih"]
+[ext_resource type="Script" uid="uid://c7tcshhj8j0ts" path="res://general/hitbox/attack_area.gd" id="2_hjekd"]
+
+[node name="Throwable" type="Area2D" unique_id=762477785]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_j7aih")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1825627364]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("2_hjekd")
+damage_amount = 1
+metadata/_custom_type_script = "uid://c7tcshhj8j0ts"

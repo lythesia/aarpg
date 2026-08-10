@@ -12,6 +12,7 @@ signal DirectionChanged(dir: Vector2)
 @onready var fsm: PlayerStateMachine = %PlayerStateMachine
 @onready var damage_area: DamageArea = %DamageArea
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var held_item: Node2D = $Sprite/HeldItem
 
 @onready var label: Label = $Label
 
@@ -136,3 +137,11 @@ func setup_player_on_load() -> void:
     PlayerManager.set_player_global_position(player_to_load["pos"])
     hp = player_to_load["hp"]
     max_hp = player_to_load["max_hp"]
+
+func lift_item(throwable: Throwable) -> void:
+    # shift throwable_object from parent to player's held item
+    var object = throwable.throwable_object
+    object.reparent(held_item, false) # don't keep global position
+    object.position = Vector2.ZERO # re-position according to held item
+    fsm.change_state(fsm.lift)
+    fsm.carry.throwable = throwable # ref throwable NOT object!

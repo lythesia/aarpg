@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="9_pcl0k"]
 [ext_resource type="PackedScene" uid="uid://dhb7dvw2yb6cr" path="res://items/interactable/chest/chest.tscn" id="10_r434y"]
 [ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="11_pcl0k"]
+[ext_resource type="PackedScene" uid="uid://b68d5x5hqub6s" path="res://levels/props/pot/pot.tscn" id="12_03meh"]
 [ext_resource type="PackedScene" uid="uid://b2ts3u2tpi680" path="res://enemies/00_slime/slime.tscn" id="12_c22wq"]
 
 [node name="S01" type="Node2D" unique_id=901446768]
@@ -84,6 +85,12 @@ position = Vector2(472, 73)
 item_data = ExtResource("11_pcl0k")
 quantity = 3
 persistent_key = "s01/chest00"
+
+[node name="Pot" parent="Items" unique_id=318786704 instance=ExtResource("12_03meh")]
+position = Vector2(346, 193)
+
+[node name="Pot2" parent="Items" unique_id=284704872 instance=ExtResource("12_03meh")]
+position = Vector2(364, 193)
 
 [node name="Mobs" type="Node2D" parent="." unique_id=2067070248]
 y_sort_enabled = true
