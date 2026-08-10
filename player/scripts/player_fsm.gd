@@ -8,6 +8,7 @@ class_name PlayerStateMachine extends Node
 @onready var spin_attack: PlayerStateSpinAttack = %PlayerStateSpinAttack
 @onready var lift: PlayerStateLift = %PlayerStateLift
 @onready var carry: PlayerStateCarry = %PlayerStateCarry
+@onready var death: PlayerStateDeath = %PlayerStateDeath
 
 const MAX_STATES: int = 3
 

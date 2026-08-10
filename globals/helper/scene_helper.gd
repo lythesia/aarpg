@@ -35,11 +35,16 @@ func _resume():
     get_tree().paused = false
 
 func _on_scene_loaded():
-    # print("on_scene_loaded: %s" % SceneManager._current_scene.name)
+    print("on_scene_loaded: %s" % SceneManager._current_scene.name)
+    current_scene = ResourceUID.path_to_uid(SceneManager._current_scene.scene_file_path)
     match _transition_type:
+        # load at same scene OR continue
         TransitionType.RELOAD:
             var player: Player = PlayerManager.get_player()
+            var scene: Node = get_tree().current_scene
+            PlayerManager.reparent_player_to_scene(scene)
             player.setup_player_on_load()
+        # load from different scene
         TransitionType.LOAD:
             var player: Player = PlayerManager.get_player()
             var scene: Node = get_tree().current_scene
@@ -53,29 +58,53 @@ func _on_scene_loaded():
 
 func new_game_scene(scene: String = DEFAULT_SCENE):
     await SceneManager.change_scene(scene, {
-        "on_fade_out": PlayerHud.show
+        "on_fade_out": _load_on_fade_out
     })
     Messages.ChangeSceneFinished.emit()
 
 
+## this is called after save file loaded
+## if different scene, new player instance will be created before this
+## but NOT if same scene, but `player_to_load` is set
 func load_scene_and_setup_player(target_scene: String):
     PlayerManager.reparent_player_to_root()
-
     # `change_scene` if load to different scene
     if target_scene != current_scene:
+        print("load: different scene")
         _transition_type = TransitionType.LOAD
-        await SceneManager.change_scene(target_scene)
-        current_scene = ResourceUID.path_to_uid(target_scene)
+        await SceneManager.change_scene(target_scene, {
+            "on_fade_out": _load_on_fade_out,
+        })
         _transition_type = TransitionType.NONE
 
     # `reload_scene` if load same scene
     else:
+        print("load: same scene")
         _transition_type = TransitionType.RELOAD
-        await SceneManager.reload_scene()
+        await SceneManager.reload_scene({
+            "on_fade_out": _reload_on_fade_out,
+        })
         _transition_type = TransitionType.NONE
 
     # always need to emit signal to activate level transition area in target scene
     Messages.ChangeSceneFinished.emit()
+
+# when completely black
+func _load_on_fade_out() -> void:
+    # we make hud visible when black out, to avoid sudden appear after new scene fade in
+    PlayerHud.show()
+
+# todo: optimize this
+const PLAYER: PackedScene = preload("uid://dgj4nm6qm1ggp")
+func _reload_on_fade_out() -> void:
+    var player = PlayerManager.get_player()
+    var player_to_load = player.player_to_load.duplicate()
+    player.queue_free()
+    player = PLAYER.instantiate()
+    player.name = "Player"
+    player.player_to_load = player_to_load
+    get_tree().root.add_child(player)
+    PlayerHud.show()
 
 # 1. pause
 # 2. await fade out
@@ -103,11 +132,7 @@ func level_transition(
     player.damage_area.set_deferred("monitorable", false)
     # todo: need `AutoWalk` state if we want to auto walk player pass through transition
 
-    await SceneManager.change_scene(target_scene, {
-        # "on_fade_out": _pause,
-        # "on_fade_in": _resume,
-    })
-    current_scene = ResourceUID.path_to_uid(target_scene)
+    await SceneManager.change_scene(target_scene)
     Messages.ChangeSceneFinished.emit()
 
     player.damage_area.set_deferred("monitorable", true)

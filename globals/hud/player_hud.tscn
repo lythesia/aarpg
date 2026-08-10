@@ -4,6 +4,68 @@
 [ext_resource type="Script" uid="uid://bjj5jy383ijaf" path="res://globals/hud/player_hud.gd" id="1_76ewb"]
 [ext_resource type="PackedScene" uid="uid://btfkrowalm2ow" path="res://globals/hud/heart_gui.tscn" id="2_baoq0"]
 
+[sub_resource type="Animation" id="Animation_76ewb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_81p1n"]
+resource_name = "show_game_over"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4n6q"]
+_data = {
+&"RESET": SubResource("Animation_76ewb"),
+&"show_game_over": SubResource("Animation_81p1n")
+}
+
 [node name="PlayerHud" type="CanvasLayer" unique_id=2041684490]
 script = ExtResource("1_76ewb")
 
@@ -90,3 +152,59 @@ layout_mode = 2
 
 [node name="Heart20" parent="Control/HeartsContainer" unique_id=612713074 instance=ExtResource("2_baoq0")]
 layout_mode = 2
+
+[node name="GameOver" type="Control" parent="Control" unique_id=556165440]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="Control/GameOver" unique_id=821153528]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GameOver" unique_id=2143825367]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -42.0
+offset_right = 60.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Control/GameOver/VBoxContainer" unique_id=1251852687]
+layout_mode = 2
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Control/GameOver/VBoxContainer" unique_id=1697104981]
+layout_mode = 2
+
+[node name="ContBtn" type="Button" parent="Control/GameOver/VBoxContainer" unique_id=1876044222]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="TitleBtn" type="Button" parent="Control/GameOver/VBoxContainer" unique_id=414728810]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back to Title"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/GameOver" unique_id=1703434175]
+libraries/ = SubResource("AnimationLibrary_j4n6q")

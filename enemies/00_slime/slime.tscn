@@ -795,11 +795,16 @@ script = ExtResource("12_l83x4")
 anim_name = "death"
 metadata/_custom_type_script = "uid://besi5f8uymy2w"
 
-[node name="EsChase" type="Node" parent="EnemyStateMachine" unique_id=889808687]
+[node name="EsChase" type="Node" parent="EnemyStateMachine" unique_id=889808687 node_paths=PackedStringArray("step_timer")]
 unique_name_in_owner = true
 script = ExtResource("14_bslat")
+step_timer = NodePath("Timer")
 anim_name = "walk"
 metadata/_custom_type_script = "uid://byf6iechsrm3p"
+
+[node name="Timer" type="Timer" parent="EnemyStateMachine/EsChase" unique_id=1753749854]
+wait_time = 0.5
+one_shot = true
 
 [node name="DecisionEngineSlime" type="Node" parent="." unique_id=1276378519]
 script = ExtResource("6_81s3k")

@@ -52,7 +52,10 @@ func _on_damage_taken(attack_area: AttackArea) -> void:
     player.fsm.change_state(self)
 
 func _on_animation_finished(_anim: String) -> void:
-    player.fsm.change_state(player.fsm.idle)
+    if player.hp > 0:
+        player.fsm.change_state(player.fsm.idle)
+    else:
+        player.fsm.change_state(player.fsm.death)
 
 # hit flash effect
 func _tween_flash():

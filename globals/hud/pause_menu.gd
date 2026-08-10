@@ -74,12 +74,12 @@ func _on_system_pressed() -> void:
 
 func _on_save_pressed() -> void:
     SaveHelper.save()
-    print("Saved to slot_%02d" % [SaveHelper.current_slot + 1])
+    # print("Saved to slot_%02d" % [SaveHelper.current_slot + 1])
 
 func _on_load_pressed() -> void:
     hide_pause_menu()
     SaveHelper.load()
-    print("Loaded from slot_%02d" % [SaveHelper.current_slot + 1])
+    # print("Loaded from slot_%02d" % [SaveHelper.current_slot + 1])
 
 func _on_back_pressed() -> void:
     hide_system_screen()
@@ -87,6 +87,10 @@ func _on_back_pressed() -> void:
 func _on_title_pressed() -> void:
     const TITLE_SCENE: String = "uid://d1w4g1fy3v3oa"
     hide_pause_menu()
-    PlayerManager.get_player().queue_free()
-    ProjectSettings.get_setting("application/run/main_scene", TITLE_SCENE)
-    SceneManager.change_scene(TITLE_SCENE)
+    SceneManager.change_scene(
+        ProjectSettings.get_setting("application/run/main_scene", TITLE_SCENE),
+        {
+            # free player when back to title scene
+            "on_fade_out": PlayerManager.get_player().queue_free,
+        }
+    )
