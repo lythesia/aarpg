@@ -36,3 +36,6 @@ func player_interact() -> void:
     # only one interactable can accquire this flag on `PlayerInteracted` shot
     interact_handled = false
     PlayerInteracted.emit()
+
+func player_in_scene(scene: Node) -> bool:
+    return scene.get_node_or_null("Player") == player

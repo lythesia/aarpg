@@ -1312,7 +1312,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_11l1d"]
 resource_name = "death"
-length = 0.39999999999999997
+length = 0.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1813,6 +1813,7 @@ libraries/ = SubResource("AnimationLibrary_uvxdc")
 
 [node name="SpinAttackArea" type="Area2D" parent="Sprite" unique_id=1477008803]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 collision_mask = 96
 monitoring = false
@@ -1934,18 +1935,18 @@ horizontal_alignment = 1
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=830260256]
 unique_name_in_owner = true
-visible = false
-position = Vector2(0, 4)
+position = Vector2(0, -8)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("10_6g3n5")
 metadata/_custom_type_script = "uid://b60no6xp6h8jr"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1553084426]
-position = Vector2(0, -9)
+visible = false
 shape = SubResource("CircleShape2D_d6mua")
 
 [node name="Interaction" type="Area2D" parent="." unique_id=1781928421]
+visible = false
 position = Vector2(0, -9)
 collision_layer = 2
 collision_mask = 0

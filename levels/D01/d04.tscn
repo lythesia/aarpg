@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="2_0tx52"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_g06t7"]
 [ext_resource type="PackedScene" uid="uid://clxgl1m5k7wwb" path="res://levels/props/torch/torch.tscn" id="4_holt6"]
+[ext_resource type="Script" uid="uid://cc0v1pfwl4f8x" path="res://general/projectiles/projectile_spawner.gd" id="5_15n47"]
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="5_nmi0q"]
+[ext_resource type="PackedScene" uid="uid://bg6xs5x3kjgj2" path="res://general/projectiles/fireball/fireball.tscn" id="6_xnggu"]
 
 [node name="D04" type="Node2D" unique_id=246040186]
 y_sort_enabled = true
@@ -27,17 +29,52 @@ location = 3
 [node name="Props" type="Node2D" parent="." unique_id=1135707861]
 y_sort_enabled = true
 
-[node name="Torch" parent="Props" unique_id=572682056 instance=ExtResource("4_holt6")]
+[node name="Torch" parent="Props" unique_id=572682056 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
 position = Vector2(112, 16)
+fireball_spawner = NodePath("ProjectileSpawner")
+initial_delay = 0.0
+fire_interval = 4.0
 
-[node name="Torch2" parent="Props" unique_id=1600483332 instance=ExtResource("4_holt6")]
+[node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch" unique_id=1611605222]
+position = Vector2(0, -19)
+script = ExtResource("5_15n47")
+projectile = ExtResource("6_xnggu")
+metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
+
+[node name="Torch2" parent="Props" unique_id=1600483332 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
 position = Vector2(400, 16)
+fireball_spawner = NodePath("ProjectileSpawner")
+fire_interval = 4.0
 
-[node name="Torch3" parent="Props" unique_id=1448974136 instance=ExtResource("4_holt6")]
+[node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch2" unique_id=1497933465]
+position = Vector2(0, -19)
+script = ExtResource("5_15n47")
+projectile = ExtResource("6_xnggu")
+metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
+
+[node name="Torch3" parent="Props" unique_id=1448974136 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
 position = Vector2(400, 176)
+fireball_spawner = NodePath("ProjectileSpawner")
+initial_delay = 2.0
+fire_interval = 4.0
 
-[node name="Torch4" parent="Props" unique_id=1964967777 instance=ExtResource("4_holt6")]
+[node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch3" unique_id=400553870]
+position = Vector2(0, -23)
+script = ExtResource("5_15n47")
+projectile = ExtResource("6_xnggu")
+metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
+
+[node name="Torch4" parent="Props" unique_id=1964967777 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
 position = Vector2(112, 176)
+fireball_spawner = NodePath("ProjectileSpawner")
+initial_delay = 3.0
+fire_interval = 4.0
+
+[node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch4" unique_id=1045498536]
+position = Vector2(0, -23)
+script = ExtResource("5_15n47")
+projectile = ExtResource("6_xnggu")
+metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=2111635396]
 color = Color(0.24840015, 0.24840018, 0.24840015, 1)
