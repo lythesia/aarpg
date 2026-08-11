@@ -34,7 +34,6 @@ func physics_update(_delta: float) -> void:
     # step mode
     else:
         if step_timer.is_stopped():
-            print("step_timer stopped, re-direction")
             # update direction then restart timer
             _update_chase_direction()
             step_timer.start()

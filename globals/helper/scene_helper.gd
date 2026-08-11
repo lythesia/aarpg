@@ -70,7 +70,7 @@ func load_scene_and_setup_player(target_scene: String):
     PlayerManager.reparent_player_to_root()
     # `change_scene` if load to different scene
     if target_scene != current_scene:
-        print("load: different scene")
+        # print("after_load: different scene")
         _transition_type = TransitionType.LOAD
         await SceneManager.change_scene(target_scene, {
             "on_fade_out": _load_on_fade_out,
@@ -79,7 +79,7 @@ func load_scene_and_setup_player(target_scene: String):
 
     # `reload_scene` if load same scene
     else:
-        print("load: same scene")
+        # print("after_load: same scene")
         _transition_type = TransitionType.RELOAD
         await SceneManager.reload_scene({
             "on_fade_out": _reload_on_fade_out,
@@ -94,16 +94,13 @@ func _load_on_fade_out() -> void:
     # we make hud visible when black out, to avoid sudden appear after new scene fade in
     PlayerHud.show()
 
-# todo: optimize this
-const PLAYER: PackedScene = preload("uid://dgj4nm6qm1ggp")
+# when completely black
 func _reload_on_fade_out() -> void:
     var player = PlayerManager.get_player()
-    var player_to_load = player.player_to_load.duplicate()
-    player.queue_free()
-    player = PLAYER.instantiate()
-    player.name = "Player"
-    player.player_to_load = player_to_load
-    get_tree().root.add_child(player)
+    # when reload same scene with player dead, we need to revive player
+    # coz player instance will not be re-created and replaced
+    if player.is_dead():
+        player.revive()
     PlayerHud.show()
 
 # 1. pause

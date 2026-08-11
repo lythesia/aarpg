@@ -145,3 +145,10 @@ func lift_item(throwable: Throwable) -> void:
     object.position = Vector2.ZERO # re-position according to held item
     fsm.change_state(fsm.lift)
     fsm.carry.throwable = throwable # ref throwable NOT object!
+
+func is_dead() -> bool:
+    return hp <= 0 and fsm.current_state is PlayerStateDeath
+
+func revive() -> void:
+    hp = max_hp
+    fsm.change_state(fsm.idle)
