@@ -35,7 +35,7 @@ func _resume():
     get_tree().paused = false
 
 func _on_scene_loaded():
-    print("on_scene_loaded: %s" % SceneManager._current_scene.name)
+    print("on_scene_loaded(%s): %s" % [TransitionType.keys()[_transition_type], SceneManager._current_scene.name])
     current_scene = ResourceUID.path_to_uid(SceneManager._current_scene.scene_file_path)
     match _transition_type:
         # load at same scene OR continue
@@ -55,6 +55,9 @@ func _on_scene_loaded():
             var scene: Node = get_tree().current_scene
             PlayerManager.reparent_player_to_scene(scene)
             Messages.NewSceneLoaded.emit(_target_level_trans, _offset)
+        # other cases activate LT
+        TransitionType.NONE:
+            Messages.ChangeSceneFinished.emit()
 
 func new_game_scene(scene: String = DEFAULT_SCENE):
     await SceneManager.change_scene(scene, {

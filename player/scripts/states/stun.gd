@@ -20,6 +20,7 @@ func enter():
     player.update_animation("stun")
     player.anim_player.animation_finished.connect(_on_animation_finished)
 
+    player.shake_trauma()
     if hit_audio:
         Audio.play_spatial_sound(hit_audio, player.global_position)
 

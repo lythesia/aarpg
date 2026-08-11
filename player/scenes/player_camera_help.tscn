@@ -29,4 +29,5 @@ follow_mode = 2
 tween_resource = SubResource("Resource_pcl0k")
 tween_on_load = false
 draw_limits = true
+noise_emitter_layer = 1
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"

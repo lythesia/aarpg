@@ -13,6 +13,7 @@ signal DirectionChanged(dir: Vector2)
 @onready var damage_area: DamageArea = %DamageArea
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var held_item: Node2D = $Sprite/HeldItem
+@onready var camera_emitter: PhantomCameraNoiseEmitter2D = %PlayerCameraNoiseEmitter
 
 @onready var label: Label = $Label
 
@@ -40,6 +41,10 @@ func _init() -> void:
 func _ready() -> void:
     fsm.init(self)
     PlayerHud.update_hp(hp, max_hp)
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("Test"):
+        shake_trauma()
 
 # func _unhandled_input(_event: InputEvent) -> void:
 #     var x_axis = Input.get_axis("Left", "Right")
@@ -152,3 +157,6 @@ func is_dead() -> bool:
 func revive() -> void:
     hp = max_hp
     fsm.change_state(fsm.idle)
+
+func shake_trauma() -> void:
+    camera_emitter.emit()
