@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cc0v1pfwl4f8x" path="res://general/projectiles/projectile_spawner.gd" id="5_15n47"]
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="5_nmi0q"]
 [ext_resource type="PackedScene" uid="uid://bg6xs5x3kjgj2" path="res://general/projectiles/fireball/fireball.tscn" id="6_xnggu"]
+[ext_resource type="PackedScene" uid="uid://brihgcxrpwgfg" path="res://general/hazards/beam/energy_beam.tscn" id="8_7k8ks"]
 
 [node name="D04" type="Node2D" unique_id=246040186]
 y_sort_enabled = true
@@ -27,6 +28,7 @@ location = 3
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("2_0tx52")]
 
 [node name="Props" type="Node2D" parent="." unique_id=1135707861]
+process_mode = 4
 y_sort_enabled = true
 
 [node name="Torch" parent="Props" unique_id=572682056 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
@@ -83,3 +85,9 @@ blend_mode = 2
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("5_nmi0q")]
 position = Vector2(256, 110)
+
+[node name="EnergyBeam" parent="." unique_id=1443270392 instance=ExtResource("8_7k8ks")]
+position = Vector2(0, 42)
+
+[node name="Timer" type="Timer" parent="EnergyBeam" unique_id=325130953]
+wait_time = 3.0
