@@ -3,6 +3,8 @@
 [ext_resource type="TileSet" uid="uid://di0sc2itjm1ll" path="res://levels/tiles/dungeon.tres" id="1_4egyd"]
 [ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="2_0tx52"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_g06t7"]
+[ext_resource type="PackedScene" uid="uid://clxgl1m5k7wwb" path="res://levels/props/torch/torch.tscn" id="4_holt6"]
+[ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="5_nmi0q"]
 
 [node name="D04" type="Node2D" unique_id=246040186]
 y_sort_enabled = true
@@ -21,3 +23,26 @@ center_offset = true
 location = 3
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("2_0tx52")]
+
+[node name="Props" type="Node2D" parent="." unique_id=1135707861]
+y_sort_enabled = true
+
+[node name="Torch" parent="Props" unique_id=572682056 instance=ExtResource("4_holt6")]
+position = Vector2(112, 16)
+
+[node name="Torch2" parent="Props" unique_id=1600483332 instance=ExtResource("4_holt6")]
+position = Vector2(400, 16)
+
+[node name="Torch3" parent="Props" unique_id=1448974136 instance=ExtResource("4_holt6")]
+position = Vector2(400, 176)
+
+[node name="Torch4" parent="Props" unique_id=1964967777 instance=ExtResource("4_holt6")]
+position = Vector2(112, 176)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=2111635396]
+color = Color(0.24840015, 0.24840018, 0.24840015, 1)
+energy = 0.8
+blend_mode = 2
+
+[node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("5_nmi0q")]
+position = Vector2(256, 110)

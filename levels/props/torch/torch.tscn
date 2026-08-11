@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://clxgl1m5k7wwb"]
+
+[ext_resource type="Script" uid="uid://c8sbknkm8k58w" path="res://levels/props/torch/torch.gd" id="1_mmbyi"]
+[ext_resource type="Texture2D" uid="uid://bh178j8j5ra6p" path="res://public/sprites/torch.png" id="1_xknyg"]
+[ext_resource type="Script" uid="uid://cdonsys5fesfa" path="res://levels/props/torch/torch_light_flicker.gd" id="2_uqobd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aabtn"]
+radius = 5.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_xknyg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_uqobd"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mmbyi"]
+_data = {
+&"RESET": SubResource("Animation_xknyg"),
+&"default": SubResource("Animation_uqobd")
+}
+
+[sub_resource type="Gradient" id="Gradient_xknyg"]
+offsets = PackedFloat32Array(0.09223301, 0.25, 0.58495146, 0.9029126, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.8, 0.73653334, 0.256, 1, 0.8856948, 0.48043287, 0.08546936, 1, 0.048729748, 0.027492573, 0.012801697, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_15n47"]
+gradient = SubResource("Gradient_xknyg")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="Torch" type="Node2D" unique_id=572682056]
+z_index = 1
+script = ExtResource("1_mmbyi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2188375]
+position = Vector2(0, -26)
+texture = ExtResource("1_xknyg")
+hframes = 5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=749853567]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1712043340]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_aabtn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1209485006]
+libraries/ = SubResource("AnimationLibrary_mmbyi")
+autoplay = &"default"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=514241736]
+position = Vector2(0, -24)
+texture = SubResource("GradientTexture2D_15n47")
+script = ExtResource("2_uqobd")
