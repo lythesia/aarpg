@@ -9,6 +9,11 @@ var fsm: EnemyStateMachine
 var enemy: Enemy
 var blackboard: Blackboard
 
+func setup(f: EnemyStateMachine, e: Enemy, b: Blackboard) -> void:
+    fsm = f
+    enemy = e
+    blackboard = b
+
 func enter() -> void: pass
 
 func re_enter() -> void: pass

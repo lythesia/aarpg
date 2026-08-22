@@ -16,9 +16,7 @@ func setup(e: Enemy, b: Blackboard) -> void:
 
     for c in get_children():
         if c is EnemyState:
-            c.fsm = self
-            c.enemy = e
-            c.blackboard = b
+            c.setup(self, e, b)
             states.append(c)
     # first state is the default one
     current_state.enter()

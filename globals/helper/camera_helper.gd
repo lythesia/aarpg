@@ -12,7 +12,7 @@ func _ready() -> void:
 func _get_base_tilemap_layer() -> TileMapLayer:
     var scene: Node = owner
     var c: Node = scene.find_child("Base*")
-    if c is TileMapLayer:
+    if c is TileMapLayer and (c as TileMapLayer).enabled:
         return c
     return null
 

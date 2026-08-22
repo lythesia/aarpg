@@ -13,8 +13,9 @@ func enter() -> void:
     blackboard.damage_source = null
     blackboard.can_decide = false
 
-    while await enemy.animation_player.animation_finished != enemy.get_animation(anim_name):
-        pass
+    # while await enemy.animation_player.animation_finished != enemy.get_animation(anim_name):
+    #     pass
+    await enemy.animation_player.animation_finished
 
     enemy.queue_free()
 

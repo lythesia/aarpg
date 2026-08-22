@@ -12,7 +12,7 @@ signal WasKilled
 
 @export var hp: float = 3.0
 
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+var collision_shape: CollisionShape2D
 
 var sprite: Sprite2D
 var animation_player: AnimationPlayer
@@ -35,6 +35,9 @@ func _ready() -> void:
 func setup() -> void:
     blackboard = Blackboard.new()
     blackboard.hp = hp
+
+    # grab `CharacterBody2D`'s collision shape
+    collision_shape = $CollisionShape2D
 
     for c in get_children():
         # do not override existing one
@@ -108,8 +111,12 @@ func update_animation(anim_state: String) -> void:
         return
 
     var anim: String = get_animation(anim_state)
+    # cardinal directed version
     if animation_player.has_animation(anim):
         animation_player.play(anim)
+    # fallback
+    elif animation_player.has_animation(anim_state):
+        animation_player.play(anim_state)
     else:
         printerr("Animation %s not found" % anim)
 
