@@ -4,7 +4,10 @@ extends CanvasLayer
 @onready var game_over_screen: Control = %GameOver
 @onready var cont_btn: Button = %ContBtn
 @onready var title_btn: Button = %TitleBtn
-@onready var animation_player = $Control/GameOver/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $Control/GameOver/AnimationPlayer
+@onready var boss_hud: Control = %BossHud
+@onready var boss_hp_bar: TextureProgressBar = %BossHpBar
+@onready var boss_label: Label = %BossLabel
 
 var hearts: Array[HeartGui] = []
 
@@ -20,6 +23,7 @@ func _ready() -> void:
     title_btn.pressed.connect(_on_title_pressed)
 
     hide_game_over()
+    hide_boss_hud()
 
 func update_hp(hp: int, max_hp: int):
     update_max_hp(max_hp)
@@ -68,3 +72,13 @@ func _on_title_pressed() -> void:
             "on_fade_out": PlayerManager.get_player().queue_free,
         }
     )
+
+func show_boss_hud(boss_name: String) -> void:
+    boss_label.text = boss_name
+    boss_hud.show()
+
+func hide_boss_hud() -> void:
+    boss_hud.hide()
+
+func update_boss_hp(hp: int, max_hp: int) -> void:
+    boss_hp_bar.value = clampf(float(hp) / float(max_hp) * 100, 0, 100)

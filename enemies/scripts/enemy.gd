@@ -10,7 +10,7 @@ signal WasHit(attack_area: AttackArea)
 signal WasKilled
 @warning_ignore_restore("unused_signal")
 
-@export var hp: float = 3.0
+@export var hp: int = 3
 
 var collision_shape: CollisionShape2D
 

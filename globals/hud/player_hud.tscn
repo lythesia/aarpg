@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b0wk5qdhkbss7" path="res://public/sprites/gui-health.png" id="1_38j0b"]
 [ext_resource type="Script" uid="uid://bjj5jy383ijaf" path="res://globals/hud/player_hud.gd" id="1_76ewb"]
 [ext_resource type="PackedScene" uid="uid://btfkrowalm2ow" path="res://globals/hud/heart_gui.tscn" id="2_baoq0"]
+[ext_resource type="Texture2D" uid="uid://csorpoex447dl" path="res://public/sprites/boss-hp.png" id="4_81p1n"]
 
 [sub_resource type="Animation" id="Animation_76ewb"]
 length = 0.001
@@ -65,6 +66,21 @@ _data = {
 &"RESET": SubResource("Animation_76ewb"),
 &"show_game_over": SubResource("Animation_81p1n")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aabtn"]
+atlas = ExtResource("4_81p1n")
+region = Rect2(9, 40, 14, 15)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j4n6q"]
+load_path = "res://.godot/imported/boss-hp.png-85a4e272f8c120eaca4fc4601630e7f5.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c886e"]
+atlas = SubResource("CompressedTexture2D_j4n6q")
+region = Rect2(40, 40, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00ovc"]
+atlas = ExtResource("4_81p1n")
+region = Rect2(0, 5, 64, 22)
 
 [node name="PlayerHud" type="CanvasLayer" unique_id=2041684490]
 script = ExtResource("1_76ewb")
@@ -208,3 +224,65 @@ text = "Back to Title"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/GameOver" unique_id=1703434175]
 libraries/ = SubResource("AnimationLibrary_j4n6q")
+
+[node name="BossHud" type="Control" parent="Control" unique_id=1061448884]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BossHpBar" type="TextureProgressBar" parent="Control/BossHud" unique_id=334082051]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.5
+offset_top = -7.0
+offset_right = 83.5
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 10.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_aabtn")
+texture_progress = SubResource("AtlasTexture_c886e")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/BossHud" unique_id=1362897357]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -12.0
+offset_right = 91.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_00ovc")
+region_rect = Rect2(0, 0, 64, 22)
+patch_margin_left = 22
+patch_margin_right = 25
+axis_stretch_horizontal = 1
+
+[node name="BossLabel" type="Label" parent="Control/BossHud" unique_id=921669362]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 15.0
+grow_horizontal = 2
+text = "Boss"
+horizontal_alignment = 1

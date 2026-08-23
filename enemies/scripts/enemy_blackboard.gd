@@ -1,6 +1,6 @@
 class_name Blackboard extends Resource
 
-var hp: float = 0.0
+var hp: int = 0
 var target: Player = null
 var distance_to_target: float = -1
 var can_decide: bool = true

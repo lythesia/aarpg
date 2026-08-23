@@ -1281,7 +1281,7 @@ z_index = 1
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_raocx")
-hp = 1.0
+hp = 10
 metadata/_custom_type_script = "uid://gjrlbmbvmuya"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=975843881]
