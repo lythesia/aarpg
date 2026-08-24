@@ -713,7 +713,7 @@ metadata/_custom_type_script = "uid://jqbhutkxlgs2"
 
 [node name="Slime" type="CharacterBody2D" unique_id=1748956911]
 z_index = 1
-collision_layer = 0
+collision_layer = 32
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
 script = ExtResource("1_rue0g")
@@ -798,6 +798,8 @@ metadata/_custom_type_script = "uid://besi5f8uymy2w"
 [node name="EsChase" type="Node" parent="EnemyStateMachine" unique_id=889808687 node_paths=PackedStringArray("step_timer")]
 unique_name_in_owner = true
 script = ExtResource("14_bslat")
+path_finder_detect_length = 10.0
+turn_rate = 0.8
 step_timer = NodePath("Timer")
 anim_name = "walk"
 metadata/_custom_type_script = "uid://byf6iechsrm3p"
@@ -827,7 +829,7 @@ metadata/_custom_type_script = "uid://btsrtx6c2nriu"
 position = Vector2(0, -9)
 monitorable = false
 script = ExtResource("20_scaum")
-search_dur = 0.8
+search_dur = 5.0
 metadata/_custom_type_script = "uid://c2fcfy0wheq88"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerSensor" unique_id=297124130]

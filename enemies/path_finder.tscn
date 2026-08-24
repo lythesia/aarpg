@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bmkg4awvdj7pe"]
+
+[ext_resource type="Script" uid="uid://bso1tftthc1jb" path="res://enemies/path_finder.gd" id="1_r84up"]
+
+[node name="PathFinder" type="Node2D" unique_id=479699603]
+script = ExtResource("1_r84up")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1241935043]
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="RayCast2D2" type="RayCast2D" parent="." unique_id=936860009]
+rotation = 0.7853982
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="RayCast2D3" type="RayCast2D" parent="." unique_id=1075727177]
+rotation = 1.5707964
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="RayCast2D4" type="RayCast2D" parent="." unique_id=702760087]
+rotation = 2.3561945
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="RayCast2D5" type="RayCast2D" parent="." unique_id=1783225532]
+rotation = 3.1415927
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="RayCast2D6" type="RayCast2D" parent="." unique_id=1518867378]
+rotation = 3.9269907
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="RayCast2D7" type="RayCast2D" parent="." unique_id=1572993067]
+rotation = 4.712389
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="RayCast2D8" type="RayCast2D" parent="." unique_id=634059438]
+rotation = 5.497787
+target_position = Vector2(0, -48)
+collision_mask = 33
+
+[node name="Timer" type="Timer" parent="." unique_id=1581278264]
+wait_time = 0.2
+autostart = true

@@ -7,19 +7,33 @@ extends EnemyState
 # var enemy: Enemy
 # var blackboard: Blackboard
 
+const PATH_FINDER: PackedScene = preload("uid://bmkg4awvdj7pe")
+
+@export var path_finder_detect_length: float = 5
+
 @export var speed: float = 40.0
 ## how much enemy can turn direction during chasing
 @export var turn_rate: float = 0.25
 
 @export var step_timer: Timer
 
+var path_finder: PathFinder
+
 func enter() -> void:
+    path_finder = PATH_FINDER.instantiate() as PathFinder
+    enemy.add_child(path_finder)
+    # update raycast length after enter_tree, else `rays` not collected yet
+    path_finder.set_raycast_len(path_finder_detect_length)
+
     enemy.update_animation(anim_name)
     if step_timer:
         # make sure one-shot, we (re)start it manually
         step_timer.one_shot = true
 
 func exit() -> void:
+    if path_finder:
+        path_finder.queue_free()
+
     if step_timer:
         step_timer.stop()
 
@@ -44,11 +58,8 @@ func physics_update(_delta: float) -> void:
     # update move physics anyway
     enemy.velocity = blackboard.dir * speed
 
-func _update_chase_direction(step_mode: bool = true) -> void:
-    var dir = enemy.global_position.direction_to(blackboard.target.global_position)
-    if !step_mode:
-        # when step mode, we might not want to lerp
-        dir = lerp(blackboard.dir, dir, turn_rate)
+func _update_chase_direction(_step_mode: bool = true) -> void:
+    var dir = lerp(blackboard.dir, path_finder.move_dir, turn_rate)
     blackboard.dir = dir
     if enemy.update_direction(dir):
         enemy.update_animation(anim_name)
