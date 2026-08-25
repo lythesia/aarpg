@@ -39,3 +39,6 @@ func player_interact() -> void:
 
 func player_in_scene(scene: Node) -> bool:
     return scene.get_node_or_null("Player") == player
+
+func gain_xp(xp: int) -> void:
+    player.xp += xp

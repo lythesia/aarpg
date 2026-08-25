@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://devo3gsikybh2"]
+
+[ext_resource type="Script" uid="uid://cf55enm61olv5" path="res://globals/hud/quest/quest_step_ui.gd" id="1_3enem"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="2_t61ks"]
+[ext_resource type="Texture2D" uid="uid://vui6df6f2bw8" path="res://public/sprites/checkbox.png" id="3_yd03u"]
+
+[node name="QuestStepUI" type="Control" unique_id=301531308]
+custom_minimum_size = Vector2(215, 22)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3enem")
+
+[node name="Label" type="Label" parent="." unique_id=327771321]
+modulate = Color(0.60784316, 0.6784314, 0.7176471, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_right = 60.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("2_t61ks")
+theme_override_font_sizes/font_size = 16
+text = "step"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1034328727]
+position = Vector2(8, 8)
+texture = ExtResource("3_yd03u")
+hframes = 2

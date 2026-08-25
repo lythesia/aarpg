@@ -42,9 +42,10 @@ func _ready() -> void:
     fsm.init(self)
     PlayerHud.update_hp(hp, max_hp)
 
-func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("Test"):
-        shake_trauma()
+func _unhandled_input(_event: InputEvent) -> void:
+    # if event.is_action_pressed("Test"):
+    #     shake_trauma()
+    pass
 
 # func _unhandled_input(_event: InputEvent) -> void:
 #     var x_axis = Input.get_axis("Left", "Right")
@@ -117,6 +118,9 @@ func _debug_label(_delta: float):
     # label.text = get_tree().current_scene.name
     pass
 
+# player stats
+var xp: int = 0
+
 #region save/load
 func save_to_dict(s: SaveKitSerializer) -> Dictionary:
     return {
@@ -124,6 +128,7 @@ func save_to_dict(s: SaveKitSerializer) -> Dictionary:
         "pos": s.encode_var(global_position),
         "hp": hp,
         "max_hp": max_hp,
+        "xp": xp,
     }
 
 func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
@@ -135,6 +140,7 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
         "pos": decoded if decoded is Vector2 else Vector2.ZERO,
         "hp": data.get("hp", DEFAULT_HP),
         "max_hp": data.get("max_hp", DEFAULT_HP),
+        "xp": data.get("xp", 0),
     }
 #endregion
 
@@ -142,6 +148,7 @@ func setup_player_on_load() -> void:
     PlayerManager.set_player_global_position(player_to_load["pos"])
     hp = player_to_load["hp"]
     max_hp = player_to_load["max_hp"]
+    xp = player_to_load["xp"]
 
 func lift_item(throwable: Throwable) -> void:
     # shift throwable_object from parent to player's held item

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ce8ncvdi14vnj"]
+
+[ext_resource type="Script" uid="uid://dtrgt48ep30au" path="res://globals/quest/quest_manager.gd" id="1_jpvrb"]
+
+[node name="QuestManager" type="Node" unique_id=460616283 groups=["saveable"]]
+script = ExtResource("1_jpvrb")

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://csykq2urwsyl0"]
+
+[ext_resource type="Script" uid="uid://bbduqqh4r3d5m" path="res://globals/hud/quest/quest_item_ui.gd" id="1_4yiqd"]
+[ext_resource type="FontFile" uid="uid://imp7wpiw3o0n" path="res://npc/assets/fonts/Abaddon Bold.ttf" id="2_fff5x"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="3_8ye4r"]
+
+[node name="QuestItemBtn" type="Button" unique_id=2013677631]
+custom_minimum_size = Vector2(200, 45)
+script = ExtResource("1_4yiqd")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=2099579981]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 208.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("2_fff5x")
+theme_override_font_sizes/font_size = 16
+text = "Quest Title"
+clip_text = true
+
+[node name="StepLabel" type="Label" parent="." unique_id=1227388532]
+modulate = Color(0.60784316, 0.60784316, 0.60784316, 1)
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 26.0
+offset_right = 208.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("3_8ye4r")
+theme_override_font_sizes/font_size = 14
+text = "Steps 1/4
+"
+clip_text = true

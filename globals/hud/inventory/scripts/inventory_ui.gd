@@ -5,8 +5,6 @@ const INVENTORY_SLOT = preload("uid://d28ga647y5dsu")
 
 @export var inventory_data: InventoryData
 
-@onready var item_desc_label: Label = $"../../ItemDesc"
-
 var last_focused_slot: int = 0
 
 func _ready() -> void:
@@ -40,7 +38,7 @@ func calibrate_inventory_data() -> void:
     inventory_data.ensure_capacity()
 
 func update_item_desc(item_data: ItemData = null) -> void:
-    item_desc_label.text = item_data.description if item_data else ""
+    PauseMenu.item_desc_label.text = item_data.description if item_data else ""
 
 func update_coin_label() -> void:
     var n: int = inventory_data.currencies.get("Coin", 0)
@@ -52,9 +50,20 @@ func _on_paused() -> void:
     update_slot_focus()
     update_coin_label()
 
+    # connect during paused
+    visibility_changed.connect(_on_visibility_changed)
+
 func _on_unpaused() -> void:
     clear_inventory()
     calibrate_inventory_data()
+
+    # disconnect when unpaused
+    visibility_changed.disconnect(_on_visibility_changed)
+
+# connect only after inventory updated during paused
+func _on_visibility_changed() -> void:
+    if visible:
+        update_slot_focus()
 
 func _on_inventory_changed() -> void:
     # if not paused, we don't do any UI updates
