@@ -32,8 +32,8 @@ SceneHelper="*uid://v65ndi5v5x6i"
 PauseMenu="*uid://dsrgw2p8wkxn2"
 SaveHelper="*uid://cx3gabbm3exgy"
 WorldState="*uid://cdex48mru2pvm"
-DialogueManager="*uid://c3rodes2l3gxb"
 QuestManager="*uid://dtrgt48ep30au"
+DialogueManager="*uid://c3rodes2l3gxb"
 
 [dialogue_manager]
 

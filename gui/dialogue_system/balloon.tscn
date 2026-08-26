@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dsmbnv23hdsvr"]
 
 [ext_resource type="Script" uid="uid://sh3aqv8wip7t" path="res://gui/dialogue_system/balloon.gd" id="1_36de5"]
-[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/nodes/dialogue_label/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="FontFile" uid="uid://dj0lbpkk8i7ug" path="res://npc/assets/fonts/Abaddon Light.ttf" id="2_ar77p"]
 [ext_resource type="Script" uid="uid://b1sp8wkjg3chu" path="res://gui/dialogue_system/portrait.gd" id="3_4wiuc"]
-[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="3_72ixx"]
 [ext_resource type="Texture2D" uid="uid://b1044fx7kpa3i" path="res://npc/assets/sprites/text-bubble.png" id="3_qsco4"]
 [ext_resource type="FontFile" uid="uid://imp7wpiw3o0n" path="res://npc/assets/fonts/Abaddon Bold.ttf" id="3_ucnx7"]
 [ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="5_4wiuc"]
@@ -72,7 +72,7 @@ corner_radius_bottom_left = 5
 default_font = ExtResource("5_4wiuc")
 default_font_size = 12
 Button/colors/font_color = Color(0, 0, 0, 1)
-Button/colors/font_disabled_color = Color(0.19090384, 0.17078084, 0.17078084, 1)
+Button/colors/font_disabled_color = Color(0.36862746, 0.34901962, 0.34901962, 0.75686276)
 Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
 Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
 Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
@@ -234,7 +234,7 @@ autoplay = &"progress"
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" unique_id=966297223 node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
-custom_maximum_size = Vector2(360, -1)
+custom_maximum_size = Vector2(180, -1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
