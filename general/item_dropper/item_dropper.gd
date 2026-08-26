@@ -29,7 +29,7 @@ func drop_item() -> void:
     drop.item_data = item
     drop.pickup_audio = pickup_audio
     drop.texture_type = ItemPickup.TextureType.ITEM_DATA
-    add_child(drop)
+    add_child.call_deferred(drop)
     if drop_audio:
         Audio.play_spatial_sound(drop_audio, global_position)
     if persistent_key:

@@ -13,7 +13,7 @@ else
 Nero: Hey Hero, I lost my magical flute, would you kindly retrieve it for me?
 Nero: I guess it's in the [b]Dark Dungeon[/b]!
 - Ok (Accept quest)
-	$> QuestManager.accept_or_advance_quest(locals.quest_title)
+	$> QuestManager.accept_quest(locals.quest_title)
 	Nero: That's really kind of you!
 - Not now, sorry
 	Nero: Ok, I'll try my luck other ways.
@@ -24,8 +24,8 @@ $> locals.flute = inventory.get_slot_by_name("Magical Flute")
 #$> debug(locals.flute)
 Nero: Have you found my flute?
 - Yes, take this (hand over flute) [if locals.flute /]
-	$> inventory.use_item(locals.lost_flute.item_data)
-	$> QuestManager.accept_or_advance_quest(locals.quest_title)
+	$> inventory.consume_item(locals.flute.item_data)
+	$> QuestManager.complete_quest(locals.quest_title)
 	Nero: Oh, you're the savior, thanks!
 - Not yet
 	Nero: Nevermind, keep it up!

@@ -1,5 +1,7 @@
 class_name InventoryData extends SaveKitResource
 
+signal GainItem(item_data: ItemData, quantity: int)
+
 ## inventory size
 @export var capacity: int = 18
 
@@ -23,11 +25,15 @@ func ensure_capacity() -> void:
     slots.resize(capacity)
 
 func add_item(item_data: ItemData, quantity: int = 1) -> bool:
+    var ok: bool = false
     match item_data.item_type:
         ItemData.ItemType.CURRENCY:
-            return _add_currency(item_data, quantity)
+            ok = _add_currency(item_data, quantity)
         _:
-            return _add_consumable(item_data, quantity)
+            ok = _add_consumable(item_data, quantity)
+    if ok:
+        GainItem.emit(item_data, quantity)
+    return ok
 
 func _add_consumable(item_data: ItemData, quantity: int = 1) -> bool:
     # 1. try to stack
@@ -72,7 +78,7 @@ func _on_slot_changed() -> void:
             slots[i] = null
             emit_changed()
 
-func use_item(item: ItemData, count: int = 1) -> bool:
+func consume_item(item: ItemData, count: int = 1) -> bool:
     for slot in slots:
         if slot and slot.item_data == item and slot.quantity >= count:
             slot.quantity -= count

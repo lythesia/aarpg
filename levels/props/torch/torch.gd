@@ -18,8 +18,13 @@ func _ready() -> void:
     # try get spawner nodes if in child but not assigned yet
     if !fireball_spawner:
         for c in find_children("*", "ProjectileSpawner"):
-            fireball_spawner = c
-            break
+            # skip if disabled
+            if c.process_mode == Node.PROCESS_MODE_DISABLED:
+                break
+            # found & attach
+            else:
+                fireball_spawner = c
+                break
 
     started = false
     player = null

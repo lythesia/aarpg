@@ -29,7 +29,7 @@ func _on_area_exited(area: Area2D) -> void:
 func _on_player_interacted() -> void:
     if is_open or !key: return
 
-    if PlayerManager.INVENTORY_DATA.use_item(key):
+    if PlayerManager.INVENTORY_DATA.consume_item(key):
         animation_player.play("opened")
         if unlock_audio:
             Audio.play_spatial_sound(unlock_audio, global_position)

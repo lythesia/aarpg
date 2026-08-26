@@ -44,3 +44,5 @@ func decide() -> EnemyState:
 func _on_hit(attack_area: AttackArea) -> void:
     if attack_area.damage_amount > 0:
         enemy.animation_player.play("stun")
+        enemy.animation_player.seek(0) # restart animation anyway
+        enemy.damage_area.make_invulnerable(0.8) # actually "stun" animation is 1.0s

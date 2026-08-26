@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://brihgcxrpwgfg" path="res://general/hazards/beam/energy_beam.tscn" id="8_7k8ks"]
 [ext_resource type="Script" uid="uid://cgpn84kf85jwp" path="res://levels/D01/d04_boss.gd" id="8_j23ik"]
 [ext_resource type="PackedScene" uid="uid://xdqhqri5lxc6" path="res://enemies/10_dark_wizard/dark_wizard.tscn" id="9_gm4rn"]
+[ext_resource type="PackedScene" uid="uid://bmo7u8vjtsecx" path="res://general/item_dropper/item_dropper.tscn" id="10_wmgv5"]
+[ext_resource type="Resource" uid="uid://wu3xbcswmvpl" path="res://items/item_tres/magical_flute.tres" id="11_kbevr"]
+[ext_resource type="AudioStream" uid="uid://c5afxxds8gi1o" path="res://public/audio/dungeon_discovery.wav" id="12_0ykpa"]
+[ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="13_gklxq"]
 
 [sub_resource type="Gradient" id="Gradient_7k8ks"]
 offsets = PackedFloat32Array(0.5218447, 0.75970876, 1)
@@ -49,51 +53,50 @@ location = 3
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("2_0tx52")]
 
 [node name="Props" type="Node2D" parent="." unique_id=1135707861]
-process_mode = 4
 y_sort_enabled = true
 
-[node name="Torch" parent="Props" unique_id=572682056 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
+[node name="Torch" parent="Props" unique_id=572682056 instance=ExtResource("4_holt6")]
 position = Vector2(112, 16)
-fireball_spawner = NodePath("ProjectileSpawner")
 initial_delay = 0.0
 fire_interval = 4.0
 
 [node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch" unique_id=1611605222]
+process_mode = 4
 position = Vector2(0, -19)
 script = ExtResource("5_15n47")
 projectile = ExtResource("6_xnggu")
 metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
 
-[node name="Torch2" parent="Props" unique_id=1600483332 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
+[node name="Torch2" parent="Props" unique_id=1600483332 instance=ExtResource("4_holt6")]
 position = Vector2(400, 16)
-fireball_spawner = NodePath("ProjectileSpawner")
 fire_interval = 4.0
 
 [node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch2" unique_id=1497933465]
+process_mode = 4
 position = Vector2(0, -19)
 script = ExtResource("5_15n47")
 projectile = ExtResource("6_xnggu")
 metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
 
-[node name="Torch3" parent="Props" unique_id=1448974136 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
+[node name="Torch3" parent="Props" unique_id=1448974136 instance=ExtResource("4_holt6")]
 position = Vector2(400, 176)
-fireball_spawner = NodePath("ProjectileSpawner")
 initial_delay = 2.0
 fire_interval = 4.0
 
 [node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch3" unique_id=400553870]
+process_mode = 4
 position = Vector2(0, -23)
 script = ExtResource("5_15n47")
 projectile = ExtResource("6_xnggu")
 metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
 
-[node name="Torch4" parent="Props" unique_id=1964967777 node_paths=PackedStringArray("fireball_spawner") instance=ExtResource("4_holt6")]
+[node name="Torch4" parent="Props" unique_id=1964967777 instance=ExtResource("4_holt6")]
 position = Vector2(112, 176)
-fireball_spawner = NodePath("ProjectileSpawner")
 initial_delay = 3.0
 fire_interval = 4.0
 
 [node name="ProjectileSpawner" type="Marker2D" parent="Props/Torch4" unique_id=1045498536]
+process_mode = 4
 position = Vector2(0, -23)
 script = ExtResource("5_15n47")
 projectile = ExtResource("6_xnggu")
@@ -151,3 +154,12 @@ texture = SubResource("GradientTexture2D_aabtn")
 [node name="Right" type="Sprite2D" parent="Boss/TeleportPositions" unique_id=1894614783]
 position = Vector2(432, 94)
 texture = SubResource("GradientTexture2D_aabtn")
+
+[node name="ItemDropper" parent="." unique_id=640575955 instance=ExtResource("10_wmgv5")]
+position = Vector2(256, 94)
+item = ExtResource("11_kbevr")
+drop_audio = ExtResource("12_0ykpa")
+pickup_audio = ExtResource("13_gklxq")
+persistent_key = "d04/flute"
+
+[connection signal="WasKilled" from="Boss/DarkWizard" to="ItemDropper" method="drop_item"]

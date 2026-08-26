@@ -28,6 +28,8 @@ func gather_quests() -> void:
         quests.append(load("{0}/{1}".format([QUEST_DATA_DIR, v])) as Quest)
     print("loaded %d quests" % [quests.size()])
 
+## accept quest only
+## todo: do we want to check steps that already completed on accept?
 func accept_quest(title: String) -> void:
     var quest_data: Quest = find_quest_by_title(title)
     assert(quest_data != null, "Quest not found: %s" % [title])
@@ -41,11 +43,13 @@ func accept_quest(title: String) -> void:
             completed_steps = 0,
         }
         current_quests.append(quest)
+        PlayerHud.queue_notification("Quest Accepted", title)
         QuestUpdated.emit(quest)
     else:
         # quest already accepted
         return
 
+## accept or advance quest one step (allow complete)
 func accept_or_advance_quest(title: String) -> void:
     var quest_data: Quest = find_quest_by_title(title)
     assert(quest_data != null, "Quest not found: %s" % [title])
@@ -59,28 +63,60 @@ func accept_or_advance_quest(title: String) -> void:
             completed_steps = 0,
         }
         current_quests.append(quest)
+        PlayerHud.queue_notification("Quest Accepted", title)
     else:
         quest = current_quests[quest_idx]
         # skip if quest is already completed
         if quest.is_completed:
             return
         quest.completed_steps += 1
-
-    quest.is_completed = quest.completed_steps == quest_data.steps.size()
+        quest.is_completed = quest.completed_steps == quest_data.steps.size()
+        if quest.is_completed:
+            PlayerHud.queue_notification("Quest Completed", title)
+        else:
+            var step: String = quest_data.steps[quest.completed_steps - 1]
+            PlayerHud.queue_notification("Quest Updated", "%s: %s" % [title, step])
 
     QuestUpdated.emit(quest)
 
     if quest.is_completed:
         reward_quest(quest_data)
 
+## complete quest directly
+func complete_quest(title: String) -> void:
+    var quest_data: Quest = find_quest_by_title(title)
+    assert(quest_data != null, "Quest not found: %s" % [title])
+    var quest_idx: int = get_current_quest_id_by_title(title)
+    if quest_idx == -1:
+        return
+
+    var quest: Dictionary = current_quests[quest_idx]
+    if quest.is_completed:
+        return
+
+    quest.is_completed = true
+    quest.completed_steps = quest_data.steps.size()
+    PlayerHud.queue_notification("Quest Completed", title)
+
+    QuestUpdated.emit(quest)
+
+    reward_quest(quest_data)
+
+
 func reward_quest(quest: Quest) -> void:
-    var items: String = " ".join(
-        quest.reward_items.map(func(v: QuestRewardItem) -> String: return "%s x %d" % [v.item.name, v.quantity])
-    )
-    print("\"%s\" reward: %d xp + [%s]" % [quest.title, quest.reward_xp, items])
-    PlayerManager.gain_xp(quest.reward_xp)
+    var title: String = "Reward"
+    var message: Array[String] = []
+
+    if quest.reward_xp > 0:
+        PlayerManager.gain_xp(quest.reward_xp)
+        message.append("%d xp" % quest.reward_xp)
+
     for v in quest.reward_items:
         PlayerManager.INVENTORY_DATA.add_item(v.item, v.quantity)
+        message.append("%s x%d" % [v.item.name, v.quantity])
+
+    if !message.is_empty():
+        PlayerHud.queue_notification(title, "\n".join(message))
 
 # searching
 func quest_accepetd(title: String) -> bool:

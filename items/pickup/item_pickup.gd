@@ -1,6 +1,8 @@
 @tool
 class_name ItemPickup extends CharacterBody2D
 
+signal PickedUp(item_data: ItemData)
+
 enum TextureType {
     ## use item data's static atlas texture
     ITEM_DATA,
@@ -33,6 +35,7 @@ func _on_body_entered(body: Node2D) -> void:
     if body is Player and item_data:
         if PlayerManager.INVENTORY_DATA.add_item(item_data):
             item_picked_up(body)
+            PickedUp.emit(item_data)
 
 func _set_item_data(value: ItemData) -> void:
     item_data = value

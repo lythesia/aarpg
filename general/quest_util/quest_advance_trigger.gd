@@ -10,12 +10,12 @@ func accept_quest() -> void:
     if !quest:
         return
 
-    await get_tree().process_frame
+    # await get_tree().process_frame
     QuestManager.accept_quest(quest.title)
 
 func advance_request() -> void:
     if !quest:
         return
 
-    await get_tree().process_frame
+    # await get_tree().process_frame
     QuestManager.accept_or_advance_quest(quest.title)

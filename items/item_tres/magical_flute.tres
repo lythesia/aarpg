@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://wu3xbcswmvpl"]
+
+[ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_b6ig1"]
+[ext_resource type="Script" uid="uid://cpirecojyj4v2" path="res://items/scripts/item_data.gd" id="2_1u84b"]
+[ext_resource type="Texture2D" uid="uid://bf2v7v62rqonb" path="res://public/sprites/flute.png" id="2_oc0qd"]
+
+[resource]
+script = ExtResource("2_1u84b")
+name = "Magical Flute"
+item_type = 2
+description = "A magical flute"
+icon = ExtResource("2_oc0qd")
+metadata/_custom_type_script = "uid://cpirecojyj4v2"

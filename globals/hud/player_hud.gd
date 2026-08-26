@@ -1,13 +1,16 @@
 extends CanvasLayer
 
 @onready var hearts_container: HFlowContainer = %HeartsContainer
+
 @onready var game_over_screen: Control = %GameOver
 @onready var cont_btn: Button = %ContBtn
 @onready var title_btn: Button = %TitleBtn
 @onready var animation_player: AnimationPlayer = $Control/GameOver/AnimationPlayer
+
 @onready var boss_hud: Control = %BossHud
 @onready var boss_hp_bar: TextureProgressBar = %BossHpBar
 @onready var boss_label: Label = %BossLabel
+@onready var notification_ui: NotificationUI = %Notification
 
 var hearts: Array[HeartGui] = []
 
@@ -82,3 +85,6 @@ func hide_boss_hud() -> void:
 
 func update_boss_hp(hp: int, max_hp: int) -> void:
     boss_hp_bar.value = clampf(float(hp) / float(max_hp) * 100, 0, 100)
+
+func queue_notification(title: String, message: String) -> void:
+    notification_ui.push_notification(title, message)

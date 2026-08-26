@@ -1,10 +1,15 @@
 @icon("res://public/icons/loot_drop.svg")
 class_name LootDropper extends Marker2D
 
+@export var owner_enemy: Enemy
 @export var items: Array[LootData]
 
 func _ready() -> void:
-    if owner is Enemy:
+    # if `owner_enemy` specified
+    if owner_enemy:
+        owner_enemy.WasKilled.connect(self._drop_loot)
+    # else fallback to `owner`
+    elif owner is Enemy:
         owner.WasKilled.connect(self._drop_loot)
 
 func _drop_loot() -> void:
