@@ -63,7 +63,6 @@ func new_game_scene(scene: String = DEFAULT_SCENE):
     await SceneManager.change_scene(scene, {
         "on_fade_out": _load_on_fade_out
     })
-    Messages.ChangeSceneFinished.emit()
 
 
 ## this is called after save file loaded

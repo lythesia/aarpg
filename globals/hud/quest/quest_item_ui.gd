@@ -17,5 +17,4 @@ func initialize(data: Quest, state: Dictionary) -> void:
         step_label.modulate = Color.LIGHT_GREEN
     else:
         var step_count: int = data.steps.size()
-        var completed_count: int = state.completed_steps.size()
-        step_label.text = "steps: %d/%d" % [completed_count, step_count]
+        step_label.text = "steps: %d/%d" % [state.completed_steps, step_count]

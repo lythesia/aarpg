@@ -76,7 +76,10 @@ func _on_player_interacted() -> void:
     can_behave = false
     DialogueManager.dialogue_ended.connect(_on_dialogue_finished)
     DialogueManager.show_dialogue_balloon(npc_dialog, "start", [
-        {"player": PlayerManager.get_player(), "inventory": PlayerManager.INVENTORY_DATA}
+        {
+            player = PlayerManager.get_player(),
+            inventory = PlayerManager.INVENTORY_DATA,
+        }
     ])
 
 func _on_dialogue_finished(_res) -> void:

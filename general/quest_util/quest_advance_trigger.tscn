@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cnvd44wdvw6ts"]
+
+[ext_resource type="Script" uid="uid://7glx3w8yur5g" path="res://general/quest_util/quest_advance_trigger.gd" id="1_067rf"]
+
+[node name="QuestAdvanceTrigger" type="Node" unique_id=945409226]
+script = ExtResource("1_067rf")
+metadata/_custom_type_script = "uid://bancxuogm1jfs"

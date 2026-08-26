@@ -51,6 +51,7 @@ func update_slot_focus() -> void:
     var quest_item: QuestItemUI = container.get_child(last_focused_slot)
     quest_item.grab_focus()
 
+# `state` always not null
 func update_quest_details(focused_idx: int, quest_data: Quest, state: Dictionary) -> void:
     clear_quest_details()
 
@@ -61,12 +62,8 @@ func update_quest_details(focused_idx: int, quest_data: Quest, state: Dictionary
         var quest_step_ui: QuestStepUI = QUEST_STEP.instantiate()
         details_container.add_child(quest_step_ui)
         # todo: not graceful ...
-        if state.title == "not found" or \
-            (state.completed_steps as Array[String]).size() <= i or \
-            state.completed_steps[i].is_empty():
-            quest_step_ui.initialize(quest_data.steps[i], false)
-        else:
-            quest_step_ui.initialize(state.completed_steps[i], true)
+        var is_completed: bool = state.title != "not found" and state.completed_steps >= i + 1
+        quest_step_ui.initialize(quest_data.steps[i], is_completed)
 
     last_focused_slot = focused_idx
 

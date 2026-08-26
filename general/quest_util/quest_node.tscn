@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://jecoh5wac42o"]
+
+[ext_resource type="Script" uid="uid://bancxuogm1jfs" path="res://general/quest_util/quest_node.gd" id="1_m5bfh"]
+
+[node name="QuestNode" type="Node" unique_id=1867748074]
+script = ExtResource("1_m5bfh")

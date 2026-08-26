@@ -42,3 +42,6 @@ func player_in_scene(scene: Node) -> bool:
 
 func gain_xp(xp: int) -> void:
     player.xp += xp
+
+func pp(v: Variant) -> void:
+    print(v)

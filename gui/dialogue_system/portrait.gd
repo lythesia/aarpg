@@ -18,7 +18,7 @@ func set_portrait(char_name: String, emo: Emotion):
 
 func _get_portrait_path(char_name: String, emo: Emotion) -> AtlasTexture:
     var path: String = "res://gui/dialogue_system/portrait_res/%s.tres" % char_name
-    assert(ResourceLoader.exists(path))
+    assert(ResourceLoader.exists(path), "portrait resource not found: %s" % path)
     var at: AtlasTexture = load(path)
     at.region.position.x = WIDTH * int(emo)
     return at
