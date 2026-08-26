@@ -28,6 +28,24 @@ func gather_quests() -> void:
         quests.append(load("{0}/{1}".format([QUEST_DATA_DIR, v])) as Quest)
     print("loaded %d quests" % [quests.size()])
 
+func accept_quest(title: String) -> void:
+    var quest_data: Quest = find_quest_by_title(title)
+    assert(quest_data != null, "Quest not found: %s" % [title])
+    var quest_idx: int = get_current_quest_id_by_title(title)
+    var quest: Dictionary
+
+    if quest_idx == -1:
+        quest = {
+            title = title,
+            is_completed = false,
+            completed_steps = 0,
+        }
+        current_quests.append(quest)
+        QuestUpdated.emit(quest)
+    else:
+        # quest already accepted
+        return
+
 func accept_or_advance_quest(title: String) -> void:
     var quest_data: Quest = find_quest_by_title(title)
     assert(quest_data != null, "Quest not found: %s" % [title])
@@ -43,6 +61,9 @@ func accept_or_advance_quest(title: String) -> void:
         current_quests.append(quest)
     else:
         quest = current_quests[quest_idx]
+        # skip if quest is already completed
+        if quest.is_completed:
+            return
         quest.completed_steps += 1
 
     quest.is_completed = quest.completed_steps == quest_data.steps.size()
@@ -53,6 +74,10 @@ func accept_or_advance_quest(title: String) -> void:
         reward_quest(quest_data)
 
 func reward_quest(quest: Quest) -> void:
+    var items: String = " ".join(
+        quest.reward_items.map(func(v: QuestRewardItem) -> String: return "%s x %d" % [v.item.name, v.quantity])
+    )
+    print("\"%s\" reward: %d xp + [%s]" % [quest.title, quest.reward_xp, items])
     PlayerManager.gain_xp(quest.reward_xp)
     for v in quest.reward_items:
         PlayerManager.INVENTORY_DATA.add_item(v.item, v.quantity)

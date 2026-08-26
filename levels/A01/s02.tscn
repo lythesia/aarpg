@@ -15,6 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://xk7lyoj3u2mm" path="res://npc/base/npc_behavior_patrol.tscn" id="12_rc8lg"]
 [ext_resource type="Resource" uid="uid://c56pkj0tlomb7" path="res://dialogue/npc2.dialogue" id="13_om7qf"]
 [ext_resource type="PackedScene" uid="uid://wkf8xv4y4ito" path="res://npc/base/patrol_location.tscn" id="13_rc8lg"]
+[ext_resource type="PackedScene" uid="uid://bs8c1h8cjuvny" path="res://items/interactable/pressure_plate/pressue_plate.tscn" id="16_tttph"]
+[ext_resource type="Script" uid="uid://7glx3w8yur5g" path="res://general/quest_util/quest_advance_trigger.gd" id="17_q5jxl"]
+[ext_resource type="Resource" uid="uid://hkk15b8bcbja" path="res://quests/short_quest.tres" id="18_7mk61"]
+[ext_resource type="Script" uid="uid://dwoqtvtud0256" path="res://general/quest_util/quest_activated_switch.gd" id="19_q5jxl"]
+[ext_resource type="PackedScene" uid="uid://b68d5x5hqub6s" path="res://levels/props/pot/pot.tscn" id="20_7mk61"]
 
 [node name="S02" type="Node2D" unique_id=1622965855]
 y_sort_enabled = true
@@ -91,3 +96,57 @@ position = Vector2(25, 139)
 [node name="PatrolLocation5" parent="Npc2/NpcBehaviorPatrol" unique_id=1236869289 instance=ExtResource("13_rc8lg")]
 modulate = Color(1, 0.7529412, 0.79607844, 1)
 position = Vector2(-63, 78)
+
+[node name="PressuePlate" parent="." unique_id=1364580908 instance=ExtResource("16_tttph")]
+position = Vector2(386, 55)
+
+[node name="QuestAdvanceTrigger" type="Node" parent="PressuePlate" unique_id=1331256967]
+script = ExtResource("17_q5jxl")
+quest = ExtResource("18_7mk61")
+summary = "UPDATE QUEST:
+- Quest: Short Quest
+- Step: 0 N/A
+- Complete: false"
+metadata/_custom_type_script = "uid://7glx3w8yur5g"
+
+[node name="PressuePlate2" parent="." unique_id=131388501 instance=ExtResource("16_tttph")]
+position = Vector2(437, 55)
+
+[node name="QuestActivatedTrigger" type="Node" parent="PressuePlate2" unique_id=552638925]
+script = ExtResource("19_q5jxl")
+react_to_quest_updated = true
+quest = ExtResource("18_7mk61")
+summary = "UPDATE QUEST:
+- Quest: Short Quest
+- Check Type: Check if player has quest
+"
+metadata/_custom_type_script = "uid://dwoqtvtud0256"
+
+[node name="QuestAdvanceTrigger" type="Node" parent="PressuePlate2" unique_id=19040077]
+script = ExtResource("17_q5jxl")
+quest = ExtResource("18_7mk61")
+step = 1
+summary = "UPDATE QUEST:
+- Quest: Short Quest
+- Step: 1 Step on another plate!
+- Complete: false"
+metadata/_custom_type_script = "uid://7glx3w8yur5g"
+
+[node name="Pot" parent="." unique_id=318786704 instance=ExtResource("20_7mk61")]
+position = Vector2(458, 107)
+
+[node name="QuestActivatedTrigger" type="Node" parent="Pot" unique_id=2039424623]
+script = ExtResource("19_q5jxl")
+check_type = 3
+react_to_quest_updated = true
+quest = ExtResource("18_7mk61")
+summary = "UPDATE QUEST:
+- Quest: Short Quest
+- Check Type: Check if player has completed quest
+"
+metadata/_custom_type_script = "uid://dwoqtvtud0256"
+
+[connection signal="Activated" from="PressuePlate" to="PressuePlate/QuestAdvanceTrigger" method="accept_quest"]
+[connection signal="Activated" from="PressuePlate2" to="PressuePlate2/QuestAdvanceTrigger" method="advance_request"]
+[connection signal="ActivateChanged" from="PressuePlate2/QuestActivatedTrigger" to="PressuePlate2" method="set_visible"]
+[connection signal="ActivateChanged" from="Pot/QuestActivatedTrigger" to="Pot" method="set_visible"]

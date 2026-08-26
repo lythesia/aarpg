@@ -7,6 +7,6 @@
 script = ExtResource("2_1g2d6")
 title = "Short Quest"
 description = "One short quest, super easy!"
-steps = Array[String](["Complete it!"])
+steps = Array[String](["Step on another plate!"])
 reward_xp = 10
 metadata/_custom_type_script = "uid://d4hoyots5q462"

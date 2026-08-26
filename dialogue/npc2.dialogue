@@ -21,6 +21,7 @@ Nero: I guess it's in the [b]Dark Dungeon[/b]!
 
 ~ submit_quest
 $> locals.flute = inventory.get_slot_by_name("Magical Flute")
+#$> debug(locals.flute)
 Nero: Have you found my flute?
 - Yes, take this (hand over flute) [if locals.flute /]
 	$> inventory.use_item(locals.lost_flute.item_data)

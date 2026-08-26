@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cc6niyfr3dip1"]
+
+[ext_resource type="Script" uid="uid://dwoqtvtud0256" path="res://general/quest_util/quest_activated_switch.gd" id="1_0pvjf"]
+
+[node name="QuestActivatedTrigger" type="Node" unique_id=1862397493]
+script = ExtResource("1_0pvjf")
+metadata/_custom_type_script = "uid://bancxuogm1jfs"

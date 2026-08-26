@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cxhkslho7louh" path="res://npc/base/npc.gd" id="1_t6q8s"]
 [ext_resource type="Texture2D" uid="uid://if6ux1ln6ohy" path="res://npc/assets/sprites/npc_sprite.png" id="2_gc41l"]
 [ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="3_i0kkw"]
+[ext_resource type="Texture2D" uid="uid://d4h35hbhydwrk" path="res://npc/assets/sprites/dialog_interactable.png" id="4_ay7i2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ts7x6"]
 radius = 6.0
@@ -181,3 +182,8 @@ monitorable = false
 position = Vector2(2.4041265e-07, -15.5)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_aabtn")
+
+[node name="InteractHint" type="Sprite2D" parent="." unique_id=778463535]
+position = Vector2(2, -50)
+texture = ExtResource("4_ay7i2")
+hframes = 2

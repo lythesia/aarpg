@@ -10,6 +10,7 @@ class_name QuestNode extends Node
 
 func set_quest(value: Quest) -> void:
     quest = value
+    update_configuration_warnings()
     update_summary()
 
 func set_step(value: int) -> void:
@@ -33,7 +34,17 @@ func _get_step() -> String:
         return "N/A"
 
 func update_summary() -> void:
+    if !quest:
+        summary = "Quest is not set"
+        return
+
     summary = r"UPDATE QUEST:
 - Quest: %s
 - Step: %d %s
 - Complete: %s" % [quest.title, step, _get_step(), is_completed]
+
+func _get_configuration_warnings() -> PackedStringArray:
+    if !quest:
+        return PackedStringArray(["Quest is not set"])
+
+    return []

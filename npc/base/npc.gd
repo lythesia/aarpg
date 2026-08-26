@@ -10,6 +10,7 @@ signal DoBehave
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var interact_area: Area2D = $InteractArea
+@onready var interact_hint: Sprite2D = $InteractHint
 
 var state: String = "idle"
 var dir: Vector2 = Vector2.ZERO
@@ -23,6 +24,7 @@ func _ready() -> void:
 
     interact_area.area_entered.connect(_on_area_entered)
     interact_area.area_exited.connect(_on_area_exited)
+    interact_hint.modulate.a = 0.0
 
     DoBehave.emit()
 
@@ -62,11 +64,21 @@ func _set_npc_res(value: NPCResource) -> void:
     npc_res = value
     setup_npc()
 
+var tween: Tween
+
 func _on_area_entered(_area: Area2D) -> void:
     PlayerManager.PlayerInteracted.connect(_on_player_interacted)
+    if tween:
+        tween.kill()
+    tween = create_tween()
+    tween.tween_property(interact_hint, "modulate:a", 1.0, 0.5)
 
 func _on_area_exited(_area: Area2D) -> void:
     PlayerManager.PlayerInteracted.disconnect(_on_player_interacted)
+    if tween:
+        tween.kill()
+    tween = create_tween()
+    tween.tween_property(interact_hint, "modulate:a", 0.0, 0.5)
 
 func _on_player_interacted() -> void:
     update_direction(PlayerManager.get_player().global_position)
