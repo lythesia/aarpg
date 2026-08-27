@@ -86,7 +86,7 @@ region = Rect2(40, 40, 15, 15)
 atlas = ExtResource("4_81p1n")
 region = Rect2(0, 5, 64, 22)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lsqg7"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_whiia"]
 content_margin_left = 12.0
 content_margin_top = 6.0
 content_margin_right = 12.0
@@ -104,19 +104,19 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-90, 5)]
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -128,63 +128,27 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PanelContainer:visible")
+tracks/2/path = NodePath(".:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_00ovc"]
 resource_name = "popup"
-length = 3.0000000000000004
+length = 2.0
 step = 0.1
-tracks/0/type = "value"
+tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/path = NodePath("../../AudioStreamPlayer2D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 2.7, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-90, 0), Vector2(-90, 5), Vector2(-90, 5), Vector2(-90, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 2.7, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PanelContainer:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "audio"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../AudioStreamPlayer2D")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -192,7 +156,43 @@ tracks/3/keys = {
 }],
 "times": PackedFloat32Array(0)
 }
-tracks/3/use_blend = true
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 5.0, 5.0, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_whiia"]
 _data = {
@@ -409,6 +409,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -40.0
@@ -417,38 +418,41 @@ grow_horizontal = 0
 mouse_filter = 2
 script = ExtResource("5_whiia")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/Notification" unique_id=1894462105]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Notification" unique_id=224640878]
 custom_minimum_size = Vector2(100, 0)
 custom_maximum_size = Vector2(150, -1)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -130.0
-offset_top = 5.0
-offset_right = -30.0
+offset_left = -150.0
 offset_bottom = 69.0
 grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_lsqg7")
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/PanelContainer" unique_id=1161108562]
+[node name="PanelContainer" type="PanelContainer" parent="Control/Notification/MarginContainer" unique_id=1535588999]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxTexture_whiia")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/MarginContainer/PanelContainer" unique_id=1699027404]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer" unique_id=978259925]
-modulate = Color(1, 0.85882354, 0.6784314, 1)
+[node name="TitleLabel" type="Label" parent="Control/Notification/MarginContainer/PanelContainer/VBoxContainer" unique_id=665680869]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85882354, 0.6784314, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_00ovc")
 text = "\"Short Quest\" Reward"
-autowrap_mode = 2
+autowrap_mode = 3
 
-[node name="MessageLabel" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer" unique_id=1122623913]
+[node name="MessageLabel" type="Label" parent="Control/Notification/MarginContainer/PanelContainer/VBoxContainer" unique_id=388652111]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_00ovc")
-text = "10 xp
-Apple x1"
-autowrap_mode = 2
+text = "Messages: wawawa wuwa ha"
+autowrap_mode = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Notification" unique_id=1277237948]
 libraries/ = SubResource("AnimationLibrary_whiia")

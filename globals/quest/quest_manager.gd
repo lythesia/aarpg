@@ -104,7 +104,7 @@ func complete_quest(title: String) -> void:
 
 
 func reward_quest(quest: Quest) -> void:
-    var title: String = "Reward"
+    var title: String = r'"%s" Reward' % [quest.title]
     var message: Array[String] = []
 
     if quest.reward_xp > 0:

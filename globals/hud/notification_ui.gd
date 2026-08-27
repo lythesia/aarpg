@@ -2,15 +2,14 @@
 ## top-right, and make it grow left & bottom
 class_name NotificationUI extends Control
 
-@onready var panel: PanelContainer = $PanelContainer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var title_label: Label = $PanelContainer/VBoxContainer/TitleLabel
-@onready var message_label: Label = $PanelContainer/VBoxContainer/MessageLabel
+@onready var title_label: Label = $MarginContainer/PanelContainer/VBoxContainer/TitleLabel
+@onready var message_label: Label = $MarginContainer/PanelContainer/VBoxContainer/MessageLabel
 
 var noti_queue: Array[Dictionary]
 
 func _ready() -> void:
-    panel.hide()
+    hide()
     # display next notification when current one is finished
     animation_player.animation_finished.connect(display_notification.unbind(1))
 

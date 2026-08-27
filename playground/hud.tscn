@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://di4k632ixa64j"]
+
+[ext_resource type="Texture2D" uid="uid://p5ytuijgp527" path="res://public/sprites/panel_notification.png" id="1_juxd3"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="2_7sjbu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aabtn"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = ExtResource("1_juxd3")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Hud" type="CanvasLayer" unique_id=2005776888]
+
+[node name="Control" type="Control" parent="." unique_id=2020447236]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control" unique_id=1746544083]
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(140, -1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Control" unique_id=566537784]
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(140, -1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_bottom = 85.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Control/MarginContainer" unique_id=1923850725]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxTexture_aabtn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Control/MarginContainer/PanelContainer" unique_id=1628625391]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Control/MarginContainer/PanelContainer/VBoxContainer" unique_id=552827322]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7sjbu")
+text = "Title: should be very very long"
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="Control/Control/MarginContainer/PanelContainer/VBoxContainer" unique_id=715554660]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7sjbu")
+text = "Messages: wawawa wuwa ha"
+autowrap_mode = 3
