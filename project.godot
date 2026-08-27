@@ -32,7 +32,7 @@ SceneHelper="*uid://v65ndi5v5x6i"
 PauseMenu="*uid://dsrgw2p8wkxn2"
 SaveHelper="*uid://cx3gabbm3exgy"
 WorldState="*uid://cdex48mru2pvm"
-QuestManager="*uid://dtrgt48ep30au"
+QuestManager="*uid://ce8ncvdi14vnj"
 DialogueManager="*uid://c3rodes2l3gxb"
 
 [dialogue_manager]

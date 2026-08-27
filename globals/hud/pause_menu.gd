@@ -76,6 +76,8 @@ func next_tab() -> void:
 func _on_save_pressed() -> void:
     SaveHelper.save()
     # print("Saved to slot_%02d" % [SaveHelper.current_slot + 1])
+    hide_pause_menu()
+    PlayerHud.queue_notification("Save Completed", "Saved to slot_%02d" % [SaveHelper.current_slot + 1])
 
 func _on_load_pressed() -> void:
     hide_pause_menu()

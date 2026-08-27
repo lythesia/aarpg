@@ -328,4 +328,4 @@ text = "Load"
 [node name="TitleBtn" type="Button" parent="Control/TabContainer/System/VBoxContainer" unique_id=1267021978]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Ttile"
+text = "Title"
