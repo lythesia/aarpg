@@ -16,6 +16,15 @@ func set_player(_player: Player) -> void:
     player = _player
     spawned = true
 
+func clear_player() -> void:
+    if player:
+        player.queue_free()
+        player = null
+        spawned = false
+
+        INVENTORY_DATA.clear()
+        QuestManager.clear_current_quests()
+
 func set_inventory_data(_inventory_data: InventoryData) -> void:
     INVENTORY_DATA = _inventory_data
 

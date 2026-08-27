@@ -85,6 +85,13 @@ func consume_item(item: ItemData, count: int = 1) -> bool:
             return true
     return false
 
+func clear() -> void:
+    slots.clear()
+    currencies.clear()
+
+    # re-init
+    _init()
+
 #region save/load
 func load_from_dict(d: Deserializer, data: Dictionary) -> void:
     super(d, data)

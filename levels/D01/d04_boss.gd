@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var persistent_key: String = "d04_boss"
+@export var persistent_key: String = "d04/boss"
 
 @onready var dark_wizard: Enemy = %DarkWizard
 @onready var base_layer: TileMapLayer = %BaseDungeon

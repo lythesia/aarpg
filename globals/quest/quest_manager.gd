@@ -156,3 +156,6 @@ func sort_current_quests() -> void:
             else:
                 return a.title.to_lower() < b.title.to_lower()
     )
+
+func clear_current_quests() -> void:
+    current_quests.clear()

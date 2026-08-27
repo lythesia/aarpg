@@ -86,11 +86,12 @@ func _on_load_pressed() -> void:
 
 func _on_title_pressed() -> void:
     const TITLE_SCENE: String = "uid://d1w4g1fy3v3oa"
+
     hide_pause_menu()
     SceneManager.change_scene(
         ProjectSettings.get_setting("application/run/main_scene", TITLE_SCENE),
         {
-            # free player when back to title scene
-            "on_fade_out": PlayerManager.get_player().queue_free,
+            # clear player when back to title scene
+            "on_fade_out": PlayerManager.clear_player
         }
     )

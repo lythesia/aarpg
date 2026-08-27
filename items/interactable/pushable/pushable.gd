@@ -40,6 +40,7 @@ func _play_push_audio() -> void:
     if push_audio:
         audio_player.stream = push_audio
         audio_player.play()
+
 func _stop_push_audio() -> void:
     if audio_player.playing:
         audio_player.stop()
