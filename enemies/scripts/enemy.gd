@@ -124,6 +124,7 @@ func update_animation(anim_state: String) -> void:
 func _on_damage_taken(attack_area: AttackArea) -> void:
     blackboard.damage_source = attack_area
     blackboard.hp -= attack_area.damage_amount
+    EffectManager.damage_text(attack_area.damage_amount, global_position + Vector2(0, -36))
 
     if blackboard.hp <= 0.0:
         hazard_area.queue_free()

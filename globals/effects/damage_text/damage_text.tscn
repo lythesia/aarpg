@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bcbbsefh4o8xm"]
+
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="1_18e7s"]
+[ext_resource type="Script" uid="uid://ckckm10ofw0eg" path="res://globals/effects/damage_text/damage_text.gd" id="1_fhyo1"]
+
+[node name="DamageText" type="Node2D" unique_id=191353989]
+z_index = 10
+script = ExtResource("1_fhyo1")
+
+[node name="Label" type="Label" parent="." unique_id=1480662310]
+offset_left = -26.0
+offset_top = -11.0
+offset_right = 26.0
+offset_bottom = 4.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_fonts/font = ExtResource("1_18e7s")
+text = "9"
+horizontal_alignment = 1

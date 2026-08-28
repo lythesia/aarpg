@@ -34,6 +34,7 @@ SaveHelper="*uid://cx3gabbm3exgy"
 WorldState="*uid://cdex48mru2pvm"
 QuestManager="*uid://ce8ncvdi14vnj"
 DialogueManager="*uid://c3rodes2l3gxb"
+EffectManager="*uid://br2l68trrq67q"
 
 [dialogue_manager]
 

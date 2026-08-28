@@ -21,10 +21,8 @@ func _process(delta: float) -> void:
             speeds.remove_at(i)
 
 func _on_area_entered(area: Area2D) -> void:
-    print("magnet area entered: %s" % [area.get_parent().name])
     if area.get_parent() is ItemPickup:
         var item: ItemPickup = area.get_parent()
-        print("item: %s" % [item.name])
         items.append(item)
         speeds.append(magnet_strength)
         # disable collision to make sure player picks it up
