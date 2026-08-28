@@ -11,6 +11,9 @@ signal PauseMenuHidden
 @onready var item_desc_label: Label = %ItemDesc
 @onready var coin_label: Label = %CoinLabel
 
+# stats tab
+@onready var stats: StatsUI = %Stats
+
 # quests tab
 @onready var quests: QuestsUI = %Quests
 

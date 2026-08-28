@@ -2,6 +2,7 @@ extends Node
 
 signal PlayerRepositioned(player: Player)
 signal PlayerInteracted
+signal PlayerLeveledUp
 
 var INVENTORY_DATA: InventoryData
 
@@ -49,5 +50,32 @@ func player_interact() -> void:
 func player_in_scene(scene: Node) -> bool:
     return scene.get_node_or_null("Player") == player
 
+#region player_stats
 func gain_xp(xp: int) -> void:
-    player.xp += xp
+    if player:
+        player.xp += xp
+        # try level up
+        level_up()
+    else:
+        printerr("no player instance!")
+
+const LEVEL_UP_XP: Array[int] = [
+    0,
+    50, # lv.1 -> lv.2
+    100,
+    200,
+    320,
+    500,
+    720,
+    1000,
+    1400,
+    2000, # lv.9 -> lv.10
+]
+
+func level_up() -> void:
+    while player.level < LEVEL_UP_XP.size() and player.xp >= LEVEL_UP_XP[player.level]:
+        player.level += 1
+        player.atk += 1
+        player.def += 1
+        PlayerLeveledUp.emit()
+#endregion

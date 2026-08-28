@@ -29,6 +29,7 @@ func boomerang_ability() -> void:
 
     var boomerang: Boomerang = BOOMERANG.instantiate()
     player.add_sibling(boomerang)
+    boomerang.hazard_area.damage_amount = player.atk
     boomerang.global_position = player.global_position
 
     var throw_dir = player.cardinal_dir

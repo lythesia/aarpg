@@ -106,6 +106,8 @@ y_sort_enabled = true
 
 [node name="Slime" parent="Mobs" unique_id=1748956911 instance=ExtResource("12_c22wq")]
 position = Vector2(409, 144)
+xp = 50
 
 [node name="Slime2" parent="Mobs" unique_id=544871573 instance=ExtResource("12_c22wq")]
 position = Vector2(439, 144)
+xp = 50

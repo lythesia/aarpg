@@ -6,6 +6,7 @@ signal DirectionChanged(dir: Vector2)
 @onready var smear_sprite: Sprite2D = %SmearSprite
 @onready var attack_area: AttackArea = %AttackArea
 @onready var spin_attack_area: AttackArea = %SpinAttackArea
+@onready var spin_aura_attack_area: AttackArea = %SpinAuraAttackArea
 @onready var spin_anim_player: AnimationPlayer = %SpinAnimPlayer
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var effect_anim_player: AnimationPlayer = $EffectAnimationPlayer
@@ -41,6 +42,7 @@ func _init() -> void:
 func _ready() -> void:
     fsm.init(self)
     PlayerHud.update_hp(hp, max_hp)
+    update_attack_damage()
 
 func _unhandled_input(_event: InputEvent) -> void:
     # if event.is_action_pressed("Test"):
@@ -54,9 +56,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 #         input_vector = Vector2(x_axis, y_axis).normalized()
 #     else:
 #         input_vector = Vector2.ZERO
-
-# func clear_input_vector() -> void:
-#     input_vector = Vector2.ZERO
 
 func _process(delta: float) -> void:
     _update_direction()
@@ -113,13 +112,26 @@ func update_animation(anim_state: String) -> String:
     return anim_player.current_animation
 
 func _debug_label(_delta: float):
-    var args = [global_position]
-    label.text = "%v" % args
-    # label.text = get_tree().current_scene.name
+    # var args = [global_position]
+    # label.text = "%v" % args
     pass
 
-# player stats
+#region player_stats
+var level: int = 1
 var xp: int = 0
+var atk: int = 1:
+    set(v):
+        atk = v
+        update_attack_damage()
+var def: int = 1:
+    set(v):
+        def = v
+
+func update_attack_damage() -> void:
+    attack_area.damage_amount = atk
+    spin_attack_area.damage_amount = atk
+    spin_aura_attack_area.damage_amount = atk
+#endregion
 
 #region save/load
 func save_to_dict(s: SaveKitSerializer) -> Dictionary:
@@ -128,7 +140,10 @@ func save_to_dict(s: SaveKitSerializer) -> Dictionary:
         "pos": s.encode_var(global_position),
         "hp": hp,
         "max_hp": max_hp,
+        "level": level,
         "xp": xp,
+        "atk": atk,
+        "def": def,
     }
 
 func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
@@ -140,15 +155,22 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
         "pos": decoded if decoded is Vector2 else Vector2.ZERO,
         "hp": data.get("hp", DEFAULT_HP),
         "max_hp": data.get("max_hp", DEFAULT_HP),
+        "level": data.get("level", 1),
         "xp": data.get("xp", 0),
+        "atk": data.get("atk", 1),
+        "def": data.get("def", 1),
     }
 #endregion
 
+# utils
 func setup_player_on_load() -> void:
     PlayerManager.set_player_global_position(player_to_load["pos"])
     hp = player_to_load["hp"]
     max_hp = player_to_load["max_hp"]
+    level = player_to_load["level"]
     xp = player_to_load["xp"]
+    atk = player_to_load["atk"]
+    def = player_to_load["def"]
 
 func lift_item(throwable: Throwable) -> void:
     # shift throwable_object from parent to player's held item

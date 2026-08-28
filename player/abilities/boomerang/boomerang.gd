@@ -6,6 +6,7 @@ enum State {INACTIVE, THROW, RETURN}
 @export var max_speed: float = 400
 @export var catch_audio: AudioStream
 
+@onready var hazard_area: HazardArea = $HazardArea
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 

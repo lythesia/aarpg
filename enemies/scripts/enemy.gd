@@ -11,6 +11,7 @@ signal WasKilled
 @warning_ignore_restore("unused_signal")
 
 @export var hp: int = 3
+@export var xp: int = 5
 
 var collision_shape: CollisionShape2D
 

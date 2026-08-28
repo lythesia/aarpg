@@ -1795,7 +1795,7 @@ texture = ExtResource("5_3orul")
 hframes = 8
 
 [node name="SpinAuraAttackArea" type="Area2D" parent="Sprite/SpinSprite" unique_id=723775655]
-visible = false
+unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 96
 monitoring = false

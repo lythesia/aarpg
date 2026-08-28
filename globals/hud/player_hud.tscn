@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://btfkrowalm2ow" path="res://globals/hud/heart_gui.tscn" id="2_baoq0"]
 [ext_resource type="Texture2D" uid="uid://csorpoex447dl" path="res://public/sprites/boss-hp.png" id="4_81p1n"]
 [ext_resource type="Texture2D" uid="uid://p5ytuijgp527" path="res://public/sprites/panel_notification.png" id="5_c886e"]
-[ext_resource type="Script" uid="uid://dit2iq27ijvtb" path="res://globals/hud/notification_ui.gd" id="5_whiia"]
+[ext_resource type="Script" uid="uid://dit2iq27ijvtb" path="res://globals/hud/notification/notification_ui.gd" id="5_whiia"]
 [ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="6_00ovc"]
 [ext_resource type="AudioStream" uid="uid://36mutrdbekrp" path="res://public/audio/notification.wav" id="7_00ovc"]
 

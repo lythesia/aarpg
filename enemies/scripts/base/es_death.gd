@@ -17,6 +17,8 @@ func enter() -> void:
     #     pass
     await enemy.animation_player.animation_finished
 
+    PlayerManager.gain_xp(enemy.xp)
+
     enemy.queue_free()
 
 func physics_update(_delta: float) -> void:

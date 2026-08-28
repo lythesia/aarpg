@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b4f3a5xedjx3f" path="res://public/sprites/coin_split/coin7.png" id="12_ahq01"]
 [ext_resource type="Texture2D" uid="uid://8rd1f4x0eyqf" path="res://public/sprites/coin_split/coin8.png" id="13_s0uh3"]
 [ext_resource type="PackedScene" uid="uid://csykq2urwsyl0" path="res://globals/hud/quest/quest_item_ui.tscn" id="15_7eg80"]
+[ext_resource type="Script" uid="uid://c4ritk5q3sx" path="res://globals/hud/stats/stats_ui.gd" id="15_ahq01"]
 [ext_resource type="Script" uid="uid://chx2bmnmpgr05" path="res://globals/hud/quest/quests_ui.gd" id="15_t4dq7"]
 [ext_resource type="FontFile" uid="uid://imp7wpiw3o0n" path="res://npc/assets/fonts/Abaddon Bold.ttf" id="17_7ex7g"]
 [ext_resource type="PackedScene" uid="uid://devo3gsikybh2" path="res://globals/hud/quest/quest_step_ui.tscn" id="18_1kdy4"]
@@ -101,10 +102,11 @@ anchor_bottom = 1.0
 offset_top = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Inventory" type="Control" parent="Control/TabContainer" unique_id=1512121720]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -219,15 +221,121 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
 text = "A brown fox jumps over the lazy dog!"
 autowrap_mode = 2
+
+[node name="Stats" type="Control" parent="Control/TabContainer" unique_id=517004029]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("15_ahq01")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/TabContainer/Stats" unique_id=1146615010]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_right = 120
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/Stats/MarginContainer" unique_id=1660562466]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_lsqg7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer" unique_id=2076318832]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer" unique_id=1602859064]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=199956335]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2061270665]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "Level"
+
+[node name="LvLabel" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=720970990]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "1"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1121058170]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=316618598]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "XP"
+
+[node name="XpLabel" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=508924944]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "0 / 100"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2139324141]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1410169848]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "ATK"
+
+[node name="AtkLabel" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=867144620]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "5"
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=859037664]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=535788882]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "DEF"
+
+[node name="DefLabel" type="Label" parent="Control/TabContainer/Stats/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1878140115]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+theme_override_font_sizes/font_size = 20
+text = "5"
+horizontal_alignment = 2
 
 [node name="Quests" type="Control" parent="Control/TabContainer" unique_id=725376391]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 script = ExtResource("15_t4dq7")
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/TabContainer/Quests" unique_id=581858305]
 layout_mode = 1
@@ -298,7 +406,7 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/System" unique_id=74415645]
 custom_minimum_size = Vector2(80, 0)

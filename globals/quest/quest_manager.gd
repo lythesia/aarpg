@@ -43,7 +43,7 @@ func accept_quest(title: String) -> void:
             completed_steps = 0,
         }
         current_quests.append(quest)
-        PlayerHud.queue_notification("Quest Accepted", title)
+        PlayerHud.queue_notification("Quest Accepted!", title)
         QuestUpdated.emit(quest)
     else:
         # quest already accepted
@@ -63,7 +63,7 @@ func accept_or_advance_quest(title: String) -> void:
             completed_steps = 0,
         }
         current_quests.append(quest)
-        PlayerHud.queue_notification("Quest Accepted", title)
+        PlayerHud.queue_notification("Quest Accepted!", title)
     else:
         quest = current_quests[quest_idx]
         # skip if quest is already completed
@@ -72,10 +72,10 @@ func accept_or_advance_quest(title: String) -> void:
         quest.completed_steps += 1
         quest.is_completed = quest.completed_steps == quest_data.steps.size()
         if quest.is_completed:
-            PlayerHud.queue_notification("Quest Completed", title)
+            PlayerHud.queue_notification("Quest Completed!", title)
         else:
             var step: String = quest_data.steps[quest.completed_steps - 1]
-            PlayerHud.queue_notification("Quest Updated", "%s: %s" % [title, step])
+            PlayerHud.queue_notification("Quest Updated!", "%s: %s" % [title, step])
 
     QuestUpdated.emit(quest)
 
@@ -96,7 +96,7 @@ func complete_quest(title: String) -> void:
 
     quest.is_completed = true
     quest.completed_steps = quest_data.steps.size()
-    PlayerHud.queue_notification("Quest Completed", title)
+    PlayerHud.queue_notification("Quest Completed!", title)
 
     QuestUpdated.emit(quest)
 
@@ -104,7 +104,7 @@ func complete_quest(title: String) -> void:
 
 
 func reward_quest(quest: Quest) -> void:
-    var title: String = r'"%s" Reward' % [quest.title]
+    var title: String = r'"%s" Reward!' % [quest.title]
     var message: Array[String] = []
 
     if quest.reward_xp > 0:
