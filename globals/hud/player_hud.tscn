@@ -458,3 +458,4 @@ autowrap_mode = 3
 libraries/ = SubResource("AnimationLibrary_whiia")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1055852544]
+bus = &"SFX"

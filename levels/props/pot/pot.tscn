@@ -126,6 +126,7 @@ shape = SubResource("RectangleShape2D_aabtn")
 shape = SubResource("RectangleShape2D_3cxjf")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=851251645]
+bus = &"SFX"
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=1900801983]
 visible = false

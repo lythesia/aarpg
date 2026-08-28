@@ -25,6 +25,7 @@ func _ready() -> void:
 
     # bounce(from global library) first if we have
     if animation_player.has_animation("bounce"):
+        area.monitorable = false # avoid item magnet picking it up until animation finished
         animation_player.play("bounce")
         animation_player.animation_finished.connect(_on_animation_finished)
 
@@ -73,9 +74,19 @@ func _set_start_frame_if_has_default_animation() -> void:
 # try to play "sub/default" animation with initial delay
 func _on_animation_finished(anim_name: String) -> void:
     if anim_name != "bounce" or !animation_player.has_animation("sub/default"):
+        area.monitorable = true
         return
 
+    # default animation like coin flips looping
     var anim: String = "sub/default"
     var start_time: float = initial_delay_percent * animation_player.get_animation(anim).length
+    var is_looping: bool = animation_player.get_animation(anim).loop_mode == Animation.LOOP_NONE
     animation_player.play(anim)
     animation_player.seek(start_time, true)
+    if is_looping:
+        # wait for animation finished
+        await animation_player.animation_finished
+        area.monitorable = true
+    else:
+        # set monitorable to true immediately
+        area.monitorable = true

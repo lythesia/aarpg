@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dedvuta282swb" path="res://public/sprites/Props.png" id="6_g2abb"]
 [ext_resource type="Script" uid="uid://dpw6ru76f572l" path="res://player/scripts/states/attack.gd" id="7_okfwm"]
 [ext_resource type="AudioStream" uid="uid://ch08vlqyq446d" path="res://player/audio/SwordSwoosh.wav" id="8_4qt65"]
+[ext_resource type="AudioStream" uid="uid://bdhpbnf6266tu" path="res://public/audio/level_up_jingle.wav" id="8_7vjvr"]
 [ext_resource type="Script" uid="uid://b60no6xp6h8jr" path="res://general/hitbox/damage_area.gd" id="10_6g3n5"]
 [ext_resource type="Script" uid="uid://duj6e51c3674j" path="res://player/scripts/states/stun.gd" id="11_d4apd"]
 [ext_resource type="Script" uid="uid://c7tcshhj8j0ts" path="res://general/hitbox/attack_area.gd" id="11_mgvvd"]
@@ -31,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://coukidj02g5t6" path="res://player/audio/exhausted.wav" id="24_1qqmx"]
 [ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="30_smv5u"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="31_d7607"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="32_d7607"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
@@ -1699,6 +1701,54 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelUpLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelUpLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-24, -64)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelUpLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_28gy6"]
 resource_name = "damaged"
@@ -1715,6 +1765,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.19607843), Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1), Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelUpLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_utphg"]
 resource_name = "default"
@@ -1730,12 +1792,105 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelUpLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_l4d2u"]
+resource_name = "level_up"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelUpLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelUpLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(-2, 2, 0.5),
+"update": 0,
+"values": [Vector2(-24, -64), Vector2(-24, -74), Vector2(-24, -70)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelUpLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.8980795,
+"start_offset": 0.0,
+"stream": ExtResource("8_7vjvr")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_28gy6"]
 _data = {
 &"RESET": SubResource("Animation_l7x70"),
 &"damaged": SubResource("Animation_28gy6"),
-&"default": SubResource("Animation_utphg")
+&"default": SubResource("Animation_utphg"),
+&"level_up": SubResource("Animation_l4d2u")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6mua"]
@@ -1753,6 +1908,14 @@ radius = 50.01
 script = ExtResource("31_d7607")
 frequency = 40.0
 metadata/_custom_type_script = "uid://dimvdouy8g0sv"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lsqg7"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -5, 0)
+emission_shape = 3
+emission_box_extents = Vector3(12, 10, 1)
+gravity = Vector3(0, -250, 0)
+scale_max = 2.5
 
 [node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player", "saveable"]]
 z_index = 1
@@ -1990,3 +2153,26 @@ noise = SubResource("Resource_aabtn")
 duration = 0.15
 decay_time = 0.15
 metadata/_custom_type_script = "uid://bhd4nuiu23e7l"
+
+[node name="LevelUpLabel" type="Label" parent="." unique_id=2057904769]
+visible = false
+offset_left = -24.0
+offset_top = -64.0
+offset_right = 22.0
+offset_bottom = -49.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_fonts/font = ExtResource("32_d7607")
+text = "Level Up!"
+horizontal_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2137108186]
+emitting = false
+amount = 12
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.25
+process_material = SubResource("ParticleProcessMaterial_lsqg7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1777336492]
+bus = &"SFX"

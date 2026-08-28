@@ -68,7 +68,7 @@ center_offset = true
 location = 2
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("3_d5g0j")]
-position = Vector2(423, 209)
+position = Vector2(242, 228)
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("6_1stbg")]
 
@@ -106,7 +106,7 @@ y_sort_enabled = true
 
 [node name="Slime" parent="Mobs" unique_id=1748956911 instance=ExtResource("12_c22wq")]
 position = Vector2(409, 144)
-xp = 50
+xp = 1000
 
 [node name="Slime2" parent="Mobs" unique_id=544871573 instance=ExtResource("12_c22wq")]
 position = Vector2(439, 144)

@@ -73,9 +73,14 @@ const LEVEL_UP_XP: Array[int] = [
 ]
 
 func level_up() -> void:
+    var leveled_up: bool = false
     while player.level < LEVEL_UP_XP.size() and player.xp >= LEVEL_UP_XP[player.level]:
         player.level += 1
         player.atk += 1
         player.def += 1
+        leveled_up = true
+
+    if leveled_up:
         PlayerLeveledUp.emit()
+        player.heal()
 #endregion

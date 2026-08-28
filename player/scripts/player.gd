@@ -43,6 +43,7 @@ func _ready() -> void:
     fsm.init(self)
     PlayerHud.update_hp(hp, max_hp)
     update_attack_damage()
+    PlayerManager.PlayerLeveledUp.connect(_on_player_leveled_up)
 
 func _unhandled_input(_event: InputEvent) -> void:
     # if event.is_action_pressed("Test"):
@@ -183,9 +184,16 @@ func lift_item(throwable: Throwable) -> void:
 func is_dead() -> bool:
     return hp <= 0 and fsm.current_state is PlayerStateDeath
 
+func heal() -> void:
+    hp = max_hp
+
 func revive() -> void:
     hp = max_hp
     fsm.change_state(fsm.idle)
 
 func shake_trauma() -> void:
     camera_emitter.emit()
+
+# signal handler
+func _on_player_leveled_up() -> void:
+    effect_anim_player.play("level_up")
