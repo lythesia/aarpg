@@ -10,6 +10,7 @@ signal PauseMenuHidden
 @onready var inventory_ui: InventoryUI = %InventoryUI
 @onready var item_desc_label: Label = %ItemDesc
 @onready var coin_label: Label = %CoinLabel
+@onready var equip_ui: EquipUI = %EquipUI
 
 # stats tab
 @onready var stats: StatsUI = %Stats
@@ -27,7 +28,6 @@ var is_paused: bool = false
 
 func _ready() -> void:
     visible = false
-    inventory_ui.clear_inventory()
     item_desc_label.text = ""
 
     # system tab has no script attached, do it in-place

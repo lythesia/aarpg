@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EquipableItemData" format=3 uid="uid://bmcqatydxtuf7"]
+
+[ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_bgj0f"]
+[ext_resource type="Script" uid="uid://sep36nxqotsq" path="res://items/scripts/equipable_item_modifier.gd" id="2_1a2hn"]
+[ext_resource type="Texture2D" uid="uid://c848iq4xyimqx" path="res://public/sprites/gear.png" id="2_rxpnc"]
+[ext_resource type="Script" uid="uid://da6wv03h0ht42" path="res://items/scripts/equipable_item_data.gd" id="3_rxpnc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pklrb"]
+atlas = ExtResource("2_rxpnc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_3qsa1"]
+script = ExtResource("2_1a2hn")
+type = 1
+value = 1
+metadata/_custom_type_script = "uid://sep36nxqotsq"
+
+[resource]
+script = ExtResource("3_rxpnc")
+modifiers = Array[ExtResource("2_1a2hn")]([SubResource("Resource_3qsa1")])
+name = "Iron Sword"
+item_type = 3
+description = "A standard iron sword."
+icon = SubResource("AtlasTexture_pklrb")
+metadata/_custom_type_script = "uid://da6wv03h0ht42"

@@ -1,3 +1,4 @@
+@tool
 class_name InventorySlotUI extends Button
 
 @onready var texture: TextureRect = $TextureRect
@@ -7,6 +8,9 @@ class_name InventorySlotUI extends Button
 var slot_data: SlotData: set = set_slot_data
 
 func _ready() -> void:
+    if Engine.is_editor_hint():
+        return
+
     texture.texture = null
     label.text = ""
     focus_entered.connect(_on_focus_entered)
@@ -20,7 +24,14 @@ func set_slot_data(value: SlotData):
         label.text = ""
     else:
         texture.texture = slot_data.item_data.icon
-        label.text = str(slot_data.quantity)
+        if slot_data.item_data.item_type == ItemData.ItemType.EQUIPABLE:
+            if slot_data.equipped:
+                _set_slot_equipped(true)
+                PlayerManager.equip(self)
+            else:
+                _set_slot_equipped(false)
+        else:
+            label.text = str(slot_data.quantity)
 
 func _on_focus_entered() -> void:
     if slot_data:
@@ -32,7 +43,29 @@ func _on_focus_exited() -> void:
 func _on_pressed() -> void:
     if slot_data and slot_data.item_data:
         if slot_data.item_data.use():
-            slot_data.quantity -= 1
-            # update quantity label in-place
-            if slot_data.quantity > 0:
-                label.text = str(slot_data.quantity)
+            if slot_data.item_data.item_type == ItemData.ItemType.EQUIPABLE:
+                # toggle equip
+                if !slot_data.equipped:
+                    _set_slot_equipped(true)
+                    PlayerManager.equip(self)
+                else:
+                    _set_slot_equipped(false)
+                    PlayerManager.unequip(self)
+            else:
+                slot_data.quantity -= 1
+                # update quantity label in-place
+                # check `slot_data` first coz `quantity -=` might trigger:
+                # SlotData.changed -> _on_slot_changed: inventory_data.tres::slots[i] = null
+                # -> InventoryData.changed -> _on_inventory_changed -> update_inventory:
+                # slot_ui[i].slot_data = inventory_data.slots[i] = null
+                # then here `slot_data` becomes null
+                if slot_data and slot_data.quantity > 0:
+                    label.text = str(slot_data.quantity)
+
+func _set_slot_equipped(value: bool) -> void:
+    if value:
+        label.text = "E"
+        slot_data.equipped = true
+    else:
+        label.text = ""
+        slot_data.equipped = false

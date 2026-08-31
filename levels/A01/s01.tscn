@@ -9,9 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="7_e8gkl"]
 [ext_resource type="Resource" uid="uid://dwmbiwabnojq4" path="res://items/item_tres/apple.tres" id="8_r434y"]
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="9_pcl0k"]
+[ext_resource type="Resource" uid="uid://ctpl6cg645f85" path="res://items/item_tres/equipable/w_katana.tres" id="10_5a37w"]
 [ext_resource type="PackedScene" uid="uid://dhb7dvw2yb6cr" path="res://items/interactable/chest/chest.tscn" id="10_r434y"]
-[ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="11_pcl0k"]
+[ext_resource type="Resource" uid="uid://bmcqatydxtuf7" path="res://items/item_tres/equipable/w_iron_sword.tres" id="11_ppvy3"]
 [ext_resource type="PackedScene" uid="uid://b68d5x5hqub6s" path="res://levels/props/pot/pot.tscn" id="12_03meh"]
+[ext_resource type="Resource" uid="uid://buhrvp4pe76pf" path="res://items/item_tres/equipable/a_tunic.tres" id="12_5a37w"]
 [ext_resource type="PackedScene" uid="uid://b2ts3u2tpi680" path="res://enemies/00_slime/slime.tscn" id="12_c22wq"]
 
 [node name="S01" type="Node2D" unique_id=901446768]
@@ -80,10 +82,20 @@ position = Vector2(-11, 53)
 item_data = ExtResource("8_r434y")
 pickup_audio = ExtResource("9_pcl0k")
 
+[node name="Katana" parent="Items" unique_id=163477879 instance=ExtResource("7_e8gkl")]
+position = Vector2(1, 261)
+item_data = ExtResource("10_5a37w")
+pickup_audio = ExtResource("9_pcl0k")
+
+[node name="Sword" parent="Items" unique_id=241234698 instance=ExtResource("7_e8gkl")]
+position = Vector2(37, 262)
+item_data = ExtResource("11_ppvy3")
+pickup_audio = ExtResource("9_pcl0k")
+
 [node name="Chest" parent="Items" unique_id=1270411528 instance=ExtResource("10_r434y")]
+z_index = 1
 position = Vector2(472, 73)
-item_data = ExtResource("11_pcl0k")
-quantity = 3
+item_data = ExtResource("12_5a37w")
 persistent_key = "s01/chest00"
 
 [node name="Pot" parent="Items" unique_id=318786704 instance=ExtResource("12_03meh")]

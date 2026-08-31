@@ -3,7 +3,7 @@ class_name InventoryData extends SaveKitResource
 signal GainItem(item_data: ItemData, quantity: int)
 
 ## inventory size
-@export var capacity: int = 18
+@export var capacity: int = 24
 
 ## slots in inventory
 @export var slots: Array[SlotData] = []
@@ -29,6 +29,8 @@ func add_item(item_data: ItemData, quantity: int = 1) -> bool:
     match item_data.item_type:
         ItemData.ItemType.CURRENCY:
             ok = _add_currency(item_data, quantity)
+        ItemData.ItemType.EQUIPABLE:
+            ok = _add_equipable(item_data)
         _:
             ok = _add_consumable(item_data, quantity)
     if ok:
@@ -42,7 +44,7 @@ func _add_consumable(item_data: ItemData, quantity: int = 1) -> bool:
             slot.quantity += quantity
             return true
 
-    # 2. try put into empty slot
+    # 2. try to put into empty slot
     for i in slots.size():
         if !slots[i]:
             var slot: SlotData = SlotData.new()
@@ -61,6 +63,22 @@ func _add_currency(item_data: ItemData, quantity: int) -> bool:
     currencies.get_or_add(item_data.name, 0 as int)
     currencies[item_data.name] += quantity
     return true
+
+func _add_equipable(item_data: ItemData) -> bool:
+    # try to put into empty slot
+    for i in slots.size():
+        if !slots[i]:
+            var slot: SlotData = SlotData.new()
+            slot.item_data = item_data
+            slot.quantity = 1
+            slots[i] = slot
+            # new slot should also be connected
+            slot.changed.connect(_on_slot_changed)
+            return true
+
+    # 3. no slots, inventory is full
+    print("inventory is full")
+    return false
 
 func _connect_slots():
     for slot in slots:
@@ -86,7 +104,10 @@ func consume_item(item: ItemData, count: int = 1) -> bool:
     return false
 
 func clear() -> void:
+    # clear items
     slots.clear()
+
+    # clear currencies
     currencies.clear()
 
     # re-init

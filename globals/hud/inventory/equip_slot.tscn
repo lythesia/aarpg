@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bpyrtxp63tl7k"]
+
+[ext_resource type="Script" uid="uid://dn7guwbg408gy" path="res://globals/hud/inventory/scripts/equip_slot_ui.gd" id="1_7c54v"]
+
+[node name="EquipSlot" type="Button" unique_id=982496357]
+custom_minimum_size = Vector2(32, 32)
+script = ExtResource("1_7c54v")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1334975963]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+stretch_mode = 3

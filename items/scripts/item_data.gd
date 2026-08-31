@@ -1,3 +1,4 @@
+## todo: `ItemData` is not persisted into save, maybe we don't need `extend SaveKitResource`
 class_name ItemData extends SaveKitResource
 
 enum ItemType {
@@ -9,6 +10,9 @@ enum ItemType {
 
     ## other items
     OTHER,
+
+    ## equipable items
+    EQUIPABLE,
 }
 
 ## item's name, use as uniq key

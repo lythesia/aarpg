@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bq3ulutra0r2r" path="res://globals/hud/inventory/scripts/inventory_slot_ui.gd" id="1_4slja"]
 [ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="1_mo6f7"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="3_q8kux"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aabtn"]
 atlas = ExtResource("1_mo6f7")
@@ -24,6 +25,9 @@ stretch_mode = 3
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 15.0
-theme_override_font_sizes/font_size = 10
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_q8kux")
+theme_override_font_sizes/font_size = 12
 text = "12"
 horizontal_alignment = 2

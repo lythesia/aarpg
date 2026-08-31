@@ -4,6 +4,9 @@ signal PlayerRepositioned(player: Player)
 signal PlayerInteracted
 signal PlayerLeveledUp
 
+signal PlayerEquipped(slot: InventorySlotUI)
+signal PlayerUnequipped(slot: InventorySlotUI)
+
 var INVENTORY_DATA: InventoryData
 
 var spawned: bool = false
@@ -25,6 +28,7 @@ func clear_player() -> void:
 
         INVENTORY_DATA.clear()
         QuestManager.clear_current_quests()
+        PauseMenu.equip_ui.reset_equip_slots()
 
 func set_inventory_data(_inventory_data: InventoryData) -> void:
     INVENTORY_DATA = _inventory_data
@@ -83,4 +87,12 @@ func level_up() -> void:
     if leveled_up:
         PlayerLeveledUp.emit()
         player.heal()
+
+func equip(slot: InventorySlotUI) -> void:
+    PlayerEquipped.emit(slot)
+    # todo: stats
+
+func unequip(slot: InventorySlotUI) -> void:
+    PlayerUnequipped.emit(slot)
+    # todo: stats
 #endregion

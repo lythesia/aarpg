@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EquipableItemData" format=3 uid="uid://buhrvp4pe76pf"]
+
+[ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_q33mv"]
+[ext_resource type="Texture2D" uid="uid://c848iq4xyimqx" path="res://public/sprites/gear.png" id="2_i1vhv"]
+[ext_resource type="Script" uid="uid://sep36nxqotsq" path="res://items/scripts/equipable_item_modifier.gd" id="3_r8axw"]
+[ext_resource type="Script" uid="uid://da6wv03h0ht42" path="res://items/scripts/equipable_item_data.gd" id="4_258if"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pklrb"]
+atlas = ExtResource("2_i1vhv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_3qsa1"]
+script = ExtResource("3_r8axw")
+type = 2
+value = 1
+metadata/_custom_type_script = "uid://sep36nxqotsq"
+
+[resource]
+script = ExtResource("4_258if")
+equip_type = 1
+modifiers = Array[ExtResource("3_r8axw")]([SubResource("Resource_3qsa1")])
+name = "Tunic"
+item_type = 3
+description = "Clean and warm."
+icon = SubResource("AtlasTexture_pklrb")
+metadata/_custom_type_script = "uid://da6wv03h0ht42"
