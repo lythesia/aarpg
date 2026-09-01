@@ -9,6 +9,7 @@ enum EquipType {
 
 @export var equip_type: EquipType
 @export var modifiers: Array[EquipableItemModifier] = []
+@export var sprite_texture: Texture
 
 func use() -> bool:
     # always allow equiping

@@ -121,9 +121,13 @@ func load_from_dict(d: Deserializer, data: Dictionary) -> void:
     var def_delta: int = 0
     for slot in slots:
         if slot and slot.item_data.item_type == ItemData.ItemType.EQUIPABLE and slot.equipped:
-            var e: EquipableItemData = slot.item_data as EquipableItemData
+            var e: EquipableItemData = slot.item_data
             atk_delta += e.atk()
             def_delta += e.def()
+            match e.equip_type:
+                EquipableItemData.EquipType.WEAPON:
+                    PlayerManager.apply_weapon_sprite(e)
+                _: pass
     PlayerManager.apply_delta_stats(atk_delta, def_delta)
     # re-connect slots
     _connect_slots()

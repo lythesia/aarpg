@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal DirectionChanged(dir: Vector2)
 
-@onready var sprite: Sprite2D = %Sprite
+@onready var sprite: PlayerSprite = %Sprite
 @onready var smear_sprite: Sprite2D = %SmearSprite
 @onready var attack_area: AttackArea = %AttackArea
 @onready var spin_attack_area: AttackArea = %SpinAttackArea

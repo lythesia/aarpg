@@ -108,3 +108,6 @@ func apply_delta_stats(atk_delta: int, def_delta: int) -> void:
     if updated:
         PlayerStatsUpdated.emit()
 #endregion
+
+func apply_weapon_sprite(item: EquipableItemData) -> void:
+    player.sprite.update_weapon_sprite(item)

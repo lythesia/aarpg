@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c848iq4xyimqx" path="res://public/sprites/gear.png" id="2_i1vhv"]
 [ext_resource type="Script" uid="uid://sep36nxqotsq" path="res://items/scripts/equipable_item_modifier.gd" id="3_r8axw"]
 [ext_resource type="Script" uid="uid://da6wv03h0ht42" path="res://items/scripts/equipable_item_data.gd" id="4_258if"]
+[ext_resource type="Texture2D" uid="uid://nmolkhopa4kd" path="res://player/sprites/player_sprite.png" id="5_i1vhv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pklrb"]
 atlas = ExtResource("2_i1vhv")
@@ -19,6 +20,7 @@ metadata/_custom_type_script = "uid://sep36nxqotsq"
 script = ExtResource("4_258if")
 equip_type = 1
 modifiers = Array[ExtResource("3_r8axw")]([SubResource("Resource_3qsa1")])
+sprite_texture = ExtResource("5_i1vhv")
 name = "Tunic"
 item_type = 3
 description = "Clean and warm."
