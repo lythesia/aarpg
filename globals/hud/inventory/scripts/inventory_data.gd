@@ -116,6 +116,15 @@ func clear() -> void:
 #region save/load
 func load_from_dict(d: Deserializer, data: Dictionary) -> void:
     super(d, data)
+    # go through equip slots and apply delta stats
+    var atk_delta: int = 0
+    var def_delta: int = 0
+    for slot in slots:
+        if slot and slot.item_data.item_type == ItemData.ItemType.EQUIPABLE and slot.equipped:
+            var e: EquipableItemData = slot.item_data as EquipableItemData
+            atk_delta += e.atk()
+            def_delta += e.def()
+    PlayerManager.apply_delta_stats(atk_delta, def_delta)
     # re-connect slots
     _connect_slots()
 #endregion

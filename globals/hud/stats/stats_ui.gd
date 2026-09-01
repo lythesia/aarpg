@@ -7,6 +7,7 @@ class_name StatsUI extends Control
 
 func _ready() -> void:
     PauseMenu.PauseMenuShown.connect(update_stats)
+    PlayerManager.PlayerStatsUpdated.connect(update_stats)
 
 func update_stats() -> void:
     var player: Player = PlayerManager.get_player()

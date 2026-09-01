@@ -120,6 +120,14 @@ func _debug_label(_delta: float):
 #region player_stats
 var level: int = 1
 var xp: int = 0
+var base_atk: int = 1:
+    set(v):
+        atk += v - base_atk
+        base_atk = v
+var base_def: int = 1:
+    set(v):
+        def += v - base_def
+        base_def = v
 var atk: int = 1:
     set(v):
         atk = v
@@ -143,8 +151,8 @@ func save_to_dict(s: SaveKitSerializer) -> Dictionary:
         "max_hp": max_hp,
         "level": level,
         "xp": xp,
-        "atk": atk,
-        "def": def,
+        "base_atk": base_atk,
+        "base_def": base_def,
     }
 
 func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
@@ -158,8 +166,8 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
         "max_hp": data.get("max_hp", DEFAULT_HP),
         "level": data.get("level", 1),
         "xp": data.get("xp", 0),
-        "atk": data.get("atk", 1),
-        "def": data.get("def", 1),
+        "base_atk": data.get("atk", 1),
+        "base_def": data.get("def", 1),
     }
 #endregion
 
@@ -170,8 +178,8 @@ func setup_player_on_load() -> void:
     max_hp = player_to_load["max_hp"]
     level = player_to_load["level"]
     xp = player_to_load["xp"]
-    atk = player_to_load["atk"]
-    def = player_to_load["def"]
+    base_atk = player_to_load["base_atk"]
+    base_def = player_to_load["base_def"]
 
 func lift_item(throwable: Throwable) -> void:
     # shift throwable_object from parent to player's held item

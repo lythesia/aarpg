@@ -27,7 +27,16 @@ func set_slot_data(value: SlotData):
         if slot_data.item_data.item_type == ItemData.ItemType.EQUIPABLE:
             if slot_data.equipped:
                 _set_slot_equipped(true)
-                PlayerManager.equip(self)
+                # fill equip slot ui
+                match (slot_data.item_data as EquipableItemData).equip_type:
+                    EquipableItemData.EquipType.WEAPON:
+                        PauseMenu.equip_ui.fill_weapon_slot(self)
+                    EquipableItemData.EquipType.ARMOR:
+                        PauseMenu.equip_ui.fill_armor_slot(self)
+                    EquipableItemData.EquipType.AMULET:
+                        PauseMenu.equip_ui.fill_amulet_slot(self)
+                    EquipableItemData.EquipType.RING:
+                        PauseMenu.equip_ui.fill_ring_slot(self)
             else:
                 _set_slot_equipped(false)
         else:
@@ -51,6 +60,7 @@ func _on_pressed() -> void:
                 else:
                     _set_slot_equipped(false)
                     PlayerManager.unequip(self)
+                PauseMenu.equip_ui.apply_delta_stats()
             else:
                 slot_data.quantity -= 1
                 # update quantity label in-place

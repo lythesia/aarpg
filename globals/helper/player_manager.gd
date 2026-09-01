@@ -6,6 +6,7 @@ signal PlayerLeveledUp
 
 signal PlayerEquipped(slot: InventorySlotUI)
 signal PlayerUnequipped(slot: InventorySlotUI)
+signal PlayerStatsUpdated
 
 var INVENTORY_DATA: InventoryData
 
@@ -80,8 +81,8 @@ func level_up() -> void:
     var leveled_up: bool = false
     while player.level < LEVEL_UP_XP.size() and player.xp >= LEVEL_UP_XP[player.level]:
         player.level += 1
-        player.atk += 1
-        player.def += 1
+        player.base_atk += 1
+        player.base_def += 1
         leveled_up = true
 
     if leveled_up:
@@ -90,9 +91,20 @@ func level_up() -> void:
 
 func equip(slot: InventorySlotUI) -> void:
     PlayerEquipped.emit(slot)
-    # todo: stats
 
 func unequip(slot: InventorySlotUI) -> void:
     PlayerUnequipped.emit(slot)
-    # todo: stats
+
+func apply_delta_stats(atk_delta: int, def_delta: int) -> void:
+    var _atk = player.base_atk + atk_delta
+    var _def = player.base_def + def_delta
+    var updated: bool = false
+    if _atk != player.atk:
+        player.atk = _atk
+        updated = true
+    if _def != player.def:
+        player.def = _def
+        updated = true
+    if updated:
+        PlayerStatsUpdated.emit()
 #endregion

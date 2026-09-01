@@ -12,7 +12,7 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="Resource" id="Resource_3qsa1"]
 script = ExtResource("3_ppfgg")
 type = 1
-value = 1
+value = 2
 metadata/_custom_type_script = "uid://sep36nxqotsq"
 
 [resource]

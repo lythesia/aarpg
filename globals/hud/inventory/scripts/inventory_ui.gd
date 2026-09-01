@@ -52,7 +52,16 @@ func calibrate_inventory_data() -> void:
     inventory_data.ensure_capacity()
 
 func update_item_desc(item_data: ItemData = null) -> void:
-    PauseMenu.item_desc_label.text = item_data.description if item_data else ""
+    var text: String
+    if item_data:
+        if item_data.item_type == ItemData.ItemType.EQUIPABLE:
+            var i: EquipableItemData = item_data as EquipableItemData
+            text = "%s  %s" % [i.description, i.stats_str()]
+        else:
+            text = item_data.description
+    else:
+        text = ""
+    PauseMenu.item_desc_label.text = text
 
 func update_coin_label() -> void:
     var n: int = inventory_data.currencies.get("Coin", 0)

@@ -26,7 +26,7 @@ func gather_quests() -> void:
 
     for v in quest_files:
         quests.append(load("{0}/{1}".format([QUEST_DATA_DIR, v])) as Quest)
-    print("loaded %d quests" % [quests.size()])
+    # print("loaded %d quests" % [quests.size()])
 
 ## accept quest only
 ## todo: do we want to check steps that already completed on accept?
