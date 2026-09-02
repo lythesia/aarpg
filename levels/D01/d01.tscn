@@ -23,6 +23,7 @@ position = Vector2(288, 224)
 target_level = "uid://cce13rldqs5om"
 target_name = "s01_to_d01"
 center_offset = true
+size = 2
 location = 3
 
 [node name="d01_to_d02" parent="LT" unique_id=63531301 instance=ExtResource("4_k7rmx")]
@@ -30,6 +31,7 @@ position = Vector2(288, 32)
 target_level = "uid://bt3dusube2cr1"
 target_name = "d02_to_d01"
 center_offset = true
+size = 2
 location = 2
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("3_fkfh8")]

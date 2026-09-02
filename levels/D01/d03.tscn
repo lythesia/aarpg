@@ -24,6 +24,7 @@ position = Vector2(0, 96)
 target_level = "uid://bt3dusube2cr1"
 target_name = "d02_to_d03"
 center_offset = true
+size = 2
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("3_yh8rw")]
 

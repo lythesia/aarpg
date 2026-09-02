@@ -19,12 +19,14 @@ position = Vector2(256, 224)
 target_level = "uid://t2fvdvalybdn"
 target_name = "d01_to_d02"
 center_offset = true
+size = 2
 location = 3
 
 [node name="d02_to_d03" parent="LT" unique_id=1175152996 instance=ExtResource("2_ky516")]
 position = Vector2(512, 96)
 target_level = "uid://d22r6jrmvxees"
 target_name = "d03_to_d02"
+size = 2
 location = 1
 
 [node name="d02_to_d04" parent="LT" unique_id=1959009138 instance=ExtResource("2_ky516")]
@@ -32,6 +34,7 @@ position = Vector2(256, -32)
 target_level = "uid://b5r3xpg3xccxn"
 target_name = "d04_to_d02"
 center_offset = true
+size = 2
 location = 2
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("3_bo1u1")]

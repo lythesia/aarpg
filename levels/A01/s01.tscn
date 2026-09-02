@@ -60,6 +60,7 @@ location = 3
 position = Vector2(544, 128)
 target_level = "uid://dl6nav0lhp6it"
 target_name = "s03_to_s01"
+size = 2
 location = 1
 
 [node name="s01_to_d01" parent="LT" unique_id=1495909631 instance=ExtResource("4_uv6ks")]
@@ -67,6 +68,7 @@ position = Vector2(240, 0)
 target_level = "uid://t2fvdvalybdn"
 target_name = "d01_to_s01"
 center_offset = true
+size = 2
 location = 2
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("3_d5g0j")]

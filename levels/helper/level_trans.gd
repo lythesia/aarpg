@@ -16,10 +16,16 @@ enum SIDE {
 #region exports
 @export_category("Target")
 ## target scene file
-@export_file("*.tscn") var target_level: String # avoid circular ref by using PackedScene instead of file path
+@export_file("*.tscn") var target_level: String: # avoid circular ref by using PackedScene instead of file path
+    set(v):
+        target_level = v
+        update_configuration_warnings()
 
 ## name of target scene's level transition
-@export var target_name: String = ""
+@export var target_name: String:
+    set(v):
+        target_name = v
+        update_configuration_warnings()
 
 @export_category("Size & Position")
 ## player collision shape width with some margin
@@ -33,7 +39,7 @@ const CELL_UNIT: int = 32
 @export var center_offset: bool = false
 
 ## box size in mutiples of 32px
-@export_range(2, 16, 1, "or_greater") var size: int = 2:
+@export_range(1, 16, 1, "or_greater") var size: int = 1:
     set(val):
         size = val
         apply_area_settings()
