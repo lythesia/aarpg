@@ -1,6 +1,8 @@
 @tool
 class_name InventorySlotUI extends Button
 
+const EQUIP_AUDIO: AudioStream = preload("uid://dfybcufblax1w")
+
 @onready var texture: TextureRect = $TextureRect
 @onready var label: Label = $Label
 @onready var inventory_ui: InventoryUI = $".."
@@ -57,6 +59,7 @@ func _on_pressed() -> void:
                 if !slot_data.equipped:
                     _set_slot_equipped(true)
                     PlayerManager.equip(self)
+                    Audio.play_ui_audio(EQUIP_AUDIO)
                 else:
                     _set_slot_equipped(false)
                     PlayerManager.unequip(self)

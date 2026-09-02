@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://di0sc2itjm1ll"]
 
-[ext_resource type="Texture2D" uid="uid://dafea2d0ne3tf" path="res://public/sprites/dungeon.png" id="1_kn0pu"]
+[ext_resource type="Texture2D" uid="uid://dafea2d0ne3tf" path="res://levels/tiles/sprites/dungeon.png" id="1_kn0pu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6hhtw"]
 texture = ExtResource("1_kn0pu")

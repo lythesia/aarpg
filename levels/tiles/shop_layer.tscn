@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://qftdpobieoan"]
+
+[ext_resource type="TileSet" uid="uid://fh0sju4ruppy" path="res://levels/tiles/shop.tres" id="1_ydk01"]
+
+[node name="ShopLayer" type="TileMapLayer" unique_id=955777256]
+tile_set = ExtResource("1_ydk01")
