@@ -247,6 +247,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "ATK"
+horizontal_alignment = 2
 
 [node name="AtkDeltaLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=354482976]
 layout_mode = 2
@@ -264,6 +265,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "DEF"
+horizontal_alignment = 2
 
 [node name="DefDeltaLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer2" unique_id=1368829329]
 layout_mode = 2

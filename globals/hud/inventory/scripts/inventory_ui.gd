@@ -10,6 +10,7 @@ const INVENTORY_SLOT = preload("uid://d28ga647y5dsu")
         update_configuration_warnings()
 
 var last_focused_slot: int = 0
+var hovered_slot: InventorySlotUI
 
 func _ready() -> void:
     # init all slots
@@ -37,6 +38,7 @@ func update_inventory(force_focus: bool = false) -> void:
     for i in inventory_data.slots.size():
         var slot_ui: InventorySlotUI = get_child(i)
         slot_ui.slot_data = inventory_data.slots[i]
+        connect_slot_signals(slot_ui)
     if force_focus and inventory_data.slots.size() > 0:
         get_child(0).grab_focus()
 
@@ -106,6 +108,32 @@ func _on_slot_focused() -> void:
 ## scene (re)load
 func connect_inventory_changed() -> void:
     inventory_data.changed.connect(_on_inventory_changed)
+
+func connect_slot_signals(slot: InventorySlotUI) -> void:
+    if !slot.button_up.is_connected(_on_slot_button_up):
+        slot.button_up.connect(_on_slot_button_up.bind(slot))
+
+    if !slot.mouse_entered.is_connected(_on_slot_mouse_entered):
+        slot.mouse_entered.connect(_on_slot_mouse_entered.bind(slot))
+
+    if !slot.mouse_exited.is_connected(_on_slot_mouse_exited):
+        slot.mouse_exited.connect(_on_slot_mouse_exited)
+
+# `slot` is the slot that was clicked, NOT the one released at
+# so we: 1. drop `slot`'s item to the hovered slot; 2. swap `slot` and `hovered_slot`
+# actually 2.swap equals 1.drop
+func _on_slot_button_up(slot: InventorySlotUI) -> void:
+    if !slot or slot == hovered_slot or !hovered_slot:
+        return
+
+    inventory_data.swap_slots_by_index(slot.get_index(), hovered_slot.get_index())
+
+func _on_slot_mouse_entered(slot: InventorySlotUI) -> void:
+    # current slot is hovered
+    hovered_slot = slot
+
+func _on_slot_mouse_exited() -> void:
+    hovered_slot = null
 
 func _get_configuration_warnings() -> PackedStringArray:
     if !inventory_data:

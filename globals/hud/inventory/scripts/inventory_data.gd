@@ -113,6 +113,12 @@ func clear() -> void:
     # re-init
     _init()
 
+func swap_slots_by_index(i: int, j: int) -> void:
+    var t: SlotData = slots[i]
+    slots[i] = slots[j]
+    slots[j] = t
+    emit_changed()
+
 #region save/load
 func load_from_dict(d: Deserializer, data: Dictionary) -> void:
     super(d, data)
