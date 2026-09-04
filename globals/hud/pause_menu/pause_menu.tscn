@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0cqku6rkw3e3" path="res://public/sprites/coin_split/coin1.png" id="6_kqlu6"]
 [ext_resource type="Texture2D" uid="uid://brs8q05k5c4yo" path="res://public/sprites/coin_split/coin2.png" id="7_ea3dv"]
 [ext_resource type="Texture2D" uid="uid://b24m2te4070sp" path="res://public/sprites/coin_split/coin3.png" id="8_7eg80"]
+[ext_resource type="Script" uid="uid://2ac3l0w0uk55" path="res://globals/hud/inventory/scripts/gear_item_ui.gd" id="8_sp8mn"]
 [ext_resource type="Texture2D" uid="uid://v8s7embhub22" path="res://public/sprites/coin_split/coin4.png" id="9_t4dq7"]
 [ext_resource type="Texture2D" uid="uid://blcfpcxqiutmk" path="res://public/sprites/coin_split/coin5.png" id="10_7ex7g"]
 [ext_resource type="Texture2D" uid="uid://cgth8i76tu4li" path="res://public/sprites/coin_split/coin6.png" id="11_1kdy4"]
@@ -17,6 +18,7 @@
 [ext_resource type="Script" uid="uid://c4ritk5q3sx" path="res://globals/hud/stats/stats_ui.gd" id="15_ahq01"]
 [ext_resource type="Script" uid="uid://c1wg41iwtfsyw" path="res://globals/hud/inventory/scripts/equip_ui.gd" id="15_qbi2l"]
 [ext_resource type="Script" uid="uid://chx2bmnmpgr05" path="res://globals/hud/quest/quests_ui.gd" id="15_t4dq7"]
+[ext_resource type="Texture2D" uid="uid://cwsutinathd26" path="res://public/sprites/ability-icons.png" id="16_7xcyj"]
 [ext_resource type="PackedScene" uid="uid://bpyrtxp63tl7k" path="res://globals/hud/inventory/equip_slot.tscn" id="16_qbi2l"]
 [ext_resource type="FontFile" uid="uid://imp7wpiw3o0n" path="res://npc/assets/fonts/Abaddon Bold.ttf" id="17_7ex7g"]
 [ext_resource type="PackedScene" uid="uid://devo3gsikybh2" path="res://globals/hud/quest/quest_step_ui.tscn" id="18_1kdy4"]
@@ -39,6 +41,37 @@ texture_margin_top = 14.0
 texture_margin_right = 14.0
 texture_margin_bottom = 14.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsqg7"]
+atlas = ExtResource("2_kq3wa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aabtn"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("AtlasTexture_lsqg7")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7lkw"]
+atlas = ExtResource("16_7xcyj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp8mn"]
+atlas = ExtResource("16_7xcyj")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xcyj"]
+atlas = ExtResource("16_7xcyj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykpvm"]
+atlas = ExtResource("16_7xcyj")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_aabtn"]
 frames = 8
 frame_0/texture = ExtResource("6_kqlu6")
@@ -57,21 +90,6 @@ frame_6/texture = ExtResource("12_ahq01")
 frame_6/duration = 0.1
 frame_7/texture = ExtResource("13_s0uh3")
 frame_7/duration = 0.1
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lsqg7"]
-atlas = ExtResource("2_kq3wa")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aabtn"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-texture = SubResource("AtlasTexture_lsqg7")
-texture_margin_left = 14.0
-texture_margin_top = 14.0
-texture_margin_right = 14.0
-texture_margin_bottom = 14.0
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=276449163]
 process_mode = 3
@@ -139,46 +157,201 @@ offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer" unique_id=543625981]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer" unique_id=673712746]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer" unique_id=543625981]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer" unique_id=721470964]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer" unique_id=721470964]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1159050716]
+[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1159050716]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_lsqg7")
 
-[node name="InventoryUI" type="GridContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=103548859 groups=["saveable"]]
+[node name="InventoryUI" type="GridContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=103548859 groups=["saveable"]]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 6
 script = ExtResource("3_yoby7")
 inventory_data = ExtResource("4_kgaf0")
 
-[node name="ItemDesc" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1617707275]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2107959953]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=2107043939]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_aabtn")
+
+[node name="EquipUI" type="GridContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer" unique_id=1960314887]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4
+script = ExtResource("15_qbi2l")
+
+[node name="SlotWeapon" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=982496357 instance=ExtResource("16_qbi2l")]
+layout_mode = 2
+
+[node name="SlotArmor" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=2102693383 instance=ExtResource("16_qbi2l")]
+layout_mode = 2
+equip_type = 1
+
+[node name="SlotAmulet" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=411927317 instance=ExtResource("16_qbi2l")]
+layout_mode = 2
+equip_type = 2
+
+[node name="SlotRing" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=310159519 instance=ExtResource("16_qbi2l")]
+layout_mode = 2
+equip_type = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=239193961]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=899507956]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "ATK"
+horizontal_alignment = 2
+
+[node name="AtkDeltaLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=354482976]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "+0"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1648859911]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2" unique_id=752139198]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "DEF"
+horizontal_alignment = 2
+
+[node name="DefDeltaLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2" unique_id=1368829329]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "+0"
+horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=2140736656]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=778866946]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_aabtn")
+
+[node name="AbilityContainer" type="GridContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2" unique_id=890623138]
+layout_mode = 2
+columns = 4
+
+[node name="Boomerang" type="Button" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer" unique_id=1489574721]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+script = ExtResource("8_sp8mn")
+description = "Boomerang, always return to you after thrown."
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/Boomerang" unique_id=1673936349]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_b7lkw")
+stretch_mode = 3
+
+[node name="GrapplingHook" type="Button" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer" unique_id=256863329]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+script = ExtResource("8_sp8mn")
+description = "This hook looks very grapply!"
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/GrapplingHook" unique_id=1247257807]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_sp8mn")
+stretch_mode = 3
+
+[node name="BowArrow" type="Button" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer" unique_id=779936753]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+script = ExtResource("8_sp8mn")
+description = "Trusty bow and arrow."
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/BowArrow" unique_id=1175809019]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_7xcyj")
+stretch_mode = 3
+
+[node name="ArrowCountLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/BowArrow" unique_id=1068321859]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 15.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_ea3dv")
+theme_override_font_sizes/font_size = 12
+text = "12"
+
+[node name="Bomb" type="Button" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer" unique_id=676728329]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+script = ExtResource("8_sp8mn")
+description = "Bomb, 4 sec fuse, keep it tight!"
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/Bomb" unique_id=92391209]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_ykpvm")
+stretch_mode = 3
+
+[node name="BombCountLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/Bomb" unique_id=868405024]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 15.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_ea3dv")
+theme_override_font_sizes/font_size = 12
+text = "12"
+
+[node name="ItemDesc" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer" unique_id=1617707275]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.69803923, 0.69803923, 0.69803923, 1)
 text = "A brown fox jumps over the lazy dog!"
+horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="CoinContainer" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1654721918]
+[node name="CoinContainer" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer" unique_id=1654721918]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="CoinLogo" type="Control" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer/CoinContainer" unique_id=1103758204]
+[node name="CoinLogo" type="Control" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/CoinContainer" unique_id=1103758204]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer/CoinContainer/CoinLogo" unique_id=1194538708]
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/CoinContainer/CoinLogo" unique_id=1194538708]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -193,12 +366,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AnimatedTexture_aabtn")
 
-[node name="CoinAmount" type="Control" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer/CoinContainer" unique_id=1318669551]
+[node name="CoinAmount" type="Control" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/CoinContainer" unique_id=1318669551]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="CoinLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer/CoinContainer/CoinAmount" unique_id=923425556]
+[node name="CoinLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/CoinContainer/CoinAmount" unique_id=923425556]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -209,70 +382,6 @@ offset_right = 8.0
 offset_bottom = 7.5
 grow_vertical = 2
 text = "0"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer" unique_id=2107959953]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=2107043939]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_aabtn")
-
-[node name="EquipUI" type="GridContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer" unique_id=1960314887]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 4
-script = ExtResource("15_qbi2l")
-
-[node name="SlotWeapon" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=982496357 instance=ExtResource("16_qbi2l")]
-layout_mode = 2
-
-[node name="SlotArmor" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=2102693383 instance=ExtResource("16_qbi2l")]
-layout_mode = 2
-equip_type = 1
-
-[node name="SlotAmulet" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=411927317 instance=ExtResource("16_qbi2l")]
-layout_mode = 2
-equip_type = 2
-
-[node name="SlotRing" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=310159519 instance=ExtResource("16_qbi2l")]
-layout_mode = 2
-equip_type = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=239193961]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=899507956]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "ATK"
-horizontal_alignment = 2
-
-[node name="AtkDeltaLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=354482976]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "+0"
-horizontal_alignment = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1648859911]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer2" unique_id=752139198]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "DEF"
-horizontal_alignment = 2
-
-[node name="DefDeltaLabel" type="Label" parent="Control/TabContainer/Inventory/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer2" unique_id=1368829329]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "+0"
-horizontal_alignment = 2
 
 [node name="Stats" type="Control" parent="Control/TabContainer" unique_id=517004029]
 unique_name_in_owner = true

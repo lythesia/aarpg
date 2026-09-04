@@ -63,10 +63,10 @@ func set_slot_data(value: SlotData):
 
 func _on_focus_entered() -> void:
     if slot_data:
-        inventory_ui.update_item_desc(slot_data.item_data)
+        inventory_ui.update_item_description(slot_data.item_data)
 
 func _on_focus_exited() -> void:
-    inventory_ui.update_item_desc()
+    inventory_ui.update_item_description()
 
 func _on_pressed() -> void:
     if slot_data and slot_data.item_data and !drag_threshold_reached():

@@ -11,6 +11,8 @@ signal PauseMenuHidden
 @onready var item_desc_label: Label = %ItemDesc
 @onready var coin_label: Label = %CoinLabel
 @onready var equip_ui: EquipUI = %EquipUI
+@onready var arrow_count_label: Label = %ArrowCountLabel
+@onready var bomb_count_label: Label = %BombCountLabel
 
 # stats tab
 @onready var stats: StatsUI = %Stats

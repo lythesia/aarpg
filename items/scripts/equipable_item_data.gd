@@ -29,5 +29,5 @@ func def() -> int:
             val += modifier.value
     return val
 
-func stats_str() -> String:
+func stats_description() -> String:
     return " ".join(modifiers.map(func(m: EquipableItemModifier) -> String: return m.to_str()))

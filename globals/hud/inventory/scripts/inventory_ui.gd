@@ -53,26 +53,39 @@ func calibrate_inventory_data() -> void:
         inventory_data.slots.erase(null)
     inventory_data.ensure_capacity()
 
-func update_item_desc(item_data: ItemData = null) -> void:
+func update_item_description(item_data: ItemData = null) -> void:
     var text: String
     if item_data:
         if item_data.item_type == ItemData.ItemType.EQUIPABLE:
             var i: EquipableItemData = item_data as EquipableItemData
-            text = "%s  %s" % [i.description, i.stats_str()]
+            text = "%s  %s" % [i.description, i.stats_description()]
         else:
             text = item_data.description
     else:
         text = ""
+    update_item_description_literal(text)
+
+func update_item_description_literal(text: String) -> void:
     PauseMenu.item_desc_label.text = text
 
 func update_coin_label() -> void:
     var n: int = inventory_data.currencies.get("Coin", 0)
     PauseMenu.coin_label.text = str(n)
 
+func update_arrow_count_label() -> void:
+    var player: Player = PlayerManager.get_player()
+    PauseMenu.arrow_count_label.text = str(player.arrow_count)
+
+func update_bomb_count_label() -> void:
+    var player: Player = PlayerManager.get_player()
+    PauseMenu.bomb_count_label.text = str(player.bomb_count)
+
 func _on_paused() -> void:
     update_inventory(true)
     update_slot_focus()
     update_coin_label()
+    update_arrow_count_label()
+    update_bomb_count_label()
 
     # connect during paused
     visibility_changed.connect(_on_visibility_changed)

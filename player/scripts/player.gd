@@ -142,6 +142,17 @@ func update_attack_damage() -> void:
     spin_aura_attack_area.damage_amount = atk
 #endregion
 
+#region abilities & gears
+const MAX_ARROW_COUNT: int = 99
+const MAX_BOMB_COUNT: int = 99
+var arrow_count: int = 0:
+    set(v):
+        arrow_count = clampi(v, 0, MAX_ARROW_COUNT)
+var bomb_count: int = 0:
+    set(v):
+        bomb_count = clampi(v, 0, MAX_BOMB_COUNT)
+#endregion
+
 #region save/load
 func save_to_dict(s: SaveKitSerializer) -> Dictionary:
     return {
@@ -153,6 +164,8 @@ func save_to_dict(s: SaveKitSerializer) -> Dictionary:
         "xp": xp,
         "base_atk": base_atk,
         "base_def": base_def,
+        "arrow_count": arrow_count,
+        "bomb_count": bomb_count,
     }
 
 func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
@@ -168,6 +181,8 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
         "xp": data.get("xp", 0),
         "base_atk": data.get("atk", 1),
         "base_def": data.get("def", 1),
+        "arrow_count": data.get("arrow_count", 0),
+        "bomb_count": data.get("bomb_count", 0),
     }
 #endregion
 
