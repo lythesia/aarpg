@@ -13,4 +13,5 @@ script = ExtResource("2_ivymc")
 name = "Coin"
 item_type = 0
 icon = SubResource("AtlasTexture_lsqg7")
+buy_price = 1
 metadata/_custom_type_script = "uid://cpirecojyj4v2"

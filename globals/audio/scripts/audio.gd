@@ -14,8 +14,8 @@ func _ready() -> void:
     ui.play()
     ui_audio_player = ui.get_stream_playback()
 
-func setup_button_audio(node: Node) -> void:
-    for c in node.find_children("*Btn", "Button"):
+func setup_button_audio(node: Node, static_only: bool = true) -> void:
+    for c in node.find_children("*Btn", "Button", true, static_only):
         (c as Button).focus_entered.connect(ui_focus_change)
         (c as Button).pressed.connect(ui_select)
 

@@ -1,0 +1,6 @@
+~ start
+Shopkeeper: Hi, may I interest you in my wares?
+- Yes
+	$> shopkeeper.show_shop_menu()
+- No, thanks
+=> END

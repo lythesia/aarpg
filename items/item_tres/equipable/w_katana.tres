@@ -24,4 +24,5 @@ name = "Katana"
 item_type = 3
 description = "A cutty blade."
 icon = SubResource("AtlasTexture_pklrb")
+buy_price = 500
 metadata/_custom_type_script = "uid://da6wv03h0ht42"

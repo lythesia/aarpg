@@ -26,6 +26,9 @@ enum ItemType {
 ## item's icon texture
 @export var icon: Texture2D
 
+## item's buy price
+@export var buy_price: int = 10
+
 ## item's use effects
 @export_category("Item Use Effects")
 @export var effects: Array[ItemEffect] = []

@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://kkccwag4tlj1"]
+
+[ext_resource type="Script" uid="uid://c6kjuthohl35b" path="res://items/interactable/shopkeeper/shopkeeper.gd" id="1_g4il0"]
+[ext_resource type="Script" uid="uid://cxhkslho7louh" path="res://npc/base/npc.gd" id="1_srceo"]
+[ext_resource type="Resource" uid="uid://bmtxr1pku1fu0" path="res://npc/npc_res/shopkeeper.tres" id="2_k2636"]
+[ext_resource type="Resource" uid="uid://cluuknh20ohvs" path="res://dialogue/shopkeeper.dialogue" id="3_g4il0"]
+[ext_resource type="Texture2D" uid="uid://b0ef1wwlhyhwo" path="res://npc/assets/sprites/shopkeeper.png" id="3_wtog6"]
+[ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="4_g4il0"]
+[ext_resource type="Texture2D" uid="uid://d4h35hbhydwrk" path="res://npc/assets/sprites/dialog_interactable.png" id="5_uk3j4"]
+[ext_resource type="Script" uid="uid://cd3222nx3y3k5" path="res://addons/dialogue_manager/nodes/context/dialogue_state_context.gd" id="8_uk3j4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ts7x6"]
+radius = 6.0
+height = 22.0
+
+[sub_resource type="Animation" id="Animation_i0kkw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ay7i2"]
+resource_name = "idle_down"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jk3bh"]
+resource_name = "idle_side"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_2dmc7"]
+resource_name = "idle_up"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_kr721"]
+resource_name = "walk_down"
+length = 0.3
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_oww1b"]
+resource_name = "walk_side"
+length = 0.3
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_3faf5"]
+resource_name = "walk_up"
+length = 0.3
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk3bh"]
+_data = {
+&"RESET": SubResource("Animation_i0kkw"),
+&"idle_down": SubResource("Animation_ay7i2"),
+&"idle_side": SubResource("Animation_jk3bh"),
+&"idle_up": SubResource("Animation_2dmc7"),
+&"walk_down": SubResource("Animation_kr721"),
+&"walk_side": SubResource("Animation_oww1b"),
+&"walk_up": SubResource("Animation_3faf5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tq1g"]
+size = Vector2(62, 20)
+
+[node name="Shopkeeper" type="Node2D" unique_id=975090332]
+script = ExtResource("1_g4il0")
+
+[node name="Npc" type="CharacterBody2D" parent="." unique_id=2065591414]
+z_index = 1
+motion_mode = 1
+script = ExtResource("1_srceo")
+npc_res = ExtResource("2_k2636")
+npc_dialog = ExtResource("3_g4il0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Npc" unique_id=536551846]
+position = Vector2(0, -20)
+texture = ExtResource("3_wtog6")
+hframes = 15
+
+[node name="ShadowSprite" type="Sprite2D" parent="Npc" unique_id=269856113]
+modulate = Color(0.16078432, 0.16078432, 0.16078432, 0.78431374)
+show_behind_parent = true
+texture = ExtResource("4_g4il0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Npc" unique_id=630967115]
+visible = false
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ts7x6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Npc" unique_id=1486669985]
+libraries/ = SubResource("AnimationLibrary_jk3bh")
+
+[node name="Label" type="Label" parent="Npc" unique_id=644413336]
+visible = false
+offset_left = -31.0
+offset_right = 33.0
+offset_bottom = 15.0
+theme_override_font_sizes/font_size = 10
+
+[node name="InteractArea" type="Area2D" parent="Npc" unique_id=454657276]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Npc/InteractArea" unique_id=959493774]
+position = Vector2(-4.3711387e-07, 0)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_5tq1g")
+
+[node name="InteractHint" type="Sprite2D" parent="Npc" unique_id=778463535]
+position = Vector2(2, -50)
+texture = ExtResource("5_uk3j4")
+hframes = 2
+
+[node name="DialogueStateContext" type="Node" parent="." unique_id=115039884 node_paths=PackedStringArray("target")]
+script = ExtResource("8_uk3j4")
+alias = "shopkeeper"
+target = NodePath("..")
+metadata/_custom_type_script = "uid://cd3222nx3y3k5"

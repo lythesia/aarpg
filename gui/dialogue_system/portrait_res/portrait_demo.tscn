@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://mic2m7rirmfc"]
 
-[ext_resource type="Texture2D" uid="uid://css1acs74bd8" path="res://gui/dialogue_system/portrait_res/npc1.tres" id="1_sguqj"]
+[ext_resource type="Texture2D" uid="uid://ctigky2jbxa6i" path="res://gui/dialogue_system/portrait_res/shopkeeper.tres" id="1_h5idq"]
 
 [node name="PortraitDemo" type="TextureRect" unique_id=1251028629]
-texture = ExtResource("1_sguqj")
+texture = ExtResource("1_h5idq")

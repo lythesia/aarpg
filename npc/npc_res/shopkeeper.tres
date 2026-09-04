@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NPCResource" format=3 uid="uid://bmtxr1pku1fu0"]
+
+[ext_resource type="Script" uid="uid://i71j60pth3y8" path="res://npc/base/npc_res.gd" id="1_s8uy2"]
+[ext_resource type="Texture2D" uid="uid://b0ef1wwlhyhwo" path="res://npc/assets/sprites/shopkeeper.png" id="2_3ap8h"]
+
+[resource]
+script = ExtResource("1_s8uy2")
+npc_name = "ShopKeeper"
+sprite = ExtResource("2_3ap8h")
+metadata/_custom_type_script = "uid://i71j60pth3y8"

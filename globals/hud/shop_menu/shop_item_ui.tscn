@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cvcjfmemha0n3"]
+
+[ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="1_pcexh"]
+[ext_resource type="Script" uid="uid://cdlmallhdcj7h" path="res://globals/hud/shop_menu/shop_item_ui.gd" id="1_t6yoi"]
+[ext_resource type="FontFile" uid="uid://dj0lbpkk8i7ug" path="res://npc/assets/fonts/Abaddon Light.ttf" id="2_4vrim"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="2_sdmvm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdmvm"]
+atlas = ExtResource("1_pcexh")
+region = Rect2(0, 0, 32, 32)
+
+[node name="ShopItemUI" type="Button" unique_id=144162890]
+custom_minimum_size = Vector2(220, 36)
+offset_right = 220.0
+offset_bottom = 36.0
+script = ExtResource("1_t6yoi")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1963101045]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 32.0
+offset_bottom = 34.0
+texture = SubResource("AtlasTexture_sdmvm")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="." unique_id=245265192]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 11.0
+offset_right = 164.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("2_4vrim")
+theme_override_font_sizes/font_size = 14
+text = "item label so long"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="PriceLabel" type="Label" parent="." unique_id=1763191243]
+layout_mode = 0
+offset_left = 173.0
+offset_top = 11.0
+offset_right = 213.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("2_sdmvm")
+text = "100"
+horizontal_alignment = 2

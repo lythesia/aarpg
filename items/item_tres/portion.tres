@@ -21,5 +21,6 @@ script = ExtResource("3_hqump")
 name = "Portion"
 description = "Heals you"
 icon = SubResource("AtlasTexture_3fqaq")
+buy_price = 25
 effects = Array[ExtResource("1_at4kb")]([SubResource("Resource_0v6hv")])
 metadata/_custom_type_script = "uid://cpirecojyj4v2"

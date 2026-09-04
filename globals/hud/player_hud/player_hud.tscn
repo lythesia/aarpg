@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://jbd4p43as3i1"]
 
 [ext_resource type="Texture2D" uid="uid://b0wk5qdhkbss7" path="res://public/sprites/gui-health.png" id="1_38j0b"]
-[ext_resource type="Script" uid="uid://bjj5jy383ijaf" path="res://globals/hud/player_hud.gd" id="1_76ewb"]
-[ext_resource type="PackedScene" uid="uid://btfkrowalm2ow" path="res://globals/hud/heart_gui.tscn" id="2_baoq0"]
+[ext_resource type="Script" uid="uid://bjj5jy383ijaf" path="res://globals/hud/player_hud/player_hud.gd" id="1_76ewb"]
+[ext_resource type="PackedScene" uid="uid://btfkrowalm2ow" path="res://globals/hud/player_hud/heart_gui.tscn" id="2_baoq0"]
 [ext_resource type="Texture2D" uid="uid://csorpoex447dl" path="res://public/sprites/boss-hp.png" id="4_81p1n"]
 [ext_resource type="Texture2D" uid="uid://p5ytuijgp527" path="res://public/sprites/panel_notification.png" id="5_c886e"]
 [ext_resource type="Script" uid="uid://dit2iq27ijvtb" path="res://globals/hud/notification/notification_ui.gd" id="5_whiia"]

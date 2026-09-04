@@ -13,4 +13,5 @@ script = ExtResource("2_cqypb")
 name = "Gem"
 description = "Precious"
 icon = SubResource("AtlasTexture_pcl0k")
+buy_price = 100
 metadata/_custom_type_script = "uid://cpirecojyj4v2"

@@ -25,4 +25,5 @@ name = "Tunic"
 item_type = 3
 description = "Clean and warm."
 icon = SubResource("AtlasTexture_pklrb")
+buy_price = 150
 metadata/_custom_type_script = "uid://da6wv03h0ht42"

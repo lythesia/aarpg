@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btfkrowalm2ow"]
 
-[ext_resource type="Script" uid="uid://cc3lgkqr4m1gt" path="res://globals/hud/heart_gui.gd" id="1_2pdi5"]
+[ext_resource type="Script" uid="uid://cc3lgkqr4m1gt" path="res://globals/hud/player_hud/heart_gui.gd" id="1_2pdi5"]
 [ext_resource type="Texture2D" uid="uid://b0wk5qdhkbss7" path="res://public/sprites/gui-health.png" id="1_btsyp"]
 
 [node name="Heart" type="Control" unique_id=394827981]

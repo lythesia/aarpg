@@ -24,4 +24,5 @@ name = "Iron Sword"
 item_type = 3
 description = "A standard iron sword."
 icon = SubResource("AtlasTexture_pklrb")
+buy_price = 150
 metadata/_custom_type_script = "uid://da6wv03h0ht42"

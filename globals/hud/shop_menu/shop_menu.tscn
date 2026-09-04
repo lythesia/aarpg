@@ -1,0 +1,319 @@
+[gd_scene format=3 uid="uid://duuphn430tnui"]
+
+[ext_resource type="Script" uid="uid://cxfxuuxlcntiw" path="res://globals/hud/shop_menu/shop_menu.gd" id="1_b7lkw"]
+[ext_resource type="FontFile" uid="uid://dj0lbpkk8i7ug" path="res://npc/assets/fonts/Abaddon Light.ttf" id="1_r1m51"]
+[ext_resource type="PackedScene" uid="uid://cvcjfmemha0n3" path="res://globals/hud/shop_menu/shop_item_ui.tscn" id="1_xo3s0"]
+[ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="2_xo3s0"]
+[ext_resource type="Texture2D" uid="uid://d0cqku6rkw3e3" path="res://public/sprites/coin_split/coin1.png" id="3_bf12h"]
+[ext_resource type="Texture2D" uid="uid://brs8q05k5c4yo" path="res://public/sprites/coin_split/coin2.png" id="4_yiywl"]
+[ext_resource type="Texture2D" uid="uid://b24m2te4070sp" path="res://public/sprites/coin_split/coin3.png" id="5_kdmul"]
+[ext_resource type="Texture2D" uid="uid://v8s7embhub22" path="res://public/sprites/coin_split/coin4.png" id="6_b7lkw"]
+[ext_resource type="Texture2D" uid="uid://blcfpcxqiutmk" path="res://public/sprites/coin_split/coin5.png" id="7_jm0v7"]
+[ext_resource type="Texture2D" uid="uid://cgth8i76tu4li" path="res://public/sprites/coin_split/coin6.png" id="8_vpmim"]
+[ext_resource type="Texture2D" uid="uid://b4f3a5xedjx3f" path="res://public/sprites/coin_split/coin7.png" id="9_rclj8"]
+[ext_resource type="Texture2D" uid="uid://8rd1f4x0eyqf" path="res://public/sprites/coin_split/coin8.png" id="10_bwifd"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="11_yiywl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsqg7"]
+atlas = ExtResource("2_xo3s0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cjajn"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("AtlasTexture_lsqg7")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdmul"]
+atlas = ExtResource("2_xo3s0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_kb5qx"]
+frames = 8
+frame_0/texture = ExtResource("3_bf12h")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("4_yiywl")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("5_kdmul")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("6_b7lkw")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("7_jm0v7")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("8_vpmim")
+frame_5/duration = 0.1
+frame_6/texture = ExtResource("9_rclj8")
+frame_6/duration = 0.1
+frame_7/texture = ExtResource("10_bwifd")
+frame_7/duration = 0.1
+
+[sub_resource type="Animation" id="Animation_yiywl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(384, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kdmul"]
+resource_name = "shake_coins"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0007176101, 0.05071761, 0.10071761, 0.15035881, 0.20035881, 0.25035882),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(384, 25), Vector2(382, 25), Vector2(386, 25), Vector2(384, 25), Vector2(382, 25), Vector2(386, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.8715731, 0.034552645, 0.034552645, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7lkw"]
+_data = {
+&"RESET": SubResource("Animation_yiywl"),
+&"shake_coins": SubResource("Animation_kdmul")
+}
+
+[node name="ShopMenu" type="CanvasLayer" unique_id=246451422]
+layer = 3
+script = ExtResource("1_b7lkw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1637540717]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20784314, 0.20784314, 0.20784314, 0.7411765)
+
+[node name="Label" type="Label" parent="." unique_id=2087911109]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 94.0
+offset_bottom = 34.0
+text = "Shopkeeper"
+
+[node name="Control" type="Control" parent="." unique_id=1999429944]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=852915319]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 252.0
+offset_bottom = -46.0
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ScrollContainer" unique_id=596709274]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ShopItemsContainer" type="VBoxContainer" parent="Control/ScrollContainer/MarginContainer" unique_id=113956390]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ShopItem" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=144162890 instance=ExtResource("1_xo3s0")]
+layout_mode = 2
+
+[node name="ShopItem2" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=1637508992 instance=ExtResource("1_xo3s0")]
+layout_mode = 2
+
+[node name="ShopItem3" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=1073661805 instance=ExtResource("1_xo3s0")]
+layout_mode = 2
+
+[node name="ShopItem4" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=121618927 instance=ExtResource("1_xo3s0")]
+layout_mode = 2
+
+[node name="ShopItem5" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=336774837 instance=ExtResource("1_xo3s0")]
+layout_mode = 2
+
+[node name="DetailsPanel" type="PanelContainer" parent="Control" unique_id=2137905044]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_top = 56.0
+offset_right = -16.0
+offset_bottom = -45.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cjajn")
+
+[node name="Control" type="Control" parent="Control/DetailsPanel" unique_id=1923663991]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/DetailsPanel/Control" unique_id=171867701]
+layout_mode = 0
+offset_left = 6.0
+offset_right = 183.0
+offset_bottom = 149.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/DetailsPanel/Control/VBoxContainer" unique_id=1541303484]
+layout_mode = 2
+
+[node name="ItemTexture" type="TextureRect" parent="Control/DetailsPanel/Control/VBoxContainer/HBoxContainer" unique_id=1100970759]
+unique_name_in_owner = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_kdmul")
+stretch_mode = 3
+
+[node name="ItemName" type="Label" parent="Control/DetailsPanel/Control/VBoxContainer/HBoxContainer" unique_id=444286223]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_r1m51")
+text = "Item Name"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/DetailsPanel/Control/VBoxContainer" unique_id=2025058765]
+layout_mode = 2
+
+[node name="ItemPrice" type="RichTextLabel" parent="Control/DetailsPanel/Control/VBoxContainer/HBoxContainer2" unique_id=1559373754]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 13)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("11_yiywl")
+theme_override_fonts/mono_font = ExtResource("11_yiywl")
+bbcode_enabled = true
+text = "[color=gray]Price[/color] 40"
+
+[node name="ItemHold" type="RichTextLabel" parent="Control/DetailsPanel/Control/VBoxContainer/HBoxContainer2" unique_id=270470956]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("11_yiywl")
+theme_override_fonts/mono_font = ExtResource("11_yiywl")
+bbcode_enabled = true
+text = "[color=gray]Hold[/color] 0"
+horizontal_alignment = 2
+
+[node name="ItemDesc" type="Label" parent="Control/DetailsPanel/Control/VBoxContainer" unique_id=1398500567]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6413951, 0.6413951, 0.6413951, 1)
+theme_override_fonts/font = ExtResource("11_yiywl")
+text = "Item Desc"
+
+[node name="CloseBtn" type="Button" parent="Control" unique_id=1766657398]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -38.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Close"
+
+[node name="CoinContainer" type="HBoxContainer" parent="Control" unique_id=1873707305]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 25.0
+offset_right = 458.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+
+[node name="CoinLogo" type="Control" parent="Control/CoinContainer" unique_id=1432758290]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CoinContainer/CoinLogo" unique_id=278293182]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_kb5qx")
+
+[node name="CoinAmount" type="Control" parent="Control/CoinContainer" unique_id=1049357920]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CoinLabel" type="Label" parent="Control/CoinContainer/CoinAmount" unique_id=1927680054]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_yiywl")
+text = "0"
+
+[node name="CoinAnimation" type="AnimationPlayer" parent="Control/CoinContainer" unique_id=781380417]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_b7lkw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1351981346]

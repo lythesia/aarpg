@@ -119,6 +119,18 @@ func swap_slots_by_index(i: int, j: int) -> void:
     slots[j] = t
     emit_changed()
 
+func get_item_hold_quantity(item: ItemData) -> int:
+    for slot in slots:
+        if slot and slot.item_data == item:
+            return slot.quantity
+    return 0
+
+func get_coin_amount() -> int:
+    return currencies.get("Coin", 0) as int
+
+func consume_coin(amount: int) -> void:
+    currencies["Coin"] -= amount
+
 #region save/load
 func load_from_dict(d: Deserializer, data: Dictionary) -> void:
     super(d, data)
