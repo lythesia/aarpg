@@ -14,7 +14,9 @@ func exit():
     pass
 
 func handle_input(event: InputEvent) -> PlayerState:
-    if event.is_action_pressed("Attack"):
+    if event.is_action_pressed("Dash"):
+        return player.fsm.dash
+    elif event.is_action_pressed("Attack"):
         return player.fsm.attack
     elif event.is_action_pressed("ui_accept"):
         PlayerManager.player_interact()

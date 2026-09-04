@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://tfign5084bd4" path="res://player/audio/throw.wav" id="22_3l1gv"]
 [ext_resource type="Script" uid="uid://dhohoiqfq7jkt" path="res://player/scripts/states/death.gd" id="23_tlx6e"]
 [ext_resource type="AudioStream" uid="uid://coukidj02g5t6" path="res://player/audio/exhausted.wav" id="24_1qqmx"]
+[ext_resource type="Script" uid="uid://cd3x2fnnehr64" path="res://player/scripts/states/dash.gd" id="28_rpcqc"]
 [ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="30_smv5u"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="31_d7607"]
 [ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="32_d7607"]
@@ -1399,6 +1400,57 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_rpcqc"]
+resource_name = "dash_down"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="Animation" id="Animation_j7tdl"]
+resource_name = "dash_side"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
+[sub_resource type="Animation" id="Animation_5b1wr"]
+resource_name = "dash_up"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
 [sub_resource type="Animation" id="Animation_11l1d"]
 resource_name = "death"
 length = 0.4
@@ -1800,6 +1852,9 @@ _data = {
 &"charge_walk_down": SubResource("Animation_3orul"),
 &"charge_walk_side": SubResource("Animation_nu80c"),
 &"charge_walk_up": SubResource("Animation_inmym"),
+&"dash_down": SubResource("Animation_rpcqc"),
+&"dash_side": SubResource("Animation_j7tdl"),
+&"dash_up": SubResource("Animation_5b1wr"),
 &"death": SubResource("Animation_11l1d"),
 &"idle_down": SubResource("Animation_t0cpu"),
 &"idle_side": SubResource("Animation_8h4do"),
@@ -2222,6 +2277,13 @@ unique_name_in_owner = true
 script = ExtResource("23_tlx6e")
 death_audio = ExtResource("24_1qqmx")
 metadata/_custom_type_script = "uid://dhohoiqfq7jkt"
+
+[node name="PlayerStateDash" type="Node" parent="PlayerStateMachine" unique_id=857353155]
+unique_name_in_owner = true
+script = ExtResource("28_rpcqc")
+effect_delay = 0.04
+dash_audio = ExtResource("20_uvxdc")
+metadata/_custom_type_script = "uid://cd3x2fnnehr64"
 
 [node name="Label" type="Label" parent="." unique_id=415583138]
 visible = false
