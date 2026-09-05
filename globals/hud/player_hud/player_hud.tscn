@@ -4,10 +4,39 @@
 [ext_resource type="Script" uid="uid://bjj5jy383ijaf" path="res://globals/hud/player_hud/player_hud.gd" id="1_76ewb"]
 [ext_resource type="PackedScene" uid="uid://btfkrowalm2ow" path="res://globals/hud/player_hud/heart_gui.tscn" id="2_baoq0"]
 [ext_resource type="Texture2D" uid="uid://csorpoex447dl" path="res://public/sprites/boss-hp.png" id="4_81p1n"]
+[ext_resource type="Texture2D" uid="uid://cwsutinathd26" path="res://public/sprites/ability-icons.png" id="4_88mkb"]
 [ext_resource type="Texture2D" uid="uid://p5ytuijgp527" path="res://public/sprites/panel_notification.png" id="5_c886e"]
 [ext_resource type="Script" uid="uid://dit2iq27ijvtb" path="res://globals/hud/notification/notification_ui.gd" id="5_whiia"]
 [ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="6_00ovc"]
 [ext_resource type="AudioStream" uid="uid://36mutrdbekrp" path="res://public/audio/notification.wav" id="7_00ovc"]
+
+[sub_resource type="Gradient" id="Gradient_xof03"]
+offsets = PackedFloat32Array(0, 0.43781096, 0.7910448)
+colors = PackedColorArray(1, 1, 1, 0.70000005, 0.77603394, 0.77110195, 0.77110195, 0.5, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aabtn"]
+gradient = SubResource("Gradient_xof03")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsqg7"]
+atlas = ExtResource("4_88mkb")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sg0d"]
+atlas = ExtResource("4_88mkb")
+region = Rect2(144, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ct8f1"]
+atlas = ExtResource("4_88mkb")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbhex"]
+atlas = ExtResource("4_88mkb")
+region = Rect2(128, 0, 16, 16)
 
 [sub_resource type="Animation" id="Animation_76ewb"]
 length = 0.001
@@ -287,6 +316,95 @@ layout_mode = 2
 [node name="Heart20" parent="Control/HeartsContainer" unique_id=612713074 instance=ExtResource("2_baoq0")]
 layout_mode = 2
 
+[node name="Abilities" type="Control" parent="Control" unique_id=143195900]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 16.0
+offset_right = -80.0
+offset_bottom = 56.0
+grow_horizontal = 0
+
+[node name="AbilitiesContainer" type="HBoxContainer" parent="Control/Abilities" unique_id=1599283194]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 24.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/AbilitiesContainer" unique_id=1535664927]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_aabtn")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/AbilitiesContainer/TextureRect" unique_id=1531353138]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_lsqg7")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Abilities/AbilitiesContainer" unique_id=751612690]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_aabtn")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/AbilitiesContainer/TextureRect2" unique_id=1311708691]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_3sg0d")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="Control/Abilities/AbilitiesContainer" unique_id=1101812359]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_aabtn")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/AbilitiesContainer/TextureRect3" unique_id=723452599]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_ct8f1")
+stretch_mode = 3
+
+[node name="ArrowCountLabel" type="Label" parent="Control/Abilities/AbilitiesContainer/TextureRect3" unique_id=197298537]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 18.0
+offset_right = 24.0
+offset_bottom = 33.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_00ovc")
+theme_override_font_sizes/font_size = 12
+text = "99"
+horizontal_alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Control/Abilities/AbilitiesContainer" unique_id=1868281652]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_aabtn")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/AbilitiesContainer/TextureRect4" unique_id=478126755]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_hbhex")
+stretch_mode = 3
+
+[node name="BombCountLabel" type="Label" parent="Control/Abilities/AbilitiesContainer/TextureRect4" unique_id=319747892]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 18.0
+offset_right = 24.0
+offset_bottom = 33.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_00ovc")
+theme_override_font_sizes/font_size = 12
+text = "99"
+horizontal_alignment = 1
+
 [node name="GameOver" type="Control" parent="Control" unique_id=556165440]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
@@ -345,6 +463,7 @@ libraries/ = SubResource("AnimationLibrary_j4n6q")
 
 [node name="BossHud" type="Control" parent="Control" unique_id=1061448884]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

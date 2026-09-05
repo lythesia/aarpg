@@ -2,6 +2,11 @@ extends CanvasLayer
 
 @onready var hearts_container: HFlowContainer = %HeartsContainer
 
+@onready var abilities: Control = %Abilities
+@onready var abilities_container: HBoxContainer = %AbilitiesContainer
+@onready var arrow_count_label: Label = %ArrowCountLabel
+@onready var bomb_count_label: Label = %BombCountLabel
+
 @onready var game_over_screen: Control = %GameOver
 @onready var cont_btn: Button = %ContBtn
 @onready var title_btn: Button = %TitleBtn
@@ -27,6 +32,8 @@ func _ready() -> void:
 
     hide_game_over()
     hide_boss_hud()
+
+    update_ability_ui(0)
 
 func update_hp(hp: int, max_hp: int):
     update_max_hp(max_hp)
@@ -88,3 +95,21 @@ func update_boss_hp(hp: int, max_hp: int) -> void:
 
 func queue_notification(title: String, message: String) -> void:
     notification_ui.push_notification(title, message)
+
+func update_ability_ui(idx: int, audio: bool = false) -> void:
+    for c in abilities_container.get_children():
+        c.self_modulate = Color.TRANSPARENT
+        c.modulate = Color(0.6, 0.6, 0.6, 0.8)
+
+    var ability: CanvasItem = abilities_container.get_child(idx)
+    ability.self_modulate = Color.WHITE
+    ability.modulate = Color.WHITE
+
+    if audio:
+        Audio.ui_focus_change()
+
+func update_arrow_count_label(count: int) -> void:
+    arrow_count_label.text = str(count)
+
+func update_bomb_count_label(count: int) -> void:
+    bomb_count_label.text = str(count)

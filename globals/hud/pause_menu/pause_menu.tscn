@@ -270,13 +270,13 @@ offset_bottom = 32.0
 texture = SubResource("AtlasTexture_b7lkw")
 stretch_mode = 3
 
-[node name="GrapplingHook" type="Button" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer" unique_id=256863329]
+[node name="Grapple" type="Button" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer" unique_id=256863329]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 script = ExtResource("8_sp8mn")
 description = "This hook looks very grapply!"
 
-[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/GrapplingHook" unique_id=1247257807]
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/AbilityContainer/Grapple" unique_id=1247257807]
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
