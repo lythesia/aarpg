@@ -15,3 +15,6 @@ collision_mask = 96
 script = ExtResource("2_hjekd")
 damage_amount = 1
 metadata/_custom_type_script = "uid://c7tcshhj8j0ts"
+
+[node name="WallDetect" type="Area2D" parent="." unique_id=1988249934]
+collision_layer = 0

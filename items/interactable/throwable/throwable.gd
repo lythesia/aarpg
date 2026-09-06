@@ -7,6 +7,7 @@ class_name Throwable extends Area2D
 
 # @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_area: AttackArea = $AttackArea
+@onready var wall_detect: Area2D = $WallDetect
 
 var picked_up: bool = false
 var throwable_object: Node2D
@@ -21,7 +22,7 @@ func _ready() -> void:
     area_entered.connect(_on_area_entered)
     area_exited.connect(_on_area_exited)
     throwable_object = get_parent() # item must be parent
-    setup_attack_area()
+    setup_collision_boxes()
 
     # sprite must be child of throwable_object and named "Sprite2D"
     object_sprite = throwable_object.find_child("Sprite2D")
@@ -37,17 +38,18 @@ func _physics_process(delta: float) -> void:
     object_sprite.position.y += verticle_velocity * delta
     # check if hit "ground"
     if object_sprite.position.y >= ground_height:
-        destroy()
+        hit_ground()
 
     verticle_velocity += gravity_strength * delta
     throwable_object.position += throw_dir * throw_speed * delta
 
 
 ## config throwable_object colli box, and damage area will use this duplicate too
-func setup_attack_area() -> void:
+func setup_collision_boxes() -> void:
     for c in find_children("*", "CollisionShape2D"):
         if !c: continue
         attack_area.add_child(c.duplicate())
+        wall_detect.add_child(c.duplicate())
         return
     assert(false, "No CollisionShape2D found")
 
@@ -79,6 +81,11 @@ func _on_player_interacted() -> void:
         area_exited.disconnect(_on_area_exited)
         picked_up = true
 
+func _on_wall_detected(body: Node2D) -> void:
+    # todo: actually we want to re-group wall and wall-likes
+    if body is TileMapLayer:
+        hit_wall()
+
 ## actually we only want to disable static_body
 func _disable_collision(node: Node) -> void:
     for c in node.find_children("*", "CollisionShape2D"):
@@ -91,6 +98,7 @@ func _enable_collision(node: Node) -> void:
         (c as CollisionShape2D).disabled = false
 
 func throw() -> void:
+    picked_up = false
     throwable_object.reparent.call_deferred(get_tree().current_scene, false) # don't keep global position
     throwable_object.position = PlayerManager.get_player().position
     object_sprite.position.y = - throw_starting_height
@@ -98,7 +106,10 @@ func throw() -> void:
     set_physics_process(true)
 
     attack_area.set_active.call_deferred(true)
-    attack_area.DamageDealt.connect(destroy)
+    attack_area.DamageDealt.connect(attack_damage_dealt)
+
+    # todo: why can't we set `monitoring=true` here? and why `monitorable` needs to be true?
+    wall_detect.body_entered.connect(_on_wall_detected)
 
 func drop() -> void:
     throwable_object.reparent.call_deferred(get_tree().current_scene, false)
@@ -107,6 +118,7 @@ func drop() -> void:
     verticle_velocity = -100
     throw_speed = 0 # just falling in-place
     set_physics_process(true)
+    wall_detect.body_entered.connect(_on_wall_detected)
 
 func destroy() -> void:
     set_physics_process(false)
@@ -114,3 +126,12 @@ func destroy() -> void:
         animation_player.play("destroy")
         await animation_player.animation_finished
     throwable_object.queue_free()
+
+func hit_ground() -> void:
+    destroy()
+
+func hit_wall() -> void:
+    destroy()
+
+func attack_damage_dealt() -> void:
+    destroy()
