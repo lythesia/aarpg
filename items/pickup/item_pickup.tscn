@@ -2,14 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dn4w8ptdgiq8j" path="res://items/pickup/item_pickup.gd" id="1_5evqp"]
 [ext_resource type="Script" uid="uid://b3gxxo3lbv5us" path="res://general/effects/floating.gd" id="3_apwkj"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="4_eukcy"]
 [ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="4_tcqwi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aabtn"]
 
 [node name="ItemPickup" type="CharacterBody2D" unique_id=2085438971]
+z_index = 1
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_5evqp")
+item_count = null
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=209384752]
 modulate = Color(0.16078432, 0.16078432, 0.16078432, 0.78431374)
@@ -35,3 +38,15 @@ shape = SubResource("CircleShape2D_aabtn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=879429178]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_aabtn")
+
+[node name="CountLabel" type="Label" parent="." unique_id=1298814984]
+offset_top = -8.0
+offset_right = 15.0
+offset_bottom = 7.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_eukcy")
+theme_override_font_sizes/font_size = 12
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1

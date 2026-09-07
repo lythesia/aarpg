@@ -66,7 +66,6 @@ func bow_ability() -> void:
         return
 
     player.arrow_count -= 1
-    PlayerHud.update_arrow_count_label(player.arrow_count)
     var arrow: Projectile = ARROW.instantiate()
     player.add_sibling(arrow)
     var fire_dir: Vector2 = player.cardinal_dir
@@ -88,7 +87,6 @@ func bomb_ability() -> void:
         return
 
     player.bomb_count -= 1
-    PlayerHud.update_bomb_count_label(player.bomb_count)
     var bomb: Node2D = BOMB.instantiate()
     player.add_sibling(bomb)
     bomb_instance = bomb

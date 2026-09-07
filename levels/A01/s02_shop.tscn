@@ -13,6 +13,10 @@
 [ext_resource type="Resource" uid="uid://dwmbiwabnojq4" path="res://items/item_tres/apple.tres" id="7_r766s"]
 [ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="8_r2nue"]
 [ext_resource type="Resource" uid="uid://8qgcg0rmriho" path="res://items/item_tres/gem.tres" id="9_epv0d"]
+[ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="14_wqtt8"]
+[ext_resource type="Resource" uid="uid://cf7wc0xjmvsxp" path="res://items/item_tres/arrow.tres" id="15_r766s"]
+[ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="16_r2nue"]
+[ext_resource type="Resource" uid="uid://bxgig654qh00u" path="res://items/item_tres/bomb.tres" id="17_r766s"]
 
 [node name="S02Shop" type="Node2D" unique_id=1118334564]
 y_sort_enabled = true
@@ -64,4 +68,16 @@ position = Vector2(375, 89)
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("4_43yg5")]
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("6_gt6xf")]
-position = Vector2(183, 191)
+position = Vector2(137, 187)
+
+[node name="Arrow" parent="." unique_id=2085438971 instance=ExtResource("14_wqtt8")]
+position = Vector2(232, 176)
+item_data = ExtResource("15_r766s")
+item_count = 10
+pickup_audio = ExtResource("16_r2nue")
+
+[node name="Bomb" parent="." unique_id=355698847 instance=ExtResource("14_wqtt8")]
+position = Vector2(264, 176)
+item_data = ExtResource("17_r766s")
+item_count = 10
+pickup_audio = ExtResource("16_r2nue")

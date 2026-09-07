@@ -11,6 +11,7 @@ enum TextureType {
 }
 
 @export var item_data: ItemData: set = _set_item_data
+@export var item_count: int = 1: set = _set_item_count
 @export var pickup_audio: AudioStream
 @export var has_shadow: bool = true: set = _set_has_shadow
 @export var texture_type: TextureType: set = _set_texture_type
@@ -18,12 +19,14 @@ enum TextureType {
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var area: Area2D = $Area2D
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
+@onready var count_label: Label = $CountLabel
 
 func _ready() -> void:
     if !has_shadow:
         shadow_sprite.visible = false
 
     _update_texture()
+    _update_count_label()
     _update_shadow()
 
     if Engine.is_editor_hint():
@@ -33,7 +36,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
     if body is Player and item_data:
-        if PlayerManager.INVENTORY_DATA.add_item(item_data):
+        if PlayerManager.INVENTORY_DATA.add_item(item_data, item_count):
             item_picked_up(body)
             PickedUp.emit(item_data)
 
@@ -44,6 +47,10 @@ func _set_item_data(value: ItemData) -> void:
         _update_texture()
         update_configuration_warnings()
 
+func _set_item_count(value: int) -> void:
+    item_count = value
+    _update_count_label()
+
 func _update_texture() -> void:
     match texture_type:
         TextureType.ITEM_DATA:
@@ -53,6 +60,15 @@ func _update_texture() -> void:
                 sprite.texture = null
         TextureType.CUSTOM:
             pass
+
+func _update_count_label() -> void:
+    if !item_data or !count_label:
+        return
+
+    if item_count > 1:
+        count_label.text = str(item_count)
+    else:
+        count_label.text = ""
 
 func _set_has_shadow(value: bool) -> void:
     has_shadow = value

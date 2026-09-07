@@ -13,6 +13,9 @@ enum ItemType {
 
     ## equipable items
     EQUIPABLE,
+
+    ## ammunition items
+    AMMO,
 }
 
 ## item's name, use as uniq key

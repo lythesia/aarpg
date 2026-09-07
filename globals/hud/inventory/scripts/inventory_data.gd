@@ -31,6 +31,8 @@ func add_item(item_data: ItemData, quantity: int = 1) -> bool:
             ok = _add_currency(item_data, quantity)
         ItemData.ItemType.EQUIPABLE:
             ok = _add_equipable(item_data)
+        ItemData.ItemType.AMMO:
+            ok = _add_ammo(item_data, quantity)
         _:
             ok = _add_consumable(item_data, quantity)
     if ok:
@@ -79,6 +81,14 @@ func _add_equipable(item_data: ItemData) -> bool:
     # 3. no slots, inventory is full
     print("inventory is full")
     return false
+
+func _add_ammo(item_data: ItemData, quantity: int) -> bool:
+    var player: Player = PlayerManager.get_player()
+    match item_data.name:
+        "Bomb": player.bomb_count += quantity
+        "Arrow": player.arrow_count += quantity
+        _: pass
+    return true
 
 func _connect_slots():
     for slot in slots:
