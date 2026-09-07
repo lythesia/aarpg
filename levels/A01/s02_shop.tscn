@@ -13,7 +13,6 @@
 [ext_resource type="Resource" uid="uid://dwmbiwabnojq4" path="res://items/item_tres/apple.tres" id="7_r766s"]
 [ext_resource type="Resource" uid="uid://dbwm6mt68w6gl" path="res://items/item_tres/portion.tres" id="8_r2nue"]
 [ext_resource type="Resource" uid="uid://8qgcg0rmriho" path="res://items/item_tres/gem.tres" id="9_epv0d"]
-[ext_resource type="PackedScene" uid="uid://dlwdds08vw7p1" path="res://player/abilities/bomb/bomb.tscn" id="14_kfrec"]
 
 [node name="S02Shop" type="Node2D" unique_id=1118334564]
 y_sort_enabled = true
@@ -66,6 +65,3 @@ position = Vector2(375, 89)
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("6_gt6xf")]
 position = Vector2(183, 191)
-
-[node name="Bomb" parent="." unique_id=727172515 instance=ExtResource("14_kfrec")]
-position = Vector2(142, 188)

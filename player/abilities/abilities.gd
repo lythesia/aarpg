@@ -1,6 +1,7 @@
 class_name PlayerAbilities extends Node
 
 const BOOMERANG: PackedScene = preload("uid://cse55h7xmknxa")
+const BOMB: PackedScene = preload("uid://dlwdds08vw7p1")
 
 enum Ability {
     BOOMERANG, GRAPPLE, BOW, BOMB,
@@ -9,6 +10,7 @@ enum Ability {
 var selected_ability: Ability = Ability.BOOMERANG
 var player: Player
 var boomerang_instance: Boomerang
+var bomb_instance: Node2D
 
 func _ready() -> void:
     player = PlayerManager.get_player()
@@ -25,7 +27,7 @@ func _unhandled_input(event: InputEvent) -> void:
             Ability.BOW:
                 pass
             Ability.BOMB:
-                pass
+                bomb_ability()
     elif event.is_action_pressed("RB"):
         next_ability()
     elif event.is_action_pressed("LB"):
@@ -53,3 +55,28 @@ func boomerang_ability() -> void:
     var throw_dir = player.cardinal_dir
     boomerang.throw(throw_dir)
     boomerang_instance = boomerang
+
+func bomb_ability() -> void:
+    if player.bomb_count <= 0:
+        return
+
+    # only one at a time allowed
+    if bomb_instance:
+        return
+
+    # only allowed in [idle, walk]
+    if player.fsm.current_state not in [player.fsm.idle, player.fsm.walk]:
+        return
+
+    player.bomb_count -= 1
+    PlayerHud.update_bomb_count_label(player.bomb_count)
+    var bomb: Node2D = BOMB.instantiate()
+    player.add_sibling(bomb)
+    bomb_instance = bomb
+
+    PlayerManager.interact_handled = false
+    var throwable: Throwable = bomb.get_node("Throwable")
+    # start animation offset in seconds
+    # todo: better ways like enter with event
+    player.fsm.lift.start_anime_offset = 0.15
+    throwable._on_player_interacted()

@@ -6,16 +6,22 @@ extends PlayerState
 
 @export var lift_audio: AudioStream
 
+# start animation offset in seconds
+var start_anime_offset: float = 0.0
+
 func init():
     pass
 
 func enter():
     player.update_animation("lift")
+    if start_anime_offset > 0:
+        player.anim_player.seek(start_anime_offset)
     player.anim_player.animation_finished.connect(_on_animation_finished.unbind(1))
 
     Audio.play_spatial_sound(lift_audio, player.global_position)
 
 func exit():
+    start_anime_offset = 0.0 # reset
     player.anim_player.animation_finished.disconnect(_on_animation_finished)
 
 func handle_input(_event: InputEvent) -> PlayerState:

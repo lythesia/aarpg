@@ -145,10 +145,10 @@ func update_attack_damage() -> void:
 #region abilities & gears
 const MAX_ARROW_COUNT: int = 99
 const MAX_BOMB_COUNT: int = 99
-var arrow_count: int = 0:
+var arrow_count: int = 10:
     set(v):
         arrow_count = clampi(v, 0, MAX_ARROW_COUNT)
-var bomb_count: int = 0:
+var bomb_count: int = 10:
     set(v):
         bomb_count = clampi(v, 0, MAX_BOMB_COUNT)
 #endregion
@@ -181,8 +181,8 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
         "xp": data.get("xp", 0),
         "base_atk": data.get("atk", 1),
         "base_def": data.get("def", 1),
-        "arrow_count": data.get("arrow_count", 0),
-        "bomb_count": data.get("bomb_count", 0),
+        "arrow_count": data.get("arrow_count", 10),
+        "bomb_count": data.get("bomb_count", 10),
     }
 #endregion
 
