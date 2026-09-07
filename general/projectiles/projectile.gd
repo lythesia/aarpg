@@ -20,7 +20,7 @@ func _ready() -> void:
             attack_area.DamageDealt.connect(_on_damage_dealt)
         elif c is AnimationPlayer:
             animation_player = c
-        elif c is Sprite2D:
+        elif c is Sprite2D and c.name == "Sprite2D": # main sprite must named "Sprite2D"
             sprite = c
 
     _lifetime_timer()
@@ -36,10 +36,14 @@ func _physics_process(delta: float) -> void:
     if colli:
         destory(true)
 
-## fire the projectile
-func start(target: Vector2) -> void:
+## fire the projectile at target
+func start_targeted(target: Vector2) -> void:
     var dir = global_position.direction_to(target)
-    rotate(dir.angle())
+    start_directed(dir)
+
+## fire the projectile in direction
+func start_directed(dir: Vector2) -> void:
+    _rotate_sprites(dir.angle())
     velocity = dir * move_speed
     Audio.play_spatial_sound(spawn_audio, position)
     show()
@@ -65,3 +69,6 @@ func destory(play_audio: bool = false):
         await animation_player.animation_finished
 
     queue_free()
+
+func _rotate_sprites(radians: float) -> void:
+    rotate(radians)

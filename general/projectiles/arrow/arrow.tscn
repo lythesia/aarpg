@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bd851tbou8scp"]
+
+[ext_resource type="Texture2D" uid="uid://ceqi2887cpq5e" path="res://public/sprites/arrow.png" id="1_ftegy"]
+[ext_resource type="Script" uid="uid://birw0rye2v7e6" path="res://general/projectiles/arrow/arrow.gd" id="1_ro17i"]
+[ext_resource type="Script" uid="uid://6l6bkw5ewj28" path="res://general/hitbox/hazard_area.gd" id="2_wiynh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
+size = Vector2(24, 6)
+
+[node name="Arrow" type="CharacterBody2D" unique_id=1170809668]
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_ro17i")
+move_speed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1034389054]
+position = Vector2(0, -12)
+texture = ExtResource("1_ftegy")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=241793570]
+modulate = Color(0.050980393, 0.050980393, 0.050980393, 0.21568628)
+texture = ExtResource("1_ftegy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1523035655]
+visible = false
+shape = SubResource("RectangleShape2D_aabtn")
+disabled = true
+
+[node name="HazardArea" type="Area2D" parent="." unique_id=1866938657]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("2_wiynh")
+damage_amount = 1
+metadata/_custom_type_script = "uid://6l6bkw5ewj28"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea" unique_id=748526041]
+shape = SubResource("RectangleShape2D_aabtn")

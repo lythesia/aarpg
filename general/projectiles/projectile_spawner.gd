@@ -19,7 +19,7 @@ func fire(target_position: Vector2, delay: float = 0.0) -> void:
     p.global_position = global_position
 
     if p is Projectile:
-        p.start(target_position)
+        p.start_targeted(target_position)
 
 func fire_at_player(delay: float = 0.0) -> void:
     var player = PlayerManager.get_player()

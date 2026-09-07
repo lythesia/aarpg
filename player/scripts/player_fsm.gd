@@ -10,6 +10,7 @@ class_name PlayerStateMachine extends Node
 @onready var carry: PlayerStateCarry = %PlayerStateCarry
 @onready var death: PlayerStateDeath = %PlayerStateDeath
 @onready var dash: PlayerStateDash = %PlayerStateDash
+@onready var draw_bow: PlayerStateDrawBow = %PlayerStateDrawBow
 
 const MAX_STATES: int = 3
 

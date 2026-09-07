@@ -2,6 +2,7 @@ class_name PlayerAbilities extends Node
 
 const BOOMERANG: PackedScene = preload("uid://cse55h7xmknxa")
 const BOMB: PackedScene = preload("uid://dlwdds08vw7p1")
+const ARROW: PackedScene = preload("uid://bd851tbou8scp")
 
 enum Ability {
     BOOMERANG, GRAPPLE, BOW, BOMB,
@@ -25,7 +26,7 @@ func _unhandled_input(event: InputEvent) -> void:
             Ability.GRAPPLE:
                 pass
             Ability.BOW:
-                pass
+                bow_ability()
             Ability.BOMB:
                 bomb_ability()
     elif event.is_action_pressed("RB"):
@@ -55,6 +56,24 @@ func boomerang_ability() -> void:
     var throw_dir = player.cardinal_dir
     boomerang.throw(throw_dir)
     boomerang_instance = boomerang
+
+func bow_ability() -> void:
+    if player.arrow_count <= 0:
+        return
+
+    # only allowed in [idle, walk]
+    if player.fsm.current_state not in [player.fsm.idle, player.fsm.walk]:
+        return
+
+    player.arrow_count -= 1
+    PlayerHud.update_arrow_count_label(player.arrow_count)
+    var arrow: Projectile = ARROW.instantiate()
+    player.add_sibling(arrow)
+    var fire_dir: Vector2 = player.cardinal_dir
+    arrow.global_position = player.global_position + fire_dir * 32.0
+    arrow.start_directed(fire_dir)
+
+    player.fsm.change_state(player.fsm.draw_bow)
 
 func bomb_ability() -> void:
     if player.bomb_count <= 0:
