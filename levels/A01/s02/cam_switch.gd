@@ -6,7 +6,7 @@ extends Node2D
 
 func _ready() -> void:
     PlayerManager.PlayerRepositioned.connect(func(_p):
-        # I dont' know what the fuck needs 200 frames here to make sure the player is repositioned?!
+        # Q: I dont' know what the fuck needs so many frames here to make sure the player is repositioned?!
         for _f in 120:
             await get_tree().process_frame
         peak_area.body_entered.connect(_enter_peak_area)

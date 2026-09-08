@@ -1,6 +1,7 @@
 class_name InventoryData extends SaveKitResource
 
 signal GainItem(item_data: ItemData, quantity: int)
+signal GainAbility(ability: PlayerAbilities.Ability)
 
 ## inventory size
 @export var capacity: int = 24
@@ -25,6 +26,9 @@ func ensure_capacity() -> void:
     slots.resize(capacity)
 
 func add_item(item_data: ItemData, quantity: int = 1) -> bool:
+    if item_data is AbilityItemData:
+        return _add_ability(item_data)
+
     var ok: bool = false
     match item_data.item_type:
         ItemData.ItemType.CURRENCY:
@@ -88,6 +92,10 @@ func _add_ammo(item_data: ItemData, quantity: int) -> bool:
         "Bomb": player.bomb_count += quantity
         "Arrow": player.arrow_count += quantity
         _: pass
+    return true
+
+func _add_ability(item: AbilityItemData) -> bool:
+    GainAbility.emit(item.ability_type)
     return true
 
 func _connect_slots():

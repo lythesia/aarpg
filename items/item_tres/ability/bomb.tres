@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityItemData" format=3 uid="uid://bowhqisfcr5cl"]
+
+[ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_mg08e"]
+[ext_resource type="Texture2D" uid="uid://cwsutinathd26" path="res://public/sprites/ability-icons.png" id="2_44htr"]
+[ext_resource type="Script" uid="uid://c7x1ojwxxm2lt" path="res://items/scripts/ability_item_data.gd" id="3_8k0it"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg08e"]
+atlas = ExtResource("2_44htr")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("3_8k0it")
+ability_type = 3
+name = "Bomb"
+item_type = 2
+icon = SubResource("AtlasTexture_mg08e")
+buy_price = 0
+metadata/_custom_type_script = "uid://c7x1ojwxxm2lt"

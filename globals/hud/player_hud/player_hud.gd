@@ -33,8 +33,6 @@ func _ready() -> void:
     hide_game_over()
     hide_boss_hud()
 
-    update_ability_ui(0)
-
 func update_hp(hp: int, max_hp: int):
     update_max_hp(max_hp)
     for i in roundi(max_hp * 0.5):
@@ -96,7 +94,17 @@ func update_boss_hp(hp: int, max_hp: int) -> void:
 func queue_notification(title: String, message: String) -> void:
     notification_ui.push_notification(title, message)
 
-func update_ability_ui(idx: int, audio: bool = false) -> void:
+func update_abilitiy_items(vs: Array[PlayerAbilities.Ability], selected_ability: PlayerAbilities.Ability) -> void:
+    for c in abilities_container.get_children():
+        if c.get_index() as PlayerAbilities.Ability in vs:
+            c.visible = true
+        else:
+            c.visible = false
+
+    if selected_ability in vs:
+        update_ability_ui_select(selected_ability as int)
+
+func update_ability_ui_select(idx: int, audio: bool = false) -> void:
     for c in abilities_container.get_children():
         c.self_modulate = Color.TRANSPARENT
         c.modulate = Color(0.6, 0.6, 0.6, 0.8)

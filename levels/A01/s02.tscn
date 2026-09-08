@@ -7,11 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="4_ynnnl"]
 [ext_resource type="PackedScene" uid="uid://b1n22nmeyvf6o" path="res://levels/helper/level_trans_interact.tscn" id="5_xqo8v"]
 [ext_resource type="PackedScene" uid="uid://cbeyyi0b7djq8" path="res://items/interactable/grapple_post/grapple_post.tscn" id="7_j3ars"]
+[ext_resource type="PackedScene" uid="uid://dhb7dvw2yb6cr" path="res://items/interactable/chest/chest.tscn" id="8_q5jxl"]
 [ext_resource type="PackedScene" uid="uid://d37qt1qv4fkcm" path="res://npc/base/npc.tscn" id="8_tmjfs"]
+[ext_resource type="Resource" uid="uid://ciy5vtj5vipiy" path="res://items/item_tres/ability/boomerang.tres" id="9_5ynds"]
 [ext_resource type="Resource" uid="uid://fkksn7r82804" path="res://npc/npc_res/npc_01.tres" id="9_6b7mu"]
 [ext_resource type="PackedScene" uid="uid://3lbx7hbyn7kp" path="res://npc/base/npc_behavior_wander.tscn" id="9_k6tnk"]
+[ext_resource type="Resource" uid="uid://c7sg4l2xiqsy6" path="res://items/item_tres/ability/grapple.tres" id="10_omkjm"]
 [ext_resource type="Resource" uid="uid://cjsa8oajhtduf" path="res://dialogue/npc1.dialogue" id="10_xqo8v"]
 [ext_resource type="Resource" uid="uid://dqgisarh6t5yh" path="res://npc/npc_res/npc_02.tres" id="11_58rao"]
+[ext_resource type="Resource" uid="uid://df1qwe43x1h33" path="res://items/item_tres/ability/bow.tres" id="11_iwchl"]
+[ext_resource type="Resource" uid="uid://bowhqisfcr5cl" path="res://items/item_tres/ability/bomb.tres" id="12_6ebg1"]
 [ext_resource type="PackedScene" uid="uid://xk7lyoj3u2mm" path="res://npc/base/npc_behavior_patrol.tscn" id="12_rc8lg"]
 [ext_resource type="Resource" uid="uid://c56pkj0tlomb7" path="res://dialogue/npc2.dialogue" id="13_om7qf"]
 [ext_resource type="PackedScene" uid="uid://wkf8xv4y4ito" path="res://npc/base/patrol_location.tscn" id="13_rc8lg"]
@@ -60,6 +65,7 @@ location = 2
 unique_name_in_owner = true
 
 [node name="Items" type="Node2D" parent="." unique_id=1178438954]
+z_index = 1
 y_sort_enabled = true
 
 [node name="GrapplePost" parent="Items" unique_id=1642882670 instance=ExtResource("7_j3ars")]
@@ -67,6 +73,26 @@ position = Vector2(64, 232)
 
 [node name="GrapplePost2" parent="Items" unique_id=111641373 instance=ExtResource("7_j3ars")]
 position = Vector2(128, 416)
+
+[node name="Chest" parent="Items" unique_id=1270411528 instance=ExtResource("8_q5jxl")]
+position = Vector2(24, 160)
+item_data = ExtResource("9_5ynds")
+persistent_key = "s02/chest01"
+
+[node name="Chest2" parent="Items" unique_id=880387243 instance=ExtResource("8_q5jxl")]
+position = Vector2(64, 160)
+item_data = ExtResource("10_omkjm")
+persistent_key = "s02/chest02"
+
+[node name="Chest3" parent="Items" unique_id=886560294 instance=ExtResource("8_q5jxl")]
+position = Vector2(104, 160)
+item_data = ExtResource("11_iwchl")
+persistent_key = "s02/chest03"
+
+[node name="Chest4" parent="Items" unique_id=1681041497 instance=ExtResource("8_q5jxl")]
+position = Vector2(144, 160)
+item_data = ExtResource("12_6ebg1")
+persistent_key = "s02/chest04"
 
 [node name="Npc1" parent="." unique_id=2065591414 instance=ExtResource("8_tmjfs")]
 position = Vector2(129, 85)

@@ -8,18 +8,51 @@ enum Ability {
     BOOMERANG, GRAPPLE, BOW, BOMB,
 }
 
-var selected_ability: Ability = Ability.BOOMERANG
+var abilities: Array[Ability] = [] # should ordered as: [BOOMERANG, GRAPPLE, BOW, BOMB]
+var selected_ability: Ability
 var player: Player
 var boomerang_instance: Boomerang
 var bomb_instance: Node2D
 
 func _ready() -> void:
     player = PlayerManager.get_player()
-    PlayerHud.update_arrow_count_label(player.arrow_count)
-    PlayerHud.update_bomb_count_label(player.bomb_count)
+    update_ability_ui()
+
+    PlayerManager.INVENTORY_DATA.GainAbility.connect(add_ability)
+
+func set_abilities(vs: Array) -> void:
+    for v in vs:
+        if v is int or v is Ability:
+            var a: Ability = v as Ability
+            if a not in abilities:
+                abilities.append(a)
+
+    update_ability_ui()
+
+func add_ability(a: Ability) -> void:
+    if a in abilities:
+        return
+    abilities.append(a)
+    abilities.sort() # keep ordered
+    # the first ability added
+    if abilities.size() == 1:
+        selected_ability = a
+
+    update_ability_ui()
+
+func update_ability_ui() -> void:
+    PlayerHud.update_abilitiy_items(abilities, selected_ability)
+    PauseMenu.ability_container.update_ability_items(abilities)
+
+    if Ability.BOW in abilities:
+        PlayerHud.update_arrow_count_label(player.arrow_count)
+    if Ability.BOMB in abilities:
+        PlayerHud.update_bomb_count_label(player.bomb_count)
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("Skill"):
+        if abilities.is_empty():
+            return
         match selected_ability:
             Ability.BOOMERANG:
                 boomerang_ability()
@@ -35,12 +68,20 @@ func _unhandled_input(event: InputEvent) -> void:
         prev_ability()
 
 func next_ability() -> void:
-    selected_ability = (selected_ability + 1) % Ability.size() as Ability
-    PlayerHud.update_ability_ui(selected_ability, true)
+    var idx: int = abilities.find(selected_ability)
+    if idx == -1:
+        return
+    idx = (idx + 1) % abilities.size()
+    selected_ability = abilities[idx]
+    PlayerHud.update_ability_ui_select(selected_ability, true)
 
 func prev_ability() -> void:
-    selected_ability = (selected_ability - 1 + Ability.size()) % Ability.size() as Ability
-    PlayerHud.update_ability_ui(selected_ability, true)
+    var idx: int = abilities.find(selected_ability)
+    if idx == -1:
+        return
+    idx = (idx - 1 + abilities.size()) % abilities.size()
+    selected_ability = abilities[idx]
+    PlayerHud.update_ability_ui_select(selected_ability, true)
 
 func boomerang_ability() -> void:
     # only one at a time allowed

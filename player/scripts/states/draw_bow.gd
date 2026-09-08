@@ -21,6 +21,7 @@ func process(_delta: float) -> PlayerState:
     return STAY
 
 func physics_process(_delta: float) -> PlayerState:
+    player.velocity = Vector2.ZERO
     return STAY
 
 func _on_animation_finished(_anim: String) -> void:

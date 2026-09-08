@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityItemData" format=3 uid="uid://ciy5vtj5vipiy"]
+
+[ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_auapk"]
+[ext_resource type="Texture2D" uid="uid://cwsutinathd26" path="res://public/sprites/ability-icons.png" id="2_66wwx"]
+[ext_resource type="Script" uid="uid://c7x1ojwxxm2lt" path="res://items/scripts/ability_item_data.gd" id="2_lls4t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onvfh"]
+atlas = ExtResource("2_66wwx")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_lls4t")
+name = "Boomerang"
+item_type = 2
+icon = SubResource("AtlasTexture_onvfh")
+buy_price = 0
+metadata/_custom_type_script = "uid://c7x1ojwxxm2lt"

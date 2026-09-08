@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityItemData" format=3 uid="uid://df1qwe43x1h33"]
+
+[ext_resource type="Script" uid="uid://yiou8wv75kwx" path="res://items/effects/item_effect.gd" id="1_vbuuu"]
+[ext_resource type="Texture2D" uid="uid://cwsutinathd26" path="res://public/sprites/ability-icons.png" id="2_1lkli"]
+[ext_resource type="Script" uid="uid://c7x1ojwxxm2lt" path="res://items/scripts/ability_item_data.gd" id="3_mpi2c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbuuu"]
+atlas = ExtResource("2_1lkli")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+script = ExtResource("3_mpi2c")
+ability_type = 2
+name = "Bow"
+item_type = 2
+icon = SubResource("AtlasTexture_vbuuu")
+buy_price = 0
+metadata/_custom_type_script = "uid://c7x1ojwxxm2lt"

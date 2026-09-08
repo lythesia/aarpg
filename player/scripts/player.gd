@@ -15,6 +15,7 @@ signal DirectionChanged(dir: Vector2)
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var held_item: Node2D = $Sprite/HeldItem
 @onready var camera_emitter: PhantomCameraNoiseEmitter2D = %PlayerCameraNoiseEmitter
+@onready var abilities: PlayerAbilities = %Abilities
 
 @onready var label: Label = $Label
 
@@ -47,8 +48,7 @@ func _ready() -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
     if _event.is_action_pressed("Test"):
-        for pcam in PhantomCameraManager.get_phantom_camera_2ds():
-            print("%s: prio=%d active=%s" % [pcam.name, pcam.get_priority(), pcam.is_active()])
+        abilities.add_ability(PlayerAbilities.Ability.BOW)
     pass
 
 # func _unhandled_input(_event: InputEvent) -> void:
@@ -148,10 +148,14 @@ const MAX_ARROW_COUNT: int = 99
 const MAX_BOMB_COUNT: int = 99
 var arrow_count: int = 0:
     set(v):
+        if PlayerAbilities.Ability.BOW not in abilities.abilities:
+            return
         arrow_count = clampi(v, 0, MAX_ARROW_COUNT)
         PlayerHud.update_arrow_count_label(arrow_count)
 var bomb_count: int = 0:
     set(v):
+        if PlayerAbilities.Ability.BOMB not in abilities.abilities:
+            return
         bomb_count = clampi(v, 0, MAX_BOMB_COUNT)
         PlayerHud.update_bomb_count_label(bomb_count)
 #endregion
@@ -167,6 +171,7 @@ func save_to_dict(s: SaveKitSerializer) -> Dictionary:
         "xp": xp,
         "base_atk": base_atk,
         "base_def": base_def,
+        "abilities": s.encode_var(abilities.abilities),
         "arrow_count": arrow_count,
         "bomb_count": bomb_count,
     }
@@ -175,9 +180,12 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
     var scene: String = data.get("scene", SceneHelper.DEFAULT_SCENE)
     SceneHelper.scene_to_load = ResourceUID.path_to_uid(scene) # used to change scene later
 
-    var decoded = d.decode_var(data["pos"], TYPE_VECTOR2)
+    var decoded_pos = d.decode_var(data["pos"], TYPE_VECTOR2)
+    var decoded_abilities = d.decode_var(data.get("abilities", []), TYPE_ARRAY)
+    abilities.set_abilities(decoded_abilities)
+
     player_to_load = {
-        "pos": decoded if decoded is Vector2 else Vector2.ZERO,
+        "pos": decoded_pos if decoded_pos is Vector2 else Vector2.ZERO,
         "hp": data.get("hp", DEFAULT_HP),
         "max_hp": data.get("max_hp", DEFAULT_HP),
         "level": data.get("level", 1),
@@ -198,6 +206,8 @@ func setup_player_on_load() -> void:
     xp = player_to_load["xp"]
     base_atk = player_to_load["base_atk"]
     base_def = player_to_load["base_def"]
+    arrow_count = player_to_load["arrow_count"]
+    bomb_count = player_to_load["bomb_count"]
 
 func lift_item(throwable: Throwable) -> void:
     # shift throwable_object from parent to player's held item

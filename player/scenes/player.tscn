@@ -2431,6 +2431,7 @@ unique_name_in_owner = true
 collision_mask = 9
 
 [node name="Abilities" type="Node" parent="." unique_id=73244148]
+unique_name_in_owner = true
 script = ExtResource("16_28gy6")
 
 [node name="Effects" type="Node" parent="." unique_id=1670182555]
