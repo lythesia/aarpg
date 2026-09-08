@@ -131,31 +131,25 @@ func _grapple_player() -> void:
 
     # disable player's related collision
     player.set_collision_mask_value(LAYER_GRAPPLE_OBSTACLES, false)
-    var dur: float = collision_dist / grapple_speed
-    tween = create_tween()
-    tween.tween_property(nine_patch_rect, "size", Vector2(nine_patch_rect.size.x, nine_patch_size), dur)
-
-    var target_pos: Vector2 = player.global_position + player.cardinal_dir * collision_dist
-    # adjust hook
-    # hook handle = 16px, hook head = 9px, position coord at end of handle
-    # up:
-    #   player_pos - 20, 20 + 16 + x + 9 = dist, x = dist - 45
-    # down:
-    #   player_pos - 10, 6 + x + 9 = dist, x = dist - 15
-    # left:
-    #   player_pos - 10, 10 + 16 + x + 9 = dist, x = dist - 35
-    # right:
-    #   player_pos + 10, 10 + 16 + x + 9 = dist, x = dist - 35
+    var hook_dur: float
     match player.cardinal_dir:
         Vector2.UP:
-            target_pos -= player.cardinal_dir * 45 * .5
+            hook_dur = (collision_dist - 45) / grapple_speed
         Vector2.DOWN:
-            target_pos -= player.cardinal_dir * 15 * .5
+            hook_dur = (collision_dist - 15) / grapple_speed
         _:
-            target_pos -= player.cardinal_dir * 35 * .5
+            hook_dur = (collision_dist - 25) / grapple_speed
+
+    var dur: float = (collision_dist - 10) / grapple_speed
+    tween = create_tween()
+    tween.tween_property(nine_patch_rect, "size", Vector2(nine_patch_rect.size.x, nine_patch_size), hook_dur)
+    tween.parallel().tween_callback(grapple_hook.hide).set_delay(hook_dur)
+
+    var target_pos: Vector2 = player.global_position + player.cardinal_dir * collision_dist
+    target_pos -= player.cardinal_dir * 10
     tween.parallel().tween_property(player, "global_position", target_pos, dur).set_ease(Tween.EASE_OUT)
     player.damage_area.make_invulnerable(dur)
-    tween.tween_callback(_grapple_finished)
+    tween.finished.connect(_grapple_finished)
 
 func _grapple_return() -> void:
     if tween:
