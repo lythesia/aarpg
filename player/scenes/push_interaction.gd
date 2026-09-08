@@ -1,11 +1,11 @@
 @tool
-class_name PushInteraction extends PlayerInteraction
+class_name PushInteraction extends Area2D
+
+@onready var player: Player = owner
 
 var pushable: Pushable = null
 
 func _ready() -> void:
-    super()
-
     if Engine.is_editor_hint():
         return
 
@@ -33,3 +33,11 @@ func _on_body_exited(body: Node2D) -> void:
     if body is Pushable and pushable == body:
         pushable.push_dir = Vector2.ZERO # clear push direction also when exit
         pushable = null
+
+func _get_configuration_warnings() -> PackedStringArray:
+    if !_is_owner_player():
+        return ["Owner must be a Player"]
+    return []
+
+func _is_owner_player() -> bool:
+    return owner is Player

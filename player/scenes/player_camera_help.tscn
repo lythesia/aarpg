@@ -25,6 +25,7 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 unique_name_in_owner = true
 top_level = true
 script = ExtResource("3_r0s5o")
+priority = 1
 follow_mode = 2
 tween_resource = SubResource("Resource_pcl0k")
 tween_on_load = false

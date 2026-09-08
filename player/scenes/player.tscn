@@ -35,9 +35,16 @@
 [ext_resource type="Script" uid="uid://cd3x2fnnehr64" path="res://player/scripts/states/dash.gd" id="28_rpcqc"]
 [ext_resource type="Script" uid="uid://dc65lqgnngt10" path="res://player/scripts/states/draw_bow.gd" id="29_j7tdl"]
 [ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="30_smv5u"]
+[ext_resource type="Script" uid="uid://d0ihs7wnmbh2r" path="res://player/scripts/states/fire_grapple.gd" id="30_yscy4"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="31_d7607"]
+[ext_resource type="AudioStream" uid="uid://cfjvbvictm1cf" path="res://public/audio/grapple_fire.wav" id="31_vl2ak"]
 [ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="32_d7607"]
+[ext_resource type="AudioStream" uid="uid://xii6ucm0mawj" path="res://public/audio/grapple_stick.wav" id="32_yarkk"]
+[ext_resource type="AudioStream" uid="uid://dro82t4vox305" path="res://public/audio/grapple_clang.wav" id="33_7p5c2"]
 [ext_resource type="PackedScene" uid="uid://bqavlqscu48p4" path="res://general/footstep_audio/footstep_audio_2d.tscn" id="36_l4d2u"]
+[ext_resource type="Texture2D" uid="uid://i6yd43i6t7a8" path="res://public/sprites/grapple.png" id="39_5b1wr"]
+[ext_resource type="AudioStream" uid="uid://bs0mlrcpouqn2" path="res://public/audio/grapple_chain.wav" id="44_pemyq"]
+[ext_resource type="Script" uid="uid://6l6bkw5ewj28" path="res://general/hitbox/hazard_area.gd" id="44_yarkk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
@@ -821,7 +828,7 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id="Animation_yscy4"]
 resource_name = "bow_down"
-length = 0.19999999999999998
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -838,7 +845,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_hec70"]
 resource_name = "bow_side"
-length = 0.19999999999999998
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -855,7 +862,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_gu7ks"]
 resource_name = "bow_up"
-length = 0.19999999999999998
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2135,13 +2142,13 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6mua"]
 radius = 13.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsqg7"]
+radius = 50.01
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7x70"]
 size = Vector2(10, 2)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_lsqg7"]
-radius = 50.01
 
 [sub_resource type="Resource" id="Resource_aabtn"]
 script = ExtResource("31_d7607")
@@ -2156,9 +2163,13 @@ emission_box_extents = Vector3(12, 10, 1)
 gravity = Vector3(0, -250, 0)
 scale_max = 2.5
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lsqg7"]
+size = Vector2(12, 10)
+
 [node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player", "saveable"]]
 z_index = 1
 collision_layer = 16
+collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
 script = ExtResource("1_87uja")
@@ -2345,6 +2356,16 @@ unique_name_in_owner = true
 script = ExtResource("29_j7tdl")
 metadata/_custom_type_script = "uid://dc65lqgnngt10"
 
+[node name="PlayerStateFireGrapple" type="Node" parent="PlayerStateMachine" unique_id=1476699572]
+unique_name_in_owner = true
+script = ExtResource("30_yscy4")
+grapple_distance = 180.0
+grapple_speed = 400.0
+fire_audio = ExtResource("31_vl2ak")
+stick_audio = ExtResource("32_yarkk")
+clang_audio = ExtResource("33_7p5c2")
+metadata/_custom_type_script = "uid://d0ihs7wnmbh2r"
+
 [node name="Label" type="Label" parent="." unique_id=415583138]
 visible = false
 anchors_preset = 15
@@ -2372,31 +2393,6 @@ metadata/_custom_type_script = "uid://b60no6xp6h8jr"
 visible = false
 shape = SubResource("CircleShape2D_d6mua")
 
-[node name="Interaction" type="Area2D" parent="." unique_id=1781928421]
-visible = false
-position = Vector2(0, -9)
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-script = ExtResource("14_l7x70")
-metadata/_custom_type_script = "uid://cg5catbhgwqsf"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction" unique_id=1931404224]
-position = Vector2(0, 20)
-shape = SubResource("RectangleShape2D_aabtn")
-
-[node name="PushInteraction" type="Area2D" parent="." unique_id=1416879563]
-visible = false
-position = Vector2(0, -5)
-collision_layer = 0
-monitorable = false
-script = ExtResource("15_utphg")
-metadata/_custom_type_script = "uid://cg5catbhgwqsf"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PushInteraction" unique_id=1460382571]
-position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_l7x70")
-
 [node name="ItemMagnet" parent="." unique_id=1694817827 instance=ExtResource("16_d8q1f")]
 visible = false
 magnet_strength = 2.0
@@ -2404,6 +2400,35 @@ magnet_strength = 2.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemMagnet" unique_id=214836098]
 position = Vector2(0, -20)
 shape = SubResource("CircleShape2D_lsqg7")
+
+[node name="Interactions" type="Node2D" parent="." unique_id=110730628]
+script = ExtResource("14_l7x70")
+
+[node name="Interaction" type="Area2D" parent="Interactions" unique_id=1184213051]
+visible = false
+position = Vector2(0, -9)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Interaction" unique_id=1931404224]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_aabtn")
+
+[node name="PushInteraction" type="Area2D" parent="Interactions" unique_id=1412924443]
+visible = false
+position = Vector2(0, -5)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_utphg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/PushInteraction" unique_id=1460382571]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_l7x70")
+
+[node name="GrappleRaycast" type="RayCast2D" parent="Interactions" unique_id=931284219]
+unique_name_in_owner = true
+collision_mask = 9
 
 [node name="Abilities" type="Node" parent="." unique_id=73244148]
 script = ExtResource("16_28gy6")
@@ -2442,3 +2467,47 @@ process_material = SubResource("ParticleProcessMaterial_lsqg7")
 bus = &"SFX"
 
 [node name="FootstepAudio2D" parent="." unique_id=1587448789 instance=ExtResource("36_l4d2u")]
+
+[node name="GrappleHook" type="Node2D" parent="." unique_id=304315714]
+unique_name_in_owner = true
+position = Vector2(0, -14)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GrappleHook" unique_id=293119561]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 25.0
+grow_horizontal = 2
+texture = ExtResource("39_5b1wr")
+patch_margin_top = 16
+patch_margin_bottom = 9
+axis_stretch_vertical = 1
+
+[node name="Control" type="Control" parent="GrappleHook/NinePatchRect" unique_id=1650555059]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GrappleHookHazardArea" type="Area2D" parent="GrappleHook/NinePatchRect/Control" unique_id=1792530626 groups=["Player"]]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("44_yarkk")
+damage_amount = 1
+metadata/_custom_type_script = "uid://6l6bkw5ewj28"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleHook/NinePatchRect/Control/GrappleHookHazardArea" unique_id=1820734254]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_lsqg7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GrappleHook" unique_id=1573073289]
+stream = ExtResource("44_pemyq")
+bus = &"SFX"

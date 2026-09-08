@@ -24,7 +24,7 @@ func _unhandled_input(event: InputEvent) -> void:
             Ability.BOOMERANG:
                 boomerang_ability()
             Ability.GRAPPLE:
-                pass
+                grapple_ability()
             Ability.BOW:
                 bow_ability()
             Ability.BOMB:
@@ -56,6 +56,13 @@ func boomerang_ability() -> void:
     var throw_dir = player.cardinal_dir
     boomerang.throw(throw_dir)
     boomerang_instance = boomerang
+
+func grapple_ability() -> void:
+    # only allowed in [idle, walk]
+    if player.fsm.current_state not in [player.fsm.idle, player.fsm.walk]:
+        return
+
+    player.fsm.change_state(player.fsm.fire_grapple)
 
 func bow_ability() -> void:
     if player.arrow_count <= 0:

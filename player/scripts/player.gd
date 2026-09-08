@@ -46,8 +46,9 @@ func _ready() -> void:
     PlayerManager.PlayerLeveledUp.connect(_on_player_leveled_up)
 
 func _unhandled_input(_event: InputEvent) -> void:
-    # if event.is_action_pressed("Test"):
-    #     shake_trauma()
+    if _event.is_action_pressed("Test"):
+        for pcam in PhantomCameraManager.get_phantom_camera_2ds():
+            print("%s: prio=%d active=%s" % [pcam.name, pcam.get_priority(), pcam.is_active()])
     pass
 
 # func _unhandled_input(_event: InputEvent) -> void:

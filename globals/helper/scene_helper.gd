@@ -131,7 +131,10 @@ func level_transition(
     player.damage_area.set_deferred("monitorable", false)
     # todo: need `AutoWalk` state if we want to auto walk player pass through transition
 
-    await SceneManager.change_scene(target_scene)
+    await SceneManager.change_scene(target_scene, {
+        # "on_fade_out": player._disable_collisions,
+        # "on_fade_in": player._enable_collisions,
+    })
     Messages.ChangeSceneFinished.emit()
 
     player.damage_area.set_deferred("monitorable", true)

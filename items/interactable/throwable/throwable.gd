@@ -55,14 +55,14 @@ func setup_collision_boxes() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-    if area is PlayerInteraction:
+    var player: Player = PlayerManager.get_player()
+    if area.owner == player:
         PlayerManager.PlayerInteracted.connect(_on_player_interacted)
-    pass
 
 func _on_area_exited(area: Area2D) -> void:
-    if area is PlayerInteraction:
+    var player: Player = PlayerManager.get_player()
+    if area.owner == player:
         PlayerManager.PlayerInteracted.disconnect(_on_player_interacted)
-    pass
 
 func _on_player_interacted() -> void:
     if PlayerManager.interact_handled:

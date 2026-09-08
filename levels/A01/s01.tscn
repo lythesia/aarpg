@@ -82,16 +82,19 @@ y_sort_enabled = true
 [node name="Apple" parent="Items" unique_id=2085438971 instance=ExtResource("7_e8gkl")]
 position = Vector2(-11, 53)
 item_data = ExtResource("8_r434y")
+item_count = 1
 pickup_audio = ExtResource("9_pcl0k")
 
 [node name="Katana" parent="Items" unique_id=163477879 instance=ExtResource("7_e8gkl")]
 position = Vector2(1, 261)
 item_data = ExtResource("10_5a37w")
+item_count = 1
 pickup_audio = ExtResource("9_pcl0k")
 
 [node name="Sword" parent="Items" unique_id=241234698 instance=ExtResource("7_e8gkl")]
 position = Vector2(37, 262)
 item_data = ExtResource("11_ppvy3")
+item_count = 1
 pickup_audio = ExtResource("9_pcl0k")
 
 [node name="Chest" parent="Items" unique_id=1270411528 instance=ExtResource("10_r434y")]

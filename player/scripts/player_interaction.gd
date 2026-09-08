@@ -1,7 +1,7 @@
 # activate area when player press "interaction"
 # detect by target area's _on_entered
 @tool
-class_name PlayerInteraction extends Area2D
+class_name PlayerInteraction extends Node2D
 
 @onready var player: Player = owner
 
