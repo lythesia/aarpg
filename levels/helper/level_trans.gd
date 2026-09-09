@@ -121,6 +121,9 @@ func get_offset(player: Node2D) -> Vector2:
     return offset
 
 func _get_configuration_warnings() -> PackedStringArray:
+    if Utils.is_editing_own_scene(self):
+        return []
+
     var warnings: PackedStringArray = []
     if target_level == "":
         warnings.append("Target level is not set")

@@ -18,7 +18,6 @@ func enter():
     player.update_animation("carry")
 
 func exit():
-    # todo: drop/throw by input?
     if throwable:
         # setup throw direction
         throwable.throw_dir = player.cardinal_dir

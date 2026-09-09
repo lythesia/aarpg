@@ -1,5 +1,4 @@
-## todo: `ItemData` is not persisted into save, maybe we don't need `extend SaveKitResource`
-class_name ItemData extends SaveKitResource
+class_name ItemData extends Resource
 
 enum ItemType {
     ## will not add to slot, but keeping as score
@@ -14,7 +13,7 @@ enum ItemType {
     ## equipable items
     EQUIPABLE,
 
-    ## ammunition items
+    ## ammunition items, like currency
     AMMO,
 }
 

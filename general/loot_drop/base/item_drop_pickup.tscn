@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7isw7hyfuyr8" path="res://general/loot_drop/base/item_drop_pickup.gd" id="1_bru0b"]
 [ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="2_bjdtr"]
+[ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="3_bjdtr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rwra3"]
 
@@ -51,13 +52,14 @@ metadata/_custom_type_script = "uid://b7isw7hyfuyr8"
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=843008953]
 modulate = Color(0.16078432, 0.16078432, 0.16078432, 0.78431374)
 show_behind_parent = true
-position = Vector2(0, 10)
+position = Vector2(0, 2)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_bjdtr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=804970223]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1275876961]
+position = Vector2(0, -8)
 collision_layer = 128
 collision_mask = 16
 
@@ -69,4 +71,17 @@ libraries/ = SubResource("AnimationLibrary_sn42m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843387140]
 visible = false
+position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_rwra3")
+
+[node name="CountLabel" type="Label" parent="." unique_id=1963097776]
+offset_top = -8.0
+offset_right = 15.0
+offset_bottom = 7.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_bjdtr")
+theme_override_font_sizes/font_size = 12
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1

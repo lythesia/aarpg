@@ -47,8 +47,11 @@ func populate_item_list(shop_inventory: Array[ItemData]) -> void:
         c.queue_free()
 
     # create new items
-    for item in shop_inventory:
+    for i in shop_inventory.size():
+        var item = shop_inventory[i]
         var item_ui: ShopItemUI = SHOP_ITEM_UI.instantiate()
+        if i > 0:
+            item_ui.name += str(i)
         item_list.add_child(item_ui)
         item_ui.name = "%sBtn" % item.name.replace(" ", "")
         item_ui.setup_item(item)

@@ -152,6 +152,11 @@ func consume_coin(amount: int) -> void:
 #region save/load
 func load_from_dict(d: Deserializer, data: Dictionary) -> void:
     super(d, data)
+    # re-connect slots on load
+    _connect_slots()
+#endregion
+
+func stats_from_equipments() -> Dictionary:
     # go through equip slots and apply delta stats
     var atk_delta: int = 0
     var def_delta: int = 0
@@ -164,7 +169,4 @@ func load_from_dict(d: Deserializer, data: Dictionary) -> void:
                 EquipableItemData.EquipType.WEAPON:
                     PlayerManager.apply_weapon_sprite(e)
                 _: pass
-    PlayerManager.apply_delta_stats(atk_delta, def_delta)
-    # re-connect slots
-    _connect_slots()
-#endregion
+    return {"atk_delta": atk_delta, "def_delta": def_delta}

@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://b5r3xpg3xccxn"]
 
 [ext_resource type="TileSet" uid="uid://di0sc2itjm1ll" path="res://levels/tiles/dungeon.tres" id="1_4egyd"]
-[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="2_0tx52"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_g06t7"]
 [ext_resource type="PackedScene" uid="uid://clxgl1m5k7wwb" path="res://levels/props/torch/torch.tscn" id="4_holt6"]
 [ext_resource type="Script" uid="uid://cc0v1pfwl4f8x" path="res://general/projectiles/projectile_spawner.gd" id="5_15n47"]
@@ -51,8 +50,6 @@ target_name = "d02_to_d04"
 center_offset = true
 size = 2
 location = 3
-
-[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("2_0tx52")]
 
 [node name="Props" type="Node2D" parent="." unique_id=1135707861]
 y_sort_enabled = true

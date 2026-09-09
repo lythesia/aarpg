@@ -14,7 +14,7 @@ func enter():
     Audio.play_spatial_sound(death_audio, player.global_position)
 
     player.collision.disabled = true
-    player.damage_area.queue_free()
+    player.damage_area.monitorable = false
 
     # show screen
     PlayerHud.show_game_over()

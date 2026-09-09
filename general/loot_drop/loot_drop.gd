@@ -17,5 +17,7 @@ func _drop_loot() -> void:
         if !item || !item.item_scene: continue
         for j in item.get_drop_count():
             var drop: ItemPickup = item.item_scene.instantiate()
+            if j > 0:
+                drop.name += str(j)
             owner.add_sibling.call_deferred(drop)
             drop.global_position = global_position

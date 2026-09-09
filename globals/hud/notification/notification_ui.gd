@@ -1,5 +1,3 @@
-## todo: I don't understand the layout when I want place container
-## top-right, and make it grow left & bottom
 class_name NotificationUI extends Control
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

@@ -4,14 +4,11 @@ extends NpcBehavior
 const DIRECTIONS = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 
 ## range in grids
-@export var wander_range: int = 2: set = _set_wander_range
+@export var wander_range: int = 1: set = _set_wander_range
 const GRID_SIZE: int = 32
 @export var wander_speed: float = 30.0
 @export var wander_dur: float = 1.0
 @export var idle_dur: float = 1.0
-
-## circle assumed
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 var orig_pos: Vector2
 
@@ -20,7 +17,6 @@ func _ready() -> void:
         return
 
     super()
-    collision_shape.queue_free()
     orig_pos = npc.global_position
 
 func _process(_delta: float) -> void:
@@ -70,6 +66,7 @@ func start() -> void:
 
 func _set_wander_range(value: int) -> void:
     wander_range = value
+
+func _draw() -> void:
     if Engine.is_editor_hint():
-        collision_shape = $CollisionShape2D
-        collision_shape.shape.radius = value * GRID_SIZE
+        draw_circle(Vector2.ZERO, wander_range * GRID_SIZE, Color.RED, false, 1.0)

@@ -17,7 +17,6 @@ var bomb_instance: Node2D
 func _ready() -> void:
     player = PlayerManager.get_player()
     update_ability_ui()
-
     PlayerManager.INVENTORY_DATA.GainAbility.connect(add_ability)
 
 func set_abilities(vs: Array) -> void:
@@ -26,6 +25,8 @@ func set_abilities(vs: Array) -> void:
             var a: Ability = v as Ability
             if a not in abilities:
                 abilities.append(a)
+    if !vs.is_empty():
+        selected_ability = vs[0]
 
     update_ability_ui()
 

@@ -34,6 +34,8 @@ func update_quests_list() -> void:
         if quest_data == null:
             continue
         var quest_item_ui: QuestItemUI = QUEST_ITEM.instantiate()
+        if idx > 0:
+            quest_item_ui.name += str(idx)
         container.add_child(quest_item_ui) # add child at `idx`
         quest_item_ui.initialize(quest_data, q)
 
@@ -60,8 +62,10 @@ func update_quest_details(focused_idx: int, quest_data: Quest, state: Dictionary
 
     for i in quest_data.steps.size():
         var quest_step_ui: QuestStepUI = QUEST_STEP.instantiate()
+        if i > 0:
+            quest_step_ui.name += str(i)
         details_container.add_child(quest_step_ui)
-        # todo: not graceful ...
+        # todo: not graceful using "not found" ...
         var is_completed: bool = state.title != "not found" and state.completed_steps >= i + 1
         quest_step_ui.initialize(quest_data.steps[i], is_completed)
 

@@ -23,7 +23,7 @@ func _resume():
     get_tree().paused = false
 
 func _on_scene_loaded():
-    print("on_scene_loaded(%s): %s" % [TransitionType.keys()[_transition_type], SceneManager._current_scene.name])
+    # print("on_scene_loaded(%s): %s" % [TransitionType.keys()[_transition_type], SceneManager._current_scene.name])
     current_scene = ResourceUID.path_to_uid(SceneManager._current_scene.scene_file_path)
     match _transition_type:
         # load at same scene OR continue
@@ -32,7 +32,7 @@ func _on_scene_loaded():
             var scene: Node = get_tree().current_scene
             PlayerManager.reattach_player(scene)
             player.setup_player_on_load()
-        # load from different scene
+        # load from different scene OR continue from different scene
         TransitionType.LOAD:
             var player: Player = PlayerManager.get_player()
             var scene: Node = get_tree().current_scene
@@ -55,23 +55,20 @@ func new_game_scene(scene: String = DEFAULT_SCENE):
 ## if different scene, new player instance will be created before this
 ## but NOT if same scene, but `player_to_load` is set
 func load_game_scene(target_scene: String):
-    PlayerManager.detach_player()
     # `change_scene` if load to different scene
     if target_scene != current_scene:
-        # print("after_load: different scene")
         _transition_type = TransitionType.LOAD
-        await SceneManager.change_scene(target_scene, {
-            "on_fade_out": _load_on_fade_out,
-        })
+        await SceneManager.fade_out({"on_fade_out": _load_on_fade_out})
+        PlayerManager.detach_player()
+        await SceneManager.change_scene(target_scene, {"skip_fade_out": true})
         _transition_type = TransitionType.NONE
 
     # `reload_scene` if load same scene
     else:
-        # print("after_load: same scene")
         _transition_type = TransitionType.RELOAD
-        await SceneManager.reload_scene({
-            "on_fade_out": _reload_on_fade_out,
-        })
+        await SceneManager.fade_out({"on_fade_out": _reload_on_fade_out})
+        PlayerManager.detach_player()
+        await SceneManager.reload_scene({"skip_fade_out": true})
         _transition_type = TransitionType.NONE
 
     # always need to emit signal to activate level transition area in target scene
@@ -80,6 +77,9 @@ func load_game_scene(target_scene: String):
 
 # when completely black
 func _load_on_fade_out() -> void:
+    var player = PlayerManager.get_player()
+    if player and player.is_dead():
+        player.revive()
     # we make hud visible when black out, to avoid sudden appear after new scene fade in
     PlayerHud.show()
 

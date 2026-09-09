@@ -44,7 +44,10 @@ func update_summary() -> void:
 - Complete: %s" % [quest.title, step, _get_step(), is_completed]
 
 func _get_configuration_warnings() -> PackedStringArray:
-    if !quest:
-        return PackedStringArray(["Quest is not set"])
+    if Utils.is_editing_own_scene(self):
+        return []
 
-    return []
+    var warnings: PackedStringArray = []
+    if !quest:
+        warnings.append("Quest is not set")
+    return warnings

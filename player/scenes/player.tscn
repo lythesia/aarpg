@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://dqvvulh7orc6j" path="res://player/scripts/states/spin_attack.gd" id="14_htc74"]
 [ext_resource type="Script" uid="uid://cg5catbhgwqsf" path="res://player/scripts/player_interaction.gd" id="14_l7x70"]
 [ext_resource type="AudioStream" uid="uid://bd2ssv0byk87l" path="res://player/audio/charged.wav" id="15_nu80c"]
-[ext_resource type="Script" uid="uid://bqtk318beexbu" path="res://player/scenes/push_interaction.gd" id="15_utphg"]
+[ext_resource type="Script" uid="uid://bqtk318beexbu" path="res://player/scripts/push_interaction.gd" id="15_utphg"]
 [ext_resource type="Script" uid="uid://si0oxp2xbrv0" path="res://player/abilities/abilities.gd" id="16_28gy6"]
 [ext_resource type="PackedScene" uid="uid://bnxdrdb3hsbrb" path="res://general/item_magnet/item_magnet.tscn" id="16_d8q1f"]
 [ext_resource type="AudioStream" uid="uid://bnlaf8n8nblyo" path="res://player/audio/spin-attack.wav" id="17_g2abb"]
@@ -45,6 +45,10 @@
 [ext_resource type="Texture2D" uid="uid://i6yd43i6t7a8" path="res://public/sprites/grapple.png" id="39_5b1wr"]
 [ext_resource type="AudioStream" uid="uid://bs0mlrcpouqn2" path="res://public/audio/grapple_chain.wav" id="44_pemyq"]
 [ext_resource type="Script" uid="uid://6l6bkw5ewj28" path="res://general/hitbox/hazard_area.gd" id="44_yarkk"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="46_3ukqf"]
+[ext_resource type="Script" uid="uid://cvs3phfeis4lq" path="res://player/scripts/player_camera.gd" id="46_7prvn"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="47_7prvn"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="48_rlits"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
@@ -2166,7 +2170,10 @@ scale_max = 2.5
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lsqg7"]
 size = Vector2(12, 10)
 
-[node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player", "saveable"]]
+[sub_resource type="Resource" id="Resource_6uqko"]
+script = ExtResource("48_rlits")
+
+[node name="Player" type="CharacterBody2D" unique_id=1761720507 groups=["Player"]]
 z_index = 1
 collision_layer = 16
 collision_mask = 5
@@ -2512,3 +2519,29 @@ shape = SubResource("RectangleShape2D_lsqg7")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GrappleHook" unique_id=1573073289]
 stream = ExtResource("44_pemyq")
 bus = &"SFX"
+
+[node name="Cam" type="Node" parent="." unique_id=1578761568]
+script = ExtResource("46_7prvn")
+
+[node name="Camera2D" type="Camera2D" parent="Cam" unique_id=1354597498]
+physics_interpolation_mode = 1
+top_level = true
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Cam/Camera2D" unique_id=695311970]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("46_3ukqf")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera2D" type="Node2D" parent="Cam" unique_id=1077198130 node_paths=PackedStringArray("follow_target")]
+unique_name_in_owner = true
+top_level = true
+script = ExtResource("47_7prvn")
+priority = 1
+follow_mode = 1
+follow_target = NodePath("../..")
+tween_resource = SubResource("Resource_6uqko")
+tween_on_load = false
+draw_limits = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"

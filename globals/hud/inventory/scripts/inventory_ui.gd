@@ -9,6 +9,12 @@ const INVENTORY_SLOT = preload("uid://d28ga647y5dsu")
         inventory_data = value
         update_configuration_warnings()
 
+        if Engine.is_editor_hint():
+            return
+
+        # always ensure `inventory_data` here and PlayerManager.INVENTORY_DATA are the same
+        PlayerManager.set_inventory_data(value)
+
 var last_focused_slot: int = 0
 var hovered_slot: InventorySlotUI
 

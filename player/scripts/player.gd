@@ -34,9 +34,6 @@ var hp: int = 6:
         PlayerHud.update_hp(hp, max_hp)
 var max_hp: int = 6
 
-# used for game load, setup player stats after scene change instead of on load
-var player_to_load: Dictionary = {}
-
 func _init() -> void:
     PlayerManager.set_player(self)
 
@@ -165,54 +162,22 @@ var bomb_count: int = 0:
         PlayerHud.update_bomb_count_label(bomb_count)
 #endregion
 
-#region save/load
-func save_to_dict(s: SaveKitSerializer) -> Dictionary:
-    return {
-        "scene": ResourceUID.uid_to_path(SceneHelper.current_scene),
-        "pos": s.encode_var(global_position),
-        "hp": hp,
-        "max_hp": max_hp,
-        "level": level,
-        "xp": xp,
-        "base_atk": base_atk,
-        "base_def": base_def,
-        "abilities": s.encode_var(abilities.abilities),
-        "arrow_count": arrow_count,
-        "bomb_count": bomb_count,
-    }
-
-func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
-    var scene: String = data.get("scene", SceneHelper.DEFAULT_SCENE)
-    SceneHelper.scene_to_load = ResourceUID.path_to_uid(scene) # used to change scene later
-
-    var decoded_pos = d.decode_var(data["pos"], TYPE_VECTOR2)
-    var decoded_abilities = d.decode_var(data.get("abilities", []), TYPE_ARRAY)
-    abilities.set_abilities(decoded_abilities)
-
-    player_to_load = {
-        "pos": decoded_pos if decoded_pos is Vector2 else Vector2.ZERO,
-        "hp": data.get("hp", DEFAULT_HP),
-        "max_hp": data.get("max_hp", DEFAULT_HP),
-        "level": data.get("level", 1),
-        "xp": data.get("xp", 0),
-        "base_atk": data.get("atk", 1),
-        "base_def": data.get("def", 1),
-        "arrow_count": data.get("arrow_count", 0),
-        "bomb_count": data.get("bomb_count", 0),
-    }
-#endregion
-
 # utils
 func setup_player_on_load() -> void:
-    PlayerManager.reposition_player(player_to_load["pos"])
-    hp = player_to_load["hp"]
-    max_hp = player_to_load["max_hp"]
-    level = player_to_load["level"]
-    xp = player_to_load["xp"]
-    base_atk = player_to_load["base_atk"]
-    base_def = player_to_load["base_def"]
-    arrow_count = player_to_load["arrow_count"]
-    bomb_count = player_to_load["bomb_count"]
+    var save: PlayerSavedata = WorldState.player_savedata
+    PlayerManager.reposition_player(save.pos)
+    hp = save.hp
+    max_hp = save.max_hp
+    level = save.level
+    xp = save.xp
+    base_atk = save.base_atk
+    base_def = save.base_def
+    abilities.set_abilities(save.abilities)
+    arrow_count = save.arrow_count
+    bomb_count = save.bomb_count
+
+    var delta_stats: Dictionary = PlayerManager.INVENTORY_DATA.stats_from_equipments()
+    PlayerManager.apply_delta_stats(delta_stats["atk_delta"], delta_stats["def_delta"])
 
 func lift_item(throwable: Throwable) -> void:
     # shift throwable_object from parent to player's held item

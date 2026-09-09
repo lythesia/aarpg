@@ -37,10 +37,6 @@ func exit() -> void:
     if step_timer:
         step_timer.stop()
 
-# todo: optimize this to avoid enemy jittering at player's position
-# we can define min step distance (like es_wander.gd, slime moves one hop as min step)
-# enemy always walk min step distance towards player, if pass through player, then
-# turnback
 func physics_update(_delta: float) -> void:
     # non step mode
     if !step_timer:

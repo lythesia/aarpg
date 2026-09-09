@@ -4,7 +4,6 @@
 [ext_resource type="TileSet" uid="uid://c8bsm6ap21gvv" path="res://levels/tiles/grass.tres" id="1_gld8x"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_5wo24"]
 [ext_resource type="TileSet" uid="uid://fh0sju4ruppy" path="res://levels/tiles/shop.tres" id="3_udvs8"]
-[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="4_ynnnl"]
 [ext_resource type="PackedScene" uid="uid://b1n22nmeyvf6o" path="res://levels/helper/level_trans_interact.tscn" id="5_xqo8v"]
 [ext_resource type="PackedScene" uid="uid://cbeyyi0b7djq8" path="res://items/interactable/grapple_post/grapple_post.tscn" id="7_j3ars"]
 [ext_resource type="PackedScene" uid="uid://dhb7dvw2yb6cr" path="res://items/interactable/chest/chest.tscn" id="8_q5jxl"]
@@ -20,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://xk7lyoj3u2mm" path="res://npc/base/npc_behavior_patrol.tscn" id="12_rc8lg"]
 [ext_resource type="Resource" uid="uid://c56pkj0tlomb7" path="res://dialogue/npc2.dialogue" id="13_om7qf"]
 [ext_resource type="PackedScene" uid="uid://wkf8xv4y4ito" path="res://npc/base/patrol_location.tscn" id="13_rc8lg"]
+[ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="15_om7qf"]
 [ext_resource type="Script" uid="uid://dowamhcy4vmkv" path="res://levels/A01/s02/cam_switch.gd" id="17_q5jxl"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="17_tttph"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="18_q5jxl"]
@@ -61,9 +61,6 @@ target_name = "shop_to_s02"
 center_offset = true
 location = 2
 
-[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("4_ynnnl")]
-unique_name_in_owner = true
-
 [node name="Items" type="Node2D" parent="." unique_id=1178438954]
 z_index = 1
 y_sort_enabled = true
@@ -95,12 +92,11 @@ item_data = ExtResource("12_6ebg1")
 persistent_key = "s02/chest04"
 
 [node name="Npc1" parent="." unique_id=2065591414 instance=ExtResource("8_tmjfs")]
-position = Vector2(129, 85)
+position = Vector2(77, 92)
 npc_res = ExtResource("9_6b7mu")
 npc_dialog = ExtResource("10_xqo8v")
 
 [node name="NpcBehaviorWander" parent="Npc1" unique_id=2005449273 instance=ExtResource("9_k6tnk")]
-wander_range = 1
 
 [node name="Npc2" parent="." unique_id=116734983 instance=ExtResource("8_tmjfs")]
 position = Vector2(303, 174)
@@ -150,3 +146,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CamSwitch/PeakArea" unique_id=123538199]
 position = Vector2(0, 68)
 shape = SubResource("RectangleShape2D_aabtn")
+
+[node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("15_om7qf")]
+position = Vector2(302, 76)

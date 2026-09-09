@@ -1,6 +1,6 @@
 extends Node
 
-signal PlayerRepositioned(player: Player)
+signal PlayerRepositioned
 signal PlayerInteracted
 signal PlayerLeveledUp
 
@@ -38,18 +38,22 @@ func get_player() -> Player:
     return player
 
 func detach_player() -> void:
+    if !player:
+        return
+
+    player.reparent(get_tree().root)
     player.global_position = Vector2(-200, -200)
     player.collision.disabled = true
     player.damage_area.monitorable = false
     player.is_input_disabled = true
-    player.reparent.call_deferred(get_tree().root)
+    # player.reparent.call_deferred(get_tree().root)
 
 func reattach_player(scene: Node) -> void:
     player.reparent(scene)
 
 func reposition_player(position: Vector2) -> void:
     player.global_position = position
-    PlayerRepositioned.emit(player)
+    PlayerRepositioned.emit()
 
 func post_reposition_player() -> void:
     player.collision.disabled = false

@@ -2,7 +2,6 @@
 
 [ext_resource type="TileSet" uid="uid://di0sc2itjm1ll" path="res://levels/tiles/dungeon.tres" id="1_jobhr"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_q8qcb"]
-[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="3_yh8rw"]
 [ext_resource type="PackedScene" uid="uid://mv3qb750nw1o" path="res://general/kill_counter/kill_counter.tscn" id="4_yh8rw"]
 [ext_resource type="PackedScene" uid="uid://b2ts3u2tpi680" path="res://enemies/00_slime/slime.tscn" id="5_alvbc"]
 [ext_resource type="PackedScene" uid="uid://bmo7u8vjtsecx" path="res://general/item_dropper/item_dropper.tscn" id="6_e2355"]
@@ -25,8 +24,6 @@ target_level = "uid://bt3dusube2cr1"
 target_name = "d02_to_d03"
 center_offset = true
 size = 2
-
-[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("3_yh8rw")]
 
 [node name="KillCounter" parent="." unique_id=1245689410 instance=ExtResource("4_yh8rw")]
 y_sort_enabled = true

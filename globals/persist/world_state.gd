@@ -1,5 +1,6 @@
 extends Node
 
+@export var player_savedata: PlayerSavedata = PlayerSavedata.new()
 @export var persistent_data: Dictionary = {}
 
 func has_kv(key: String) -> bool:

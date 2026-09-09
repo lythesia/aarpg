@@ -4,7 +4,6 @@
 [ext_resource type="TileSet" uid="uid://c8bsm6ap21gvv" path="res://levels/tiles/grass.tres" id="2_r68ua"]
 [ext_resource type="PackedScene" uid="uid://b2ts3u2tpi680" path="res://enemies/00_slime/slime.tscn" id="3_u3i6p"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="4_u3i6p"]
-[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="5_3h20w"]
 
 [node name="S03" type="Node2D" unique_id=459792750]
 y_sort_enabled = true
@@ -31,5 +30,3 @@ position = Vector2(0, 128)
 target_level = "uid://cce13rldqs5om"
 target_name = "s01_to_s03"
 size = 6
-
-[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("5_3h20w")]

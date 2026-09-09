@@ -4,7 +4,6 @@
 [ext_resource type="TileSet" uid="uid://c8bsm6ap21gvv" path="res://levels/tiles/grass.tres" id="2_518nr"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="3_84ywv"]
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="4_650na"]
-[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="5_mm2qc"]
 
 [node name="T01" type="Node2D" unique_id=280381731]
 y_sort_enabled = true
@@ -29,5 +28,3 @@ location = 1
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("4_650na")]
 position = Vector2(279, 114)
-
-[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("5_mm2qc")]

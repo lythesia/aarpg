@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b68d5x5hqub6s" path="res://levels/props/pot/pot.tscn" id="2_1hgjj"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_43yg5"]
 [ext_resource type="Script" uid="uid://cpirecojyj4v2" path="res://items/scripts/item_data.gd" id="3_12dkg"]
-[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="4_43yg5"]
 [ext_resource type="Resource" uid="uid://bmcqatydxtuf7" path="res://items/item_tres/equipable/w_iron_sword.tres" id="4_kfrec"]
 [ext_resource type="Resource" uid="uid://buhrvp4pe76pf" path="res://items/item_tres/equipable/a_tunic.tres" id="5_f5w8j"]
 [ext_resource type="PackedScene" uid="uid://kkccwag4tlj1" path="res://items/interactable/shopkeeper/shopkeeper.tscn" id="5_kwodk"]
@@ -64,8 +63,6 @@ position = Vector2(74, 77)
 
 [node name="Pot6" parent="Props" unique_id=492139311 instance=ExtResource("2_1hgjj")]
 position = Vector2(375, 89)
-
-[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("4_43yg5")]
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("6_gt6xf")]
 position = Vector2(137, 187)

@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://t2fvdvalybdn"]
 
 [ext_resource type="TileSet" uid="uid://di0sc2itjm1ll" path="res://levels/tiles/dungeon.tres" id="1_i5eyw"]
-[ext_resource type="PackedScene" uid="uid://cexvbsm0fvhd0" path="res://player/scenes/player_camera_help.tscn" id="3_fkfh8"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="4_k7rmx"]
 [ext_resource type="PackedScene" uid="uid://bs8c1h8cjuvny" path="res://items/interactable/pressure_plate/pressue_plate.tscn" id="5_t5tcp"]
 [ext_resource type="AudioStream" uid="uid://drhg2bbuq0pl4" path="res://public/audio/push_stone.wav" id="6_6tn6q"]
@@ -33,8 +32,6 @@ target_name = "d02_to_d01"
 center_offset = true
 size = 2
 location = 2
-
-[node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("3_fkfh8")]
 
 [node name="Props" type="Node2D" parent="." unique_id=20966179]
 process_mode = 3
