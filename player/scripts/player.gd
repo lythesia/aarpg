@@ -25,7 +25,7 @@ var cardinal_dir: Vector2 = Vector2.DOWN
 # actual moving direction
 var dir: Vector2 = Vector2.ZERO
 
-# var input_vector: Vector2 = Vector2.ZERO
+var is_input_disabled: bool = false
 
 const DEFAULT_HP: int = 6
 var hp: int = 6:
@@ -60,6 +60,11 @@ func _unhandled_input(_event: InputEvent) -> void:
 #         input_vector = Vector2.ZERO
 
 func _process(delta: float) -> void:
+    if is_input_disabled:
+        dir = Vector2.ZERO
+        velocity = Vector2.ZERO
+        return
+
     _update_direction()
     _debug_label(delta)
 
@@ -199,7 +204,7 @@ func load_from_dict(d: SaveKitDeserializer, data: Dictionary) -> void:
 
 # utils
 func setup_player_on_load() -> void:
-    PlayerManager.set_player_global_position(player_to_load["pos"])
+    PlayerManager.reposition_player(player_to_load["pos"])
     hp = player_to_load["hp"]
     max_hp = player_to_load["max_hp"]
     level = player_to_load["level"]

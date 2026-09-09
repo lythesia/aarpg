@@ -19,4 +19,4 @@ func _ready() -> void:
     PlayerManager.set_player(player)
 
     # position player
-    PlayerManager.set_player_global_position(self.global_position)
+    PlayerManager.reposition_player(self.global_position)

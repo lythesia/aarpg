@@ -65,7 +65,7 @@ func _update_chase_direction(_step_mode: bool = true) -> void:
         enemy.update_animation(anim_name)
 
 func can_chase() -> bool:
-    if !enemy or !blackboard.target:
+    if !enemy or !blackboard.target or blackboard.target.is_dead():
         return false
 
     return true

@@ -21,9 +21,10 @@ offset_bottom = 15.0
 text = "Test 01"
 
 [node name="t01_to_t02" parent="." unique_id=139219880 instance=ExtResource("3_84ywv")]
-position = Vector2(496, 96)
+position = Vector2(496, 144)
 target_level = "uid://d2oh87qkv886p"
 target_name = "t02_to_t01"
+size = 9
 location = 1
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("4_650na")]

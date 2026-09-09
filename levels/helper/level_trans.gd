@@ -59,7 +59,7 @@ func _ready() -> void:
     if Engine.is_editor_hint():
         return
 
-    Messages.NewSceneLoaded.connect(_on_new_scene_ready)
+    Messages.NewSceneLoaded.connect(_on_new_scene_loaded)
     Messages.ChangeSceneFinished.connect(_on_load_scene_finished)
 
 var _is_transitioning: bool = false
@@ -68,21 +68,18 @@ func _on_player_entered(player: Player) -> void:
     if _is_transitioning: return
 
     _is_transitioning = true
-    await SceneHelper.level_transition(target_level, target_name, player, get_offset(player))
+    await SceneHelper.level_transition(target_level, target_name, get_offset(player))
     _is_transitioning = false
 
-func _on_new_scene_ready(target: String, offset: Vector2) -> void:
-    # target_name behaves like LT's id, to make sure `_on_new_scene_ready`
+func _on_new_scene_loaded(target: String, offset: Vector2) -> void:
+    # target_name behaves like LT's id, to make sure `_on_new_scene_loaded`
     # is called only by one of them in single scene
     if target == self.name:
-        PlayerManager.set_player_global_position(self.global_position + offset)
+        PlayerManager.reposition_player(self.global_position + offset)
 
 func _on_load_scene_finished() -> void:
-    area.monitoring = false # disable area collision detect
-    # await PlayerManager.PlayerRepositioned
+    area.monitoring = false # disable
     area.body_entered.connect(_on_player_entered)
-    for _f in range(2): # at least 2 frames, 1 won't work
-        await get_tree().process_frame
     area.monitoring = true # enable
 
 func apply_area_settings() -> void:

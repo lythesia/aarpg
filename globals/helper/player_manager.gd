@@ -37,15 +37,24 @@ func set_inventory_data(_inventory_data: InventoryData) -> void:
 func get_player() -> Player:
     return player
 
-func reparent_player_to_root() -> void:
+func detach_player() -> void:
+    player.global_position = Vector2(-200, -200)
+    player.collision.disabled = true
+    player.damage_area.monitorable = false
+    player.is_input_disabled = true
     player.reparent.call_deferred(get_tree().root)
 
-func reparent_player_to_scene(scene: Node) -> void:
+func reattach_player(scene: Node) -> void:
     player.reparent(scene)
 
-func set_player_global_position(position: Vector2) -> void:
+func reposition_player(position: Vector2) -> void:
     player.global_position = position
     PlayerRepositioned.emit(player)
+
+func post_reposition_player() -> void:
+    player.collision.disabled = false
+    player.damage_area.monitorable = true
+    player.is_input_disabled = false
 
 func player_interact() -> void:
     # only one interactable can accquire this flag on `PlayerInteracted` shot

@@ -27,6 +27,6 @@ func switch_slot(slot: int):
     current_slot = slot
 
 func _on_after_load() -> void:
-    SceneHelper.load_scene_and_setup_player(SceneHelper.scene_to_load)
+    SceneHelper.load_game_scene(SceneHelper.scene_to_load)
     PlayerManager.set_inventory_data(PauseMenu.inventory_ui.inventory_data)
     PauseMenu.inventory_ui.connect_inventory_changed()

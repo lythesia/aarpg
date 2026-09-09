@@ -20,8 +20,9 @@ offset_bottom = 15.0
 text = "Test 03"
 
 [node name="t03_to_t02" parent="." unique_id=327073310 instance=ExtResource("3_nsphv")]
-position = Vector2(-16, 96)
+position = Vector2(-16, 144)
 target_level = "uid://d2oh87qkv886p"
 target_name = "t02_to_t03"
+size = 9
 
 [node name="Cam" parent="." unique_id=1012394959 instance=ExtResource("4_y5ul1")]
