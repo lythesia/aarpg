@@ -108,7 +108,10 @@ func throw() -> void:
     attack_area.set_active.call_deferred(true)
     attack_area.DamageDealt.connect(attack_damage_dealt)
 
-    # todo: why can't we set `monitoring=true` here? and why `monitorable` needs to be true?
+    # Q: why can't we just set `monitoring=true` here? and why `monitorable` needs to be true?
+    # A: area2d collision with static objects like tilemap needs `monitorable` to be true which is
+    # counterintuitive, see:
+    # https://www.reddit.com/r/godot/comments/14m5eax/why_does_area2dmonitorable_have_to_be_enabled_for
     wall_detect.body_entered.connect(_on_wall_detected)
 
 func drop() -> void:
