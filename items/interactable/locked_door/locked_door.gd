@@ -18,12 +18,12 @@ func _ready() -> void:
         interact_area.area_entered.connect(_on_area_entered)
         interact_area.area_exited.connect(_on_area_exited)
 
-func _on_area_entered(area: Area2D) -> void:
-    if !is_open and area is PlayerInteraction:
+func _on_area_entered(_area: Area2D) -> void:
+    if !is_open:
         PlayerManager.PlayerInteracted.connect(_on_player_interacted)
 
-func _on_area_exited(area: Area2D) -> void:
-    if !is_open and area is PlayerInteraction:
+func _on_area_exited(_area: Area2D) -> void:
+    if !is_open:
         PlayerManager.PlayerInteracted.disconnect(_on_player_interacted)
 
 func _on_player_interacted() -> void:

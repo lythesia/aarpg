@@ -37,6 +37,18 @@ func set_inventory_data(_inventory_data: InventoryData) -> void:
 func get_player() -> Player:
     return player
 
+const PLAYER_SCENE: PackedScene = preload("uid://dgj4nm6qm1ggp")
+func get_or_spawn_player(scene: Node = null) -> Player:
+    if player:
+        return player
+    else:
+        set_player(PLAYER_SCENE.instantiate())
+        if scene:
+            scene.add_child(player)
+        else:
+            get_tree().root.add_child(player)
+        return player
+
 func detach_player() -> void:
     if !player:
         return
@@ -49,6 +61,9 @@ func detach_player() -> void:
     # player.reparent.call_deferred(get_tree().root)
 
 func reattach_player(scene: Node) -> void:
+    if scene == player.get_parent():
+        # do nothing
+        return
     player.reparent(scene)
 
 func reposition_player(position: Vector2) -> void:

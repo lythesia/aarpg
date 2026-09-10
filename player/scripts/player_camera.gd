@@ -15,6 +15,8 @@ func _ready() -> void:
     orig_tween_dur = pcam.get_tween_duration()
     PlayerManager.PlayerRepositioned.connect(_on_player_repositioned, CONNECT_ONE_SHOT)
 
+    Messages.TileMapLayerEnabled.connect(_on_tilemap_layer_enabled)
+
 func _on_scene_loaded() -> void:
     var base_tilemap_layer: TileMapLayer = _get_scene_base_tilemap_layer()
     if base_tilemap_layer:
@@ -35,3 +37,7 @@ func _on_player_repositioned() -> void:
 
 func _on_first_tween_completed() -> void:
     pcam.set_tween_duration(orig_tween_dur)
+
+func _on_tilemap_layer_enabled(tilemap_layer: TileMapLayer) -> void:
+    if tilemap_layer.enabled:
+        pcam.set_limit_target(tilemap_layer.get_path())

@@ -28,14 +28,15 @@ func _on_scene_loaded():
     match _transition_type:
         # load at same scene OR continue
         TransitionType.RELOAD:
+            # player should always exist when reload
             var player: Player = PlayerManager.get_player()
             var scene: Node = get_tree().current_scene
             PlayerManager.reattach_player(scene)
             player.setup_player_on_load()
         # load from different scene OR continue from different scene
         TransitionType.LOAD:
-            var player: Player = PlayerManager.get_player()
             var scene: Node = get_tree().current_scene
+            var player: Player = PlayerManager.get_or_spawn_player(scene)
             PlayerManager.reattach_player(scene)
             player.setup_player_on_load()
         # on level transition

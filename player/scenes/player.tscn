@@ -2409,11 +2409,12 @@ position = Vector2(0, -20)
 shape = SubResource("CircleShape2D_lsqg7")
 
 [node name="Interactions" type="Node2D" parent="." unique_id=110730628]
+position = Vector2(0, -5)
 script = ExtResource("14_l7x70")
 
 [node name="Interaction" type="Area2D" parent="Interactions" unique_id=1184213051]
 visible = false
-position = Vector2(0, -9)
+position = Vector2(0, -4)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -2424,7 +2425,6 @@ shape = SubResource("RectangleShape2D_aabtn")
 
 [node name="PushInteraction" type="Area2D" parent="Interactions" unique_id=1412924443]
 visible = false
-position = Vector2(0, -5)
 collision_layer = 0
 monitorable = false
 script = ExtResource("15_utphg")
@@ -2435,6 +2435,8 @@ shape = SubResource("RectangleShape2D_l7x70")
 
 [node name="GrappleRaycast" type="RayCast2D" parent="Interactions" unique_id=931284219]
 unique_name_in_owner = true
+visible = false
+position = Vector2(0, 5)
 collision_mask = 9
 
 [node name="Abilities" type="Node" parent="." unique_id=73244148]
@@ -2478,6 +2480,7 @@ bus = &"SFX"
 
 [node name="GrappleHook" type="Node2D" parent="." unique_id=304315714]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -14)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="GrappleHook" unique_id=293119561]

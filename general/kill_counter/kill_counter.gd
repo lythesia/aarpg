@@ -3,13 +3,20 @@ class_name KillCounter extends Node2D
 
 signal Done
 
+var enemies: Array[Enemy]
+var counter: int = 0
+
 func _ready() -> void:
-    child_exiting_tree.connect(_enemy_exited_tree)
+    _gather_enemies()
+    for e in enemies:
+        e.WasKilled.connect(_on_enemy_killed, CONNECT_ONE_SHOT)
 
-func _enemy_exited_tree(enemy: Node2D) -> void:
-    if enemy is Enemy:
-        if _count_enemies() == 0:
-            Done.emit() # manually connect to target **in editor**
+func _gather_enemies() -> void:
+    for e in find_children("*", "Enemy"):
+        if e is Enemy:
+            enemies.append(e)
 
-func _count_enemies() -> int:
-    return find_children("*", "Enemy").size()
+func _on_enemy_killed() -> void:
+    counter += 1
+    if counter == enemies.size():
+        Done.emit() # manually connect to target **in editor**

@@ -35,7 +35,9 @@ func _update_boss_hp() -> void:
 func _lock_room() -> void:
     base_layer.enabled = false
     locked_layer.enabled = true
+    Messages.TileMapLayerEnabled.emit(locked_layer)
 
 func _unlock_room() -> void:
     base_layer.enabled = true
     locked_layer.enabled = false
+    Messages.TileMapLayerEnabled.emit(base_layer)
