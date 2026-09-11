@@ -1,7 +1,7 @@
 class_name EnemyStateMachine extends Node
 
 var enemy: Enemy
-var blackboard: Blackboard
+var blackboard: EnemyBlackboard
 var states: Array[EnemyState]
 var current_state: EnemyState:
     get():
@@ -10,7 +10,7 @@ var previous_state: EnemyState:
     get():
         return states.get(1)
 
-func setup(e: Enemy, b: Blackboard) -> void:
+func setup(e: Enemy, b: EnemyBlackboard) -> void:
     enemy = e
     blackboard = b
 

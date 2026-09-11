@@ -3,7 +3,7 @@ class_name DecisionEngine extends Node
 var enemy: Enemy
 var previous_state: EnemyState
 var current_state: EnemyState
-var blackboard: Blackboard
+var blackboard: EnemyBlackboard
 
 func _ready() -> void:
     while !enemy:

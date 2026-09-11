@@ -12,7 +12,7 @@ var beams_v: Array[BeamAttack] = [] # vertical beams
 
 var ended: bool = false
 
-func setup(f: EnemyStateMachine, e: Enemy, b: Blackboard) -> void:
+func setup(f: EnemyStateMachine, e: Enemy, b: EnemyBlackboard) -> void:
     super(f, e, b)
     var beam_attacks: Node2D = enemy.get_node("../BeamAttacks")
     assert(beam_attacks, "BeamAttacks not found")

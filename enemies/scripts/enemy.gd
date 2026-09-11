@@ -22,7 +22,7 @@ var damage_area: DamageArea
 
 var fsm: EnemyStateMachine
 var decision_engine: DecisionEngine
-var blackboard: Blackboard
+var blackboard: EnemyBlackboard
 
 func _ready() -> void:
     z_index = 1
@@ -34,7 +34,7 @@ func _ready() -> void:
     setup()
 
 func setup() -> void:
-    blackboard = Blackboard.new()
+    blackboard = EnemyBlackboard.new()
     blackboard.hp = hp
 
     # grab `CharacterBody2D`'s collision shape

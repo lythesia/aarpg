@@ -1,11 +1,10 @@
 @tool
 @icon("res://npc/assets/icons/npc.svg")
-class_name NPC extends CharacterBody2D
-
-signal DoBehave
+class_name Npc extends CharacterBody2D
 
 @export var npc_res: NPCResource: set = _set_npc_res
 @export var npc_dialog: DialogueResource
+@export var npc_bt: BTPlayer
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -26,16 +25,17 @@ func _ready() -> void:
     interact_area.area_exited.connect(_on_area_exited)
     interact_hint.modulate.a = 0.0
 
-    DoBehave.emit()
-
 func _physics_process(_delta: float) -> void:
     if Engine.is_editor_hint():
         return
     # $Label.text = "%s:%s" % [state, str(global_position)]
     move_and_slide()
 
-func update_animation() -> void:
-    var anim: String = "%s_%s" % [state, _dir_str()]
+func move(vel: Vector2) -> void:
+    velocity = vel
+
+func update_animation(st: String = state) -> void:
+    var anim: String = "%s_%s" % [st, _dir_str()]
     animation_player.play(anim)
 
 func update_direction(target_pos: Vector2) -> void:
@@ -81,11 +81,11 @@ func _on_area_exited(_area: Area2D) -> void:
     tween.tween_property(interact_hint, "modulate:a", 0.0, 0.5)
 
 func _on_player_interacted() -> void:
-    update_direction(PlayerManager.get_player().global_position)
-    state = "idle"
-    velocity = Vector2.ZERO
-    update_animation()
-    can_behave = false
+    npc_bt.blackboard.set_var("face_target", PlayerManager.get_player().global_position)
+    # update_direction(PlayerManager.get_player().global_position)
+    # state = "idle"
+    # velocity = Vector2.ZERO
+    # update_animation("idle")
     DialogueManager.dialogue_ended.connect(_on_dialogue_finished)
     DialogueManager.show_dialogue_balloon(npc_dialog, "start", [
         {
@@ -96,7 +96,6 @@ func _on_player_interacted() -> void:
 
 func _on_dialogue_finished(_res) -> void:
     DialogueManager.dialogue_ended.disconnect(_on_dialogue_finished)
-    state = "idle"
-    update_animation()
-    can_behave = true
-    DoBehave.emit()
+    # state = "idle"
+    # update_animation("idle")
+    npc_bt.blackboard.erase_var("face_target")

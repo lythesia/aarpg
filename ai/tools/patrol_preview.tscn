@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://18b1qlrfrpp3"]
+
+[ext_resource type="Script" uid="uid://cyq40rey0x2j2" path="res://ai/tools/patrol_preview.gd" id="1_o7xbr"]
+
+[node name="PatrolPreview" type="Node2D" unique_id=1827658592]
+script = ExtResource("1_o7xbr")

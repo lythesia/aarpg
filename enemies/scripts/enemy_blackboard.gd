@@ -1,4 +1,4 @@
-class_name Blackboard extends Resource
+class_name EnemyBlackboard extends Resource
 
 var hp: int = 0
 var target: Player = null

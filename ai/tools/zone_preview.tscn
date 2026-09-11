@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cw7blds8v4bcf"]
+
+[ext_resource type="Script" uid="uid://lrfmg8ig6mtb" path="res://ai/tools/zone_preview.gd" id="1_mwipk"]
+
+[node name="ZonePreview" type="Node2D" unique_id=162663658]
+script = ExtResource("1_mwipk")

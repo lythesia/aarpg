@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NPCResource" format=3 uid="uid://fkksn7r82804"]
+
+[ext_resource type="Script" uid="uid://i71j60pth3y8" path="res://npc/base/npc_res.gd" id="1_46qfa"]
+[ext_resource type="Texture2D" uid="uid://if6ux1ln6ohy" path="res://npc/assets/sprites/npc_sprite.png" id="3_kcrcu"]
+
+[resource]
+script = ExtResource("1_46qfa")
+npc_name = "Cyan"
+sprite = ExtResource("3_kcrcu")
+metadata/_custom_type_script = "uid://i71j60pth3y8"

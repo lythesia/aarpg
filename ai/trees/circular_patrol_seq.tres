@@ -1,0 +1,37 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://b4osxlbuvvkan"]
+
+[ext_resource type="Script" uid="uid://bgycddgomysfw" path="res://ai/tasks/next_patrol_loc.gd" id="1_523qq"]
+[ext_resource type="Script" uid="uid://n06lqn6fenm8" path="res://ai/tasks/move_to.gd" id="2_xyvgp"]
+[ext_resource type="Script" uid="uid://dt3cqx525ltqk" path="res://ai/tasks/idle.gd" id="3_5qsuo"]
+[ext_resource type="Script" uid="uid://8kakjls88r4p" path="res://ai/tasks/arg_time_limit.gd" id="4_xyvgp"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_5qsuo"]
+
+[sub_resource type="BTAction" id="BTAction_kk3el"]
+script = ExtResource("1_523qq")
+
+[sub_resource type="BTAction" id="BTAction_fmjd0"]
+script = ExtResource("2_xyvgp")
+
+[sub_resource type="BTSequence" id="BTSequence_wyca0"]
+custom_name = "SequenceMove"
+children = [SubResource("BTAction_kk3el"), SubResource("BTAction_fmjd0")]
+
+[sub_resource type="BTAction" id="BTAction_cpuj5"]
+script = ExtResource("3_5qsuo")
+
+[sub_resource type="BTDecorator" id="BTDecorator_kk3el"]
+children = [SubResource("BTAction_cpuj5")]
+script = ExtResource("4_xyvgp")
+
+[sub_resource type="BTSequence" id="BTSequence_wvqq3"]
+custom_name = "SequenceIdle"
+children = [SubResource("BTDecorator_kk3el")]
+
+[sub_resource type="BTSequence" id="BTSequence_5ffy2"]
+custom_name = "SequencePartrol"
+children = [SubResource("BTSequence_wyca0"), SubResource("BTSequence_wvqq3")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_5qsuo")
+root_task = SubResource("BTSequence_5ffy2")

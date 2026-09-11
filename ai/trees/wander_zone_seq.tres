@@ -1,0 +1,38 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://honn6y1rcpyk"]
+
+[ext_resource type="Script" uid="uid://stut5ii4gttg" path="res://ai/tasks/rand_pos_in_range.gd" id="1_huivl"]
+[ext_resource type="Script" uid="uid://n06lqn6fenm8" path="res://ai/tasks/move_to.gd" id="2_hxfoo"]
+[ext_resource type="Script" uid="uid://dt3cqx525ltqk" path="res://ai/tasks/idle.gd" id="3_fsm78"]
+[ext_resource type="Script" uid="uid://d24hdxiyfsf2s" path="res://ai/tasks/rand_time_limit.gd" id="4_hxfoo"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_huivl"]
+
+[sub_resource type="BTAction" id="BTAction_n4m0o"]
+script = ExtResource("1_huivl")
+
+[sub_resource type="BTAction" id="BTAction_8ehgb"]
+script = ExtResource("2_hxfoo")
+
+[sub_resource type="BTSequence" id="BTSequence_43ouq"]
+custom_name = "Sequence MoveTo"
+children = [SubResource("BTAction_n4m0o"), SubResource("BTAction_8ehgb")]
+
+[sub_resource type="BTAction" id="BTAction_yq1k7"]
+script = ExtResource("3_fsm78")
+
+[sub_resource type="BTDecorator" id="BTDecorator_fsm78"]
+children = [SubResource("BTAction_yq1k7")]
+script = ExtResource("4_hxfoo")
+min_time = 2.0
+max_time = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_tfdvg"]
+custom_name = "Sequence Idle"
+children = [SubResource("BTDecorator_fsm78")]
+
+[sub_resource type="BTSequence" id="BTSequence_2msn0"]
+children = [SubResource("BTSequence_43ouq"), SubResource("BTSequence_tfdvg")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_huivl")
+root_task = SubResource("BTSequence_2msn0")

@@ -7,9 +7,9 @@ const STAY: EnemyState = null
 
 var fsm: EnemyStateMachine
 var enemy: Enemy
-var blackboard: Blackboard
+var blackboard: EnemyBlackboard
 
-func setup(f: EnemyStateMachine, e: Enemy, b: Blackboard) -> void:
+func setup(f: EnemyStateMachine, e: Enemy, b: EnemyBlackboard) -> void:
     fsm = f
     enemy = e
     blackboard = b

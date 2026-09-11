@@ -21,7 +21,7 @@ var curr_dir: Dir = Dir.DOWN
 
 var ended: bool = false
 
-func setup(f: EnemyStateMachine, e: Enemy, b: Blackboard) -> void:
+func setup(f: EnemyStateMachine, e: Enemy, b: EnemyBlackboard) -> void:
     super(f, e, b)
     var teleport_positions: Node2D = enemy.get_node("../TeleportPositions")
     assert(teleport_positions, "TeleportPositions not found")

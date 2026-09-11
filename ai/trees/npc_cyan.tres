@@ -1,0 +1,31 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://c818t2ty405mg"]
+
+[ext_resource type="Script" uid="uid://boclcbiajy8ly" path="res://ai/tasks/has_bb_var.gd" id="1_mivce"]
+[ext_resource type="Script" uid="uid://bibfjdpf2k5g2" path="res://ai/tasks/taking_to.gd" id="2_ech5o"]
+[ext_resource type="BehaviorTree" uid="uid://honn6y1rcpyk" path="res://ai/trees/wander_zone_seq.tres" id="3_ech5o"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_b7mg7"]
+
+[sub_resource type="BTCondition" id="BTCondition_23xyg"]
+script = ExtResource("1_mivce")
+var_to_check = &"face_target"
+
+[sub_resource type="BTAction" id="BTAction_xgva5"]
+script = ExtResource("2_ech5o")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_im1gp"]
+custom_name = "SequenceTalking"
+children = [SubResource("BTCondition_23xyg"), SubResource("BTAction_xgva5")]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_dofmp"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_23xyg"]
+subtree = ExtResource("3_ech5o")
+blackboard_plan = SubResource("BlackboardPlan_dofmp")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_ac2pf"]
+children = [SubResource("BTDynamicSequence_im1gp"), SubResource("BTSubtree_23xyg")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_b7mg7")
+root_task = SubResource("BTDynamicSelector_ac2pf")
