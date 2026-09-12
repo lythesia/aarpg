@@ -21,9 +21,8 @@ func _enter() -> void:
 
     if !is_arrived():
         var dir: Vector2 = agent.global_position.direction_to(target_pos)
-        agent.state = anim_state
         agent.move(dir * speed)
-        agent.update_direction(target_pos)
+        agent.update_direction(dir)
         agent.update_animation(anim_state)
         # agent should have methods: move, update_direction, update_animation
 
@@ -34,14 +33,6 @@ func _tick(_delta: float) -> Status:
     if is_arrived():
         return Status.SUCCESS
     else:
-        # in case interrupted by player (e.g. dialogue), we resume move here
-        # todo: not graceful, we should have some atomic sequence to resume
-        # if agent.state != anim_state or agent.velocity == Vector2.ZERO:
-        #     var dir: Vector2 = agent.global_position.direction_to(target_pos)
-        #     agent.state = anim_state
-        #     agent.move(dir * speed)
-        #     agent.update_direction(target_pos)
-        #     agent.update_animation(anim_state)
         return Status.RUNNING
 
 func _exit() -> void:

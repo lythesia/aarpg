@@ -1,7 +1,8 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://bg2e1g23twki7"]
 
 [ext_resource type="Script" uid="uid://boclcbiajy8ly" path="res://ai/tasks/has_bb_var.gd" id="1_b7mg7"]
-[ext_resource type="Script" uid="uid://bibfjdpf2k5g2" path="res://ai/tasks/taking_to.gd" id="2_dofmp"]
+[ext_resource type="Script" uid="uid://25l0ksbd04i0" path="res://ai/tasks/face_target.gd" id="2_dofmp"]
+[ext_resource type="Script" uid="uid://dt3cqx525ltqk" path="res://ai/tasks/idle.gd" id="3_23xyg"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_b7mg7"]
 
@@ -12,9 +13,15 @@ var_to_check = &"face_target"
 [sub_resource type="BTAction" id="BTAction_xgva5"]
 script = ExtResource("2_dofmp")
 
+[sub_resource type="BTAction" id="BTAction_im1gp"]
+script = ExtResource("3_23xyg")
+
+[sub_resource type="BTSequence" id="BTSequence_ac2pf"]
+children = [SubResource("BTAction_xgva5"), SubResource("BTAction_im1gp")]
+
 [sub_resource type="BTDynamicSequence" id="BTDynamicSequence_im1gp"]
-custom_name = "SequenceTalking"
-children = [SubResource("BTCondition_23xyg"), SubResource("BTAction_xgva5")]
+custom_name = "Check Talking"
+children = [SubResource("BTCondition_23xyg"), SubResource("BTSequence_ac2pf")]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_dofmp"]
 

@@ -39,19 +39,14 @@ func _physics_process(delta: float) -> void:
         search_timer -= delta
         if search_timer <= 0.0:
             PlayerExited.emit()
-            # bug: there's a case enemy in chase state, while player sensor null the target here,
-            # then es_chase invoke `blackboard.target.xxx` failed
-            # so we should null it at least es_chase complete current `physics_process` or at
-            # `enemy._physics_process` level
-            # enemy.blackboard.target = null
-            enemy.blackboard.set_deferred("target", null)
+            enemy.btplayer.blackboard.erase_var(&"target")
 
 func _on_body_entered(body: Node2D) -> void:
     if body is not Player:
         return
 
     PlayerEntered.emit()
-    enemy.blackboard.target = body as Player
+    enemy.btplayer.blackboard.set_var(&"target", body as Player)
     search_timer = 0 # reset timer when player entered, esp during searching
 
 func _on_body_exited(body: Node2D) -> void:

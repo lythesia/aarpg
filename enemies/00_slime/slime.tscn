@@ -4,17 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dar4len2ax1on" path="res://enemies/00_slime/Slime.png" id="2_wc4ln"]
 [ext_resource type="Script" uid="uid://b60no6xp6h8jr" path="res://general/hitbox/damage_area.gd" id="3_hebmw"]
 [ext_resource type="Texture2D" uid="uid://b8bduxd7punv5" path="res://public/sprites/Shadow.png" id="3_ujhcd"]
-[ext_resource type="Script" uid="uid://b1lbbx2u30304" path="res://enemies/scripts/enemy_state_machine.gd" id="4_7oura"]
-[ext_resource type="Script" uid="uid://ywy4dgvoo76j" path="res://enemies/scripts/basic_states/es_idle.gd" id="5_uwlwk"]
 [ext_resource type="Script" uid="uid://6l6bkw5ewj28" path="res://general/hitbox/hazard_area.gd" id="5_uwv4y"]
-[ext_resource type="Script" uid="uid://bj62x7uxsua7t" path="res://enemies/00_slime/decision_engine_slime.gd" id="6_81s3k"]
-[ext_resource type="Script" uid="uid://cwts8wjb1vtdr" path="res://enemies/scripts/basic_states/es_wander.gd" id="6_senpr"]
-[ext_resource type="Script" uid="uid://bl3ocqa7iay1a" path="res://enemies/scripts/basic_states/es_stun.gd" id="10_uksmk"]
 [ext_resource type="AudioStream" uid="uid://cj2f8i6amcvr1" path="res://public/audio/hit_01.wav" id="11_1js83"]
-[ext_resource type="Script" uid="uid://besi5f8uymy2w" path="res://enemies/scripts/base/es_death.gd" id="12_l83x4"]
 [ext_resource type="AudioStream" uid="uid://cl8fdopju6pq4" path="res://public/audio/hit_00.wav" id="13_d6mua"]
-[ext_resource type="Script" uid="uid://byf6iechsrm3p" path="res://enemies/scripts/basic_states/es_chase.gd" id="14_bslat"]
 [ext_resource type="PackedScene" uid="uid://blxqf5mi5omx0" path="res://general/effects/animated_sprites/destroy_smoke.tscn" id="14_d6mua"]
+[ext_resource type="BehaviorTree" uid="uid://2b6rmio63xic" path="res://ai/trees/enemy_slime.tres" id="14_l83x4"]
 [ext_resource type="Script" uid="uid://btsrtx6c2nriu" path="res://general/loot_drop/loot_drop.gd" id="15_3ig6r"]
 [ext_resource type="Script" uid="uid://jqbhutkxlgs2" path="res://general/loot_drop/lood_data.gd" id="16_gxb4a"]
 [ext_resource type="PackedScene" uid="uid://j2xay6up0xqq" path="res://general/loot_drop/scenes/coin.tscn" id="17_gxb4a"]
@@ -711,6 +705,8 @@ item_scene = ExtResource("18_gxb4a")
 min_drop = 1
 metadata/_custom_type_script = "uid://jqbhutkxlgs2"
 
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_scaum"]
+
 [node name="Slime" type="CharacterBody2D" unique_id=1748956911]
 z_index = 1
 collision_layer = 32
@@ -766,52 +762,6 @@ metadata/_custom_type_script = "uid://6l6bkw5ewj28"
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_uwv4y")
 
-[node name="EnemyStateMachine" type="Node" parent="." unique_id=1184502898]
-script = ExtResource("4_7oura")
-metadata/_custom_type_script = "uid://b1lbbx2u30304"
-
-[node name="EsIdle" type="Node" parent="EnemyStateMachine" unique_id=724465934]
-unique_name_in_owner = true
-script = ExtResource("5_uwlwk")
-anim_name = "idle"
-metadata/_custom_type_script = "uid://ywy4dgvoo76j"
-
-[node name="EsWander" type="Node" parent="EnemyStateMachine" unique_id=707859275]
-unique_name_in_owner = true
-script = ExtResource("6_senpr")
-anim_length = 0.7
-anim_name = "walk"
-metadata/_custom_type_script = "uid://cwts8wjb1vtdr"
-
-[node name="EsStun" type="Node" parent="EnemyStateMachine" unique_id=981053251]
-unique_name_in_owner = true
-script = ExtResource("10_uksmk")
-anim_name = "stun"
-metadata/_custom_type_script = "uid://bl3ocqa7iay1a"
-
-[node name="EsDeath" type="Node" parent="EnemyStateMachine" unique_id=1608618311]
-unique_name_in_owner = true
-script = ExtResource("12_l83x4")
-anim_name = "death"
-metadata/_custom_type_script = "uid://besi5f8uymy2w"
-
-[node name="EsChase" type="Node" parent="EnemyStateMachine" unique_id=889808687 node_paths=PackedStringArray("step_timer")]
-unique_name_in_owner = true
-script = ExtResource("14_bslat")
-path_finder_detect_length = 10.0
-turn_rate = 0.8
-step_timer = NodePath("Timer")
-anim_name = "walk"
-metadata/_custom_type_script = "uid://byf6iechsrm3p"
-
-[node name="Timer" type="Timer" parent="EnemyStateMachine/EsChase" unique_id=1753749854]
-wait_time = 0.5
-one_shot = true
-
-[node name="DecisionEngineSlime" type="Node" parent="." unique_id=1276378519]
-script = ExtResource("6_81s3k")
-metadata/_custom_type_script = "uid://bj62x7uxsua7t"
-
 [node name="Audio" type="Node" parent="." unique_id=1268115268]
 
 [node name="HitAudio" type="AudioStreamPlayer2D" parent="Audio" unique_id=1148592080]
@@ -835,3 +785,7 @@ metadata/_custom_type_script = "uid://c2fcfy0wheq88"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerSensor" unique_id=297124130]
 position = Vector2(0, 9)
 polygon = PackedVector2Array(-5, -7, -42, 49, 42, 49, 5, -7)
+
+[node name="BTPlayer" type="BTPlayer" parent="." unique_id=1534967559]
+behavior_tree = ExtResource("14_l83x4")
+blackboard_plan = SubResource("BlackboardPlan_scaum")

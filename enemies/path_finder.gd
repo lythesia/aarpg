@@ -42,7 +42,7 @@ func _ready() -> void:
     # connect timer timeout
     timer.timeout.connect(_on_timer_timeout)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
     # gradually update `move_dir` towards `best_path`
     # other scripts will ref the `move_dir` during movement logic
     # `lerp` prevents hard direction changes & jiterring or direction confused cases

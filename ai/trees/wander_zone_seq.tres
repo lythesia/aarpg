@@ -14,7 +14,7 @@ script = ExtResource("1_huivl")
 script = ExtResource("2_hxfoo")
 
 [sub_resource type="BTSequence" id="BTSequence_43ouq"]
-custom_name = "Sequence MoveTo"
+custom_name = "Random Walk"
 children = [SubResource("BTAction_n4m0o"), SubResource("BTAction_8ehgb")]
 
 [sub_resource type="BTAction" id="BTAction_yq1k7"]
@@ -27,7 +27,7 @@ min_time = 2.0
 max_time = 3.0
 
 [sub_resource type="BTSequence" id="BTSequence_tfdvg"]
-custom_name = "Sequence Idle"
+custom_name = "Idle"
 children = [SubResource("BTDecorator_fsm78")]
 
 [sub_resource type="BTSequence" id="BTSequence_2msn0"]

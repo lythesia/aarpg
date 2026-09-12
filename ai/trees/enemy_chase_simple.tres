@@ -1,0 +1,121 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://bt2c2jjtu4nnm"]
+
+[ext_resource type="Script" uid="uid://boclcbiajy8ly" path="res://ai/tasks/has_bb_var.gd" id="1_gmde7"]
+[ext_resource type="Script" uid="uid://c2wsujqp467kt" path="res://ai/tasks/pred_on_target.gd" id="2_r0e20"]
+[ext_resource type="Script" uid="uid://wisdqqmddl30" path="res://ai/tasks/chase_direction.gd" id="3_tv66t"]
+[ext_resource type="Script" uid="uid://dthopheismrl3" path="res://ai/tasks/step_towards.gd" id="4_m7o83"]
+[ext_resource type="Script" uid="uid://q70k5rgwtl88" path="res://ai/tasks/seq_chase.gd" id="5_d1vvv"]
+[ext_resource type="Script" uid="uid://duuytjc1mkcmt" path="res://ai/tasks/rand_direction.gd" id="6_eiiry"]
+[ext_resource type="Script" uid="uid://c828kjgau8q8t" path="res://ai/tasks/rand_counter.gd" id="7_1cd24"]
+[ext_resource type="Script" uid="uid://c0scdo4nkry3a" path="res://ai/tasks/arg_repeat.gd" id="8_50dfi"]
+[ext_resource type="Script" uid="uid://dt3cqx525ltqk" path="res://ai/tasks/idle.gd" id="9_kmect"]
+[ext_resource type="Script" uid="uid://d24hdxiyfsf2s" path="res://ai/tasks/rand_time_limit.gd" id="10_tduxs"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_1qj1p"]
+prefetch_nodepath_vars = false
+
+[sub_resource type="BTCondition" id="BTCondition_7npt8"]
+script = ExtResource("1_gmde7")
+var_to_check = &"target"
+
+[sub_resource type="BTCondition" id="BTCondition_ho00m"]
+script = ExtResource("2_r0e20")
+pred_func = &"is_dead"
+
+[sub_resource type="BTInvert" id="BTInvert_r0e20"]
+custom_name = "Is Target Alive"
+children = [SubResource("BTCondition_ho00m")]
+
+[sub_resource type="BTWaitTicks" id="BTWaitTicks_r0e20"]
+num_ticks = 5
+custom_name = "Wait PathFinder"
+
+[sub_resource type="BBNode" id="BBNode_r0e20"]
+value_source = 1
+variable = &"path_finder"
+resource_name = "$path_finder"
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_5q714"]
+node = SubResource("BBNode_r0e20")
+expression_string = "move_dir"
+result_var = &"path_finder_hint"
+
+[sub_resource type="BTAction" id="BTAction_wpnr1"]
+script = ExtResource("3_tv66t")
+turn_rate = 0.8
+
+[sub_resource type="BTSequence" id="BTSequence_tscai"]
+custom_name = "Redir only after step ends"
+children = [SubResource("BTEvaluateExpression_5q714"), SubResource("BTAction_wpnr1")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_34lut"]
+duration = 0.7
+children = [SubResource("BTSequence_tscai")]
+
+[sub_resource type="BTAction" id="BTAction_yoiy5"]
+script = ExtResource("4_m7o83")
+speed = 40.0
+
+[sub_resource type="BTSelector" id="BTSelector_r0e20"]
+custom_name = "Redir or Chase"
+children = [SubResource("BTCooldown_34lut"), SubResource("BTAction_yoiy5")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_r0e20"]
+forever = true
+children = [SubResource("BTSelector_r0e20")]
+
+[sub_resource type="BTSequence" id="BTSequence_oul5u"]
+custom_name = "Chase Player"
+children = [SubResource("BTWaitTicks_r0e20"), SubResource("BTRepeat_r0e20")]
+script = ExtResource("5_d1vvv")
+path_finder_detect_length = 10.0
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_noulj"]
+custom_name = "Player Spotted"
+children = [SubResource("BTCondition_7npt8"), SubResource("BTInvert_r0e20"), SubResource("BTSequence_oul5u")]
+
+[sub_resource type="BTAction" id="BTAction_ceakx"]
+script = ExtResource("6_eiiry")
+
+[sub_resource type="BTAction" id="BTAction_1ljxr"]
+script = ExtResource("7_1cd24")
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_r0e20"]
+text = "do %d steps"
+bb_format_parameters = PackedStringArray("counter")
+_enabled = false
+
+[sub_resource type="BTAction" id="BTAction_h8usx"]
+script = ExtResource("4_m7o83")
+wall_check = true
+
+[sub_resource type="BTRepeat" id="BTRepeat_iuryc"]
+children = [SubResource("BTAction_h8usx")]
+script = ExtResource("8_50dfi")
+
+[sub_resource type="BTSequence" id="BTSequence_p2lcu"]
+custom_name = "Walk Random Steps"
+children = [SubResource("BTAction_ceakx"), SubResource("BTAction_1ljxr"), SubResource("BTConsolePrint_r0e20"), SubResource("BTRepeat_iuryc")]
+
+[sub_resource type="BTAction" id="BTAction_uq5bl"]
+script = ExtResource("9_kmect")
+
+[sub_resource type="BTDecorator" id="BTDecorator_e4j0c"]
+children = [SubResource("BTAction_uq5bl")]
+script = ExtResource("10_tduxs")
+max_time = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_cqqxp"]
+custom_name = "Idle"
+children = [SubResource("BTDecorator_e4j0c")]
+
+[sub_resource type="BTSequence" id="BTSequence_k5310"]
+custom_name = "Wander & Chill"
+children = [SubResource("BTSequence_p2lcu"), SubResource("BTSequence_cqqxp")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_r0e20"]
+children = [SubResource("BTDynamicSequence_noulj"), SubResource("BTSequence_k5310")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_1qj1p")
+root_task = SubResource("BTDynamicSelector_r0e20")
