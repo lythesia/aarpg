@@ -8,8 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://cj2f8i6amcvr1" path="res://public/audio/hit_01.wav" id="11_1js83"]
 [ext_resource type="AudioStream" uid="uid://cl8fdopju6pq4" path="res://public/audio/hit_00.wav" id="13_d6mua"]
 [ext_resource type="PackedScene" uid="uid://blxqf5mi5omx0" path="res://general/effects/animated_sprites/destroy_smoke.tscn" id="14_d6mua"]
-[ext_resource type="BehaviorTree" uid="uid://2b6rmio63xic" path="res://ai/trees/enemy_slime.tres" id="14_l83x4"]
+[ext_resource type="BehaviorTree" uid="uid://dfpoprpwgjxbs" path="res://ai/trees/hit_interruptable.tres" id="14_umdq1"]
 [ext_resource type="Script" uid="uid://btsrtx6c2nriu" path="res://general/loot_drop/loot_drop.gd" id="15_3ig6r"]
+[ext_resource type="BehaviorTree" uid="uid://bt2c2jjtu4nnm" path="res://ai/trees/enemy_chase_simple.tres" id="15_gxb4a"]
 [ext_resource type="Script" uid="uid://jqbhutkxlgs2" path="res://general/loot_drop/lood_data.gd" id="16_gxb4a"]
 [ext_resource type="PackedScene" uid="uid://j2xay6up0xqq" path="res://general/loot_drop/scenes/coin.tscn" id="17_gxb4a"]
 [ext_resource type="PackedScene" uid="uid://ccws6jvb4ajvd" path="res://general/loot_drop/scenes/portion.tscn" id="18_gxb4a"]
@@ -706,6 +707,11 @@ min_drop = 1
 metadata/_custom_type_script = "uid://jqbhutkxlgs2"
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_scaum"]
+var/main_bt/name = &"main_bt"
+var/main_bt/type = 24
+var/main_bt/value = ExtResource("15_gxb4a")
+var/main_bt/hint = 17
+var/main_bt/hint_string = "BehaviorTree"
 
 [node name="Slime" type="CharacterBody2D" unique_id=1748956911]
 z_index = 1
@@ -787,5 +793,5 @@ position = Vector2(0, 9)
 polygon = PackedVector2Array(-5, -7, -42, 49, 42, 49, 5, -7)
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=1534967559]
-behavior_tree = ExtResource("14_l83x4")
+behavior_tree = ExtResource("14_umdq1")
 blackboard_plan = SubResource("BlackboardPlan_scaum")

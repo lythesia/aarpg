@@ -1,5 +1,6 @@
 extends BTAction
 
+## idle animation
 @export var anim_state: StringName = &"idle"
 
 func _enter() -> void:

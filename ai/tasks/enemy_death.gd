@@ -1,5 +1,6 @@
 extends BTAction
 
+## death animation
 @export var anim_state: StringName = &"death"
 
 func _enter() -> void:

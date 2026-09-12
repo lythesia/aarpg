@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://boclcbiajy8ly" path="res://ai/tasks/has_bb_var.gd" id="1_b7mg7"]
 [ext_resource type="Script" uid="uid://25l0ksbd04i0" path="res://ai/tasks/face_target.gd" id="2_dofmp"]
 [ext_resource type="Script" uid="uid://dt3cqx525ltqk" path="res://ai/tasks/idle.gd" id="3_23xyg"]
+[ext_resource type="Script" uid="uid://7dsimahn2j6l" path="res://ai/tasks/dynamic_subtree.gd" id="4_23xyg"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_b7mg7"]
+var/main_bt/name = &"main_bt"
+var/main_bt/type = 24
+var/main_bt/hint = 17
+var/main_bt/hint_string = "BehaviorTree"
 
 [sub_resource type="BTCondition" id="BTCondition_23xyg"]
 script = ExtResource("1_b7mg7")
@@ -23,13 +28,17 @@ children = [SubResource("BTAction_xgva5"), SubResource("BTAction_im1gp")]
 custom_name = "Check Talking"
 children = [SubResource("BTCondition_23xyg"), SubResource("BTSequence_ac2pf")]
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_dofmp"]
+[sub_resource type="BBVariant" id="BBVariant_xgva5"]
+value_source = 1
+variable = &"main_bt"
+resource_name = "$main_bt"
 
-[sub_resource type="BTSubtree" id="BTSubtree_23xyg"]
-blackboard_plan = SubResource("BlackboardPlan_dofmp")
+[sub_resource type="BTDecorator" id="BTDecorator_im1gp"]
+script = ExtResource("4_23xyg")
+subtree = SubResource("BBVariant_xgva5")
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_ac2pf"]
-children = [SubResource("BTDynamicSequence_im1gp"), SubResource("BTSubtree_23xyg")]
+children = [SubResource("BTDynamicSequence_im1gp"), SubResource("BTDecorator_im1gp")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_b7mg7")

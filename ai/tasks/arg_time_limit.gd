@@ -1,22 +1,25 @@
+@tool
 extends BTDecorator
 
-@export_category("Input")
-@export var var_limit_time: StringName = &"time_limit"
+## BB variable of time limit in seconds
+@export var time_limit: StringName = &"time_limit"
+
 var timer: float
 
+func _generate_name() -> String:
+    return "Time Limit %s sec" % [LimboUtility.decorate_var(time_limit)]
+
 func _enter() -> void:
-    if !blackboard.has_var(var_limit_time):
-        push_error("Blackboard variable %s not found." % var_limit_time)
+    if !blackboard.has_var(time_limit):
+        push_error("Blackboard variable %s not found." % LimboUtility.decorate_var(time_limit))
     else:
-        timer = blackboard.get_var(var_limit_time)
+        timer = blackboard.get_var(time_limit)
 
 func _tick(delta: float) -> Status:
-    if !blackboard.has_var(var_limit_time):
-        push_error("Blackboard variable %s not found." % var_limit_time)
+    if !blackboard.has_var(time_limit):
         return Status.FAILURE
 
     if get_child_count() == 0:
-        push_error("BT decorator has no child.")
         return Status.FAILURE
 
     var st: Status = get_child(0).execute(delta)
@@ -27,4 +30,4 @@ func _tick(delta: float) -> Status:
     return st
 
 func _exit() -> void:
-    blackboard.erase_var(var_limit_time)
+    blackboard.erase_var(time_limit)

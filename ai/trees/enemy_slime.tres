@@ -1,47 +1,97 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://2b6rmio63xic"]
 
-[ext_resource type="Script" uid="uid://boclcbiajy8ly" path="res://ai/tasks/has_bb_var.gd" id="1_a1iwb"]
+[ext_resource type="Script" uid="uid://djyuavr8fa7v8" path="res://ai/tasks/evaluate_bb_var.gd" id="1_vvvt0"]
 [ext_resource type="Script" uid="uid://b16vaqysxd3qn" path="res://ai/tasks/enemy_death.gd" id="2_vvvt0"]
 [ext_resource type="Script" uid="uid://c01ak8y6tl1x6" path="res://ai/tasks/enemy_knockback.gd" id="3_lu68y"]
 [ext_resource type="BehaviorTree" uid="uid://bt2c2jjtu4nnm" path="res://ai/trees/enemy_chase_simple.tres" id="4_vvvt0"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_h1e62"]
+var/damage_source/name = &"damage_source"
+var/damage_source/type = 24
+var/damage_source/hint = 34
+var/damage_source/hint_string = ""
+var/is_stunned/name = &"is_stunned"
+var/is_stunned/type = 1
+var/is_stunned/value = false
+var/is_stunned/hint = 0
+var/is_stunned/hint_string = ""
 
-[sub_resource type="BTCondition" id="BTCondition_evk3g"]
-script = ExtResource("1_a1iwb")
-var_to_check = &"damage_source"
+[sub_resource type="BBVariant" id="BBVariant_lu68y"]
+saved_value = null
+resource_name = "<null>"
 
-[sub_resource type="BBVariant" id="BBVariant_afppj"]
+[sub_resource type="BTCheckVar" id="BTCheckVar_7gcb3"]
+variable = &"damage_source"
+check_type = 5
+value = SubResource("BBVariant_lu68y")
+
+[sub_resource type="BTAction" id="BTAction_7bf8v"]
+script = ExtResource("1_vvvt0")
+variable = &"damage_source"
+property = &"global_position"
+result_var = &"damage_source_pos"
+
+[sub_resource type="BBVariant" id="BBVariant_txjg4"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTSetVar" id="BTSetVar_7egmf"]
+variable = &"damage_source"
+value = SubResource("BBVariant_txjg4")
+
+[sub_resource type="BBVariant" id="BBVariant_2mo2e"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetVar" id="BTSetVar_n3a07"]
+variable = &"is_stunned"
+value = SubResource("BBVariant_2mo2e")
+
+[sub_resource type="BTSequence" id="BTSequence_34l1i"]
+custom_name = "Hit Detect"
+children = [SubResource("BTCheckVar_7gcb3"), SubResource("BTAction_7bf8v"), SubResource("BTSetVar_7egmf"), SubResource("BTSetVar_n3a07")]
+
+[sub_resource type="BBVariant" id="BBVariant_mbcuu"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_q0d2g"]
+variable = &"is_stunned"
+value = SubResource("BBVariant_mbcuu")
+
+[sub_resource type="BBVariant" id="BBVariant_a2cp3"]
 type = 2
 saved_value = 0
 resource_name = "<null>"
 
-[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_ffqkf"]
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_farwo"]
 property = &"hp"
 check_type = 2
-value = SubResource("BBVariant_afppj")
+value = SubResource("BBVariant_a2cp3")
 
-[sub_resource type="BTAction" id="BTAction_m1qpj"]
+[sub_resource type="BTAction" id="BTAction_nryr3"]
 script = ExtResource("2_vvvt0")
 
-[sub_resource type="BTSequence" id="BTSequence_jko5i"]
+[sub_resource type="BTSequence" id="BTSequence_8g7y3"]
 custom_name = "Dead"
-children = [SubResource("BTCheckAgentProperty_ffqkf"), SubResource("BTAction_m1qpj")]
+children = [SubResource("BTCheckAgentProperty_farwo"), SubResource("BTAction_nryr3")]
 
-[sub_resource type="BTAction" id="BTAction_qxn6e"]
+[sub_resource type="BTAction" id="BTAction_na6bq"]
 script = ExtResource("3_lu68y")
 
-[sub_resource type="BTSequence" id="BTSequence_7lqak"]
-custom_name = "Hit"
-children = [SubResource("BTAction_qxn6e")]
+[sub_resource type="BTSequence" id="BTSequence_bkktn"]
+custom_name = "Knockback"
+children = [SubResource("BTAction_na6bq")]
 
-[sub_resource type="BTSelector" id="BTSelector_h5san"]
-custom_name = "Hit Or Dead"
-children = [SubResource("BTSequence_jko5i"), SubResource("BTSequence_7lqak")]
+[sub_resource type="BTSelector" id="BTSelector_bxsi1"]
+custom_name = "Knockback or Dead"
+children = [SubResource("BTSequence_8g7y3"), SubResource("BTSequence_bkktn")]
 
-[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_c7nk4"]
-custom_name = "On Hit Detection"
-children = [SubResource("BTCondition_evk3g"), SubResource("BTSelector_h5san")]
+[sub_resource type="BTSequence" id="BTSequence_e1o2r"]
+custom_name = "Knocback Stun or Dead Stun"
+children = [SubResource("BTCheckVar_q0d2g"), SubResource("BTSelector_bxsi1")]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lu68y"]
 prefetch_nodepath_vars = false
@@ -51,7 +101,7 @@ subtree = ExtResource("4_vvvt0")
 blackboard_plan = SubResource("BlackboardPlan_lu68y")
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_3g0t7"]
-children = [SubResource("BTDynamicSequence_c7nk4"), SubResource("BTSubtree_3j0oq")]
+children = [SubResource("BTSequence_34l1i"), SubResource("BTSequence_e1o2r"), SubResource("BTSubtree_3j0oq")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_h1e62")

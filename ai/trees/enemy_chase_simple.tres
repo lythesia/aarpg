@@ -23,12 +23,12 @@ script = ExtResource("2_r0e20")
 pred_func = &"is_dead"
 
 [sub_resource type="BTInvert" id="BTInvert_r0e20"]
-custom_name = "Is Target Alive"
+custom_name = "Is player alive?"
 children = [SubResource("BTCondition_ho00m")]
 
 [sub_resource type="BTWaitTicks" id="BTWaitTicks_r0e20"]
 num_ticks = 5
-custom_name = "Wait PathFinder"
+custom_name = "Wait path finder"
 
 [sub_resource type="BBNode" id="BBNode_r0e20"]
 value_source = 1
@@ -57,7 +57,7 @@ script = ExtResource("4_m7o83")
 speed = 40.0
 
 [sub_resource type="BTSelector" id="BTSelector_r0e20"]
-custom_name = "Redir or Chase"
+custom_name = "Redir or chase one step"
 children = [SubResource("BTCooldown_34lut"), SubResource("BTAction_yoiy5")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_r0e20"]
@@ -65,13 +65,13 @@ forever = true
 children = [SubResource("BTSelector_r0e20")]
 
 [sub_resource type="BTSequence" id="BTSequence_oul5u"]
-custom_name = "Chase Player"
+custom_name = "Chase player"
 children = [SubResource("BTWaitTicks_r0e20"), SubResource("BTRepeat_r0e20")]
 script = ExtResource("5_d1vvv")
 path_finder_detect_length = 10.0
 
 [sub_resource type="BTDynamicSequence" id="BTDynamicSequence_noulj"]
-custom_name = "Player Spotted"
+custom_name = "Player spotted"
 children = [SubResource("BTCondition_7npt8"), SubResource("BTInvert_r0e20"), SubResource("BTSequence_oul5u")]
 
 [sub_resource type="BTAction" id="BTAction_ceakx"]
@@ -94,7 +94,7 @@ children = [SubResource("BTAction_h8usx")]
 script = ExtResource("8_50dfi")
 
 [sub_resource type="BTSequence" id="BTSequence_p2lcu"]
-custom_name = "Walk Random Steps"
+custom_name = "Walk random steps"
 children = [SubResource("BTAction_ceakx"), SubResource("BTAction_1ljxr"), SubResource("BTConsolePrint_r0e20"), SubResource("BTRepeat_iuryc")]
 
 [sub_resource type="BTAction" id="BTAction_uq5bl"]

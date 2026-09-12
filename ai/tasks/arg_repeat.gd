@@ -1,10 +1,11 @@
 @tool
 extends BTRepeat
 
-@export var var_counter: StringName = &"counter"
+## BB variable of repeat count of child task
+@export var counter: StringName = &"counter"
 
 func _generate_name() -> String:
-    return "Repeat: %s times" % [LimboUtility.decorate_var(var_counter)]
+    return "Repeat: %s times" % [LimboUtility.decorate_var(counter)]
 
 func _enter() -> void:
-    times = blackboard.get_var(var_counter, 1)
+    times = blackboard.get_var(counter, 1)

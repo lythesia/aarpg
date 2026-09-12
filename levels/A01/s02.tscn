@@ -19,16 +19,27 @@
 [ext_resource type="PackedScene" uid="uid://wkf8xv4y4ito" path="res://ai/tools/patrol_location.tscn" id="13_rc8lg"]
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="15_om7qf"]
 [ext_resource type="PackedScene" uid="uid://cw7blds8v4bcf" path="res://ai/tools/zone_preview.tscn" id="15_omkjm"]
-[ext_resource type="BehaviorTree" uid="uid://c818t2ty405mg" path="res://ai/trees/npc_cyan.tres" id="16_iwchl"]
+[ext_resource type="BehaviorTree" uid="uid://bg2e1g23twki7" path="res://ai/trees/talk_interruptable.tres" id="16_6ebg1"]
+[ext_resource type="BehaviorTree" uid="uid://honn6y1rcpyk" path="res://ai/trees/wander_zone_seq.tres" id="17_6nnyc"]
 [ext_resource type="Script" uid="uid://dowamhcy4vmkv" path="res://levels/A01/s02/cam_switch.gd" id="17_q5jxl"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="17_tttph"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="18_q5jxl"]
 [ext_resource type="PackedScene" uid="uid://18b1qlrfrpp3" path="res://ai/tools/patrol_preview.tscn" id="19_omkjm"]
-[ext_resource type="BehaviorTree" uid="uid://bc8xp86v05nxo" path="res://ai/trees/npc_nero.tres" id="21_6ebg1"]
+[ext_resource type="BehaviorTree" uid="uid://b4osxlbuvvkan" path="res://ai/trees/circular_patrol_seq.tres" id="22_6ebg1"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_iwchl"]
+var/main_bt/name = &"main_bt"
+var/main_bt/type = 24
+var/main_bt/value = ExtResource("17_6nnyc")
+var/main_bt/hint = 17
+var/main_bt/hint_string = "BehaviorTree"
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_udvs8"]
+var/main_bt/name = &"main_bt"
+var/main_bt/type = 24
+var/main_bt/value = ExtResource("22_6ebg1")
+var/main_bt/hint = 17
+var/main_bt/hint_string = "BehaviorTree"
 
 [sub_resource type="Resource" id="Resource_7mk61"]
 script = ExtResource("18_q5jxl")
@@ -106,7 +117,7 @@ npc_bt = NodePath("BTPlayer")
 [node name="ZonePreview" parent="Cyan" unique_id=162663658 instance=ExtResource("15_omkjm")]
 
 [node name="BTPlayer" type="BTPlayer" parent="Cyan" unique_id=131499082]
-behavior_tree = ExtResource("16_iwchl")
+behavior_tree = ExtResource("16_6ebg1")
 blackboard_plan = SubResource("BlackboardPlan_iwchl")
 
 [node name="Nero" parent="." unique_id=116734983 node_paths=PackedStringArray("npc_bt") instance=ExtResource("8_tmjfs")]
@@ -137,7 +148,7 @@ modulate = Color(1, 0.7529412, 0.79607844, 1)
 position = Vector2(0, 68)
 
 [node name="BTPlayer" type="BTPlayer" parent="Nero" unique_id=1893321375]
-behavior_tree = ExtResource("21_6ebg1")
+behavior_tree = ExtResource("16_6ebg1")
 blackboard_plan = SubResource("BlackboardPlan_udvs8")
 
 [node name="CamSwitch" type="Node2D" parent="." unique_id=891944321]

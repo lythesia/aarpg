@@ -14,7 +14,7 @@ script = ExtResource("1_523qq")
 script = ExtResource("2_xyvgp")
 
 [sub_resource type="BTSequence" id="BTSequence_wyca0"]
-custom_name = "SequenceMove"
+custom_name = "Pick next location and move"
 children = [SubResource("BTAction_kk3el"), SubResource("BTAction_fmjd0")]
 
 [sub_resource type="BTAction" id="BTAction_cpuj5"]
@@ -25,11 +25,11 @@ children = [SubResource("BTAction_cpuj5")]
 script = ExtResource("4_xyvgp")
 
 [sub_resource type="BTSequence" id="BTSequence_wvqq3"]
-custom_name = "SequenceIdle"
+custom_name = "Chill"
 children = [SubResource("BTDecorator_kk3el")]
 
 [sub_resource type="BTSequence" id="BTSequence_5ffy2"]
-custom_name = "SequencePartrol"
+custom_name = "Partrol"
 children = [SubResource("BTSequence_wyca0"), SubResource("BTSequence_wvqq3")]
 
 [resource]

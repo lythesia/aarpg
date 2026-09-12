@@ -1,21 +1,31 @@
-## move one step
+## move one step towards a direction
+@tool
 extends BTAction
 
-@export var speed: float = 30
-@export var anim_state: StringName = &"walk"
-@export var step_dur: float = 0.7
-@export var wall_check: bool = false
+## BB variable of target direction (Vector2)
+@export var target_dir: StringName = &"target_dir"
 
-@export_category("Input")
-@export var var_target_dir: StringName = &"target_dir"
+## step animation
+@export var anim_state: StringName = &"walk"
+
+@export var speed: float = 30
+## duration of one step (float)
+@export var step_dur: float = 0.7
+## bounce off walls if true
+@export var wall_check: bool = false
 
 var dur: float
 var dir: Vector2
 
+func _generate_name() -> String:
+    return "One Step Towards %s" % [
+        LimboUtility.decorate_var(target_dir)
+    ]
+
 func _enter() -> void:
     dur = step_dur
     agent.update_animation(anim_state)
-    dir = blackboard.get_var(var_target_dir)
+    dir = blackboard.get_var(target_dir)
 
 func _tick(delta: float) -> Status:
     if not dir:
