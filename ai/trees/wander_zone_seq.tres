@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://stut5ii4gttg" path="res://ai/tasks/rand_pos_in_range.gd" id="1_huivl"]
 [ext_resource type="Script" uid="uid://n06lqn6fenm8" path="res://ai/tasks/move_to.gd" id="2_hxfoo"]
 [ext_resource type="Script" uid="uid://dt3cqx525ltqk" path="res://ai/tasks/idle.gd" id="3_fsm78"]
-[ext_resource type="Script" uid="uid://d24hdxiyfsf2s" path="res://ai/tasks/rand_time_limit.gd" id="4_hxfoo"]
+[ext_resource type="Script" uid="uid://d24hdxiyfsf2s" path="res://ai/tasks/rand_run_for.gd" id="4_hxfoo"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_huivl"]
 

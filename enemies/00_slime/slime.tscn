@@ -706,7 +706,7 @@ item_scene = ExtResource("18_gxb4a")
 min_drop = 1
 metadata/_custom_type_script = "uid://jqbhutkxlgs2"
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_scaum"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_d6mua"]
 var/main_bt/name = &"main_bt"
 var/main_bt/type = 24
 var/main_bt/value = ExtResource("15_gxb4a")
@@ -794,4 +794,4 @@ polygon = PackedVector2Array(-5, -7, -42, 49, 42, 49, 5, -7)
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=1534967559]
 behavior_tree = ExtResource("14_umdq1")
-blackboard_plan = SubResource("BlackboardPlan_scaum")
+blackboard_plan = SubResource("BlackboardPlan_d6mua")

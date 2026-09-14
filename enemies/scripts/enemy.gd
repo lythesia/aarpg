@@ -10,12 +10,9 @@ signal WasHit(attack_area: AttackArea)
 signal WasKilled
 @warning_ignore_restore("unused_signal")
 
+@export var max_hp: int = 3
 @export var hp: int = 3
 @export var xp: int = 5
-@export var knockback_speed: float = 80
-@export var knockback_decelerate: float = 10
-@export var invulnerable_dur: float = 0.8
-@export var hit_audio: AudioStream
 
 var collision_shape: CollisionShape2D
 var sprite: Sprite2D

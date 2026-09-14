@@ -1,0 +1,161 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://dlod3fjvfvdxk"]
+
+[ext_resource type="Script" uid="uid://chc57x121dn4r" path="res://ai/tasks/dark_wizard_disappear.gd" id="1_d7r5t"]
+[ext_resource type="Script" uid="uid://bp303pkxm17y4" path="res://ai/tasks/gather_teleport_pos.gd" id="1_ks225"]
+[ext_resource type="Script" uid="uid://b1vvl6w48swx5" path="res://ai/tasks/gather_beam_attacks.gd" id="2_ssv8c"]
+[ext_resource type="Script" uid="uid://bmj4bmyp14psc" path="res://ai/tasks/fire_projectile.gd" id="2_tcfbd"]
+[ext_resource type="Script" uid="uid://dt3cqx525ltqk" path="res://ai/tasks/idle.gd" id="3_15g4x"]
+[ext_resource type="Script" uid="uid://bglcynpluhrjj" path="res://ai/tasks/dark_wizard_appear.gd" id="6_15g4x"]
+[ext_resource type="Script" uid="uid://gpm5o8v23123" path="res://ai/tasks/dark_wizard_beam_attack.gd" id="7_15g4x"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_8qmua"]
+
+[sub_resource type="BBNode" id="BBNode_ssv8c"]
+saved_value = NodePath("Boss/TeleportPositions")
+resource_name = "Boss/TeleportPositions"
+
+[sub_resource type="BTAction" id="BTAction_15g4x"]
+script = ExtResource("1_ks225")
+preview_node = SubResource("BBNode_ssv8c")
+
+[sub_resource type="BBNode" id="BBNode_15g4x"]
+saved_value = NodePath("Boss/BeamAttacks")
+resource_name = "Boss/BeamAttacks"
+
+[sub_resource type="BTAction" id="BTAction_t3kdp"]
+script = ExtResource("2_ssv8c")
+preview_node = SubResource("BBNode_15g4x")
+
+[sub_resource type="BTSequence" id="BTSequence_60t3p"]
+custom_name = "Setup"
+children = [SubResource("BTAction_15g4x"), SubResource("BTAction_t3kdp")]
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_jxqtj"]
+children = [SubResource("BTSequence_60t3p")]
+
+[sub_resource type="BTAction" id="BTAction_j4r11"]
+script = ExtResource("3_15g4x")
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_ptfwc"]
+time_limit = 1.0
+children = [SubResource("BTAction_j4r11")]
+
+[sub_resource type="BTInvert" id="BTInvert_15g4x"]
+children = [SubResource("BTTimeLimit_ptfwc")]
+
+[sub_resource type="BTSequence" id="BTSequence_vrmjf"]
+custom_name = "Chill"
+children = [SubResource("BTInvert_15g4x")]
+
+[sub_resource type="BTAction" id="BTAction_1e0lm"]
+script = ExtResource("1_d7r5t")
+
+[sub_resource type="BBNode" id="BBNode_jxqtj"]
+saved_value = NodePath("Boss/DarkWizard/FireballSpawner")
+resource_name = "Boss/DarkWizard/FireballSpawner"
+
+[sub_resource type="BTAction" id="BTAction_60t3p"]
+script = ExtResource("2_tcfbd")
+spawner = SubResource("BBNode_jxqtj")
+
+[sub_resource type="BTWait" id="BTWait_j4r11"]
+
+[sub_resource type="BBVariant" id="BBVariant_15g4x"]
+value_source = 1
+variable = &"teleport_positions"
+resource_name = "$teleport_positions"
+
+[sub_resource type="BBNode" id="BBNode_t3kdp"]
+saved_value = NodePath("Boss/DarkWizard")
+resource_name = "Boss/DarkWizard"
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_vrmjf"]
+node = SubResource("BBNode_t3kdp")
+expression_string = "tps.pick_random()"
+result_var = &"pos_and_face"
+input_names = PackedStringArray("tps")
+input_values = Array[BBVariant]([SubResource("BBVariant_15g4x")])
+
+[sub_resource type="BBVariant" id="BBVariant_ssv8c"]
+value_source = 1
+variable = &"pos_and_face"
+resource_name = "$pos_and_face"
+
+[sub_resource type="BBNode" id="BBNode_60t3p"]
+saved_value = NodePath("Boss/DarkWizard")
+resource_name = "Boss/DarkWizard"
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_j4r11"]
+node = SubResource("BBNode_60t3p")
+expression_string = "pos_and_face.pos"
+result_var = &"appear_pos"
+input_names = PackedStringArray("pos_and_face")
+input_values = Array[BBVariant]([SubResource("BBVariant_ssv8c")])
+
+[sub_resource type="BBVariant" id="BBVariant_ptfwc"]
+value_source = 1
+variable = &"pos_and_face"
+resource_name = "$pos_and_face"
+
+[sub_resource type="BBNode" id="BBNode_vrmjf"]
+saved_value = NodePath("Boss/DarkWizard")
+resource_name = "Boss/DarkWizard"
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_nij2s"]
+node = SubResource("BBNode_vrmjf")
+expression_string = "pos_and_face.face"
+result_var = &"appear_face"
+input_names = PackedStringArray("pos_and_face")
+input_values = Array[BBVariant]([SubResource("BBVariant_ptfwc")])
+
+[sub_resource type="BBVariant" id="BBVariant_o7j0e"]
+value_source = 1
+variable = &"appear_pos"
+resource_name = "$appear_pos"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_mhjg4"]
+property = &"global_position"
+value = SubResource("BBVariant_o7j0e")
+
+[sub_resource type="BBVariant" id="BBVariant_nij2s"]
+value_source = 1
+variable = &"appear_face"
+resource_name = "$appear_face"
+
+[sub_resource type="BBNode" id="BBNode_1e0lm"]
+saved_value = NodePath("Boss/DarkWizard")
+resource_name = "Boss/DarkWizard"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_o7j0e"]
+node = SubResource("BBNode_1e0lm")
+method = &"update_cloak_animation"
+args = Array[BBVariant]([SubResource("BBVariant_nij2s")])
+
+[sub_resource type="BTAction" id="BTAction_jxqtj"]
+script = ExtResource("6_15g4x")
+
+[sub_resource type="BTSequence" id="BTSequence_eh6s6"]
+custom_name = "Teleport"
+children = [SubResource("BTAction_1e0lm"), SubResource("BTAction_60t3p"), SubResource("BTWait_j4r11"), SubResource("BTEvaluateExpression_vrmjf"), SubResource("BTEvaluateExpression_j4r11"), SubResource("BTEvaluateExpression_nij2s"), SubResource("BTSetAgentProperty_mhjg4"), SubResource("BTCallMethod_o7j0e"), SubResource("BTAction_jxqtj")]
+
+[sub_resource type="BTAction" id="BTAction_ptfwc"]
+script = ExtResource("7_15g4x")
+
+[sub_resource type="BTSequence" id="BTSequence_mhjg4"]
+custom_name = "Attack"
+children = [SubResource("BTAction_ptfwc")]
+
+[sub_resource type="BTSequence" id="BTSequence_vkfym"]
+custom_name = "Teleport then attack"
+children = [SubResource("BTSequence_eh6s6"), SubResource("BTSequence_mhjg4")]
+
+[sub_resource type="BTSequence" id="BTSequence_15g4x"]
+custom_name = "Attack flow"
+children = [SubResource("BTSequence_vrmjf"), SubResource("BTSequence_vkfym")]
+
+[sub_resource type="BTSelector" id="BTSelector_jxqtj"]
+children = [SubResource("BTRunLimit_jxqtj"), SubResource("BTSequence_15g4x")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_8qmua")
+root_task = SubResource("BTSelector_jxqtj")

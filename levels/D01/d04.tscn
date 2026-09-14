@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bg6xs5x3kjgj2" path="res://general/projectiles/fireball/fireball.tscn" id="6_xnggu"]
 [ext_resource type="PackedScene" uid="uid://brihgcxrpwgfg" path="res://general/hazards/beam/energy_beam.tscn" id="8_7k8ks"]
 [ext_resource type="Script" uid="uid://cgpn84kf85jwp" path="res://levels/D01/d04_boss.gd" id="8_j23ik"]
+[ext_resource type="BehaviorTree" uid="uid://dlod3fjvfvdxk" path="res://ai/trees/dark_wizard.tres" id="9_gklxq"]
 [ext_resource type="PackedScene" uid="uid://xdqhqri5lxc6" path="res://enemies/10_dark_wizard/dark_wizard.tscn" id="9_gm4rn"]
 [ext_resource type="PackedScene" uid="uid://bmo7u8vjtsecx" path="res://general/item_dropper/item_dropper.tscn" id="10_wmgv5"]
 [ext_resource type="Resource" uid="uid://wu3xbcswmvpl" path="res://items/item_tres/magical_flute.tres" id="11_kbevr"]
@@ -14,6 +15,9 @@
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="13_gklxq"]
 [ext_resource type="Script" uid="uid://7glx3w8yur5g" path="res://general/quest_util/quest_advance_trigger.gd" id="14_kbevr"]
 [ext_resource type="Resource" uid="uid://ctyjooliji88b" path="res://quests/lost_flute.tres" id="15_0ykpa"]
+[ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="17_gklxq"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_wmgv5"]
 
 [sub_resource type="Gradient" id="Gradient_7k8ks"]
 offsets = PackedFloat32Array(0.5218447, 0.75970876, 1)
@@ -26,6 +30,13 @@ height = 32
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0)
+
+[sub_resource type="GDScript" id="GDScript_r0e20"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+    show()
+"
 
 [node name="D04" type="Node2D" unique_id=246040186]
 y_sort_enabled = true
@@ -114,24 +125,15 @@ script = ExtResource("8_j23ik")
 unique_name_in_owner = true
 position = Vector2(256, 94)
 
-[node name="BeamAttacks" type="Node2D" parent="Boss" unique_id=1143388016]
+[node name="BTPlayer" type="BTPlayer" parent="Boss/DarkWizard" unique_id=1500635033]
+behavior_tree = ExtResource("9_gklxq")
+blackboard_plan = SubResource("BlackboardPlan_wmgv5")
 
-[node name="Beam_H1" parent="Boss/BeamAttacks" unique_id=1783698393 instance=ExtResource("8_7k8ks")]
-position = Vector2(0, 8)
-
-[node name="Beam_H2" parent="Boss/BeamAttacks" unique_id=1443270392 instance=ExtResource("8_7k8ks")]
-position = Vector2(0, 94)
-
-[node name="Beam_H3" parent="Boss/BeamAttacks" unique_id=476768827 instance=ExtResource("8_7k8ks")]
-position = Vector2(0, 182)
-
-[node name="Beam_V1" parent="Boss/BeamAttacks" unique_id=1663583301 instance=ExtResource("8_7k8ks")]
-position = Vector2(159, 182)
-rotation = 1.5707964
-
-[node name="Beam_V2" parent="Boss/BeamAttacks" unique_id=1765478727 instance=ExtResource("8_7k8ks")]
-position = Vector2(352, 194)
-rotation = 1.5707964
+[node name="FireballSpawner" type="Marker2D" parent="Boss/DarkWizard" unique_id=1074741346]
+position = Vector2(0, -12)
+script = ExtResource("5_15n47")
+projectile = ExtResource("6_xnggu")
+metadata/_custom_type_script = "uid://cc0v1pfwl4f8x"
 
 [node name="TeleportPositions" type="Node2D" parent="Boss" unique_id=826030676]
 visible = false
@@ -152,6 +154,27 @@ texture = SubResource("GradientTexture2D_aabtn")
 position = Vector2(432, 94)
 texture = SubResource("GradientTexture2D_aabtn")
 
+[node name="BeamAttacks" type="Node2D" parent="Boss" unique_id=1143388016]
+visible = false
+script = SubResource("GDScript_r0e20")
+
+[node name="Beam_H1" parent="Boss/BeamAttacks" unique_id=1783698393 instance=ExtResource("8_7k8ks")]
+position = Vector2(0, 8)
+
+[node name="Beam_H2" parent="Boss/BeamAttacks" unique_id=1443270392 instance=ExtResource("8_7k8ks")]
+position = Vector2(0, 94)
+
+[node name="Beam_H3" parent="Boss/BeamAttacks" unique_id=476768827 instance=ExtResource("8_7k8ks")]
+position = Vector2(0, 182)
+
+[node name="Beam_V1" parent="Boss/BeamAttacks" unique_id=1663583301 instance=ExtResource("8_7k8ks")]
+position = Vector2(159, 182)
+rotation = 1.5707964
+
+[node name="Beam_V2" parent="Boss/BeamAttacks" unique_id=1765478727 instance=ExtResource("8_7k8ks")]
+position = Vector2(352, 194)
+rotation = 1.5707964
+
 [node name="ItemDropper" parent="." unique_id=640575955 instance=ExtResource("10_wmgv5")]
 position = Vector2(256, 94)
 item = ExtResource("11_kbevr")
@@ -169,6 +192,9 @@ summary = "UPDATE QUEST:
 - Step: 1 Find the magical flute
 - Complete: true"
 metadata/_custom_type_script = "uid://7glx3w8yur5g"
+
+[node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("17_gklxq")]
+position = Vector2(255, 179)
 
 [connection signal="WasKilled" from="Boss/DarkWizard" to="ItemDropper" method="drop_item"]
 [connection signal="DropPickedUp" from="ItemDropper" to="ItemDropper/QuestAdvanceTrigger" method="advance_request"]

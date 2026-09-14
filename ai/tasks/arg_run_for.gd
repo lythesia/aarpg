@@ -1,13 +1,13 @@
 @tool
 extends BTDecorator
 
-## BB variable of time limit in seconds
+## BB variable of time to run in seconds
 @export var time_limit: StringName = &"time_limit"
 
 var timer: float
 
 func _generate_name() -> String:
-    return "Time Limit %s sec" % [LimboUtility.decorate_var(time_limit)]
+    return "RunFor %s secs" % [LimboUtility.decorate_var(time_limit)]
 
 func _enter() -> void:
     if !blackboard.has_var(time_limit):

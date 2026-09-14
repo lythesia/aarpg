@@ -1,6 +1,5 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://dfpoprpwgjxbs"]
 
-[ext_resource type="Script" uid="uid://djyuavr8fa7v8" path="res://ai/tasks/evaluate_bb_var.gd" id="1_hvjrx"]
 [ext_resource type="Script" uid="uid://b16vaqysxd3qn" path="res://ai/tasks/enemy_death.gd" id="2_hvjrx"]
 [ext_resource type="Script" uid="uid://c01ak8y6tl1x6" path="res://ai/tasks/enemy_knockback.gd" id="3_flle3"]
 [ext_resource type="Script" uid="uid://7dsimahn2j6l" path="res://ai/tasks/dynamic_subtree.gd" id="4_flle3"]
@@ -12,13 +11,28 @@ var/main_bt/hint = 17
 var/main_bt/hint_string = "BehaviorTree"
 var/damage_source/name = &"damage_source"
 var/damage_source/type = 24
-var/damage_source/hint = 0
-var/damage_source/hint_string = ""
+var/damage_source/hint = 34
+var/damage_source/hint_string = "AttackArea"
 var/is_stunned/name = &"is_stunned"
 var/is_stunned/type = 1
 var/is_stunned/value = false
 var/is_stunned/hint = 0
 var/is_stunned/hint_string = ""
+var/invuln_dur/name = &"invuln_dur"
+var/invuln_dur/type = 3
+var/invuln_dur/value = 0.3
+var/invuln_dur/hint = 0
+var/invuln_dur/hint_string = ""
+var/kb_speed/name = &"kb_speed"
+var/kb_speed/type = 3
+var/kb_speed/value = 200.0
+var/kb_speed/hint = 0
+var/kb_speed/hint_string = ""
+var/kb_decel/name = &"kb_decel"
+var/kb_decel/type = 3
+var/kb_decel/value = 10.0
+var/kb_decel/hint = 0
+var/kb_decel/hint_string = ""
 
 [sub_resource type="BBVariant" id="BBVariant_evk3g"]
 saved_value = null
@@ -29,11 +43,21 @@ variable = &"damage_source"
 check_type = 5
 value = SubResource("BBVariant_evk3g")
 
-[sub_resource type="BTAction" id="BTAction_ffqkf"]
-script = ExtResource("1_hvjrx")
+[sub_resource type="BBVariant" id="BBVariant_hvjrx"]
+value_source = 1
 variable = &"damage_source"
-property = &"global_position"
+resource_name = "$damage_source"
+
+[sub_resource type="BBNode" id="BBNode_flle3"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_evk3g"]
+node = SubResource("BBNode_flle3")
+expression_string = "damage_source.global_position"
 result_var = &"damage_source_pos"
+input_names = PackedStringArray("damage_source")
+input_values = Array[BBVariant]([SubResource("BBVariant_hvjrx")])
 
 [sub_resource type="BBVariant" id="BBVariant_m1qpj"]
 saved_value = null
@@ -54,7 +78,7 @@ value = SubResource("BBVariant_qxn6e")
 
 [sub_resource type="BTSequence" id="BTSequence_h5san"]
 custom_name = "Being hit?"
-children = [SubResource("BTCheckVar_afppj"), SubResource("BTAction_ffqkf"), SubResource("BTSetVar_jko5i"), SubResource("BTSetVar_7lqak")]
+children = [SubResource("BTCheckVar_afppj"), SubResource("BTEvaluateExpression_evk3g"), SubResource("BTSetVar_jko5i"), SubResource("BTSetVar_7lqak")]
 
 [sub_resource type="BBVariant" id="BBVariant_3j0oq"]
 type = 1
@@ -82,8 +106,26 @@ script = ExtResource("2_hvjrx")
 custom_name = "Dead"
 children = [SubResource("BTCheckAgentProperty_283rq"), SubResource("BTAction_rim6p")]
 
+[sub_resource type="BBFloat" id="BBFloat_hvjrx"]
+value_source = 1
+variable = &"invuln_dur"
+resource_name = "$invuln_dur"
+
+[sub_resource type="BBFloat" id="BBFloat_flle3"]
+value_source = 1
+variable = &"kb_decel"
+resource_name = "$kb_decel"
+
+[sub_resource type="BBFloat" id="BBFloat_evk3g"]
+value_source = 1
+variable = &"kb_speed"
+resource_name = "$kb_speed"
+
 [sub_resource type="BTAction" id="BTAction_l7piy"]
 script = ExtResource("3_flle3")
+invulnerable_dur = SubResource("BBFloat_hvjrx")
+knockback_speed = SubResource("BBFloat_evk3g")
+knockback_decelerate = SubResource("BBFloat_flle3")
 
 [sub_resource type="BTSequence" id="BTSequence_ct6mu"]
 custom_name = "Knockback"

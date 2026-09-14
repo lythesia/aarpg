@@ -1,15 +1,15 @@
 @tool
 extends BTDecorator
 
-## min time to wait (float)
+## min time to run (float)
 @export var min_time: float = 1.0
-## max time to wait (float)
+## max time to run (float)
 @export var max_time: float = 5.0
 
 var timer: float
 
 func _generate_name() -> String:
-    return "Wait for %.1f to %.1f seconds" % [
+    return "RunFor %.1fs to %.1fs" % [
         min_time,
         max_time
     ]

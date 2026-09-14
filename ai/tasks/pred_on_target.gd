@@ -8,7 +8,7 @@ extends BTCondition
 @export var pred_func: StringName
 
 func _generate_name() -> String:
-    return "if %s.%s()" % [
+    return "If %s.%s()" % [
         LimboUtility.decorate_var(target),
         pred_func
     ]

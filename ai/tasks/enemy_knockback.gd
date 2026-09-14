@@ -9,9 +9,12 @@ extends BTAction
 ## stun animation
 @export var anim_state: StringName = &"stun"
 
-@export var invulnerable_dur: float = 0.3
-@export var knockback_speed: float = 200
-@export var knockback_decelerate: float = 10
+## default: 0.3s
+@export var invulnerable_dur: BBFloat
+## default: 200
+@export var knockback_speed: BBFloat
+## default: 10
+@export var knockback_decelerate: BBFloat
 
 var enemy: Enemy
 var dur: float
@@ -23,18 +26,21 @@ func _enter() -> void:
     else:
         enemy.update_animation(anim_state)
 
-    enemy.damage_area.make_invulnerable(invulnerable_dur)
+    var idur: float = invulnerable_dur.get_value(scene_root, blackboard, 0.3)
+    enemy.damage_area.make_invulnerable(idur)
 
     dur = enemy.animation_player.current_animation_length
     var dmg_src_pos: Vector2 = blackboard.get_var(damage_source_pos) as Vector2
     var dir = dmg_src_pos.direction_to(enemy.global_position).normalized()
-    if knockback_speed > 0:
-        enemy.move(dir * knockback_speed)
+    var speed: float = knockback_speed.get_value(scene_root, blackboard, 200)
+    if speed > 0:
+        enemy.move(dir * speed)
 
 func _tick(delta: float) -> Status:
     dur -= delta
-    if knockback_decelerate > 0:
-        enemy.velocity -= enemy.velocity * knockback_decelerate * delta
+    var decel: float = knockback_decelerate.get_value(scene_root, blackboard, 10)
+    if decel > 0:
+        enemy.velocity -= enemy.velocity * decel * delta
     if dur <= 0:
         return Status.SUCCESS
     return Status.RUNNING

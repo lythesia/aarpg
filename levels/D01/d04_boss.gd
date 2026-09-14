@@ -5,6 +5,7 @@ extends Node2D
 @onready var dark_wizard: Enemy = %DarkWizard
 @onready var base_layer: TileMapLayer = %BaseDungeon
 @onready var locked_layer: TileMapLayer = %BaseLockedDungeon
+@onready var beam_attacks: Node2D = $BeamAttacks
 
 func _ready() -> void:
     if WorldState.has_kv(persistent_key) and WorldState.get_kv(persistent_key):
@@ -23,6 +24,7 @@ func _on_hit(_a: AttackArea) -> void:
 
 func _on_killed() -> void:
     PlayerHud.hide_boss_hud()
+    beam_attacks.queue_free() # todo: what if beam's activating?
 
 func _on_defeated() -> void:
     WorldState.add_kv(persistent_key, true)
@@ -30,7 +32,7 @@ func _on_defeated() -> void:
     queue_free()
 
 func _update_boss_hp() -> void:
-    PlayerHud.update_boss_hp(dark_wizard.blackboard.hp, dark_wizard.hp)
+    PlayerHud.update_boss_hp(dark_wizard.hp, dark_wizard.max_hp)
 
 func _lock_room() -> void:
     base_layer.enabled = false
