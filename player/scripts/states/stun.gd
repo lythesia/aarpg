@@ -26,7 +26,6 @@ func enter():
 
     player.damage_area.make_invulnerable(invulnerable_dur)
     player.effect_anim_player.play("damaged")
-    # _tween_flash()
 
     player.velocity = init_velocity
 
@@ -57,14 +56,3 @@ func _on_animation_finished(_anim: String) -> void:
         player.fsm.change_state(player.fsm.idle)
     else:
         player.fsm.change_state(player.fsm.death)
-
-# hit flash effect
-func _tween_flash():
-    if tw:
-        tw.kill()
-    tw = create_tween()
-    tw.tween_method(_set_flash_amount, 0.0, 1.0, 0.0)
-    tw.tween_method(_set_flash_amount, 1.0, 0.0, 1.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
-func _set_flash_amount(value: float):
-    player.sprite_material.set_shader_parameter("flash_amount", value)

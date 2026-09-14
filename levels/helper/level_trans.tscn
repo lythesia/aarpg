@@ -5,16 +5,26 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aabtn"]
 size = Vector2(32, 32)
 
-[node name="LevelTrans" type="Node2D" unique_id=327073310]
+[node name="LevelTrans" type="Node2D" unique_id=2117019325]
 script = ExtResource("1_fhwi5")
+metadata/_custom_type_script = "uid://c3tokejtqe4tq"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1886137723]
-scale = Vector2(-1, 1)
+rotation = -3.1415925
+scale = Vector2(1, -1)
 collision_layer = 0
 collision_mask = 16
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=639646800]
+visible = false
 shape = SubResource("RectangleShape2D_aabtn")
 debug_color = Color(0.7244996, 0.32303998, 0.880634, 0.41960785)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1529181211]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1217022843]
+shape = SubResource("RectangleShape2D_aabtn")

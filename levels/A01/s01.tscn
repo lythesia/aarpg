@@ -71,7 +71,7 @@ size = 2
 location = 2
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("3_d5g0j")]
-position = Vector2(242, 228)
+position = Vector2(430, 244)
 
 [node name="Items" type="Node2D" parent="." unique_id=830853031]
 y_sort_enabled = true
@@ -116,5 +116,5 @@ position = Vector2(365, 211)
 y_sort_enabled = true
 
 [node name="Slime" parent="Mobs" unique_id=1748956911 instance=ExtResource("12_c22wq")]
-position = Vector2(409, 144)
+position = Vector2(509, 135)
 hp = 10

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ca4njjpf7kek5" path="res://player/scripts/player.gd" id="1_87uja"]
 [ext_resource type="Texture2D" uid="uid://nmolkhopa4kd" path="res://player/sprites/player_sprite.png" id="2_d8q1f"]
+[ext_resource type="Shader" uid="uid://bndbpji0ri3hy" path="res://public/materials/flash_white.gdshader" id="2_rlits"]
 [ext_resource type="Script" uid="uid://bvrt5mspxsgl7" path="res://player/scripts/player_fsm.gd" id="2_t0cpu"]
 [ext_resource type="Script" uid="uid://cijxcr5qaj8a" path="res://player/scripts/player_sprite.gd" id="3_11l1d"]
 [ext_resource type="Texture2D" uid="uid://8lfj0kih6jli" path="res://player/sprites/player_sprite_sword.png" id="3_ivons"]
@@ -49,6 +50,10 @@
 [ext_resource type="Script" uid="uid://cvs3phfeis4lq" path="res://player/scripts/player_camera.gd" id="46_7prvn"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="47_7prvn"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="48_rlits"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3pel"]
+shader = ExtResource("2_rlits")
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0v6hv"]
 radius = 14.0
@@ -1999,21 +2004,34 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite:material:shader_parameter/flash_amount")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_28gy6"]
 resource_name = "damaged"
+length = 0.6
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.19607843), Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1), Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.19607843), Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2026,6 +2044,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:material:shader_parameter/flash_amount")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_utphg"]
@@ -2157,6 +2187,7 @@ size = Vector2(10, 2)
 [sub_resource type="Resource" id="Resource_aabtn"]
 script = ExtResource("31_d7607")
 frequency = 40.0
+noise_seed = 904
 metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lsqg7"]
@@ -2183,6 +2214,7 @@ script = ExtResource("1_87uja")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1662689798]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_j3pel")
 position = Vector2(0, -20)
 texture = ExtResource("2_d8q1f")
 hframes = 16
@@ -2449,7 +2481,7 @@ script = ExtResource("16_28gy6")
 unique_name_in_owner = true
 script = ExtResource("30_smv5u")
 noise = SubResource("Resource_aabtn")
-duration = 0.15
+duration = 0.2
 decay_time = 0.15
 metadata/_custom_type_script = "uid://bhd4nuiu23e7l"
 
@@ -2547,4 +2579,5 @@ follow_target = NodePath("../..")
 tween_resource = SubResource("Resource_6uqko")
 tween_on_load = false
 draw_limits = true
+noise_emitter_layer = 1
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"

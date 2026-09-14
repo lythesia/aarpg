@@ -45,13 +45,15 @@ const CELL_UNIT: int = 32
         apply_area_settings()
 
 ## which side transition is placed
-@export() var location: SIDE = SIDE.LEFT:
+@export var location: SIDE = SIDE.LEFT:
     set(val):
         location = val
         apply_area_settings()
 #endregion
 
 @onready var area: Area2D = $Area2D
+@onready var area_col: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var static_body: StaticBody2D = $StaticBody2D
 
 func _ready() -> void:
     apply_area_settings() # ensure area is scaled correctly anyway
@@ -88,18 +90,28 @@ func apply_area_settings() -> void:
     if !area:
         return
 
+    static_body = get_node_or_null("StaticBody2D")
+    if !static_body:
+        return
+
     if location == SIDE.LEFT or location == SIDE.RIGHT:
         area.scale.y = size
+        static_body.scale.y = size
         if location == SIDE.LEFT:
             area.scale.x = -1
+            static_body.scale.x = -1
         else:
             area.scale.x = 1
+            static_body.scale.x = 1
     else:
         area.scale.x = size
+        static_body.scale.x = size
         if location == SIDE.TOP:
             area.scale.y = 1
+            static_body.scale.y = 1
         else:
             area.scale.y = -1
+            static_body.scale.y = -1
 
 func get_offset(player: Node2D) -> Vector2:
     var offset = Vector2.ZERO
