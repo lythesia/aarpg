@@ -3,7 +3,7 @@ class_name ItemDropper extends Marker2D
 
 signal DropPickedUp
 
-@export var item: ItemData: set = _set_item
+@export var item: PickableItemBase: set = _set_item
 @export var drop_audio: AudioStream
 @export var pickup_audio: AudioStream
 @export var persistent_key: String
@@ -33,8 +33,7 @@ func drop_item() -> void:
     drop.texture_type = ItemPickup.TextureType.ITEM_DATA
     add_child.call_deferred(drop)
     drop.PickedUp.connect(_on_drop_picked_up.unbind(1))
-    if drop_audio:
-        Audio.play_spatial_sound(drop_audio, global_position)
+    Audio.play_spatial_sound(drop_audio, global_position)
     if persistent_key:
         WorldState.add_kv(persistent_key, true)
     has_dropped = true
@@ -46,11 +45,11 @@ func drop_item() -> void:
 func _on_drop_picked_up() -> void:
     DropPickedUp.emit()
 
-func _set_item(value: ItemData) -> void:
+func _set_item(value: PickableItemBase) -> void:
     item = value
     _update_texture()
 
 func _update_texture() -> void:
     if Engine.is_editor_hint():
         if sprite and item:
-            sprite.texture = item.icon
+            sprite.texture = item.texture()

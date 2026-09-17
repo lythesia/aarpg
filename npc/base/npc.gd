@@ -70,7 +70,8 @@ func _on_area_exited(_area: Area2D) -> void:
     tween.tween_property(interact_hint, "modulate:a", 0.0, 0.5)
 
 func _on_player_interacted() -> void:
-    npc_bt.blackboard.set_var("talk_target", PlayerManager.get_player())
+    if npc_bt:
+        npc_bt.blackboard.set_var("talk_target", PlayerManager.get_player())
     DialogueManager.dialogue_ended.connect(_on_dialogue_finished)
     DialogueManager.show_dialogue_balloon(npc_dialog, "start", [
         {
@@ -81,4 +82,5 @@ func _on_player_interacted() -> void:
 
 func _on_dialogue_finished(_res) -> void:
     DialogueManager.dialogue_ended.disconnect(_on_dialogue_finished)
-    npc_bt.blackboard.set_var("talk_target", null)
+    if npc_bt:
+        npc_bt.blackboard.set_var("talk_target", null)

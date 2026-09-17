@@ -21,6 +21,7 @@ buses/default_bus_layout="uid://bu4e70aw0jtc8"
 
 [autoload]
 
+Pandora="*uid://bqv713p4thrli"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 SceneManager="*uid://j20v4cg7v8m1"
 SaveManager="*uid://ck4ih2layufdo"
@@ -50,7 +51,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/savekit/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/savekit/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
 
 [file_customization]
 
@@ -159,5 +160,3 @@ rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 viewport/hdr_2d=true
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

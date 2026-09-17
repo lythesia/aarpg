@@ -48,13 +48,9 @@ func _get_equip_stats(slot: EquipSlotUI) -> Dictionary:
     if slot and slot.slot_linked and \
         slot.slot_linked.slot_data and \
         slot.slot_linked.slot_data.item_data:
-        var e: EquipableItemData = slot.slot_linked.slot_data.item_data as EquipableItemData
-        for m in e.modifiers:
-            match m.type:
-                EquipableItemModifier.Type.ATK:
-                    atk += m.value
-                EquipableItemModifier.Type.DEF:
-                    def += m.value
+        var e: EquippableItem = slot.slot_linked.slot_data.item_data as EquippableItem
+        atk += e.atk()
+        def += e.def()
     return {"atk": atk, "def": def}
 
 func fill_weapon_slot(slot: InventorySlotUI) -> void:

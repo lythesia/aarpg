@@ -13,16 +13,15 @@ func _process(_delta: float) -> void:
     weapon_above_sprite.frame = frame + FRAME_COUNT # 2nd half
 
 func _on_equipment_changed(slot: InventorySlotUI) -> void:
-    var i: EquipableItemData = slot.slot_data.item_data
-    match i.equip_type:
-        EquipableItemData.EquipType.WEAPON:
-            update_weapon_sprite(i)
-        _: # ignore others for now (like armor)
-            pass
+    var i: EquippableItem = slot.slot_data.item_data
+    if i is EquippableWeapon:
+        update_weapon_sprite(i as EquippableWeapon)
+    else: # ignore others for now (like armor)
+        pass
 
-func update_weapon_sprite(item: EquipableItemData) -> void:
-    weapon_below_sprite.texture = item.sprite_texture
-    weapon_above_sprite.texture = item.sprite_texture
+func update_weapon_sprite(item: EquippableWeapon) -> void:
+    weapon_below_sprite.texture = item.sprite_texture()
+    weapon_above_sprite.texture = item.sprite_texture()
 
 func ghost(dur: float = 0.2) -> void:
     var effect: Node2D = Node2D.new()

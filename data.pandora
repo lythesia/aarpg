@@ -1,0 +1,730 @@
+{
+	"_entity_data": {
+		"_categories": [
+			{
+				"_category_id": "71.0",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "17.0",
+				"_ids_generation_class": "ItemIds",
+				"_index": 3,
+				"_name": "SlotItems",
+				"_script_path": "res://items/scripts/slot_item_data.gd"
+			},
+			{
+				"_category_id": "",
+				"_icon_color": "ffffff00",
+				"_id": "24.0",
+				"_index": 0,
+				"_name": "UseEffects",
+				"_script_path": "res://items/effects/item_use_effect.gd"
+			},
+			{
+				"_category_id": "17.0",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "29.0",
+				"_ids_generation_class": "ConsumableIds",
+				"_index": 0,
+				"_name": "Consumable",
+				"_script_path": "res://items/scripts/consumable_item.gd"
+			},
+			{
+				"_category_id": "17.0",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "40.0",
+				"_ids_generation_class": "EquippableIds",
+				"_index": 0,
+				"_name": "Equippable",
+				"_property_overrides": {
+					"stackable": {
+						"type": "bool",
+						"value": false
+					}
+				},
+				"_script_path": "res://items/scripts/equippable_item.gd"
+			},
+			{
+				"_category_id": "17.0",
+				"_icon_color": "ffffff00",
+				"_id": "41.0",
+				"_index": 0,
+				"_name": "Other"
+			},
+			{
+				"_category_id": "40.0",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "45.0",
+				"_ids_generation_class": "ItemArmor",
+				"_index": 0,
+				"_name": "Armor",
+				"_script_path": "res://items/scripts/equippable_armor.gd"
+			},
+			{
+				"_category_id": "40.0",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "46.0",
+				"_ids_generation_class": "WeaponIds",
+				"_index": 0,
+				"_name": "Weapon",
+				"_script_path": "res://items/scripts/equippable_weapon.gd"
+			},
+			{
+				"_category_id": "17.0",
+				"_icon_color": "ffffff00",
+				"_id": "57.0",
+				"_index": 0,
+				"_name": "Important",
+				"_property_overrides": {
+					"stackable": {
+						"type": "bool",
+						"value": false
+					}
+				}
+			},
+			{
+				"_category_id": "71.0",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "62.0",
+				"_ids_generation_class": "AbilityIds",
+				"_index": 3,
+				"_name": "Abilities",
+				"_script_path": "res://items/scripts/ability_item_data.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "71.0",
+				"_index": 0,
+				"_name": "Pickups",
+				"_script_path": "res://items/scripts/pickable_item_base.gd"
+			},
+			{
+				"_category_id": "71.0",
+				"_icon_color": "ffffff00",
+				"_id": "76.0",
+				"_index": 0,
+				"_name": "Currency",
+				"_script_path": "res://items/scripts/curreny_item_data.gd"
+			},
+			{
+				"_category_id": "71.0",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "78.0",
+				"_ids_generation_class": "AmmoIds",
+				"_index": 0,
+				"_name": "Ammo",
+				"_script_path": "res://items/scripts/ammo_item_data.gd"
+			},
+			{
+				"_category_id": "24.0",
+				"_icon_color": "ffffff00",
+				"_id": "85.0",
+				"_index": 0,
+				"_name": "EffectHeal",
+				"_property_overrides": {
+					"effect_type": {
+						"type": "string",
+						"value": "heal"
+					}
+				},
+				"_script_path": "res://items/effects/item_use_effect_heal.gd"
+			},
+			{
+				"_category_id": "40.0",
+				"_icon_color": "ffffff00",
+				"_id": "91.0",
+				"_index": 0,
+				"_name": "Amulet"
+			},
+			{
+				"_category_id": "40.0",
+				"_icon_color": "ffffff00",
+				"_id": "92.0",
+				"_index": 0,
+				"_name": "Ring"
+			}
+		],
+		"_entities": [
+			{
+				"_category_id": "29.0",
+				"_icon_color": "ffffff00",
+				"_id": "30.0",
+				"_index": 0,
+				"_name": "Apple",
+				"_property_overrides": {
+					"description": {
+						"type": "string",
+						"value": "Juicy!"
+					},
+					"name": {
+						"type": "string",
+						"value": "Apple"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/cons_apple.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "85.0",
+				"_icon_color": "ffffff00",
+				"_icon_path": "res://addons/pandora/icons/Object.svg",
+				"_id": "34.0",
+				"_index": 0,
+				"_name": "Heal_S",
+				"_property_overrides": {
+					"effect_amount": {
+						"type": "int",
+						"value": 1
+					},
+					"effect_type": {
+						"type": "string",
+						"value": "heal"
+					}
+				}
+			},
+			{
+				"_category_id": "85.0",
+				"_icon_color": "ffffff00",
+				"_icon_path": "res://addons/pandora/icons/Object.svg",
+				"_id": "38.0",
+				"_index": 1,
+				"_name": "Heal_M",
+				"_property_overrides": {
+					"effect_amount": {
+						"type": "int",
+						"value": 2
+					},
+					"effect_type": {
+						"type": "string",
+						"value": "heal"
+					}
+				}
+			},
+			{
+				"_category_id": "29.0",
+				"_icon_color": "ffffff00",
+				"_id": "39.0",
+				"_index": 0,
+				"_name": "Portion",
+				"_property_overrides": {
+					"buy_price": {
+						"type": "int",
+						"value": 25
+					},
+					"description": {
+						"type": "string",
+						"value": "Heals."
+					},
+					"name": {
+						"type": "string",
+						"value": "Portion"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/cons_portion.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "45.0",
+				"_icon_color": "ffffff00",
+				"_id": "47.0",
+				"_index": 0,
+				"_name": "Tunic",
+				"_property_overrides": {
+					"buy_price": {
+						"type": "int",
+						"value": 150
+					},
+					"def": {
+						"type": "int",
+						"value": 1
+					},
+					"description": {
+						"type": "string",
+						"value": "Keep you warm."
+					},
+					"name": {
+						"type": "string",
+						"value": "Tunic"
+					},
+					"sprite_texture": {
+						"type": "resource",
+						"value": "res://player/sprites/player_sprite.png"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/equip_tunic.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "46.0",
+				"_icon_color": "ffffff00",
+				"_id": "48.0",
+				"_index": 0,
+				"_name": "IronSword",
+				"_property_overrides": {
+					"atk": {
+						"type": "int",
+						"value": 1
+					},
+					"buy_price": {
+						"type": "int",
+						"value": 150
+					},
+					"description": {
+						"type": "string",
+						"value": "Trusty friend."
+					},
+					"name": {
+						"type": "string",
+						"value": "Iron Sword"
+					},
+					"sprite_texture": {
+						"type": "resource",
+						"value": "res://player/sprites/player_sprite_sword.png"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/equip_iron_sword.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "46.0",
+				"_icon_color": "ffffff00",
+				"_id": "52.0",
+				"_index": 0,
+				"_name": "Katana",
+				"_property_overrides": {
+					"atk": {
+						"type": "int",
+						"value": 2
+					},
+					"buy_price": {
+						"type": "int",
+						"value": 500
+					},
+					"description": {
+						"type": "string",
+						"value": "Cutty blade."
+					},
+					"name": {
+						"type": "string",
+						"value": "Katana"
+					},
+					"sprite_texture": {
+						"type": "resource",
+						"value": "res://player/sprites/player_sprite_sword_katana.png"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/equip_katana.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "41.0",
+				"_icon_color": "ffffff00",
+				"_id": "58.0",
+				"_index": 0,
+				"_name": "Gem",
+				"_property_overrides": {
+					"buy_price": {
+						"type": "int",
+						"value": 100
+					},
+					"description": {
+						"type": "string",
+						"value": "Precious."
+					},
+					"name": {
+						"type": "string",
+						"value": "Gem"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/other_gem.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "41.0",
+				"_icon_color": "ffffff00",
+				"_id": "59.0",
+				"_index": 0,
+				"_name": "Branch",
+				"_property_overrides": {
+					"description": {
+						"type": "string",
+						"value": "Useless."
+					},
+					"name": {
+						"type": "string",
+						"value": "Branch"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/other_branch.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "57.0",
+				"_icon_color": "ffffff00",
+				"_id": "60.0",
+				"_index": 0,
+				"_name": "Flute",
+				"_property_overrides": {
+					"description": {
+						"type": "string",
+						"value": "Who lost it?"
+					},
+					"name": {
+						"type": "string",
+						"value": "Magical Flute"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/imp_flute.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "41.0",
+				"_icon_color": "ffffff00",
+				"_id": "61.0",
+				"_index": 0,
+				"_name": "Key",
+				"_property_overrides": {
+					"buy_price": {
+						"type": "int",
+						"value": 500
+					},
+					"description": {
+						"type": "string",
+						"value": "Where to use?"
+					},
+					"name": {
+						"type": "string",
+						"value": "Key"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/other_key.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "62.0",
+				"_icon_color": "ffffff00",
+				"_id": "64.0",
+				"_index": 0,
+				"_name": "Bomb",
+				"_property_overrides": {
+					"ability_enum": {
+						"type": "int",
+						"value": 3
+					},
+					"description": {
+						"type": "string",
+						"value": "Booom!"
+					},
+					"name": {
+						"type": "string",
+						"value": "Bomb"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/abil_bomb.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "62.0",
+				"_icon_color": "ffffff00",
+				"_id": "67.0",
+				"_index": 0,
+				"_name": "Boomerang",
+				"_property_overrides": {
+					"ability_enum": {
+						"type": "int",
+						"value": 0
+					},
+					"description": {
+						"type": "string",
+						"value": "Fly and returns!"
+					},
+					"name": {
+						"type": "string",
+						"value": "Boomerang"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/abil_boomerang.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "62.0",
+				"_icon_color": "ffffff00",
+				"_id": "68.0",
+				"_index": 0,
+				"_name": "Bow",
+				"_property_overrides": {
+					"ability_enum": {
+						"type": "int",
+						"value": 2
+					},
+					"description": {
+						"type": "string",
+						"value": "Bow & arrow."
+					},
+					"name": {
+						"type": "string",
+						"value": "Bow"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/abil_bow.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "62.0",
+				"_icon_color": "ffffff00",
+				"_id": "69.0",
+				"_index": 0,
+				"_name": "Grapple",
+				"_property_overrides": {
+					"ability_enum": {
+						"type": "int",
+						"value": 1
+					},
+					"description": {
+						"type": "string",
+						"value": "Grapple hook."
+					},
+					"name": {
+						"type": "string",
+						"value": "Grapple"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/abil_grapple.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "76.0",
+				"_icon_color": "ffffff00",
+				"_id": "79.0",
+				"_index": 0,
+				"_name": "Coin",
+				"_property_overrides": {
+					"name": {
+						"type": "string",
+						"value": "Coin"
+					},
+					"texture": {
+						"type": "resource",
+						"value": "res://public/sprites/coin_split/coin_icon.png"
+					}
+				}
+			},
+			{
+				"_category_id": "78.0",
+				"_icon_color": "ffffff00",
+				"_id": "83.0",
+				"_index": 0,
+				"_name": "Arrows",
+				"_property_overrides": {
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/ammo_arrow.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "78.0",
+				"_icon_color": "ffffff00",
+				"_id": "84.0",
+				"_index": 0,
+				"_name": "Bombs",
+				"_property_overrides": {
+					"texture": {
+						"type": "resource",
+						"value": "res://items/texture_tres/normal/ammo_bomb.tres"
+					}
+				}
+			}
+		],
+		"_properties": [
+			{
+				"_category_id": "29.0",
+				"_default_value": {},
+				"_id": "33.0",
+				"_name": "use_effects",
+				"_setting_overrides": {
+					"Array Type": "reference",
+					"Category Filter": "24.0"
+				},
+				"_type": "array"
+			},
+			{
+				"_category_id": "24.0",
+				"_default_value": "",
+				"_id": "36.0",
+				"_name": "effect_type",
+				"_type": "string"
+			},
+			{
+				"_category_id": "24.0",
+				"_default_value": 0,
+				"_id": "37.0",
+				"_name": "effect_amount",
+				"_setting_overrides": {
+					"Max Value": 999.0,
+					"Min Value": 0.0
+				},
+				"_type": "int"
+			},
+			{
+				"_category_id": "40.0",
+				"_default_value": 0,
+				"_id": "43.0",
+				"_name": "atk",
+				"_setting_overrides": {
+					"Max Value": 999.0,
+					"Min Value": 0.0
+				},
+				"_type": "int"
+			},
+			{
+				"_category_id": "40.0",
+				"_default_value": 0,
+				"_id": "44.0",
+				"_name": "def",
+				"_setting_overrides": {
+					"Max Value": 999.0,
+					"Min Value": 0.0
+				},
+				"_type": "int"
+			},
+			{
+				"_category_id": "45.0",
+				"_default_value": null,
+				"_id": "54.0",
+				"_name": "sprite_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "46.0",
+				"_default_value": null,
+				"_id": "55.0",
+				"_name": "sprite_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "62.0",
+				"_default_value": "",
+				"_id": "65.0",
+				"_name": "name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "62.0",
+				"_default_value": "",
+				"_id": "66.0",
+				"_name": "description",
+				"_type": "string"
+			},
+			{
+				"_category_id": "71.0",
+				"_default_value": null,
+				"_id": "74.0",
+				"_name": "texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "17.0",
+				"_default_value": "",
+				"_id": "80.0",
+				"_name": "name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "17.0",
+				"_default_value": "",
+				"_id": "81.0",
+				"_name": "description",
+				"_type": "string"
+			},
+			{
+				"_category_id": "17.0",
+				"_default_value": true,
+				"_id": "82.0",
+				"_name": "stackable",
+				"_type": "bool"
+			},
+			{
+				"_category_id": "85.0",
+				"_default_value": "res://public/audio/hp-up.wav",
+				"_id": "87.0",
+				"_name": "audio",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "40.0",
+				"_default_value": false,
+				"_id": "88.0",
+				"_name": "is_equipped",
+				"_type": "bool"
+			},
+			{
+				"_category_id": "62.0",
+				"_default_value": 0,
+				"_id": "89.0",
+				"_name": "ability_enum",
+				"_setting_overrides": {
+					"Max Value": 32.0,
+					"Min Value": 0.0
+				},
+				"_type": "int"
+			},
+			{
+				"_category_id": "76.0",
+				"_default_value": "",
+				"_id": "90.0",
+				"_name": "name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "17.0",
+				"_default_value": 10,
+				"_id": "93.0",
+				"_name": "buy_price",
+				"_setting_overrides": {
+					"Min Value": 0.0
+				},
+				"_type": "int"
+			}
+		]
+	},
+	"_id_generator": {
+		"_ids_by_context": {
+			"default": 93.0
+		}
+	},
+	"_version": 1
+}

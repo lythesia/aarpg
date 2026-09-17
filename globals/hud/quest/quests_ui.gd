@@ -11,18 +11,15 @@ const QUEST_STEP: PackedScene = preload("uid://devo3gsikybh2")
 var last_focused_slot: int = 0
 
 func _ready() -> void:
-    clear_quest_details()
+    clear()
     visibility_changed.connect(_on_visibility_changed)
 
 func _on_visibility_changed() -> void:
-    if visible:
+    if is_visible_in_tree():
         update_quests_list()
 
 func update_quests_list() -> void:
-    # clear
-    for v in container.get_children():
-        v.queue_free()
-    clear_quest_details()
+    clear()
 
     # sort
     QuestManager.sort_current_quests()
@@ -43,15 +40,24 @@ func update_quests_list() -> void:
         quest_item_ui.focus_entered.connect(update_quest_details.bind(idx, quest_data, q))
         idx += 1
 
-    await get_tree().process_frame # wait for children to be added
+    await get_tree().process_frame
     update_slot_focus()
+
+func clear() -> void:
+    # clear: remove from tree first so get_child only sees new items
+    for v in container.get_children():
+        container.remove_child(v)
+        v.queue_free()
+    clear_quest_details()
 
 func update_slot_focus() -> void:
     if container.get_child_count() == 0:
         return
 
+    last_focused_slot = mini(last_focused_slot, container.get_child_count() - 1)
     var quest_item: QuestItemUI = container.get_child(last_focused_slot)
-    quest_item.grab_focus()
+    # to avoid: https://github.com/godotengine/godot/issues/76696
+    quest_item.grab_focus.call_deferred()
 
 # `state` always not null
 func update_quest_details(focused_idx: int, quest_data: Quest, state: Dictionary) -> void:
@@ -69,11 +75,12 @@ func update_quest_details(focused_idx: int, quest_data: Quest, state: Dictionary
         var is_completed: bool = state.title != "not found" and state.completed_steps >= i + 1
         quest_step_ui.initialize(quest_data.steps[i], is_completed)
 
-    last_focused_slot = focused_idx
+    last_focused_slot = mini(focused_idx, container.get_child_count() - 1)
 
 func clear_quest_details() -> void:
     title_label.text = ""
     desc_label.text = ""
     for c in details_container.get_children():
         if c is QuestStepUI:
+            details_container.remove_child(c)
             c.queue_free()

@@ -10,7 +10,7 @@
 [ext_resource type="BehaviorTree" uid="uid://dlod3fjvfvdxk" path="res://ai/trees/dark_wizard.tres" id="9_gklxq"]
 [ext_resource type="PackedScene" uid="uid://xdqhqri5lxc6" path="res://enemies/10_dark_wizard/dark_wizard.tscn" id="9_gm4rn"]
 [ext_resource type="PackedScene" uid="uid://bmo7u8vjtsecx" path="res://general/item_dropper/item_dropper.tscn" id="10_wmgv5"]
-[ext_resource type="Resource" uid="uid://wu3xbcswmvpl" path="res://items/item_tres/magical_flute.tres" id="11_kbevr"]
+[ext_resource type="Script" uid="uid://vfmgdpadvmfn" path="res://items/scripts/slot_item_data.gd" id="11_0ykpa"]
 [ext_resource type="AudioStream" uid="uid://c5afxxds8gi1o" path="res://public/audio/dungeon_discovery.wav" id="12_0ykpa"]
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="13_gklxq"]
 [ext_resource type="Script" uid="uid://7glx3w8yur5g" path="res://general/quest_util/quest_advance_trigger.gd" id="14_kbevr"]
@@ -37,6 +37,10 @@ script/source = "extends Node2D
 func _ready() -> void:
     show()
 "
+
+[sub_resource type="Resource" id="Resource_gklxq"]
+script = ExtResource("11_0ykpa")
+_id = "60.0"
 
 [node name="D04" type="Node2D" unique_id=246040186]
 y_sort_enabled = true
@@ -177,7 +181,7 @@ rotation = 1.5707964
 
 [node name="ItemDropper" parent="." unique_id=640575955 instance=ExtResource("10_wmgv5")]
 position = Vector2(256, 94)
-item = ExtResource("11_kbevr")
+item = SubResource("Resource_gklxq")
 drop_audio = ExtResource("12_0ykpa")
 pickup_audio = ExtResource("13_gklxq")
 persistent_key = "d04/flute"

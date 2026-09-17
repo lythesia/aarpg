@@ -14,3 +14,6 @@ func get_kv(key: String) -> Variant:
 
 func remove_kv(key: String) -> void:
     persistent_data.erase(key)
+
+func clear() -> void:
+    persistent_data.clear()

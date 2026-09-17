@@ -1,8 +1,5 @@
-class_name AbilityItemData extends ItemData
+@tool
+class_name AbilityItemData extends PickableItemBase
 
-@export var ability_type: PlayerAbilities.Ability
-
-# override
-# non-usable item
-func use() -> bool:
-    return false
+func ability_type() -> PlayerAbilities.Ability:
+    return get_integer("ability_enum") as PlayerAbilities.Ability

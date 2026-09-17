@@ -1,7 +1,7 @@
 @tool
 class_name Chest extends Node2D
 
-@export var item_data: ItemData
+@export var item_data: PickableItemBase: set = _set_item_data
 @export var quantity: int = 1
 @export var persistent_key: String
 
@@ -35,13 +35,19 @@ func _set_chest_open() -> void:
     # update flag
     is_open = true
 
-func _set_item_data(value: ItemData):
+func _set_item_data(value: PickableItemBase):
     item_data = value
-    _update_texture()
+
+    if Engine.is_editor_hint() and is_node_ready():
+        item_sprite = $ItemSprite
+        _update_texture()
+        update_configuration_warnings()
 
 func _update_texture():
     if item_sprite and item_data:
-        item_sprite.texture = item_data.icon
+        item_sprite.texture = item_data.texture()
+    elif item_sprite:
+        item_sprite.texture = null
 
 func _set_quantity(value: int):
     quantity = value
@@ -66,7 +72,26 @@ func _on_player_interacted() -> void:
     is_open = true
     WorldState.add_kv(persistent_key, true)
     animation_player.play("open")
-    if item_data and quantity > 0:
-        PlayerManager.INVENTORY_DATA.add_item(item_data, quantity)
-    else:
-        printerr("No items in chest")
+    if !item_data or quantity == 0:
+        return
+
+    if item_data is CurrencyItemData:
+        PlayerManager.INVENTORY_DATA.add_currency(item_data as CurrencyItemData, quantity)
+
+    elif item_data is SlotItemData:
+        PlayerManager.INVENTORY_DATA.add_item(item_data as SlotItemData, quantity)
+
+    elif item_data is AbilityItemData:
+        PlayerManager.PlayerGainAbility.emit(item_data.ability_type())
+
+    elif item_data is AmmoItemData:
+        PlayerManager.INVENTORY_DATA.add_ammo(item_data as AmmoItemData, quantity)
+
+func _get_configuration_warnings() -> PackedStringArray:
+    if Utils.is_editing_own_scene(self):
+        return []
+
+    var warnings: PackedStringArray = []
+    if !item_data:
+        warnings.append("Item data is not set")
+    return warnings

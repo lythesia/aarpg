@@ -17,7 +17,7 @@ var bomb_instance: Node2D
 func _ready() -> void:
     player = PlayerManager.get_player()
     update_ability_ui()
-    PlayerManager.INVENTORY_DATA.GainAbility.connect(add_ability)
+    PlayerManager.PlayerGainAbility.connect(add_ability)
 
 func set_abilities(vs: Array) -> void:
     for v in vs:
@@ -40,6 +40,9 @@ func add_ability(a: Ability) -> void:
         selected_ability = a
 
     update_ability_ui()
+
+func has_ability(a: Ability) -> bool:
+    return a in abilities
 
 func update_ability_ui() -> void:
     PlayerHud.update_abilitiy_items(abilities, selected_ability)

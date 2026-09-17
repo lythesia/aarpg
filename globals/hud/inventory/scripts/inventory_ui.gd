@@ -59,14 +59,14 @@ func calibrate_inventory_data() -> void:
         inventory_data.slots.erase(null)
     inventory_data.ensure_capacity()
 
-func update_item_description(item_data: ItemData = null) -> void:
+func update_item_description(item_data: SlotItemData = null) -> void:
     var text: String
     if item_data:
-        if item_data.item_type == ItemData.ItemType.EQUIPABLE:
-            var i: EquipableItemData = item_data as EquipableItemData
-            text = "%s  %s" % [i.description, i.stats_description()]
+        if item_data is EquippableItem:
+            var e: EquippableItem = item_data as EquippableItem
+            text = "%s  %s" % [e.description(), e.stats_description()]
         else:
-            text = item_data.description
+            text = item_data.description()
     else:
         text = ""
     update_item_description_literal(text)
@@ -104,7 +104,7 @@ func _on_unpaused() -> void:
 
 # connect only after inventory updated during paused
 func _on_visibility_changed() -> void:
-    if visible:
+    if is_visible_in_tree():
         update_slot_focus()
 
 func _on_inventory_changed() -> void:

@@ -42,20 +42,18 @@ func set_slot_data(value: SlotData):
         texture.texture = null
         label.text = ""
     else:
-        texture.texture = slot_data.item_data.icon
-        if slot_data.item_data.item_type == ItemData.ItemType.EQUIPABLE:
-            if slot_data.equipped:
+        texture.texture = slot_data.item_data.texture()
+        if slot_data.item_data is EquippableItem:
+            var e: EquippableItem = slot_data.item_data as EquippableItem
+            if e.is_equipped():
                 _set_slot_equipped(true)
                 # fill equip slot ui
-                match (slot_data.item_data as EquipableItemData).equip_type:
-                    EquipableItemData.EquipType.WEAPON:
-                        PauseMenu.equip_ui.fill_weapon_slot(self)
-                    EquipableItemData.EquipType.ARMOR:
-                        PauseMenu.equip_ui.fill_armor_slot(self)
-                    EquipableItemData.EquipType.AMULET:
-                        PauseMenu.equip_ui.fill_amulet_slot(self)
-                    EquipableItemData.EquipType.RING:
-                        PauseMenu.equip_ui.fill_ring_slot(self)
+                if e is EquippableArmor:
+                    PauseMenu.equip_ui.fill_armor_slot(self)
+                elif e is EquippableWeapon:
+                    PauseMenu.equip_ui.fill_weapon_slot(self)
+                else:
+                    pass
             else:
                 _set_slot_equipped(false)
         else:
@@ -70,18 +68,20 @@ func _on_focus_exited() -> void:
 
 func _on_pressed() -> void:
     if slot_data and slot_data.item_data and !drag_threshold_reached():
-        if slot_data.item_data.use():
-            if slot_data.item_data.item_type == ItemData.ItemType.EQUIPABLE:
-                # toggle equip
-                if !slot_data.equipped:
-                    _set_slot_equipped(true)
-                    PlayerManager.equip(self)
-                    Audio.play_ui_audio(EQUIP_AUDIO)
-                else:
-                    _set_slot_equipped(false)
-                    PlayerManager.unequip(self)
-                PauseMenu.equip_ui.apply_delta_stats()
+        if slot_data.item_data is EquippableItem:
+            var e: EquippableItem = slot_data.item_data as EquippableItem
+            # toggle equip
+            if !e.is_equipped():
+                _set_slot_equipped(true)
+                PlayerManager.equip(self)
+                Audio.play_ui_audio(EQUIP_AUDIO)
             else:
+                _set_slot_equipped(false)
+                PlayerManager.unequip(self)
+            PauseMenu.equip_ui.apply_delta_stats()
+        elif slot_data.item_data is ConsumableItem:
+            var c: ConsumableItem = slot_data.item_data as ConsumableItem
+            if c.use():
                 slot_data.quantity -= 1
                 # update quantity label in-place
                 # check `slot_data` first coz `quantity -=` might trigger:
@@ -95,10 +95,10 @@ func _on_pressed() -> void:
 func _set_slot_equipped(value: bool) -> void:
     if value:
         label.text = "E"
-        slot_data.equipped = true
+        (slot_data.item_data as EquippableItem).set_is_equipped(true)
     else:
         label.text = ""
-        slot_data.equipped = false
+        (slot_data.item_data as EquippableItem).set_is_equipped(false)
 
 func _on_button_down() -> void:
     click_pos = get_global_mouse_position()

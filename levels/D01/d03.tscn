@@ -4,10 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="2_q8qcb"]
 [ext_resource type="PackedScene" uid="uid://mv3qb750nw1o" path="res://general/kill_counter/kill_counter.tscn" id="4_yh8rw"]
 [ext_resource type="PackedScene" uid="uid://b2ts3u2tpi680" path="res://enemies/00_slime/slime.tscn" id="5_alvbc"]
+[ext_resource type="Script" uid="uid://vfmgdpadvmfn" path="res://items/scripts/slot_item_data.gd" id="6_20g15"]
 [ext_resource type="PackedScene" uid="uid://bmo7u8vjtsecx" path="res://general/item_dropper/item_dropper.tscn" id="6_e2355"]
-[ext_resource type="Resource" uid="uid://d1gcbtkpuusu6" path="res://items/item_tres/key.tres" id="7_l1sa2"]
 [ext_resource type="AudioStream" uid="uid://c5afxxds8gi1o" path="res://public/audio/dungeon_discovery.wav" id="8_20g15"]
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="9_cfr7t"]
+
+[sub_resource type="Resource" id="Resource_d2lpl"]
+script = ExtResource("6_20g15")
+_id = "61.0"
 
 [node name="D03" type="Node2D" unique_id=201977268]
 y_sort_enabled = true
@@ -36,7 +40,7 @@ position = Vector2(392, -12)
 
 [node name="ItemDropper" parent="." unique_id=640575955 instance=ExtResource("6_e2355")]
 position = Vector2(320, 88)
-item = ExtResource("7_l1sa2")
+item = SubResource("Resource_d2lpl")
 drop_audio = ExtResource("8_20g15")
 pickup_audio = ExtResource("9_cfr7t")
 persistent_key = "d03/key"

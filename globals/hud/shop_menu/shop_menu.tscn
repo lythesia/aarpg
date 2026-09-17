@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cxfxuuxlcntiw" path="res://globals/hud/shop_menu/shop_menu.gd" id="1_b7lkw"]
 [ext_resource type="FontFile" uid="uid://dj0lbpkk8i7ug" path="res://npc/assets/fonts/Abaddon Light.ttf" id="1_r1m51"]
 [ext_resource type="PackedScene" uid="uid://cvcjfmemha0n3" path="res://globals/hud/shop_menu/shop_item_ui.tscn" id="1_xo3s0"]
+[ext_resource type="Script" uid="uid://dl7550mlp5xtl" path="res://globals/hud/shop_menu/snap_scroll_container.gd" id="2_jm0v7"]
 [ext_resource type="Texture2D" uid="uid://hsm83o2p7a08" path="res://public/sprites/items.png" id="2_xo3s0"]
 [ext_resource type="Texture2D" uid="uid://d0cqku6rkw3e3" path="res://public/sprites/coin_split/coin1.png" id="3_bf12h"]
 [ext_resource type="Texture2D" uid="uid://brs8q05k5c4yo" path="res://public/sprites/coin_split/coin2.png" id="4_yiywl"]
@@ -13,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://b4f3a5xedjx3f" path="res://public/sprites/coin_split/coin7.png" id="9_rclj8"]
 [ext_resource type="Texture2D" uid="uid://8rd1f4x0eyqf" path="res://public/sprites/coin_split/coin8.png" id="10_bwifd"]
 [ext_resource type="FontFile" uid="uid://bcdpgwcpcrvua" path="res://npc/assets/fonts/m5x7.ttf" id="11_yiywl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jm0v7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lsqg7"]
 atlas = ExtResource("2_xo3s0")
@@ -141,43 +147,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=852915319]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=956559545]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 56.0
-offset_right = 252.0
-offset_bottom = -46.0
-grow_vertical = 2
-follow_focus = true
-horizontal_scroll_mode = 0
+offset_right = 246.0
+offset_bottom = 226.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/ScrollContainer" unique_id=596709274]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="ShopItemsContainer" type="VBoxContainer" parent="Control/ScrollContainer/MarginContainer" unique_id=113956390]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/PanelContainer" unique_id=852915319]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 5
+size_flags_vertical = 3
+follow_focus = true
+theme_override_constants/scrollbar_h_separation = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jm0v7")
+horizontal_scroll_mode = 0
+script = ExtResource("2_jm0v7")
 
-[node name="ShopItem" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=144162890 instance=ExtResource("1_xo3s0")]
+[node name="ShopItemsContainer" type="VBoxContainer" parent="Control/PanelContainer/ScrollContainer" unique_id=113956390]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ShopItemUI" parent="Control/PanelContainer/ScrollContainer/ShopItemsContainer" unique_id=144162890 instance=ExtResource("1_xo3s0")]
 layout_mode = 2
 
-[node name="ShopItem2" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=1637508992 instance=ExtResource("1_xo3s0")]
+[node name="ShopItemUI2" parent="Control/PanelContainer/ScrollContainer/ShopItemsContainer" unique_id=618152150 instance=ExtResource("1_xo3s0")]
 layout_mode = 2
 
-[node name="ShopItem3" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=1073661805 instance=ExtResource("1_xo3s0")]
+[node name="ShopItemUI3" parent="Control/PanelContainer/ScrollContainer/ShopItemsContainer" unique_id=503280525 instance=ExtResource("1_xo3s0")]
 layout_mode = 2
 
-[node name="ShopItem4" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=121618927 instance=ExtResource("1_xo3s0")]
+[node name="ShopItemUI4" parent="Control/PanelContainer/ScrollContainer/ShopItemsContainer" unique_id=2034555129 instance=ExtResource("1_xo3s0")]
 layout_mode = 2
 
-[node name="ShopItem5" parent="Control/ScrollContainer/MarginContainer/ShopItemsContainer" unique_id=336774837 instance=ExtResource("1_xo3s0")]
+[node name="ShopItemUI5" parent="Control/PanelContainer/ScrollContainer/ShopItemsContainer" unique_id=1687536678 instance=ExtResource("1_xo3s0")]
 layout_mode = 2
 
 [node name="DetailsPanel" type="PanelContainer" parent="Control" unique_id=2137905044]
@@ -254,22 +259,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.6413951, 0.6413951, 0.6413951, 1)
 theme_override_fonts/font = ExtResource("11_yiywl")
 text = "Item Desc"
-
-[node name="CloseBtn" type="Button" parent="Control" unique_id=1766657398]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -72.0
-offset_top = -38.0
-offset_right = -15.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Close"
 
 [node name="CoinContainer" type="HBoxContainer" parent="Control" unique_id=1873707305]
 layout_mode = 0

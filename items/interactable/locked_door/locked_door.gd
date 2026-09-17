@@ -1,6 +1,6 @@
 class_name LockedDoor extends Node2D
 
-@export var key: ItemData
+@export var key: SlotItemData
 @export var unlock_audio: AudioStream
 @export var lock_audio: AudioStream
 @export var persistent_key: String

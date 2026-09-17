@@ -6,14 +6,29 @@
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="3_d5g0j"]
 [ext_resource type="PackedScene" uid="uid://b6328kgvjaob0" path="res://levels/helper/level_trans.tscn" id="4_uv6ks"]
 [ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="7_e8gkl"]
-[ext_resource type="Resource" uid="uid://dwmbiwabnojq4" path="res://items/item_tres/apple.tres" id="8_r434y"]
+[ext_resource type="Script" uid="uid://c2ty2bh5c64w" path="res://items/scripts/consumable_item.gd" id="8_c22wq"]
+[ext_resource type="Script" uid="uid://c1smqk8a32y8e" path="res://items/scripts/equippable_weapon.gd" id="9_03meh"]
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="9_pcl0k"]
-[ext_resource type="Resource" uid="uid://ctpl6cg645f85" path="res://items/item_tres/equipable/w_katana.tres" id="10_5a37w"]
 [ext_resource type="PackedScene" uid="uid://dhb7dvw2yb6cr" path="res://items/interactable/chest/chest.tscn" id="10_r434y"]
-[ext_resource type="Resource" uid="uid://bmcqatydxtuf7" path="res://items/item_tres/equipable/w_iron_sword.tres" id="11_ppvy3"]
+[ext_resource type="Script" uid="uid://d0klm1fi854d4" path="res://items/scripts/equippable_armor.gd" id="11_03meh"]
 [ext_resource type="PackedScene" uid="uid://b68d5x5hqub6s" path="res://levels/props/pot/pot.tscn" id="12_03meh"]
-[ext_resource type="Resource" uid="uid://buhrvp4pe76pf" path="res://items/item_tres/equipable/a_tunic.tres" id="12_5a37w"]
 [ext_resource type="PackedScene" uid="uid://b2ts3u2tpi680" path="res://enemies/00_slime/slime.tscn" id="12_c22wq"]
+
+[sub_resource type="Resource" id="Resource_03meh"]
+script = ExtResource("8_c22wq")
+_id = "30.0"
+
+[sub_resource type="Resource" id="Resource_5a37w"]
+script = ExtResource("9_03meh")
+_id = "52.0"
+
+[sub_resource type="Resource" id="Resource_ppvy3"]
+script = ExtResource("9_03meh")
+_id = "48.0"
+
+[sub_resource type="Resource" id="Resource_muhyh"]
+script = ExtResource("11_03meh")
+_id = "47.0"
 
 [node name="S01" type="Node2D" unique_id=901446768]
 y_sort_enabled = true
@@ -71,30 +86,30 @@ size = 2
 location = 2
 
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("3_d5g0j")]
-position = Vector2(430, 244)
+position = Vector2(82, 150)
 
 [node name="Items" type="Node2D" parent="." unique_id=830853031]
 y_sort_enabled = true
 
 [node name="Apple" parent="Items" unique_id=2085438971 instance=ExtResource("7_e8gkl")]
 position = Vector2(-11, 53)
-item_data = ExtResource("8_r434y")
+item_data = SubResource("Resource_03meh")
 pickup_audio = ExtResource("9_pcl0k")
 
 [node name="Katana" parent="Items" unique_id=163477879 instance=ExtResource("7_e8gkl")]
 position = Vector2(1, 261)
-item_data = ExtResource("10_5a37w")
+item_data = SubResource("Resource_5a37w")
 pickup_audio = ExtResource("9_pcl0k")
 
 [node name="Sword" parent="Items" unique_id=241234698 instance=ExtResource("7_e8gkl")]
 position = Vector2(37, 262)
-item_data = ExtResource("11_ppvy3")
+item_data = SubResource("Resource_ppvy3")
 pickup_audio = ExtResource("9_pcl0k")
 
 [node name="Chest" parent="Items" unique_id=1270411528 instance=ExtResource("10_r434y")]
 z_index = 1
 position = Vector2(472, 73)
-item_data = ExtResource("12_5a37w")
+item_data = SubResource("Resource_muhyh")
 persistent_key = "s01/chest00"
 
 [node name="Pot" parent="Items" unique_id=318786704 instance=ExtResource("12_03meh")]

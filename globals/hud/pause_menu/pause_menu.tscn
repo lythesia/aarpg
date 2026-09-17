@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://brs8q05k5c4yo" path="res://public/sprites/coin_split/coin2.png" id="7_ea3dv"]
 [ext_resource type="Texture2D" uid="uid://b24m2te4070sp" path="res://public/sprites/coin_split/coin3.png" id="8_7eg80"]
 [ext_resource type="Script" uid="uid://2ac3l0w0uk55" path="res://globals/hud/inventory/scripts/gear_item_ui.gd" id="8_sp8mn"]
+[ext_resource type="Script" uid="uid://ddi7nbxu0sys3" path="res://addons/pandora/model/category.gd" id="8_yj6fu"]
 [ext_resource type="Script" uid="uid://deddq5qk2b4qb" path="res://globals/hud/pause_menu/ability_container.gd" id="8_ykpvm"]
 [ext_resource type="Texture2D" uid="uid://v8s7embhub22" path="res://public/sprites/coin_split/coin4.png" id="9_t4dq7"]
 [ext_resource type="Texture2D" uid="uid://blcfpcxqiutmk" path="res://public/sprites/coin_split/coin5.png" id="10_7ex7g"]
@@ -56,6 +57,22 @@ texture_margin_left = 14.0
 texture_margin_top = 14.0
 texture_margin_right = 14.0
 texture_margin_bottom = 14.0
+
+[sub_resource type="Resource" id="Resource_ije3j"]
+script = ExtResource("8_yj6fu")
+_id = "46.0"
+
+[sub_resource type="Resource" id="Resource_df18w"]
+script = ExtResource("8_yj6fu")
+_id = "45.0"
+
+[sub_resource type="Resource" id="Resource_ln6q7"]
+script = ExtResource("8_yj6fu")
+_id = "91.0"
+
+[sub_resource type="Resource" id="Resource_w5ne3"]
+script = ExtResource("8_yj6fu")
+_id = "92.0"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b7lkw"]
 atlas = ExtResource("16_7xcyj")
@@ -197,18 +214,19 @@ script = ExtResource("15_qbi2l")
 
 [node name="SlotWeapon" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=982496357 instance=ExtResource("16_qbi2l")]
 layout_mode = 2
+equip_type = SubResource("Resource_ije3j")
 
 [node name="SlotArmor" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=2102693383 instance=ExtResource("16_qbi2l")]
 layout_mode = 2
-equip_type = 1
+equip_type = SubResource("Resource_df18w")
 
 [node name="SlotAmulet" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=411927317 instance=ExtResource("16_qbi2l")]
 layout_mode = 2
-equip_type = 2
+equip_type = SubResource("Resource_ln6q7")
 
 [node name="SlotRing" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/EquipUI" unique_id=310159519 instance=ExtResource("16_qbi2l")]
 layout_mode = 2
-equip_type = 3
+equip_type = SubResource("Resource_w5ne3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/TabContainer/Inventory/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=239193961]
 layout_mode = 2

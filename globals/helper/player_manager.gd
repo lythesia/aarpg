@@ -8,6 +8,9 @@ signal PlayerEquipped(slot: InventorySlotUI)
 signal PlayerUnequipped(slot: InventorySlotUI)
 signal PlayerStatsUpdated
 
+@warning_ignore("unused_signal")
+signal PlayerGainAbility(ability: PlayerAbilities.Ability)
+
 var INVENTORY_DATA: InventoryData
 
 var spawned: bool = false
@@ -29,6 +32,7 @@ func clear_player() -> void:
 
         INVENTORY_DATA.clear()
         QuestManager.clear_current_quests()
+        WorldState.clear()
         PauseMenu.equip_ui.reset_equip_slots()
 
 func set_inventory_data(_inventory_data: InventoryData) -> void:
@@ -137,5 +141,5 @@ func apply_delta_stats(atk_delta: int, def_delta: int) -> void:
         PlayerStatsUpdated.emit()
 #endregion
 
-func apply_weapon_sprite(item: EquipableItemData) -> void:
+func apply_weapon_sprite(item: EquippableWeapon) -> void:
     player.sprite.update_weapon_sprite(item)

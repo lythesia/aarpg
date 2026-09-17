@@ -1,7 +1,7 @@
 @tool
 class_name ItemPickup extends CharacterBody2D
 
-signal PickedUp(item_data: ItemData)
+signal PickedUp(item_data: PickableItemBase)
 
 enum TextureType {
     ## use item data's static atlas texture
@@ -10,8 +10,8 @@ enum TextureType {
     CUSTOM,
 }
 
-@export var item_data: ItemData: set = _set_item_data
-@export var item_count: int = 1: set = _set_item_count
+@export var item_data: PickableItemBase: set = _set_item_data
+@export_range(1, 99, 1) var item_count: int = 1: set = _set_item_count
 @export var pickup_audio: AudioStream
 @export var has_shadow: bool = true: set = _set_has_shadow
 @export var texture_type: TextureType: set = _set_texture_type
@@ -36,29 +36,45 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
     if body is Player and item_data:
-        if PlayerManager.INVENTORY_DATA.add_item(item_data, item_count):
-            item_picked_up(body)
-            PickedUp.emit(item_data)
+        # todo: similar logic happens in chest.gd, need refactor
+        if item_data is CurrencyItemData:
+            if PlayerManager.INVENTORY_DATA.add_currency(item_data as CurrencyItemData, item_count):
+                item_picked_up(body)
 
-func _set_item_data(value: ItemData) -> void:
+        elif item_data is SlotItemData:
+            if PlayerManager.INVENTORY_DATA.add_item(item_data as SlotItemData, item_count):
+                item_picked_up(body)
+                PickedUp.emit(item_data)
+
+        elif item_data is AbilityItemData:
+            PlayerManager.PlayerGainAbility.emit(item_data.ability_type())
+
+        elif item_data is AmmoItemData:
+            if PlayerManager.INVENTORY_DATA.add_ammo(item_data as AmmoItemData, item_count):
+                item_picked_up(body)
+                PickedUp.emit(item_data)
+
+func _set_item_data(value: PickableItemBase) -> void:
     item_data = value
 
     if Engine.is_editor_hint() and is_node_ready():
         _update_texture()
+        _update_count_label()
         update_configuration_warnings()
 
 func _set_item_count(value: int) -> void:
-    item_count = value
+    item_count = clampi(value, 1, 99)
     _update_count_label()
 
 func _update_texture() -> void:
     match texture_type:
         TextureType.ITEM_DATA:
             if item_data and sprite:
-                sprite.texture = item_data.icon
+                sprite.texture = item_data.texture()
             elif sprite:
                 sprite.texture = null
         TextureType.CUSTOM:
+            # not implemented
             pass
 
 func _update_count_label() -> void:
@@ -86,8 +102,7 @@ func _set_texture_type(value: TextureType) -> void:
 
 func item_picked_up(_player: Player) -> void:
     area.body_entered.disconnect(_on_body_entered)
-    if pickup_audio:
-        Audio.play_spatial_sound(pickup_audio, global_position)
+    Audio.play_spatial_sound(pickup_audio, global_position)
 
     # disable pickup animation
     # play_pickup_animation(player)

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://drdk7prmgwdbk"]
+
+[ext_resource type="Texture2D" uid="uid://bf2v7v62rqonb" path="res://public/sprites/flute.png" id="1_ylopm"]
+
+[resource]
+atlas = ExtResource("1_ylopm")
+region = Rect2(0, 0, 32, 32)

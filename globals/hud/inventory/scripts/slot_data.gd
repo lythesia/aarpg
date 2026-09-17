@@ -1,8 +1,7 @@
 class_name SlotData extends SaveKitResource
 
-@export var item_data: ItemData
+@export var item_data: SlotItemData
 @export var quantity: int = 0: set = set_quantity
-@export var equipped: bool = false
 
 func set_quantity(value: int) -> void:
     quantity = value
@@ -13,13 +12,11 @@ func set_quantity(value: int) -> void:
 #region save/load
 func save_to_dict(_s: Serializer) -> Dictionary:
     return {
-        "item_data": item_data.resource_path,
+        "item_data": Pandora.serialize(item_data),
         "quantity": quantity,
-        "equipped": equipped,
     }
 
 func load_from_dict(_d: Deserializer, data: Dictionary) -> void:
-    item_data = load(data["item_data"])
+    item_data = Pandora.deserialize(data["item_data"]) as SlotItemData
     quantity = data.get("quantity", 0)
-    equipped = data.get("equipped", false)
 #endregion

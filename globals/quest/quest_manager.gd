@@ -102,6 +102,9 @@ func complete_quest(title: String) -> void:
 
     reward_quest(quest_data)
 
+## check as many as possible steps that can be advanced
+func ckeck_and_try_advance_quest(_quest_state: Dictionary) -> void:
+    pass
 
 func reward_quest(quest: Quest) -> void:
     var title: String = r'"%s" Reward!' % [quest.title]
