@@ -23,18 +23,19 @@ buses/default_bus_layout="uid://bu4e70aw0jtc8"
 
 Pandora="*uid://bqv713p4thrli"
 PhantomCameraManager="*uid://duq6jhf6unyis"
+QuestSystem="*uid://b77kvbliweux5"
 SceneManager="*uid://j20v4cg7v8m1"
 SaveManager="*uid://ck4ih2layufdo"
 DialogueManager="*uid://c3rodes2l3gxb"
 Audio="*uid://c2m16mm4678j"
 Messages="*uid://b7lb6ddds8trm"
+QuestManager="*uid://ce8ncvdi14vnj"
 PlayerHud="*uid://jbd4p43as3i1"
 PlayerManager="*uid://cqnwbal30g0vf"
 SceneHelper="*uid://v65ndi5v5x6i"
 PauseMenu="*uid://dsrgw2p8wkxn2"
 SaveHelper="*uid://cx3gabbm3exgy"
 WorldState="*uid://cdex48mru2pvm"
-QuestManager="*uid://ce8ncvdi14vnj"
 EffectManager="*uid://br2l68trrq67q"
 
 [dialogue_manager]
@@ -51,7 +52,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/savekit/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/quest_system/plugin.cfg", "res://addons/savekit/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
 
 [file_customization]
 

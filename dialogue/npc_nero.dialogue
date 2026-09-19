@@ -1,9 +1,7 @@
 ~ start
-$> locals.quest_title = "Lost Flute"
-$> locals.quest_state = QuestManager.find_current_quest_by_title(locals.quest_title)
-if !QuestManager.quest_accepetd(locals.quest_title)
+if not QuestManager.is_quest_active(QuestIds.LOSTFLUTE) and not QuestManager.is_quest_completed(QuestIds.LOSTFLUTE)
 	=> accept_quest
-elif !locals.quest_state.is_completed
+elif QuestManager.is_quest_active(QuestIds.LOSTFLUTE)
 	=> submit_quest
 else
 	Nero: Thank you retrieve my flute!
@@ -13,19 +11,22 @@ else
 Nero: Hey Hero, I lost my magical flute, would you kindly retrieve it for me?
 Nero: I guess it's in the [b]Dark Dungeon[/b]!
 - Ok (Accept quest)
-	$> QuestManager.accept_quest(locals.quest_title)
+	$> QuestManager.start_quest(QuestIds.LOSTFLUTE)
 	Nero: That's really kind of you!
 - Not now, sorry
 	Nero: Ok, I'll try my luck other ways.
 => END
 
 ~ submit_quest
-$> locals.flute = inventory.get_slot_by_name("Magical Flute")
+$> locals.quest = QuestManager.get_quest_by_entity_id(QuestIds.LOSTFLUTE)
+$> locals.step = locals.quest.steps[1]
+$> locals.flute = inventory.get_slot(locals.step.item)
 #$> debug(locals.flute)
 Nero: Have you found my flute?
 - Yes, take this (hand over flute) [if locals.flute /]
-	$> inventory.consume_item(locals.flute.item_data)
-	$> QuestManager.complete_quest(locals.quest_title)
+	$> locals.quest.steps[0].set_locked(true)
+	$> PlayerManager.deliver_item(locals.step.item, locals.step.quantity, locals.step.to)
+	$> QuestManager.complete_quest(QuestIds.LOSTFLUTE)
 	Nero: Oh, you're the savior, thanks!
 - Not yet
 	Nero: Nevermind, keep it up!

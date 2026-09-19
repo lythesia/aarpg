@@ -1,164 +1,114 @@
 extends Node
 
-signal QuestUpdated(quest: Dictionary)
+signal QuestStarted(quest: BaseQuest)
 
-const QUEST_DATA_DIR: String = "res://quests"
+@warning_ignore("unused_signal")
+signal QuestStepUpdated(quest_title: String, step: QuestStep)
 
-# all quests
-var quests: Array[Quest]
-# current active/archived quests, each as `{ title = "not found", is_completed = false, completed_steps = 0 }`
-@export var current_quests: Array[Dictionary] = []
+signal QuestCompleted(quest: BaseQuest)
 
-func _ready() -> void:
-    # gather all quests
-    gather_quests()
+signal QuestRewarded(quest_title: String, msg: String)
 
-func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("Test"):
-        # accept_or_advance_quest("Short Quest")
-        # accept_or_advance_quest("Lost Flute")
-        # accept_or_advance_quest("Long Quest")
-        pass
+var quests_cache: Dictionary = {}
 
-func gather_quests() -> void:
-    quests.clear()
-    var quest_files: PackedStringArray = DirAccess.get_files_at(QUEST_DATA_DIR)
+func get_active_quests() -> Array[BaseQuest]:
+    var quests: Array[Quest] = QuestSystem.get_active_quests()
+    return _cont_quests(quests)
 
-    for v in quest_files:
-        quests.append(load("{0}/{1}".format([QUEST_DATA_DIR, v])) as Quest)
-    # print("loaded %d quests" % [quests.size()])
+func get_completed_quests() -> Array[BaseQuest]:
+    var pool: BaseQuestPool = QuestSystem.get_pool("Completed")
+    return _cont_quests(pool.get_all_quests())
 
-## accept quest only
-## todo: do we want to check steps that already completed on accept?
-func accept_quest(title: String) -> void:
-    var quest_data: Quest = find_quest_by_title(title)
-    assert(quest_data != null, "Quest not found: %s" % [title])
-    var quest_idx: int = get_current_quest_id_by_title(title)
-    var quest: Dictionary
+func is_quest_active(quest_entity_id: String) -> bool:
+    var quest: BaseQuest = get_quest_by_entity_id(quest_entity_id)
+    return QuestSystem.is_quest_active(quest)
 
-    if quest_idx == -1:
-        quest = {
-            title = title,
-            is_completed = false,
-            completed_steps = 0,
-        }
-        current_quests.append(quest)
-        PlayerHud.queue_notification("Quest Accepted!", title)
-        QuestUpdated.emit(quest)
-    else:
-        # quest already accepted
-        return
+func is_quest_completed(quest_entity_id: String) -> bool:
+    var quest: BaseQuest = get_quest_by_entity_id(quest_entity_id)
+    return QuestSystem.is_quest_completed(quest)
 
-## accept or advance quest one step (allow complete)
-func accept_or_advance_quest(title: String) -> void:
-    var quest_data: Quest = find_quest_by_title(title)
-    assert(quest_data != null, "Quest not found: %s" % [title])
-    var quest_idx: int = get_current_quest_id_by_title(title)
-    var quest: Dictionary
+func start_quest(quest_entity_id: String) -> BaseQuest:
+    var quest: BaseQuest = get_quest_by_entity_id(quest_entity_id)
 
-    if quest_idx == -1:
-        quest = {
-            title = title,
-            is_completed = false,
-            completed_steps = 0,
-        }
-        current_quests.append(quest)
-        PlayerHud.queue_notification("Quest Accepted!", title)
-    else:
-        quest = current_quests[quest_idx]
-        # skip if quest is already completed
-        if quest.is_completed:
-            return
-        quest.completed_steps += 1
-        quest.is_completed = quest.completed_steps == quest_data.steps.size()
-        if quest.is_completed:
-            PlayerHud.queue_notification("Quest Completed!", title)
-        else:
-            var step: String = quest_data.steps[quest.completed_steps - 1]
-            PlayerHud.queue_notification("Quest Updated!", "%s: %s" % [title, step])
+    if !can_start_quest(quest_entity_id, quest):
+        push_warning("Quest already started or completed: %s" % [quest_entity_id])
+        return quest
 
-    QuestUpdated.emit(quest)
+    QuestSystem.start_quest(quest)
+    QuestStarted.emit(quest)
+    return quest
 
-    if quest.is_completed:
-        reward_quest(quest_data)
+func can_start_quest(quest_entity_id: String, quest: BaseQuest = null) -> bool:
+    if !quest:
+        quest = get_quest_by_entity_id(quest_entity_id)
 
-## complete quest directly
-func complete_quest(title: String) -> void:
-    var quest_data: Quest = find_quest_by_title(title)
-    assert(quest_data != null, "Quest not found: %s" % [title])
-    var quest_idx: int = get_current_quest_id_by_title(title)
-    if quest_idx == -1:
-        return
+    return !QuestSystem.is_quest_active(quest) and !QuestSystem.is_quest_completed(quest)
 
-    var quest: Dictionary = current_quests[quest_idx]
-    if quest.is_completed:
-        return
+func complete_quest(quest_entity_id: String) -> BaseQuest:
+    var quest: BaseQuest = get_quest_by_entity_id(quest_entity_id)
+    if !can_complete_quest(quest_entity_id, quest):
+        push_warning("Quest not started or completed already or objectives not met: %s" % [quest_entity_id])
+        return quest
 
-    quest.is_completed = true
-    quest.completed_steps = quest_data.steps.size()
-    PlayerHud.queue_notification("Quest Completed!", title)
+    quest.objective_completed = true
+    QuestSystem.complete_quest(quest)
+    QuestCompleted.emit(quest)
 
-    QuestUpdated.emit(quest)
+    # do rewards
+    reward_quest(quest)
 
-    reward_quest(quest_data)
+    return quest
 
-## check as many as possible steps that can be advanced
-func ckeck_and_try_advance_quest(_quest_state: Dictionary) -> void:
-    pass
+func can_complete_quest(quest_entity_id: String, quest: BaseQuest = null) -> bool:
+    if !quest:
+        quest = get_quest_by_entity_id(quest_entity_id)
 
-func reward_quest(quest: Quest) -> void:
-    var title: String = r'"%s" Reward!' % [quest.title]
+    return QuestSystem.is_quest_active(quest) and \
+        !QuestSystem.is_quest_completed(quest) and \
+        quest.get_completed_steps_count() == quest.get_steps_count()
+
+func reward_quest(quest: BaseQuest) -> void:
     var message: Array[String] = []
 
     if quest.reward_xp > 0:
         PlayerManager.gain_xp(quest.reward_xp)
         message.append("%d xp" % quest.reward_xp)
-
-    for v in quest.reward_items:
-        PlayerManager.INVENTORY_DATA.add_item(v.item, v.quantity)
-        message.append("%s x%d" % [v.item.name, v.quantity])
-
+    if !quest.rewards.is_empty():
+        for v in quest.rewards:
+            PlayerManager.INVENTORY_DATA.add_item(v.item, v.quantity)
+            message.append("%s x%d" % [v.item.name(), v.quantity])
     if !message.is_empty():
-        PlayerHud.queue_notification(title, "\n".join(message))
+        QuestRewarded.emit(quest.quest_name, "\n".join(message))
 
-# searching
-func quest_accepetd(title: String) -> bool:
-    return current_quests.find_custom(
-        func(v: Dictionary) -> bool:
-            return v.title.to_lower() == title.to_lower()
-    ) != -1
+# 1. try cache first
+# 2. try pools: active, completed, (available not used), these all be init on load
+# 3. completely new quest: pandora -> cache, it may be later add to pool
+func get_quest_by_entity_id(quest_entity_id: String) -> BaseQuest:
+    # 1. cache
+    if quest_entity_id in quests_cache:
+        return quests_cache[quest_entity_id]
 
-func find_current_quest(q: Quest) -> Dictionary:
-    return find_current_quest_by_title(q.title)
+    # get pandora entity first: we need quest id
+    var quest_data: QuestData = Pandora.get_entity(quest_entity_id) as QuestData
+    assert(quest_data != null, "Quest data not found: %s" % [quest_entity_id])
+    var quest: BaseQuest = quest_data.quest()
+    var deep_copy: BaseQuest = quest.duplicate(true)
 
-func find_current_quest_by_title(title: String) -> Dictionary:
-    for v in current_quests:
-        if title.to_lower() == v.title.to_lower():
-            return v
+    # 2. pools
+    var pooled: BaseQuest = QuestSystem._get_quest_by_id(quest.id)
+    if pooled:
+        return pooled
 
-    return {
-        title = "not found",
-        is_completed = false,
-        completed_steps = 0,
-    }
+    # 3. cache pandora copy
+    quests_cache[quest_entity_id] = deep_copy
+    return deep_copy
 
-func find_quest_by_title(title: String) -> Quest:
-    for v in quests:
-        if v.title.to_lower() == title.to_lower():
-            return v
-    return null
+func _cont_quests(base: Array[Quest]) -> Array[BaseQuest]:
+    var vs: Array[BaseQuest] = []
+    for v in base:
+        if v is BaseQuest:
+            vs.append(v)
+    return vs
 
-func get_current_quest_id_by_title(title: String) -> int:
-    return current_quests.find_custom(func(v: Dictionary) -> bool: return v.title.to_lower() == title.to_lower())
-
-func sort_current_quests() -> void:
-    current_quests.sort_custom(
-        func(a: Dictionary, b: Dictionary) -> bool:
-            if a.is_completed != b.is_completed:
-                return !a.is_completed
-            else:
-                return a.title.to_lower() < b.title.to_lower()
-    )
-
-func clear_current_quests() -> void:
-    current_quests.clear()
+func clear_cache() -> void:
+    quests_cache.clear()

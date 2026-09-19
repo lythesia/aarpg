@@ -22,22 +22,24 @@ func update_quests_list() -> void:
     clear()
 
     # sort
-    QuestManager.sort_current_quests()
+    var quests: Array[BaseQuest] = QuestManager.get_active_quests()
+    var actived: int = quests.size()
+    quests.sort_custom(func(a: BaseQuest, b: BaseQuest) -> bool: return a.quest_name.to_lower() < b.quest_name.to_lower())
+    var to_append: Array[BaseQuest] = QuestManager.get_completed_quests()
+    to_append.sort_custom(func(a: BaseQuest, b: BaseQuest) -> bool: return a.quest_name.to_lower() < b.quest_name.to_lower())
+    quests.append_array(to_append)
 
     # update UI
     var idx: int = 0
-    for q in QuestManager.current_quests:
-        var quest_data: Quest = QuestManager.find_quest_by_title(q.title)
-        if quest_data == null:
-            continue
+    for q in quests:
         var quest_item_ui: QuestItemUI = QUEST_ITEM.instantiate()
         if idx > 0:
             quest_item_ui.name += str(idx)
         container.add_child(quest_item_ui) # add child at `idx`
-        quest_item_ui.initialize(quest_data, q)
+        quest_item_ui.initialize(q, idx >= actived)
 
         # connect focus_entered
-        quest_item_ui.focus_entered.connect(update_quest_details.bind(idx, quest_data, q))
+        quest_item_ui.focus_entered.connect(update_quest_details.bind(idx, q))
         idx += 1
 
     await get_tree().process_frame
@@ -60,20 +62,21 @@ func update_slot_focus() -> void:
     quest_item.grab_focus.call_deferred()
 
 # `state` always not null
-func update_quest_details(focused_idx: int, quest_data: Quest, state: Dictionary) -> void:
+func update_quest_details(focused_idx: int, quest_data: BaseQuest) -> void:
     clear_quest_details()
 
-    title_label.text = quest_data.title
-    desc_label.text = quest_data.description
+    title_label.text = quest_data.quest_name
+    desc_label.text = quest_data.quest_description
 
     for i in quest_data.steps.size():
         var quest_step_ui: QuestStepUI = QUEST_STEP.instantiate()
         if i > 0:
             quest_step_ui.name += str(i)
         details_container.add_child(quest_step_ui)
-        # todo: not graceful using "not found" ...
-        var is_completed: bool = state.title != "not found" and state.completed_steps >= i + 1
-        quest_step_ui.initialize(quest_data.steps[i], is_completed)
+
+        var step_text: String = quest_data.steps[i].description
+        var step_completed: bool = quest_data.steps[i].is_completed
+        quest_step_ui.initialize(step_text, step_completed)
 
     last_focused_slot = mini(focused_idx, container.get_child_count() - 1)
 

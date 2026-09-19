@@ -4,6 +4,8 @@ class_name PandoraCategories
 
 const USEEFFECTS = "24.0"
 const PICKUPS = "71.0"
+const QUESTS = "94.0"
+const HUMAN = "98.0"
 
 
 class UseEffectsCategories:

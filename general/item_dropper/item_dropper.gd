@@ -50,6 +50,15 @@ func _set_item(value: PickableItemBase) -> void:
     _update_texture()
 
 func _update_texture() -> void:
-    if Engine.is_editor_hint():
+    if Engine.is_editor_hint() and is_node_ready():
         if sprite and item:
             sprite.texture = item.texture()
+
+func _get_configuration_warnings() -> PackedStringArray:
+    if Utils.is_editing_own_scene(self):
+        return []
+
+    var warnings: PackedStringArray = []
+    if !item:
+        warnings.append("Item is not set")
+    return warnings

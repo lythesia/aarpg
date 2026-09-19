@@ -149,6 +149,27 @@
 				"_id": "92.0",
 				"_index": 0,
 				"_name": "Ring"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_icon_path": "res://addons/quest_system/assets/quest_resource.svg",
+				"_id": "94.0",
+				"_ids_generation_class": "QuestIds",
+				"_index": 0,
+				"_name": "Quests",
+				"_script_path": "res://items/scripts/quest_data.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "98.0",
+				"_ids_generation_class": "HumanIds",
+				"_index": 0,
+				"_name": "Human",
+				"_script_path": "res://items/scripts/pandora_human.gd"
 			}
 		],
 		"_entities": [
@@ -170,6 +191,18 @@
 					"texture": {
 						"type": "resource",
 						"value": "res://items/texture_tres/normal/cons_apple.tres"
+					},
+					"use_effects": {
+						"type": "array",
+						"value": {
+							"0": {
+								"type": "reference",
+								"value": {
+									"_entity_id": "34.0",
+									"_type": 0
+								}
+							}
+						}
 					}
 				}
 			},
@@ -231,6 +264,18 @@
 					"texture": {
 						"type": "resource",
 						"value": "res://items/texture_tres/normal/cons_portion.tres"
+					},
+					"use_effects": {
+						"type": "array",
+						"value": {
+							"0": {
+								"type": "reference",
+								"value": {
+									"_entity_id": "38.0",
+									"_type": 0
+								}
+							}
+						}
 					}
 				}
 			},
@@ -567,6 +612,58 @@
 						"value": "res://items/texture_tres/normal/ammo_bomb.tres"
 					}
 				}
+			},
+			{
+				"_category_id": "94.0",
+				"_icon_color": "ffffff00",
+				"_id": "99.0",
+				"_index": 0,
+				"_name": "LostFlute",
+				"_property_overrides": {
+					"quest": {
+						"type": "resource",
+						"value": "res://quests/quest_tres/lost_flute.tres"
+					}
+				}
+			},
+			{
+				"_category_id": "98.0",
+				"_icon_color": "ffffff00",
+				"_id": "100.0",
+				"_index": 0,
+				"_name": "Nero",
+				"_property_overrides": {
+					"name": {
+						"type": "string",
+						"value": "Nero"
+					}
+				}
+			},
+			{
+				"_category_id": "98.0",
+				"_icon_color": "ffffff00",
+				"_id": "102.0",
+				"_index": 0,
+				"_name": "Cyan",
+				"_property_overrides": {
+					"name": {
+						"type": "string",
+						"value": "Cyan"
+					}
+				}
+			},
+			{
+				"_category_id": "94.0",
+				"_icon_color": "ffffff00",
+				"_id": "103.0",
+				"_index": 0,
+				"_name": "WantApples",
+				"_property_overrides": {
+					"quest": {
+						"type": "resource",
+						"value": "res://quests/quest_tres/i_want_apples.tres"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -718,12 +815,26 @@
 					"Min Value": 0.0
 				},
 				"_type": "int"
+			},
+			{
+				"_category_id": "94.0",
+				"_default_value": null,
+				"_id": "97.0",
+				"_name": "quest",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "98.0",
+				"_default_value": "",
+				"_id": "101.0",
+				"_name": "name",
+				"_type": "string"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 93.0
+			"default": 103.0
 		}
 	},
 	"_version": 1

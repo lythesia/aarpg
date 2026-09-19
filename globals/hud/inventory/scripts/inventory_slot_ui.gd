@@ -83,6 +83,7 @@ func _on_pressed() -> void:
             var c: ConsumableItem = slot_data.item_data as ConsumableItem
             if c.use():
                 slot_data.quantity -= 1
+                PlayerManager.INVENTORY_DATA.ItemRemoved.emit(c, 1) # or use `consume`?
                 # update quantity label in-place
                 # check `slot_data` first coz `quantity -=` might trigger:
                 # SlotData.changed -> _on_slot_changed: inventory_data.tres::slots[i] = null

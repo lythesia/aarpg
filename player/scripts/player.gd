@@ -45,8 +45,8 @@ func _ready() -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
     if _event.is_action_pressed("Test"):
-        abilities.add_ability(PlayerAbilities.Ability.BOW)
-    pass
+        QuestManager.start_quest(QuestIds.WANTAPPLES)
+        pass
 
 # func _unhandled_input(_event: InputEvent) -> void:
 #     var x_axis = Input.get_axis("Left", "Right")

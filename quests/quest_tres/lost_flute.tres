@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="BaseQuest" format=3 uid="uid://dxfbbq6j38le8"]
+
+[ext_resource type="Script" uid="uid://c62t5elwuq20u" path="res://quests/scripts/quest_reward.gd" id="1_dqsxx"]
+[ext_resource type="Script" uid="uid://dbdcqjn1e0tjj" path="res://quests/scripts/base_quest.gd" id="2_hyp0d"]
+[ext_resource type="Script" uid="uid://c2ty2bh5c64w" path="res://items/scripts/consumable_item.gd" id="2_lwb0q"]
+[ext_resource type="Script" uid="uid://o8m1ajf4je01" path="res://quests/scripts/quest_step.gd" id="3_esm4p"]
+[ext_resource type="Script" uid="uid://vfmgdpadvmfn" path="res://items/scripts/slot_item_data.gd" id="5_dimec"]
+[ext_resource type="Script" uid="uid://chmueisnmbviw" path="res://quests/scripts/steps/collect_item.gd" id="6_hug54"]
+[ext_resource type="Script" uid="uid://mogyoqjaq1ig" path="res://quests/scripts/steps/deliver_item.gd" id="7_dimec"]
+[ext_resource type="Script" uid="uid://70epti8jkwj8" path="res://items/scripts/pandora_human.gd" id="8_hug54"]
+
+[sub_resource type="Resource" id="Resource_5tlb6"]
+script = ExtResource("2_lwb0q")
+_id = "39.0"
+
+[sub_resource type="Resource" id="Resource_dimec"]
+script = ExtResource("1_dqsxx")
+item = SubResource("Resource_5tlb6")
+quantity = 5
+metadata/_custom_type_script = "uid://c62t5elwuq20u"
+
+[sub_resource type="Resource" id="Resource_fmoju"]
+script = ExtResource("5_dimec")
+_id = "60.0"
+
+[sub_resource type="Resource" id="Resource_lwb0q"]
+script = ExtResource("6_hug54")
+item = SubResource("Resource_fmoju")
+complete_mode = 1
+description = "Retrieve the flute from dungeon."
+metadata/_custom_type_script = "uid://chmueisnmbviw"
+
+[sub_resource type="Resource" id="Resource_2cqbl"]
+script = ExtResource("8_hug54")
+_id = "100.0"
+
+[sub_resource type="Resource" id="Resource_20g15"]
+script = ExtResource("7_dimec")
+item = SubResource("Resource_fmoju")
+to = SubResource("Resource_2cqbl")
+description = "Deliver it to Nero."
+metadata/_custom_type_script = "uid://mogyoqjaq1ig"
+
+[resource]
+script = ExtResource("2_hyp0d")
+title = "Lost Flute"
+description = "Retrieve the magical flute for Nero."
+steps = Array[ExtResource("3_esm4p")]([SubResource("Resource_lwb0q"), SubResource("Resource_20g15")])
+reward_xp = 100
+rewards = Array[ExtResource("1_dqsxx")]([SubResource("Resource_dimec")])
+id = null
+quest_name = "Lost Flute"
+quest_description = "Retrieve the magical flute for Nero."
+quest_objective = null
+metadata/_custom_type_script = "uid://dbdcqjn1e0tjj"

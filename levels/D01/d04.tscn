@@ -13,8 +13,6 @@
 [ext_resource type="Script" uid="uid://vfmgdpadvmfn" path="res://items/scripts/slot_item_data.gd" id="11_0ykpa"]
 [ext_resource type="AudioStream" uid="uid://c5afxxds8gi1o" path="res://public/audio/dungeon_discovery.wav" id="12_0ykpa"]
 [ext_resource type="AudioStream" uid="uid://bfdmeer15dqmj" path="res://public/audio/item_pickup.wav" id="13_gklxq"]
-[ext_resource type="Script" uid="uid://7glx3w8yur5g" path="res://general/quest_util/quest_advance_trigger.gd" id="14_kbevr"]
-[ext_resource type="Resource" uid="uid://ctyjooliji88b" path="res://quests/lost_flute.tres" id="15_0ykpa"]
 [ext_resource type="PackedScene" uid="uid://dd35a8jkqdqdr" path="res://levels/helper/player_spawn.tscn" id="17_gklxq"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_wmgv5"]
@@ -186,19 +184,7 @@ drop_audio = ExtResource("12_0ykpa")
 pickup_audio = ExtResource("13_gklxq")
 persistent_key = "d04/flute"
 
-[node name="QuestAdvanceTrigger" type="Node" parent="ItemDropper" unique_id=2040753722]
-script = ExtResource("14_kbevr")
-quest = ExtResource("15_0ykpa")
-step = 1
-is_completed = true
-summary = "UPDATE QUEST:
-- Quest: Lost Flute
-- Step: 1 Find the magical flute
-- Complete: true"
-metadata/_custom_type_script = "uid://7glx3w8yur5g"
-
 [node name="PlayerSpawn" parent="." unique_id=492424280 instance=ExtResource("17_gklxq")]
 position = Vector2(255, 179)
 
 [connection signal="WasKilled" from="Boss/DarkWizard" to="ItemDropper" method="drop_item"]
-[connection signal="DropPickedUp" from="ItemDropper" to="ItemDropper/QuestAdvanceTrigger" method="advance_request"]

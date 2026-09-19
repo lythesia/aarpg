@@ -11,6 +11,8 @@ signal PlayerStatsUpdated
 @warning_ignore("unused_signal")
 signal PlayerGainAbility(ability: PlayerAbilities.Ability)
 
+signal PlayerDeliveredItem(item: SlotItemData, quantity: int, to: PandoraHuman)
+
 var INVENTORY_DATA: InventoryData
 
 var spawned: bool = false
@@ -31,7 +33,7 @@ func clear_player() -> void:
         spawned = false
 
         INVENTORY_DATA.clear()
-        QuestManager.clear_current_quests()
+        QuestManager.clear_cache()
         WorldState.clear()
         PauseMenu.equip_ui.reset_equip_slots()
 
@@ -86,6 +88,10 @@ func player_interact() -> void:
 
 func player_in_scene(scene: Node) -> bool:
     return scene.get_node_or_null("Player") == player
+
+func deliver_item(item: SlotItemData, quantity: int, to: PandoraHuman) -> void:
+    if INVENTORY_DATA.consume_item(item, quantity):
+        PlayerDeliveredItem.emit(item, quantity, to)
 
 #region player_stats
 func gain_xp(xp: int) -> void:

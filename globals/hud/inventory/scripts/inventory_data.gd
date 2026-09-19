@@ -1,6 +1,7 @@
 class_name InventoryData extends SaveKitResource
 
-signal GainItem(item_data: SlotItemData, quantity: int)
+signal ItemAdded(item_data: SlotItemData, quantity: int)
+signal ItemRemoved(item_data: SlotItemData, quantity: int)
 
 ## inventory size
 @export var capacity: int = 24
@@ -15,9 +16,9 @@ func _init() -> void:
     ensure_capacity()
     _connect_slots()
 
-func get_slot_by_name(name: String) -> SlotData:
+func get_slot(item: SlotItemData) -> SlotData:
     for slot in slots:
-        if slot and slot.item_data.name() == name:
+        if slot and slot.item_data.is_same(item):
             return slot
     return null
 
@@ -36,7 +37,7 @@ func add_item(item_data: SlotItemData, quantity: int = 1) -> bool:
         ok = add_unstackable(item_data, quantity)
 
     if ok:
-        GainItem.emit(item_data, quantity)
+        ItemAdded.emit(item_data, quantity)
     return ok
 
 func add_stackable(item_data: SlotItemData, quantity: int = 1) -> bool:
@@ -114,6 +115,7 @@ func consume_item(item: SlotItemData, count: int = 1) -> bool:
     for slot in slots:
         if slot and slot.item_data.is_same(item) and slot.quantity >= count:
             slot.quantity -= count
+            ItemRemoved.emit(item, count)
             return true
     return false
 

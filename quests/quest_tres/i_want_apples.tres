@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="BaseQuest" format=3 uid="uid://bp26eqk2xypj6"]
+
+[ext_resource type="Script" uid="uid://c62t5elwuq20u" path="res://quests/scripts/quest_reward.gd" id="1_sd2fm"]
+[ext_resource type="Script" uid="uid://dbdcqjn1e0tjj" path="res://quests/scripts/base_quest.gd" id="2_tgx5a"]
+[ext_resource type="Script" uid="uid://o8m1ajf4je01" path="res://quests/scripts/quest_step.gd" id="3_vqlrc"]
+[ext_resource type="Script" uid="uid://c2ty2bh5c64w" path="res://items/scripts/consumable_item.gd" id="4_q08jm"]
+[ext_resource type="Script" uid="uid://chmueisnmbviw" path="res://quests/scripts/steps/collect_item.gd" id="5_k7xqd"]
+[ext_resource type="Script" uid="uid://mogyoqjaq1ig" path="res://quests/scripts/steps/deliver_item.gd" id="6_6sycx"]
+[ext_resource type="Script" uid="uid://70epti8jkwj8" path="res://items/scripts/pandora_human.gd" id="7_k7xqd"]
+
+[sub_resource type="Resource" id="Resource_d2wkb"]
+script = ExtResource("4_q08jm")
+_id = "30.0"
+
+[sub_resource type="Resource" id="Resource_q08jm"]
+script = ExtResource("5_k7xqd")
+item = SubResource("Resource_d2wkb")
+quantity = 2
+complete_mode = 1
+description = "Collect apples."
+metadata/_custom_type_script = "uid://chmueisnmbviw"
+
+[sub_resource type="Resource" id="Resource_6sycx"]
+script = ExtResource("7_k7xqd")
+_id = "102.0"
+
+[sub_resource type="Resource" id="Resource_k7xqd"]
+script = ExtResource("6_6sycx")
+item = SubResource("Resource_d2wkb")
+quantity = 2
+to = SubResource("Resource_6sycx")
+description = "Deliver apples to Cyan."
+metadata/_custom_type_script = "uid://mogyoqjaq1ig"
+
+[resource]
+script = ExtResource("2_tgx5a")
+steps = Array[ExtResource("3_vqlrc")]([SubResource("Resource_q08jm"), SubResource("Resource_k7xqd")])
+reward_xp = 50
+id = 1
+quest_name = "I want apples"
+quest_description = "Cyan wants 2 apples."
+metadata/_custom_type_script = "uid://dbdcqjn1e0tjj"
