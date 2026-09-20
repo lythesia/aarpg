@@ -6,9 +6,7 @@ class_name CollectItemStep extends QuestStep
 var collected: int = 0
 
 func on_start() -> void:
-    PlayerManager.INVENTORY_DATA.ItemAdded.connect(_on_item_added)
-    PlayerManager.INVENTORY_DATA.ItemRemoved.connect(_on_item_removed)
-    collected = PlayerManager.INVENTORY_DATA.get_item_hold_quantity(item)
+    on_load()
     check_condition()
 
 # it happens at:
@@ -41,6 +39,11 @@ func check_condition() -> bool:
                 return false
         _:
             return false
+
+func on_load() -> void:
+    PlayerManager.INVENTORY_DATA.ItemAdded.connect(_on_item_added)
+    PlayerManager.INVENTORY_DATA.ItemRemoved.connect(_on_item_removed)
+    collected = PlayerManager.INVENTORY_DATA.get_item_hold_quantity(item)
 
 func _on_item_added(item_data: SlotItemData, _quantity: int) -> void:
     if !item_data.is_same(item):

@@ -9,10 +9,10 @@ signal ActivateChanged(v: bool)
 
 enum CheckType {
     ## if has the quest
-    HAS_QUEST,
+    QUEST_ACTIVED,
 
-    ## if has completed current step
-    QUEST_STEP_COMPLETE,
+    ## if has completed step
+    QUEST_STEP_COMPLETED,
 
     ## if is on current step
     ON_CURRENT_QUEST_STEP,
@@ -22,7 +22,7 @@ enum CheckType {
 }
 
 ## which quest state is interested
-@export var check_type: CheckType = CheckType.HAS_QUEST: set = _set_check_type
+@export var check_type: CheckType = CheckType.QUEST_ACTIVED: set = _set_check_type
 
 ## by default, checking happens once at `_ready` (e.g. enter scene and node's initialized)
 ## if set to `true`, checking happens every time when quest updated
@@ -38,42 +38,33 @@ func _ready() -> void:
     check_activated()
 
     if react_to_quest_updated:
-        QuestManager.QuestUpdated.connect(_on_quest_updated)
+        QuestManager.QuestStepUpdated.connect(_on_quest_updated)
 
 func check_activated() -> void:
-    var quest_state: Dictionary = QuestManager.find_current_quest(quest)
-    # not graceful cmp to "not found" ...
-    if quest_state.title != "not found":
-        match check_type:
-            CheckType.HAS_QUEST:
-                set_activated(true)
+    match check_type:
+        CheckType.QUEST_ACTIVED:
+            var is_active: bool = QuestManager.is_quest_active(quest_data.get_entity_id())
+            set_activated(is_active)
 
-            CheckType.QUEST_STEP_COMPLETE:
-                if step > 0 and quest_state.completed_steps >= step:
-                    set_activated(true)
-                else:
-                    set_activated(false)
+        CheckType.QUEST_STEP_COMPLETED:
+            var quest: BaseQuest = QuestManager.get_quest_by_entity_id(quest_data.get_entity_id())
+            set_activated(quest.get_completed_steps_count() > step)
 
-            CheckType.ON_CURRENT_QUEST_STEP:
-                # state.completed_steps + 1 == quest_node.step
-                if quest_state.completed_steps + 1 == step:
-                    set_activated(true)
-                else:
-                    set_activated(false)
+        CheckType.ON_CURRENT_QUEST_STEP:
+            var quest: BaseQuest = QuestManager.get_quest_by_entity_id(quest_data.get_entity_id())
+            set_activated(step == quest.get_completed_steps_count())
 
-            CheckType.QUEST_COMPLETE:
-                set_activated(quest_state.is_completed)
-    # quest not found
-    else:
-        set_activated(false)
+        CheckType.QUEST_COMPLETE:
+            set_activated(QuestManager.is_quest_completed(quest_data.get_entity_id()))
 
 func set_activated(v: bool) -> void:
     is_activated = v
     ActivateChanged.emit(v)
 
-func _on_quest_updated(quest_state: Dictionary) -> void:
+func _on_quest_updated(quest_id: int, _title: String, _step: QuestStep) -> void:
+    var quest: BaseQuest = QuestManager.get_quest_by_entity_id(quest_data.get_entity_id())
     # non-related quest, ignore
-    if quest_state.title.to_lower() != quest.title.to_lower():
+    if quest_id != quest.id:
         return
 
     check_activated()
@@ -82,23 +73,24 @@ func _set_check_type(value: CheckType) -> void:
     check_type = value
     update_summary()
 
+# overrides
 func update_summary() -> void:
-    if !quest:
+    if !quest_data:
         summary = "Quest is not set"
         return
 
     var s: String
     match check_type:
-        CheckType.HAS_QUEST:
-            s = "Check if player has quest"
-        CheckType.QUEST_STEP_COMPLETE:
-            s = "Check if player has completed step: %s" % _get_step()
+        CheckType.QUEST_ACTIVED:
+            s = "Check if player has quest activated"
+        CheckType.QUEST_STEP_COMPLETED:
+            s = "Check if player has completed step: %s" % _get_step().description
         CheckType.ON_CURRENT_QUEST_STEP:
-            s = "Check if player is on step: %s" % _get_step()
+            s = "Check if player is on step: %s" % _get_step().description
         CheckType.QUEST_COMPLETE:
             s = "Check if player has completed quest"
 
     summary = r"UPDATE QUEST:
 - Quest: %s
 - Check Type: %s
-" % [quest.title, s]
+" % [quest_data.quest().quest_name, s]

@@ -33,7 +33,7 @@ func clear_player() -> void:
         spawned = false
 
         INVENTORY_DATA.clear()
-        QuestManager.clear_cache()
+        QuestManager.clear()
         WorldState.clear()
         PauseMenu.equip_ui.reset_equip_slots()
 

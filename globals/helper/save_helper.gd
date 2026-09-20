@@ -32,4 +32,5 @@ func _on_after_load() -> void:
     await SceneHelper.load_game_scene(SceneHelper.scene_to_load)
     PlayerManager.set_inventory_data(PauseMenu.inventory_ui.inventory_data)
     PauseMenu.inventory_ui.connect_inventory_changed()
+    QuestManager.connect_quest_steps()
     PlayerHud.show()

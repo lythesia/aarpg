@@ -24,7 +24,7 @@ func complete(_args: Dictionary = {}) -> void:
     completed.emit()
 
 func _on_step_updated(step: QuestStep) -> void:
-    QuestManager.QuestStepUpdated.emit(quest_name, step)
+    QuestManager.QuestStepUpdated.emit(id, quest_name, step)
 
 # utils
 func get_steps_count() -> int:
@@ -48,3 +48,28 @@ func complete_step(idx: int) -> void:
         push_error("Quest step index out of bounds")
         return
     steps[idx].is_completed = true
+
+#region save/load
+# overrides
+func serialize() -> Dictionary:
+    var steps_data: Array[bool] = []
+    for step in steps:
+        steps_data.append(step.is_completed)
+    var data: Dictionary = {
+        "objective_completed": objective_completed,
+        "steps": steps_data,
+    }
+    return data
+
+func deserialize(data: Dictionary) -> void:
+    objective_completed = data.get("objective_completed", false)
+    var steps_data: Array = data.get("steps", [])
+    for i in steps_data.size():
+        if steps_data[i] as bool == true:
+            steps[i].is_completed = true
+
+func on_load() -> void:
+    for step in steps:
+        step.on_load()
+        step.Updated.connect(_on_step_updated.bind(step))
+#endregion

@@ -17,11 +17,17 @@ enum CompleteMode {
 
 var locked: bool = false
 
+## invoke when quest start
 @abstract
 func on_start() -> void
 
+## check if step can be completed, and set `is_completed` if possible
 @abstract
 func check_condition() -> bool
+
+## state reload, connect signals (e.g. step status update)
+func on_load() -> void:
+    pass
 
 ## in some case we want to lock step's completed status
 ## e.g. submit quest to complete

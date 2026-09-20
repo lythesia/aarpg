@@ -3,7 +3,7 @@ extends Node
 signal QuestStarted(quest: BaseQuest)
 
 @warning_ignore("unused_signal")
-signal QuestStepUpdated(quest_title: String, step: QuestStep)
+signal QuestStepUpdated(quest_id: int, quest_title: String, step: QuestStep)
 
 signal QuestCompleted(quest: BaseQuest)
 
@@ -110,5 +110,44 @@ func _cont_quests(base: Array[Quest]) -> Array[BaseQuest]:
             vs.append(v)
     return vs
 
-func clear_cache() -> void:
+func clear() -> void:
     quests_cache.clear()
+    QuestSystem.reset_pool()
+
+#region save/load
+func save_to_dict(_s: SaveKitSerializer) -> Dictionary:
+    var active_quests = QuestSystem.serialize_quests("Active")
+    var completed_quests = QuestSystem.serialize_quests("Completed")
+    var pool_state = QuestSystem.pool_state_as_dict()
+    return {
+        "active_quests": active_quests,
+        "completed_quests": completed_quests,
+        "pool_state": pool_state,
+    }
+
+func load_from_dict(_d: SaveKitDeserializer, data: Dictionary) -> void:
+    # 1. load pandora first
+    var category := Pandora.get_category(PandoraCategories.QUESTS)
+    var quests: Array[Quest] = []
+    for e in Pandora.get_all_entities(category):
+        var quest_data: QuestData = e as QuestData
+        var quest := quest_data.quest().duplicate(true) as BaseQuest
+        quests_cache[quest_data.get_entity_id()] = quest
+        quests.append(quest)
+
+    # 2. then populate quest states
+    # 2.1 dispatch quests to pools
+    QuestSystem.restore_pool_state_from_dict(data.get("pool_state", {}), quests)
+    # 2.2 restore quest states
+    QuestSystem.deserialize_quests(data.get("active_quests", {}), "Active")
+    QuestSystem.deserialize_quests(data.get("completed_quests", {}), "Completed")
+
+    # 3. step state & signals restore handled by BaseQuest deser
+
+## connect signals for quest steps[br]
+## it must be called after savekit's load
+func connect_quest_steps() -> void:
+    for quest in QuestSystem.get_active_quests():
+        if quest is BaseQuest:
+            quest.on_load()
+#endregion

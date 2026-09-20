@@ -1,15 +1,14 @@
 @tool
 class_name QuestNode extends Node
 
-@export var quest: Quest: set = set_quest
+@export var quest_data: QuestData: set = set_quest
 @export var step: int: set = set_step
-@export var is_completed: bool: set = set_is_completed
 
 @export_category("Info only")
 @export_multiline var summary: String
 
-func set_quest(value: Quest) -> void:
-    quest = value
+func set_quest(value: QuestData) -> void:
+    quest_data = value
     update_configuration_warnings()
     update_summary()
 
@@ -17,37 +16,39 @@ func set_step(value: int) -> void:
     step = clampi(value, 0, _get_steps_count())
     update_summary()
 
-func set_is_completed(value: bool) -> void:
-    is_completed = value
-    update_summary()
-
 func _get_steps_count() -> int:
-    if !quest:
+    if !quest_data:
         return 0
 
-    return quest.steps.size()
+    return quest_data.quest().steps.size()
 
-func _get_step() -> String:
-    if step > 0 and step <= _get_steps_count():
-        return quest.steps[step - 1]
-    else:
-        return "N/A"
+func _get_step() -> QuestStep:
+    assert(step >= 0 and step <= _get_steps_count(), "Step out of range: %d" % step)
+    return quest_data.quest().steps[step]
 
 func update_summary() -> void:
-    if !quest:
+    if !quest_data:
         summary = "Quest is not set"
         return
 
+    var quest: BaseQuest = quest_data.quest()
+    var quest_step: QuestStep = _get_step()
+
     summary = r"UPDATE QUEST:
 - Quest: %s
-- Step: %d %s
-- Complete: %s" % [quest.title, step, _get_step(), is_completed]
+- Step: [%d] %s
+- Complete: %s" % [
+        quest.quest_name,
+        step,
+        quest_step.description,
+        quest_step.is_completed
+    ]
 
 func _get_configuration_warnings() -> PackedStringArray:
     if Utils.is_editing_own_scene(self):
         return []
 
     var warnings: PackedStringArray = []
-    if !quest:
+    if !quest_data:
         warnings.append("Quest is not set")
     return warnings

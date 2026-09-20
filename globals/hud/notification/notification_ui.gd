@@ -41,7 +41,7 @@ func display_notification() -> void:
 func _on_quest_started(quest: BaseQuest) -> void:
     push_notification("Quest Start!", quest.quest_name)
 
-func _on_quest_step_updated(quest_title: String, step: QuestStep) -> void:
+func _on_quest_step_updated(_id: int, quest_title: String, step: QuestStep) -> void:
     push_notification("Quest Updated!", "%s: %s" % [quest_title, step.description])
 
 func _on_quest_completed(quest: BaseQuest) -> void:

@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dhb7dvw2yb6cr" path="res://items/interactable/chest/chest.tscn" id="8_q5jxl"]
 [ext_resource type="PackedScene" uid="uid://d37qt1qv4fkcm" path="res://npc/base/npc.tscn" id="8_tmjfs"]
 [ext_resource type="Resource" uid="uid://fkksn7r82804" path="res://npc/npc_res/npc_cyan.tres" id="9_6b7mu"]
+[ext_resource type="PackedScene" uid="uid://cvwa4cmuf8lqi" path="res://items/pickup/item_pickup.tscn" id="9_iwchl"]
+[ext_resource type="Script" uid="uid://vfmgdpadvmfn" path="res://items/scripts/slot_item_data.gd" id="10_6ebg1"]
 [ext_resource type="Resource" uid="uid://cjsa8oajhtduf" path="res://dialogue/npc_cyan.dialogue" id="10_xqo8v"]
 [ext_resource type="Resource" uid="uid://dqgisarh6t5yh" path="res://npc/npc_res/npc_nero.tres" id="11_58rao"]
 [ext_resource type="Resource" uid="uid://c56pkj0tlomb7" path="res://dialogue/npc_nero.dialogue" id="13_om7qf"]
@@ -39,6 +41,10 @@ _id = "68.0"
 [sub_resource type="Resource" id="Resource_5ynds"]
 script = ExtResource("8_omkjm")
 _id = "64.0"
+
+[sub_resource type="Resource" id="Resource_xo5n5"]
+script = ExtResource("10_6ebg1")
+_id = "60.0"
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_iwchl"]
 var/main_bt/name = &"main_bt"
@@ -119,6 +125,10 @@ persistent_key = "s02/chest03"
 position = Vector2(144, 160)
 item_data = SubResource("Resource_5ynds")
 persistent_key = "s02/chest04"
+
+[node name="Flute" parent="Items" unique_id=2085438971 instance=ExtResource("9_iwchl")]
+position = Vector2(191, 61)
+item_data = SubResource("Resource_xo5n5")
 
 [node name="Cyan" parent="." unique_id=2065591414 node_paths=PackedStringArray("npc_bt") instance=ExtResource("8_tmjfs")]
 position = Vector2(57, 100)
